@@ -2,6 +2,7 @@ package com.graduate.touslestemp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,7 +24,9 @@ public class Account implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Long id;
+    @NotEmpty(message = "Enter username !")
     private String username;
+    @NotEmpty(message = "Enter password !")
     private String password;
     private String phone;
     private String email;

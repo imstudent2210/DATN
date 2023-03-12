@@ -5,6 +5,7 @@ import com.graduate.touslestemp.model.AccountRole;
 import com.graduate.touslestemp.model.Account;
 import com.graduate.touslestemp.repository.AccountRepository;
 import com.graduate.touslestemp.service.AccountService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -19,13 +20,13 @@ public class AdminController {
     @Autowired
     private AccountService accountService;
 
-        private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Autowired
     private AccountRepository accountRepository;
 
     @PostMapping("/admin")
-    public Account createAdmin(@RequestBody Account admin) throws Exception{
+    public Account createAdmin(@RequestBody @Valid Account admin) throws Exception {
         Set<AccountRole> roles = new HashSet<>();
 
         admin.setPassword(passwordEncoder.encode(admin.getPassword()));
@@ -39,11 +40,11 @@ public class AdminController {
 
         roles.add(adminRole);
 
-        return this.accountService.createAccount(admin,roles);
+        return this.accountService.createAccount(admin, roles);
     }
 
     @PostMapping("/manager")
-    public Account createManager(@RequestBody Account manager) throws Exception{
+    public Account createManager(@RequestBody @Valid Account manager) throws Exception {
         Set<AccountRole> roles = new HashSet<>();
 
         manager.setPassword(passwordEncoder.encode(manager.getPassword()));
@@ -57,19 +58,21 @@ public class AdminController {
 
         roles.add(managerRole);
 
-        return this.accountService.createAccount(manager,roles);
+        return this.accountService.createAccount(manager, roles);
     }
+
     @GetMapping("/get")
-    List<Account> getUser(){
+    List<Account> getUser() {
         return accountRepository.findAll();
     }
-//    @GetMapping("/get/{username}")
+
+    //    @GetMapping("/get/{username}")
 //    Admin getUserByName(@PathVariable("username") String username){
 //        return this.adminService.findAdmin(username);
 //
 //    }
     @GetMapping("/get/{username}")
-    Account getUserByName(@PathVariable("username") String username){
+    Account getUserByName(@PathVariable("username") String username) {
 
              if(accountRepository.findByUsername(username)!=null){
                  return accountRepository.findByUsername(username);
@@ -77,7 +80,6 @@ public class AdminController {
                  throw new NotFoundAdminException(username);
              }
     }
-
 
 
 }

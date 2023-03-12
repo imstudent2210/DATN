@@ -7,6 +7,7 @@ import com.graduate.touslestemp.model.Account;
 import com.graduate.touslestemp.model.JwtRequest;
 import com.graduate.touslestemp.model.JwtRespone;
 import com.graduate.touslestemp.service.impl.AccountDetailServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,7 +31,7 @@ public class AuthController {
     private JwtUtil jwtUtil;
 
     @PostMapping("/login")
-    public ResponseEntity<?> generateToken(@RequestBody JwtRequest jwtRequest) throws Exception{
+    public ResponseEntity<?> generateToken(@RequestBody @Valid JwtRequest jwtRequest) throws Exception{
         try {
             authenticaticate(jwtRequest.getUsername(), jwtRequest.getPassword());
 

@@ -2,25 +2,27 @@ package com.graduate.touslestemp.service.impl;
 
 import com.graduate.touslestemp.exception.AdminAlreadyExistsException;
 import com.graduate.touslestemp.model.AccountRole;
-import com.graduate.touslestemp.model.Admin;
-import com.graduate.touslestemp.repository.AdminRepository;
+import com.graduate.touslestemp.model.Account;
+import com.graduate.touslestemp.repository.AccountRepository;
+
 import com.graduate.touslestemp.repository.RoleRepository;
-import com.graduate.touslestemp.service.AdminService;
+import com.graduate.touslestemp.service.AccountService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
-public class AdminServiceImpl implements AdminService {
+public class AccountServiceImpl implements AccountService {
     @Autowired
-    private AdminRepository adminRepository;
+    private AccountRepository accountRepository;
     @Autowired
     private RoleRepository roleRepository;
 
     @Override
-    public Admin createAdmin(Admin admin, Set<AccountRole> userRoles) throws Exception {
-        Admin local = this.adminRepository.findByUsername(admin.getUsername());
+    public Account createAccount(Account admin, Set<AccountRole> userRoles) throws Exception {
+        Account local = this.accountRepository.findByUsername(admin.getUsername());
         if(local !=null){
             System.out.println("Admin has already");
             throw new AdminAlreadyExistsException(local.getUsername());
@@ -29,14 +31,14 @@ public class AdminServiceImpl implements AdminService {
                 roleRepository.save(ur.getRole());
             }
             admin.getUserRole().addAll(userRoles);
-            local = this.adminRepository.save(admin);
+            local = this.accountRepository.save(admin);
 
         }
         return local;
     }
 
     @Override
-    public Admin findAdmin(String username) {
-        return this.adminRepository.findByUsername(username);
+    public Account findAccount(String username) {
+        return this.accountRepository.findByUsername(username);
     }
 }

@@ -18,9 +18,9 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private Long roleID;
-    private String roleName;
+    private Long id;
+    private String name;
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "role")
     @JsonIgnore
-    private Set<AccountRole> userRole = new HashSet<>();
+    private Set<AccountRole> accountRoles = new HashSet<>();
 }

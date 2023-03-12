@@ -1,6 +1,6 @@
 package com.graduate.touslestemp.config;
 
-import com.graduate.touslestemp.service.impl.AdminDetailServiceImpl;
+import com.graduate.touslestemp.service.impl.AccountDetailServiceImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,7 +19,7 @@ import java.io.IOException;
 @Component
 public class JwtAuthencationFilter extends OncePerRequestFilter {
     @Autowired
-    private AdminDetailServiceImpl adminDetailService;
+    private AccountDetailServiceImpl accountDetailService;
     @Autowired
     private JwtUtil jwtUtil;
     @Override
@@ -44,7 +44,7 @@ public class JwtAuthencationFilter extends OncePerRequestFilter {
         }
         // validated
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            final UserDetails userDetails = this.adminDetailService.loadUserByUsername(username);
+            final UserDetails userDetails = this.accountDetailService.loadUserByUsername(username);
             if (this.jwtUtil.validateToken(jwtToken, userDetails)) {
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

@@ -16,12 +16,11 @@ import jakarta.persistence.*;
 public class AccountRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userRoleId;
-
+    private Long accountRoleId;
 
     @ManyToOne(fetch = FetchType.EAGER)
 
-    private Admin admin;
+    private Account account;
 
     @ManyToOne(fetch = FetchType.EAGER)
 

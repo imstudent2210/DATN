@@ -1,19 +1,16 @@
 package com.graduate.touslestemp.controller;
 
+import com.graduate.touslestemp.config.JwtUtil;
 import com.graduate.touslestemp.exception.AdminAlreadyExistsException;
 import com.graduate.touslestemp.exception.NotFoundAdminException;
-import com.graduate.touslestemp.model.Admin;
+import com.graduate.touslestemp.model.Account;
 import com.graduate.touslestemp.model.JwtRequest;
 import com.graduate.touslestemp.model.JwtRespone;
-import com.graduate.touslestemp.config.JwtAuthencationFilter;
-import com.graduate.touslestemp.config.JwtAuthenticationEntryPoint;
-import com.graduate.touslestemp.config.JwtUtil;
-import com.graduate.touslestemp.service.impl.AdminDetailServiceImpl;
+import com.graduate.touslestemp.service.impl.AccountDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,7 +22,7 @@ import java.security.Principal;
 @CrossOrigin("*")
 public class AuthController {
     @Autowired
-    private AdminDetailServiceImpl adminDetailService;
+    private AccountDetailServiceImpl adminDetailService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -44,7 +41,7 @@ public class AuthController {
 
         UserDetails userDetails = this.adminDetailService.loadUserByUsername(jwtRequest.getUsername());
         String token = this.jwtUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new JwtRespone(token,(Admin) userDetails));
+        return ResponseEntity.ok(new JwtRespone(token,userDetails.getUsername()));
     }
     private void authenticaticate(String username, String password) throws Exception{
         try{
@@ -57,7 +54,7 @@ public class AuthController {
     }
 
     @GetMapping("/current-user")
-    public Admin getCurrentuser(Principal principal ){
-        return ((Admin)this.adminDetailService.loadUserByUsername(principal.getName()));
+    public Account getCurrentuser(Principal principal ){
+        return ((Account)this.adminDetailService.loadUserByUsername(principal.getName()));
     }
 }

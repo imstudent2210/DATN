@@ -1,8 +1,7 @@
 package com.graduate.touslestemp.service.impl;
 
-import com.graduate.touslestemp.exception.NotFoundAdminException;
-import com.graduate.touslestemp.model.Admin;
-import com.graduate.touslestemp.repository.AdminRepository;
+import com.graduate.touslestemp.model.Account;
+import com.graduate.touslestemp.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,16 +9,16 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AdminDetailServiceImpl implements UserDetailsService {
+public class AccountDetailServiceImpl implements UserDetailsService {
     @Autowired
-    private AdminRepository adminRepository;
+    private AccountRepository accountRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Admin admin = this.adminRepository.findByUsername(username);
-        if(admin == null){
-            throw new NotFoundAdminException(admin.getUsername());
+        Account account = this.accountRepository.findByUsername(username);
+        if(account == null){
+            throw new UsernameNotFoundException(username);
         }
-    return  admin;
+    return  account;
     }
 }

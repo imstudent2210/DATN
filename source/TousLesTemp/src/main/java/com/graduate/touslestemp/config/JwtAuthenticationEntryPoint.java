@@ -15,7 +15,7 @@ import java.io.IOException;
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-//        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "unauthorized");
-        throw new NotFoundAdminException(request.getLocalName().toString());
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "unauthorized");
+//        throw new NotFoundAdminException(request.getLocalName().toString());
     }
 }

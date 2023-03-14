@@ -71,15 +71,15 @@ public class AdminController {
 //        return this.adminService.findAdmin(username);
 //
 //    }
-    @GetMapping("/get/{username}")
-    Account getUserByName(@PathVariable("username") String username) {
-
-             if(accountRepository.findByUsername(username)!=null){
-                 return accountRepository.findByUsername(username);
-             }else{
-                 throw new NotFoundAdminException(username);
-             }
-    }
-
+//    @GetMapping("/get/{username}")
+//    Account getUserByName(@PathVariable("username") String username) {
+//
+//             if(accountRepository.findByUsername(username)!=null){
+//                 return accountRepository.findByUsername(username);
+//             }else{
+//                 throw new NotFoundAdminException(username);
+//             }
+//    }
+//
 
 }

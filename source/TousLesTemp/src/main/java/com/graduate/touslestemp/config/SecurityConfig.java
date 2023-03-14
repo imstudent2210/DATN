@@ -1,4 +1,6 @@
 package com.graduate.touslestemp.config;
+import com.graduate.touslestemp.service.impl.AccountDetailServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -20,8 +22,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 /** * Config các bảo mật về mật khẩu, phạm vi truy cập*/
     public class SecurityConfig {
 
-    private  JwtAuthenticationEntryPoint unauthorizedHandler = new JwtAuthenticationEntryPoint();
-    private JwtAuthencationFilter jwtAuthencationFilter = new JwtAuthencationFilter();
+//    private  JwtAuthenticationEntryPoint unauthorizedHandler = new JwtAuthenticationEntryPoint();
+//    private JwtAuthencationFilter jwtAuthencationFilter = new JwtAuthencationFilter();
+    @Autowired
+    private JwtAuthencationFilter jwtAuthencationFilter;
+    @Autowired
+    private JwtAuthenticationEntryPoint unauthorizedHandler;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {

@@ -42,7 +42,7 @@ public class AuthController {
 
         UserDetails userDetails = this.adminDetailService.loadUserByUsername(jwtRequest.getUsername());
         String token = this.jwtUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new JwtRespone(token,userDetails.getUsername()));
+        return ResponseEntity.ok(new JwtRespone(token,(Account) userDetails));
     }
     private void authenticaticate(String username, String password) throws Exception{
         try{
@@ -55,7 +55,7 @@ public class AuthController {
     }
 
     @GetMapping("/current-user")
-    public Account getCurrentuser(Principal principal ){
+    public Account getCurrentUser(Principal principal ){
         return ((Account)this.adminDetailService.loadUserByUsername(principal.getName()));
     }
 }

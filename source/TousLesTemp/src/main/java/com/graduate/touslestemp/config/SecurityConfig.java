@@ -22,8 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 /** * Config các bảo mật về mật khẩu, phạm vi truy cập*/
     public class SecurityConfig {
 
-//    private  JwtAuthenticationEntryPoint unauthorizedHandler = new JwtAuthenticationEntryPoint();
-//    private JwtAuthencationFilter jwtAuthencationFilter = new JwtAuthencationFilter();
+
     @Autowired
     private JwtAuthencationFilter jwtAuthencationFilter;
     @Autowired

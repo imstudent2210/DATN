@@ -1,5 +1,6 @@
 package com.graduate.touslestemp.exception;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.validation.BindingResult;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +32,7 @@ public class NotValidExceptionHandler {
     }
 
     private Error processFieldErrors(List<org.springframework.validation.FieldError> fieldErrors) {
-        Error error = new Error(BAD_REQUEST.value(), "validation error");
+        Error error = new Error(BAD_REQUEST.value(), "validation error",ZonedDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh")));
         for (org.springframework.validation.FieldError fieldError: fieldErrors) {
             error.addFieldError(fieldError.getField(), fieldError.getDefaultMessage());
         }
@@ -39,11 +42,18 @@ public class NotValidExceptionHandler {
     static class Error {
         private final int status;
         private final String message;
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+        private ZonedDateTime timestamp;
         private List<FieldError> fieldErrors = new ArrayList<>();
 
-        Error(int status, String message) {
+        Error(int status, String message, ZonedDateTime timestamp) {
             this.status = status;
             this.message = message;
+            this.timestamp = timestamp;
+        }
+
+        public ZonedDateTime getTimestamp() {
+            return timestamp;
         }
 
         public int getStatus() {

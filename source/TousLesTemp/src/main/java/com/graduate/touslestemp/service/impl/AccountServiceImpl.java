@@ -1,6 +1,6 @@
 package com.graduate.touslestemp.service.impl;
 
-import com.graduate.touslestemp.exception.AdminAlreadyExistsException;
+import com.graduate.touslestemp.exception.RequestException;
 import com.graduate.touslestemp.model.AccountRole;
 import com.graduate.touslestemp.model.Account;
 import com.graduate.touslestemp.repository.AccountRepository;
@@ -23,11 +23,11 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Account createAccount(Account admin, Set<AccountRole> userRoles) throws Exception {
         Account local = this.accountRepository.findByUsername(admin.getUsername());
-        if(local !=null){
+        if (local != null) {
             System.out.println("Admin has already");
-            throw new AdminAlreadyExistsException(local.getUsername());
-        }else{
-            for(AccountRole ur:userRoles){
+            throw new RequestException("This account has already!");
+        } else {
+            for (AccountRole ur : userRoles) {
                 roleRepository.save(ur.getRole());
             }
             admin.getUserRole().addAll(userRoles);
@@ -39,6 +39,13 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account findAccount(String username) {
-        return this.accountRepository.findByUsername(username);
+        Account local = this.accountRepository.findByUsername(username);
+        if (local == null) {
+            System.out.println("Not found this account: " + username);
+            throw new RequestException("Not found account with username: " + username);
+        } else
+            return this.accountRepository.findByUsername(username);
+
     }
 }
+

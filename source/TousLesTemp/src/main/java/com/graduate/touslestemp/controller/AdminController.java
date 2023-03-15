@@ -1,5 +1,5 @@
 package com.graduate.touslestemp.controller;
-import com.graduate.touslestemp.exception.NotFoundAdminException;
+
 import com.graduate.touslestemp.model.Role;
 import com.graduate.touslestemp.model.AccountRole;
 import com.graduate.touslestemp.model.Account;
@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -66,20 +67,10 @@ public class AdminController {
         return accountRepository.findAll();
     }
 
-    //    @GetMapping("/get/{username}")
-//    Admin getUserByName(@PathVariable("username") String username){
-//        return this.adminService.findAdmin(username);
-//
-//    }
     @GetMapping("/get/{username}")
-    Account getUserByName(@PathVariable("username") String username) {
+    Account getUserByName(@PathVariable("username") String username) throws Exception {
+        return this.accountService.findAccount(username);
 
-             if(accountRepository.findByUsername(username)!=null){
-                 return accountRepository.findByUsername(username);
-             }else{
-                 throw new NotFoundAdminException(username);
-             }
     }
-
 
 }

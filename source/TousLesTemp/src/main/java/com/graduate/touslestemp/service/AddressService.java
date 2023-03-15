@@ -1,0 +1,14 @@
+package com.graduate.touslestemp.service;
+
+import com.graduate.touslestemp.model.Address;
+
+import java.util.List;
+
+public interface AddressService {
+    List<Address> findAll();
+    Address save(Address address) throws Exception;
+    Address findAddress(String name);
+
+    Address update(Address address);
+
+}

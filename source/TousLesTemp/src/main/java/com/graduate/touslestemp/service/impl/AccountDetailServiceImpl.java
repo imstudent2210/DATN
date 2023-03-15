@@ -1,5 +1,6 @@
 package com.graduate.touslestemp.service.impl;
 
+import com.graduate.touslestemp.exception.RequestException;
 import com.graduate.touslestemp.model.Account;
 import com.graduate.touslestemp.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class AccountDetailServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = this.accountRepository.findByUsername(username);
         if(account == null){
-            throw new UsernameNotFoundException(username);
+            throw new RequestException("Not found this account!");
         }
     return  account;
     }

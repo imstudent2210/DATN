@@ -8,5 +8,5 @@ import java.util.Set;
 public interface AccountService {
 
     public Account createAccount(Account account, Set<AccountRole> userRoles) throws Exception;
-   Account findAccount(String username);
+   Account findAccount(String username) throws Exception;
 }

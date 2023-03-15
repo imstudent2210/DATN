@@ -1,8 +1,7 @@
 package com.graduate.touslestemp.controller;
 
 import com.graduate.touslestemp.config.JwtUtil;
-import com.graduate.touslestemp.exception.AdminAlreadyExistsException;
-import com.graduate.touslestemp.exception.NotFoundAdminException;
+import com.graduate.touslestemp.exception.RequestException;
 import com.graduate.touslestemp.model.Account;
 import com.graduate.touslestemp.model.JwtRequest;
 import com.graduate.touslestemp.model.JwtRespone;
@@ -37,7 +36,7 @@ public class AuthController {
 
         }catch (UsernameNotFoundException e){
             e.printStackTrace();
-            throw new NotFoundAdminException(jwtRequest.getUsername());
+            throw new RequestException("Not found this account: "+ jwtRequest.getUsername());
         }
 
         UserDetails userDetails = this.adminDetailService.loadUserByUsername(jwtRequest.getUsername());
@@ -47,8 +46,8 @@ public class AuthController {
     private void authenticaticate(String username, String password) throws Exception{
         try{
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username,password));
-        }catch (AdminAlreadyExistsException e){
-            throw new Exception("User disabled " +e.getMessage());
+        }catch (RequestException e){
+            throw new RequestException("User disable");
         }catch (BadCredentialsException e){
             throw new Exception("Invalid Credentials "+e.getMessage());
         }

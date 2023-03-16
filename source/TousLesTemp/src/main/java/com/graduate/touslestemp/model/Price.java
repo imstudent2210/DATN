@@ -2,7 +2,6 @@ package com.graduate.touslestemp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,13 +15,11 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="StaffGroup")
-public class StaffGroup {
-    @Id
+@Table(name="Price")
+public class Price {
+    @EmbeddedId
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="staff_group_id")
-    private Long id;
-    @NotEmpty(message = "Enter staff group name !")
-    private String name;
-
+    @Column(name="price_id")
+    private SkuID id;
+    private double price;
 }

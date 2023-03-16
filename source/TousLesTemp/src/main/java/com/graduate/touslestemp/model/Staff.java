@@ -4,6 +4,8 @@ package com.graduate.touslestemp.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Getter
 @Setter
@@ -23,11 +25,13 @@ public class Staff {
     private String email;
     private String phone;
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "StaffGroup", referencedColumnName = "staffgroup_id")
+    @JoinColumn(name = "StaffGroup", referencedColumnName = "staff_group_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private StaffGroup staffGroup;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "Store", referencedColumnName = "id")
+    @JoinColumn(name = "Store", referencedColumnName = "store_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Store store;
 
 

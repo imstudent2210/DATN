@@ -1,27 +1,23 @@
 package com.graduate.touslestemp.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.Set;
-
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "Category")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity
-@Data
-@Table(name="Address")
-public class Address {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="address_id")
+    @Column(name = "category_id")
     private Long id;
-    @NotEmpty(message = "Enter address !")
+    @NotEmpty(message = "Enter category !")
     private String name;
+    private boolean isActivated= true;
 
 }

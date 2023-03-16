@@ -1,13 +1,8 @@
 package com.graduate.touslestemp.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
-
-import java.util.HashSet;
-import java.util.Set;
-
 
 @Getter
 @Setter
@@ -15,13 +10,12 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Data
-@Table(name="Address")
-public class Address {
+@Table(name="ProductSize")
+public class ProductSize {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="address_id")
+    @Column(name="product_size_id")
     private Long id;
-    @NotEmpty(message = "Enter address !")
-    private String name;
-
+    @NotEmpty(message = "Enter size !")
+    private String size;
 }

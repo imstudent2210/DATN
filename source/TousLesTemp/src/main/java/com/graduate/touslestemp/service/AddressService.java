@@ -9,6 +9,9 @@ public interface AddressService {
     Address save(Address address) throws Exception;
     Address findAddress(String name);
 
-    Address update(Address address);
+    Address update(Address address, String name) throws Exception;
+//    void delete(String name) throws Exception;
+    void deleteAddress (Long id);
+
 
 }

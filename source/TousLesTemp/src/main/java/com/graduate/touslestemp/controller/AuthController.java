@@ -2,9 +2,9 @@ package com.graduate.touslestemp.controller;
 
 import com.graduate.touslestemp.config.JwtUtil;
 import com.graduate.touslestemp.exception.RequestException;
-import com.graduate.touslestemp.model.Account;
-import com.graduate.touslestemp.model.JwtRequest;
-import com.graduate.touslestemp.model.JwtRespone;
+import com.graduate.touslestemp.domain.entity.Account;
+import com.graduate.touslestemp.domain.entity.JwtRequest;
+import com.graduate.touslestemp.domain.entity.JwtRespone;
 import com.graduate.touslestemp.service.impl.AccountDetailServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

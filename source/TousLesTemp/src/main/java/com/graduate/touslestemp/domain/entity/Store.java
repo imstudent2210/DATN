@@ -1,7 +1,6 @@
-package com.graduate.touslestemp.model;
+package com.graduate.touslestemp.domain.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
@@ -28,10 +27,9 @@ public class Store {
     private String phone;
     private String email;
 
-
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "Address", referencedColumnName = "address_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
     private Address address;
 
     @ManyToMany(fetch = FetchType.LAZY,

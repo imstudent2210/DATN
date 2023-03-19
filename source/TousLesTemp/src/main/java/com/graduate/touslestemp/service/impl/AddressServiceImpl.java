@@ -2,8 +2,8 @@ package com.graduate.touslestemp.service.impl;
 
 import com.graduate.touslestemp.exception.RequestException;
 import com.graduate.touslestemp.exception.RequestSuccess;
-import com.graduate.touslestemp.model.Address;
-import com.graduate.touslestemp.repository.AddressRepository;
+import com.graduate.touslestemp.domain.entity.Address;
+import com.graduate.touslestemp.domain.repository.AddressRepository;
 import com.graduate.touslestemp.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @Service
 public class AddressServiceImpl implements AddressService {
+
     @Autowired
     private AddressRepository addressRepository;
     @Autowired
@@ -30,13 +31,11 @@ public class AddressServiceImpl implements AddressService {
             System.out.println("This address has already");
             throw new RequestException("This address has already!");
         } else {
-
-
             local = this.addressRepository.save(address);
-
         }
         return local;
     }
+
 
     @Override
     public Address findAddress(String address) {
@@ -53,11 +52,16 @@ public class AddressServiceImpl implements AddressService {
     public Address update(Address address, String addressname) {
 
         Address updateAddress = this.addressRepository.findAddressByName(addressname);
+        String updateName = address.getName();
+        Address local = this.addressRepository.findAddressByName(updateName);
         if (updateAddress == null) {
             System.out.println("Not found this address: " + addressname);
             throw new RequestException("Not found this address: " + addressname);
         } else {
-            updateAddress.setName(address.getName());
+            if (local == null)
+                updateAddress.setName(address.getName());
+            else
+                throw new RequestException("This address has already: " + updateName);
         }
         return this.addressRepository.save(updateAddress);
     }
@@ -69,10 +73,10 @@ public class AddressServiceImpl implements AddressService {
         Optional<Address> local = this.addressRepository.findById(address.getId());
         if (!local.isPresent()) {
             System.out.println("Not found this address ");
-            throw new RequestException("Not found this address id: "+id);
+            throw new RequestException("Not found this address id: " + id);
         } else {
             this.addressRepository.delete(address);
-            throw new RequestSuccess("Delete address id "+id+" completed! ");
+            throw new RequestSuccess("Delete address id " + id + " completed! ");
         }
     }
 }

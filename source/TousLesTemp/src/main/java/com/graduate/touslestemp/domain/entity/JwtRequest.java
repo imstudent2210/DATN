@@ -1,4 +1,4 @@
-package com.graduate.touslestemp.model;
+package com.graduate.touslestemp.domain.entity;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;

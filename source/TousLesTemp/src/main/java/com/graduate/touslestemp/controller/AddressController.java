@@ -1,11 +1,9 @@
 package com.graduate.touslestemp.controller;
 
-import com.graduate.touslestemp.model.Account;
-import com.graduate.touslestemp.model.Address;
-import com.graduate.touslestemp.repository.AddressRepository;
+import com.graduate.touslestemp.domain.entity.Address;
+import com.graduate.touslestemp.domain.repository.AddressRepository;
 import com.graduate.touslestemp.service.AddressService;
 import jakarta.validation.Valid;
-import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

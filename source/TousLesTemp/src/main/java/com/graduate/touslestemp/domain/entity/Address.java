@@ -1,12 +1,8 @@
-package com.graduate.touslestemp.model;
+package com.graduate.touslestemp.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
-
-import java.util.HashSet;
-import java.util.Set;
 
 
 @Getter
@@ -23,5 +19,4 @@ public class Address {
     private Long id;
     @NotEmpty(message = "Enter address !")
     private String name;
-
 }

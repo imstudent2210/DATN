@@ -1,4 +1,4 @@
-package com.graduate.touslestemp.model;
+package com.graduate.touslestemp.domain.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 

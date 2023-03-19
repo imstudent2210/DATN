@@ -1,4 +1,4 @@
-package com.graduate.touslestemp.model;
+package com.graduate.touslestemp.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

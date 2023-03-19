@@ -1,11 +1,11 @@
 package com.graduate.touslestemp.service.impl;
 
 import com.graduate.touslestemp.exception.RequestException;
-import com.graduate.touslestemp.model.AccountRole;
-import com.graduate.touslestemp.model.Account;
-import com.graduate.touslestemp.repository.AccountRepository;
+import com.graduate.touslestemp.domain.entity.AccountRole;
+import com.graduate.touslestemp.domain.entity.Account;
+import com.graduate.touslestemp.domain.repository.AccountRepository;
 
-import com.graduate.touslestemp.repository.RoleRepository;
+import com.graduate.touslestemp.domain.repository.RoleRepository;
 import com.graduate.touslestemp.service.AccountService;
 
 import org.springframework.beans.factory.annotation.Autowired;

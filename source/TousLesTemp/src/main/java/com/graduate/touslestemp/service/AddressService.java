@@ -1,6 +1,6 @@
 package com.graduate.touslestemp.service;
 
-import com.graduate.touslestemp.model.Address;
+import com.graduate.touslestemp.domain.entity.Address;
 
 import java.util.List;
 

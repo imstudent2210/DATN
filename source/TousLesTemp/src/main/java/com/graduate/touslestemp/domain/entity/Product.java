@@ -43,8 +43,7 @@ public class Product {
                     CascadeType.MERGE
             },
             mappedBy = "products")
-    @JsonIgnore
-    private Set<Store> tutorials = new HashSet<>();
+    private Set<Store> stores = new HashSet<>();
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "ProductSize", referencedColumnName = "product_size_id")
     private ProductSize productSize;

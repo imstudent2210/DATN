@@ -41,7 +41,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.csrf().disable().cors().disable().authorizeHttpRequests()
-                .requestMatchers("/login", "/register/**","/address/**","/store/**").permitAll()
+                .requestMatchers("/login", "/register/**","/address/**","/store/**","/category/**").permitAll()
                 .requestMatchers(HttpMethod.OPTIONS).permitAll()
                 .anyRequest().authenticated().and()
                 .exceptionHandling()

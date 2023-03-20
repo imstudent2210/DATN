@@ -1,5 +1,6 @@
 package com.graduate.touslestemp.service.impl;
 
+import com.graduate.touslestemp.domain.dto.PageResponseDTO;
 import com.graduate.touslestemp.domain.dto.StoreDTO;
 import com.graduate.touslestemp.exception.RequestException;
 import com.graduate.touslestemp.domain.entity.Address;
@@ -9,9 +10,11 @@ import com.graduate.touslestemp.domain.repository.StoreRepository;
 import com.graduate.touslestemp.service.StoreService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class StoreServiceImpl implements StoreService {
@@ -30,17 +33,14 @@ public class StoreServiceImpl implements StoreService {
     //save store using model mapper
     @Override
     public Store save(Store store) throws Exception {
-        Store local = this.storeRepository.findStoreByName(store.getName());
-        if (local != null) {
+        if (isExisStore(store.getName())) {
             System.out.println("This store has already");
             throw new RequestException("This store has already!");
         } else {
             Address address = store.getAddress();
-            if(this.addressRepository.findAddressById(address.getId()) == null)
+            if (this.addressRepository.findAddressById(address.getId()) == null)
                 throw new RequestException("This address not exist!");
-            else
-            {
-
+            else {
                 address.setName(address.getName());
                 store.setAddress(address);
 
@@ -50,6 +50,36 @@ public class StoreServiceImpl implements StoreService {
                 );
             }
         }
+    }
+
+    @Override
+    public Store update(Store store, String name) throws Exception {
+        Store updateStore = this.storeRepository.findStoreByName(name);
+
+        if (updateStore == null) {
+            System.out.println("Not found this store: " + name);
+            throw new RequestException("Not found this store: " + name);
+        } else {
+            if (isExisStore(store.getName())) {
+                System.out.println("This store has already");
+                throw new RequestException("This store has already!");
+            } else {
+                Address address = store.getAddress();
+                if (this.addressRepository.findAddressById(address.getId()) == null)
+                    throw new RequestException("This address not exist!");
+
+                address.setName(address.getName());
+                store.setAddress(address);
+
+                updateStore.setName(store.getName());
+                updateStore.setPhone(store.getPhone());
+                updateStore.setEmail(store.getEmail());
+                updateStore.setAddress(store.getAddress());
+                updateStore.setProducts(store.getProducts());
+
+            }
+        }
+        return this.storeRepository.save(updateStore);
     }
 
 
@@ -63,36 +93,36 @@ public class StoreServiceImpl implements StoreService {
             return this.storeRepository.findStoreByName(store);
     }
 
-    @Override
-    public Store update(Store store, String name) throws Exception {
-        Store updateStore = this.storeRepository.findStoreByName(name);
-        String updateName = store.getName();
-
-        if (updateStore == null) {
-            System.out.println("Not found this store: " + name);
-            throw new RequestException("Not found this store: " + name);
-        } else {
-
-            Address address = store.getAddress();
-            address.setName(address.getName());
-            store.setAddress(address);
-
-            updateStore.setName(store.getName());
-            updateStore.setPhone(store.getPhone());
-            updateStore.setEmail(store.getEmail());
-            updateStore.setAddress(store.getAddress());
-            updateStore.setProducts(store.getProducts());
-
-        }
-        return this.storeRepository.save(updateStore);
-    }
-
 
     // method delete 2
     @Override
     public void deleteStore(Long id) {
         storeRepository.delete(storeRepository.findById(id).orElseThrow(() -> new RequestException("Can't found this store id: " + id)));
     }
+
+    public boolean isExisStore(String name) {
+        Store checkStore = storeRepository.findStoreByName(name);
+        if (checkStore != null) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public PageResponseDTO<?> getAllStore(Pageable pageable) {
+        return modelMapper.map(storeRepository.findAll(pageable), PageResponseDTO.class);
+    }
+
+//    @Override
+//    public List<Store> findStoreByAddressId(Long id) {
+//        Address address = this.addressRepository.findAddressById(id);
+//        if(address.getId()== null){
+//            throw new RequestException("This address not exist!");
+//        }else{
+//            return (List<Store>) this.storeRepository.findStoreByAddressId(id);
+//        }
+//
+//    }
 
 
 }

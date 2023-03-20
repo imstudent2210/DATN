@@ -29,7 +29,6 @@ public class Store {
 
     @ManyToOne
     @JoinColumn(name = "Address", referencedColumnName = "address_id")
-//    @OnDelete(action = OnDeleteAction.CASCADE)
     private Address address;
 
     @ManyToMany(fetch = FetchType.LAZY,

@@ -1,5 +1,6 @@
 package com.graduate.touslestemp.domain.repository;
 
+import com.graduate.touslestemp.domain.dto.StoreDTO;
 import com.graduate.touslestemp.domain.entity.Address;
 import com.graduate.touslestemp.domain.entity.Store;
 import org.springframework.data.domain.Page;
@@ -9,16 +10,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public interface StoreRepository extends JpaRepository<Store, Long> {
-    Store findStoreByName(String address);
-
-//    @Query(value = "")
-
+    Store findStoreByName(String name);
     Page<Store> findAll(Pageable pageable);
-
-//    @Query("select s from Store s where s.address.id = :id")
-//    Store findStoreByAddressId(@Param("id") Long id);
-    Set<Store> findByAddressId(Address address);
+    Optional<Store> findStoreDTOByName(String name);
 }

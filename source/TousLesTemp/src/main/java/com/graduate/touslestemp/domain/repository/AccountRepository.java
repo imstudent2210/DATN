@@ -1,6 +1,6 @@
 package com.graduate.touslestemp.domain.repository;
 
-import com.graduate.touslestemp.domain.entity.Account;
+import com.graduate.touslestemp.domain.entity.auth.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

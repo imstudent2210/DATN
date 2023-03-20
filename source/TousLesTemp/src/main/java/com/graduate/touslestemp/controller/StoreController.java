@@ -35,6 +35,24 @@ public class StoreController {
 
     @Autowired
     private ProductRepository productRepository;
+
+    /*==========================DTO==============================*/
+    @GetMapping("/get/dto")
+    List<StoreDTO> allStoreDTO() {
+        return this.storeService.findAllByDTO();
+    }
+
+    @GetMapping("/get/dto-id/{id}")
+    StoreDTO getStoreDTOById(@PathVariable("id") Long id) throws Exception {
+        return this.storeService.findStoreDTOById(id);
+    }
+    @GetMapping("/get/dto-name/{name}")
+    List<StoreDTO> getStoreDTOByName(@PathVariable("name") String name) throws Exception {
+        return this.storeService.findStoreDTOByName(name);
+    }
+
+
+    /*==========================end DTO==============================*/
     @GetMapping("/get")
     List<Store> allStore() {
         return this.storeRepository.findAll();
@@ -46,9 +64,8 @@ public class StoreController {
     }
 
     @GetMapping("/get/{store}")
-    Store getAddressByName(@PathVariable("store") String store) throws Exception {
+    Store getStoreByName(@PathVariable("store") String store) throws Exception {
         return this.storeService.findStore(store);
-
     }
 
     @GetMapping("/get-page")
@@ -70,5 +87,6 @@ public class StoreController {
     List<Product> allProduct() {
         return this.productRepository.findAll();
     }
+
 
 }

@@ -36,24 +36,16 @@ public class Product {
     @JoinColumn(name = "category", referencedColumnName = "category_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Category category;
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "size", referencedColumnName = "size_id")
     private Size size;
 
-    //    @ManyToMany(fetch = FetchType.LAZY,
-//            cascade = {
-//
-//                    CascadeType.MERGE
-//            },
-//            mappedBy = "products")
-//    private Set<Store> stores = new HashSet<>();
+
     @ManyToOne
     @JoinColumn(name = "store", referencedColumnName = "store_id")
     private Store store;
 
-
-//    @Enumerated(EnumType.STRING)
-//    private Gender gender;
 
 
 }

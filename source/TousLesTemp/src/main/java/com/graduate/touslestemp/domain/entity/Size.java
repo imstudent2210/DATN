@@ -10,11 +10,11 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Data
-@Table(name="ProductSize")
-public class ProductSize {
+@Table(name="size")
+public class Size {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="product_size_id")
+    @Column(name="size_id")
     private Long id;
     @NotEmpty(message = "Enter size !")
     private String size;

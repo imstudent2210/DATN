@@ -27,7 +27,7 @@ public class Product {
     private String description;
     @NotEmpty(message = "Enter current quantity !")
     private int inventory;
-
+    private double price;
     @Lob
     @Column(columnDefinition = "MEDIUMBLOB")
     private String image;
@@ -36,27 +36,21 @@ public class Product {
     @JoinColumn(name = "category", referencedColumnName = "category_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Category category;
-
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            },
-            mappedBy = "products")
-    private Set<Store> stores = new HashSet<>();
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ProductSize", referencedColumnName = "product_size_id")
-    private ProductSize productSize;
+    @JoinColumn(name = "size", referencedColumnName = "size_id")
+    private Size size;
+
+    //    @ManyToMany(fetch = FetchType.LAZY,
+//            cascade = {
+//
+//                    CascadeType.MERGE
+//            },
+//            mappedBy = "products")
+//    private Set<Store> stores = new HashSet<>();
     @ManyToOne
-    @JoinColumns({
-            @JoinColumn(
-                    name = "product_id_sku",
-                    referencedColumnName = "product_id_sku"),
-            @JoinColumn(
-                    name = "size_id_sku",
-                    referencedColumnName = "size_id_sku")
-    })
-    private Price price;
+    @JoinColumn(name = "store", referencedColumnName = "store_id")
+    private Store store;
+
 
 //    @Enumerated(EnumType.STRING)
 //    private Gender gender;

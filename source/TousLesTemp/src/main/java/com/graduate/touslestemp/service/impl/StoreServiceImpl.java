@@ -75,7 +75,7 @@ public class StoreServiceImpl implements StoreService {
                 updateStore.setPhone(store.getPhone());
                 updateStore.setEmail(store.getEmail());
                 updateStore.setAddress(store.getAddress());
-                updateStore.setProducts(store.getProducts());
+//                updateStore.setProducts(store.getProducts());
 
             }
         }

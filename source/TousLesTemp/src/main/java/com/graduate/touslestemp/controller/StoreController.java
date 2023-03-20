@@ -2,8 +2,10 @@ package com.graduate.touslestemp.controller;
 
 import com.graduate.touslestemp.domain.dto.StoreDTO;
 import com.graduate.touslestemp.domain.entity.Address;
+import com.graduate.touslestemp.domain.entity.Product;
 import com.graduate.touslestemp.domain.entity.Store;
 import com.graduate.touslestemp.domain.repository.AddressRepository;
+import com.graduate.touslestemp.domain.repository.ProductRepository;
 import com.graduate.touslestemp.domain.repository.StoreRepository;
 import com.graduate.touslestemp.service.AddressService;
 import com.graduate.touslestemp.service.StoreService;
@@ -30,6 +32,9 @@ public class StoreController {
     private StoreService storeService;
     @Autowired
     private AddressService addressService;
+
+    @Autowired
+    private ProductRepository productRepository;
     @GetMapping("/get")
     List<Store> allStore() {
         return this.storeRepository.findAll();
@@ -58,6 +63,12 @@ public class StoreController {
     @DeleteMapping("/delete/{id}")
     public void deleteStore(@PathVariable("id") Long id) throws Exception{
         this.storeService.deleteStore(id);
+    }
+
+    //
+    @GetMapping("/product")
+    List<Product> allProduct() {
+        return this.productRepository.findAll();
     }
 
 }

@@ -2,10 +2,7 @@ package com.graduate.touslestemp.service.impl;
 
 import com.graduate.touslestemp.domain.dto.PageResponseDTO;
 import com.graduate.touslestemp.domain.entity.Product;
-import com.graduate.touslestemp.domain.entity.Store;
-import com.graduate.touslestemp.domain.repository.AddressRepository;
 import com.graduate.touslestemp.domain.repository.ProductRepository;
-import com.graduate.touslestemp.domain.repository.StoreRepository;
 import com.graduate.touslestemp.service.ProductService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

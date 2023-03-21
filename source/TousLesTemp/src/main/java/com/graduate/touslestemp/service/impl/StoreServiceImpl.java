@@ -1,22 +1,18 @@
 package com.graduate.touslestemp.service.impl;
 
 import com.graduate.touslestemp.domain.dto.PageResponseDTO;
-import com.graduate.touslestemp.domain.dto.StoreDTO;
-import com.graduate.touslestemp.exception.RequestException;
 import com.graduate.touslestemp.domain.entity.Address;
 import com.graduate.touslestemp.domain.entity.Store;
 import com.graduate.touslestemp.domain.repository.AddressRepository;
 import com.graduate.touslestemp.domain.repository.StoreRepository;
+import com.graduate.touslestemp.exception.RequestException;
 import com.graduate.touslestemp.service.StoreService;
-import com.graduate.touslestemp.domain.dto.StoreDTOMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Service
 public class StoreServiceImpl implements StoreService {
@@ -30,36 +26,7 @@ public class StoreServiceImpl implements StoreService {
     @Autowired
     private StoreService storeService;
 
-    /* ====================DTO pattern =========================*/
-    @Autowired
-    private StoreDTOMapper storeDTOMapper;
-
-    @Override
-    public List<StoreDTO> findAllByDTO() {
-        return storeService.findAll()
-                .stream()
-                .map(storeDTOMapper)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public StoreDTO findStoreDTOById(Long id) {
-        return storeRepository.findById(id)
-                .map(storeDTOMapper)
-                .orElseThrow(() -> new RequestException("Not found store with id: " + id));
-    }
-
-    @Override
-    public List<StoreDTO> findStoreDTOByName(String name) {
-        if (!isExisStore(name)) {
-            throw new RequestException("Not found store with name: " + name);
-        }
-        return storeRepository.findStoreDTOByName(name)
-                .stream()
-                .map(storeDTOMapper)
-                .collect(Collectors.toList());
-    }
-
+    /*====================DTO v2==========================*/
     /*===================end DTO==========================*/
     @Override
     public List<Store> findAll() {

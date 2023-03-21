@@ -11,8 +11,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @SpringBootApplication
-//@Configuration
-//@ComponentScan("com.graduate.touslestemp.repository")
 public class TousLesTempApplication {
 
     public static void main(String[] args) {

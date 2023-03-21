@@ -1,10 +1,12 @@
 package com.graduate.touslestemp.controller;
 
-import com.graduate.touslestemp.domain.dto.StoreDTO;
-import com.graduate.touslestemp.domain.entity.Address;
+//import com.graduate.touslestemp.domain.dto.StoreDTO;
+
+import com.graduate.touslestemp.domain.dto.PageResponseDTO;
 import com.graduate.touslestemp.domain.entity.Product;
 import com.graduate.touslestemp.domain.entity.Store;
-import com.graduate.touslestemp.domain.repository.AddressRepository;
+import com.graduate.touslestemp.domain.mapper.StoreDto;
+import com.graduate.touslestemp.domain.mapper.StoreMapper;
 import com.graduate.touslestemp.domain.repository.ProductRepository;
 import com.graduate.touslestemp.domain.repository.StoreRepository;
 import com.graduate.touslestemp.service.AddressService;
@@ -12,14 +14,12 @@ import com.graduate.touslestemp.service.StoreService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.graduate.touslestemp.domain.dto.PageResponseDTO;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @CrossOrigin("*")
@@ -35,22 +35,15 @@ public class StoreController {
 
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private StoreMapper storeMapper;
 
-    /*==========================DTO==============================*/
-    @GetMapping("/get/dto")
-    List<StoreDTO> allStoreDTO() {
-        return this.storeService.findAllByDTO();
-    }
+    /*===========================DTO v2=========================*/
 
-    @GetMapping("/get/dto-id/{id}")
-    StoreDTO getStoreDTOById(@PathVariable("id") Long id) throws Exception {
-        return this.storeService.findStoreDTOById(id);
+    @GetMapping("/get/dto1")
+    public ResponseEntity<List<StoreDto>> allStoreDTO() {
+        return new ResponseEntity<>(storeMapper.toStoreDTOs(storeRepository.findAll()), HttpStatus.OK);
     }
-    @GetMapping("/get/dto-name/{name}")
-    List<StoreDTO> getStoreDTOByName(@PathVariable("name") String name) throws Exception {
-        return this.storeService.findStoreDTOByName(name);
-    }
-
 
     /*==========================end DTO==============================*/
     @GetMapping("/get")

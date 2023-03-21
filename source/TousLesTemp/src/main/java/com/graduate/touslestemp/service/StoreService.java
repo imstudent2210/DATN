@@ -1,7 +1,7 @@
 package com.graduate.touslestemp.service;
 
 import com.graduate.touslestemp.domain.dto.PageResponseDTO;
-import com.graduate.touslestemp.domain.dto.StoreDTO;
+//import com.graduate.touslestemp.domain.dto.StoreDTO;
 import com.graduate.touslestemp.domain.entity.Store;
 import org.springframework.data.domain.Pageable;
 
@@ -17,10 +17,10 @@ public interface StoreService {
     /*====================== DTO==================*/
     PageResponseDTO<?> getAllStore(Pageable request);
 
-    List<StoreDTO> findAllByDTO();
-
-    StoreDTO findStoreDTOById(Long id);
-
-    List<StoreDTO> findStoreDTOByName(String name);
+//    List<StoreDTO> findAllByDTO();
+//
+//    StoreDTO findStoreDTOById(Long id);
+//
+//    List<StoreDTO> findStoreDTOByName(String name);
 
 }

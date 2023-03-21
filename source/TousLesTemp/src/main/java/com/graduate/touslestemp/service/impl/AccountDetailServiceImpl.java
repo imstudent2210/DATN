@@ -1,7 +1,7 @@
 package com.graduate.touslestemp.service.impl;
 
 import com.graduate.touslestemp.exception.RequestException;
-import com.graduate.touslestemp.domain.entity.auth.Account;
+import com.graduate.touslestemp.config.authenticate.Account;
 import com.graduate.touslestemp.domain.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

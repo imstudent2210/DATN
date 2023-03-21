@@ -24,3 +24,10 @@ spring:
       file-size-threshold: 2KB
       max-file-size: 100MB
       max-request-size: 100MB
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html

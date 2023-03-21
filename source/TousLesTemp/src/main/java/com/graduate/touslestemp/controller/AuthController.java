@@ -1,10 +1,10 @@
 package com.graduate.touslestemp.controller;
 
-import com.graduate.touslestemp.config.JwtUtil;
+import com.graduate.touslestemp.config.authenticate.JwtUtil;
 import com.graduate.touslestemp.exception.RequestException;
-import com.graduate.touslestemp.domain.entity.auth.Account;
-import com.graduate.touslestemp.domain.entity.auth.JwtRequest;
-import com.graduate.touslestemp.domain.entity.auth.JwtRespone;
+import com.graduate.touslestemp.config.authenticate.Account;
+import com.graduate.touslestemp.config.authenticate.JwtRequest;
+import com.graduate.touslestemp.config.authenticate.JwtRespone;
 import com.graduate.touslestemp.service.impl.AccountDetailServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

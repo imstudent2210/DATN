@@ -1,5 +1,6 @@
 package com.graduate.touslestemp.config;
-import com.graduate.touslestemp.service.impl.AccountDetailServiceImpl;
+import com.graduate.touslestemp.config.authenticate.JwtAuthencationFilter;
+import com.graduate.touslestemp.config.authenticate.JwtAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,8 +22,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 /** * Config các bảo mật về mật khẩu, phạm vi truy cập*/
     public class SecurityConfig {
-
-
     @Autowired
     private JwtAuthencationFilter jwtAuthencationFilter;
     @Autowired
@@ -41,7 +40,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.csrf().disable().cors().disable().authorizeHttpRequests()
-                .requestMatchers("/login", "/register/**","/address/**","/store/**","/category/**").permitAll()
+                .requestMatchers("/login", "/register/**","/address/**","/store/**","/category/**","/swagger-ui.html").permitAll()
                 .requestMatchers(HttpMethod.OPTIONS).permitAll()
                 .anyRequest().authenticated().and()
                 .exceptionHandling()

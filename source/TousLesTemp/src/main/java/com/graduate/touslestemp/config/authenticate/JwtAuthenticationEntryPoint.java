@@ -1,4 +1,4 @@
-package com.graduate.touslestemp.config;
+package com.graduate.touslestemp.config.authenticate;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

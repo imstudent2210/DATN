@@ -51,6 +51,15 @@ public class StoreController {
     public ResponseEntity<StoreDto> getStoreDTOById(@PathVariable(name = "id") Long id) {
         return new ResponseEntity<>(storeService.findStoreDTOById(id), HttpStatus.OK);
     }
+    @PostMapping("/create/dto")
+    public ResponseEntity<StoreDto> createStoreDTO(@RequestBody @Valid Store store ) throws Exception {
+        return new ResponseEntity<>(storeService.create(store), HttpStatus.OK);
+    }
+
+//    @DeleteMapping("/delete/dto/{id}")
+//    public ResponseEntity<StoreDto> createStoreDTO(@PathVariable(name = "id") Long id ) throws Exception {
+//        return new ResponseEntity<>(storeService.create(store), HttpStatus.OK);
+//    }
 
     /*==========================end DTO==============================*/
     @GetMapping("/get")
@@ -83,7 +92,7 @@ public class StoreController {
 
     @DeleteMapping("/delete/{id}")
     public void deleteStore(@PathVariable("id") Long id) throws Exception {
-        this.storeService.deleteStore(id);
+        this.storeService.delete(id);
     }
 
     //

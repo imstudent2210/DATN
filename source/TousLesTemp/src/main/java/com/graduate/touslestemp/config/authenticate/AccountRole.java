@@ -1,4 +1,4 @@
-package com.graduate.touslestemp.domain.entity.auth;
+package com.graduate.touslestemp.config.authenticate;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

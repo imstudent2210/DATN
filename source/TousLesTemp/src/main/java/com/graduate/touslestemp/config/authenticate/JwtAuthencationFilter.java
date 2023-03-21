@@ -1,6 +1,5 @@
-package com.graduate.touslestemp.config;
+package com.graduate.touslestemp.config.authenticate;
 
-import com.graduate.touslestemp.service.impl.AccountDetailServiceImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

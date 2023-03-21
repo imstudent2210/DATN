@@ -34,7 +34,15 @@ public class StoreServiceImpl implements StoreService {
     private StoreService storeService;
 
     /*====================DTO v2==========================*/
-
+    @Override
+    public StoreDto create(Store store) throws Exception {
+        if (isExisStore(store.getName())) {
+            System.out.println("This store has already");
+            throw new RequestException("This store has already!");
+        }else{
+            return (storeMapper.toStoreDTO(storeRepository.save(store)));
+        }
+    }
     @Override
     public StoreDto findStoreDTOById(Long id) {
         Optional<Store> store = storeRepository.findById(id);
@@ -42,6 +50,35 @@ public class StoreServiceImpl implements StoreService {
             throw new RequestException("Not found store, id: "+id);
         }
         return (storeMapper.toStoreDTO(storeRepository.findById(id).get()));
+    }
+
+    @Override
+    public StoreDto update(Store store, Long id) throws Exception {
+        Optional<Store> local = storeRepository.findById(id);
+        if (local.isEmpty()) {
+            throw new RequestException("Not found store, id: "+id);
+        }else {
+            if (isExisStore(store.getName())) {
+                System.out.println("This store has already");
+                throw new RequestException("This store has already!");
+            } else {
+                Address address = store.getAddress();
+                if (this.addressRepository.findAddressById(address.getId()) == null)
+                    throw new RequestException("This address not exist!");
+
+                address.setName(address.getName());
+                store.setAddress(address);
+
+                StoreDto a = storeMapper.toStoreDTO(store);
+
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void delete(Long id) {
+        storeRepository.delete(storeRepository.findById(id).orElseThrow(() -> new RequestException("Can't found this store id: " + id)));
     }
 
     /*===================end DTO==========================*/
@@ -115,12 +152,6 @@ public class StoreServiceImpl implements StoreService {
     }
 
 
-    // method delete 2
-    @Override
-    public void deleteStore(Long id) {
-        storeRepository.delete(storeRepository.findById(id).orElseThrow(() -> new RequestException("Can't found this store id: " + id)));
-    }
-
     public boolean isExisStore(String name) {
         Store checkStore = storeRepository.findStoreByName(name);
         if (checkStore != null) {
@@ -133,17 +164,5 @@ public class StoreServiceImpl implements StoreService {
     public PageResponseDTO<?> getAllStore(Pageable pageable) {
         return modelMapper.map(storeRepository.findAll(pageable), PageResponseDTO.class);
     }
-
-//    @Override
-//    public List<Store> findStoreByAddressId(Long id) {
-//        Address address = this.addressRepository.findAddressById(id);
-//        if(address.getId()== null){
-//            throw new RequestException("This address not exist!");
-//        }else{
-//            return (List<Store>) this.storeRepository.findStoreByAddressId(id);
-//        }
-//
-//    }
-
 
 }

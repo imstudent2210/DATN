@@ -1,7 +1,7 @@
 package com.graduate.touslestemp.service;
 
-import com.graduate.touslestemp.domain.entity.auth.AccountRole;
-import com.graduate.touslestemp.domain.entity.auth.Account;
+import com.graduate.touslestemp.config.authenticate.AccountRole;
+import com.graduate.touslestemp.config.authenticate.Account;
 
 import java.util.Set;
 

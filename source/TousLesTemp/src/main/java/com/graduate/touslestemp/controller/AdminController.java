@@ -1,8 +1,8 @@
 package com.graduate.touslestemp.controller;
 
-import com.graduate.touslestemp.domain.entity.auth.Role;
-import com.graduate.touslestemp.domain.entity.auth.AccountRole;
-import com.graduate.touslestemp.domain.entity.auth.Account;
+import com.graduate.touslestemp.config.authenticate.Role;
+import com.graduate.touslestemp.config.authenticate.AccountRole;
+import com.graduate.touslestemp.config.authenticate.Account;
 import com.graduate.touslestemp.domain.repository.AccountRepository;
 import com.graduate.touslestemp.service.AccountService;
 import jakarta.validation.Valid;

@@ -1,4 +1,4 @@
-package com.graduate.touslestemp.domain.entity.auth;
+package com.graduate.touslestemp.config.authenticate;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

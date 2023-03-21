@@ -1,4 +1,4 @@
-package com.graduate.touslestemp.config;
+package com.graduate.touslestemp.config.authenticate;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

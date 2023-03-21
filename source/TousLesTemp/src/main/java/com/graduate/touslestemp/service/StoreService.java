@@ -13,13 +13,14 @@ public interface StoreService {
     Store save(Store store) throws Exception;
     Store findStore(String name);
     Store update(Store store, String name) throws Exception;
-    void deleteStore (Long id);
+//    void deleteStore (Long id);
 
     /*====================== DTO==================*/
     PageResponseDTO<?> getAllStore(Pageable request);
-//
     StoreDto findStoreDTOById(Long id);
-//
+    StoreDto create(Store store) throws Exception;
 //    List<StoreDTO> findStoreDTOByName(String name);
+    void delete (Long id);
+    StoreDto update(Store store, Long id) throws Exception;
 
 }

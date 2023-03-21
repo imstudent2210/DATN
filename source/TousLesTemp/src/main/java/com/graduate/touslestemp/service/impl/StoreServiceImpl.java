@@ -3,6 +3,8 @@ package com.graduate.touslestemp.service.impl;
 import com.graduate.touslestemp.domain.dto.PageResponseDTO;
 import com.graduate.touslestemp.domain.entity.Address;
 import com.graduate.touslestemp.domain.entity.Store;
+import com.graduate.touslestemp.domain.mapper.StoreDto;
+import com.graduate.touslestemp.domain.mapper.StoreMapper;
 import com.graduate.touslestemp.domain.repository.AddressRepository;
 import com.graduate.touslestemp.domain.repository.StoreRepository;
 import com.graduate.touslestemp.exception.RequestException;
@@ -10,9 +12,12 @@ import com.graduate.touslestemp.service.StoreService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StoreServiceImpl implements StoreService {
@@ -22,11 +27,23 @@ public class StoreServiceImpl implements StoreService {
     private StoreRepository storeRepository;
     @Autowired
     private AddressRepository addressRepository;
+    @Autowired
+    private StoreMapper storeMapper;
 
     @Autowired
     private StoreService storeService;
 
     /*====================DTO v2==========================*/
+
+    @Override
+    public StoreDto findStoreDTOById(Long id) {
+        Optional<Store> store = storeRepository.findById(id);
+        if (store.isEmpty()) {
+            throw new RequestException("Not found store, id: "+id);
+        }
+        return (storeMapper.toStoreDTO(storeRepository.findById(id).get()));
+    }
+
     /*===================end DTO==========================*/
     @Override
     public List<Store> findAll() {

@@ -9,6 +9,7 @@ import com.graduate.touslestemp.domain.mapper.StoreDto;
 import com.graduate.touslestemp.domain.mapper.StoreMapper;
 import com.graduate.touslestemp.domain.repository.ProductRepository;
 import com.graduate.touslestemp.domain.repository.StoreRepository;
+import com.graduate.touslestemp.exception.RequestException;
 import com.graduate.touslestemp.service.AddressService;
 import com.graduate.touslestemp.service.StoreService;
 import jakarta.transaction.Transactional;
@@ -20,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
@@ -40,9 +42,14 @@ public class StoreController {
 
     /*===========================DTO v2=========================*/
 
-    @GetMapping("/get/dto1")
+    @GetMapping("/get/dto")
     public ResponseEntity<List<StoreDto>> allStoreDTO() {
         return new ResponseEntity<>(storeMapper.toStoreDTOs(storeRepository.findAll()), HttpStatus.OK);
+    }
+
+    @GetMapping("/get/dto/{id}")
+    public ResponseEntity<StoreDto> getStoreDTOById(@PathVariable(name = "id") Long id) {
+        return new ResponseEntity<>(storeService.findStoreDTOById(id), HttpStatus.OK);
     }
 
     /*==========================end DTO==============================*/
@@ -50,10 +57,11 @@ public class StoreController {
     List<Store> allStore() {
         return this.storeRepository.findAll();
     }
+
     @Transactional
     @PostMapping("/create")
     public Store createStore(@RequestBody @Valid Store store) throws Exception {
-       return this.storeService.save(store);
+        return this.storeService.save(store);
     }
 
     @GetMapping("/get/{store}")
@@ -62,7 +70,10 @@ public class StoreController {
     }
 
     @GetMapping("/get-page")
-    public PageResponseDTO<?> getAllCourse(Pageable request){    return storeService.getAllStore(request);}
+    public PageResponseDTO<?> getAllCourse(Pageable request) {
+        return storeService.getAllStore(request);
+    }
+
     @PatchMapping("/update/{storename}")
     public Store updateStore(@RequestBody @Valid Store store, @PathVariable("storename") String storename) throws Exception {
 
@@ -71,7 +82,7 @@ public class StoreController {
 
 
     @DeleteMapping("/delete/{id}")
-    public void deleteStore(@PathVariable("id") Long id) throws Exception{
+    public void deleteStore(@PathVariable("id") Long id) throws Exception {
         this.storeService.deleteStore(id);
     }
 

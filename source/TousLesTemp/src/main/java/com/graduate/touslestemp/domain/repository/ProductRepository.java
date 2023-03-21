@@ -12,4 +12,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 //    @Query(value = "")
 
     Page<Product> findAll(Pageable pageable);
+
+
 }

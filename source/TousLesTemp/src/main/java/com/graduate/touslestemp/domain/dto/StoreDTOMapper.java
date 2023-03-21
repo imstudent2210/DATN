@@ -1,4 +1,4 @@
-package com.graduate.touslestemp.service.mapper;
+package com.graduate.touslestemp.domain.dto;
 
 import com.graduate.touslestemp.domain.dto.StoreDTO;
 import com.graduate.touslestemp.domain.entity.Store;

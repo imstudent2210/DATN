@@ -6,6 +6,7 @@ import com.graduate.touslestemp.domain.dto.StoreDto;
 import com.graduate.touslestemp.domain.entity.Product;
 import com.graduate.touslestemp.domain.entity.Store;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -22,5 +23,6 @@ public interface ProductService {
     ProductDto create(Product product) throws Exception;
     void delete (Long id);
     ProductDto update(ProductDto productDto, Long id) throws Exception;
-
+    /*================================================*/
+//    ProductDto create(MultipartFile imageProduct, Product product) throws Exception;
 }

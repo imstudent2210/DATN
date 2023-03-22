@@ -1,9 +1,7 @@
 package com.graduate.touslestemp.domain.mapper;
 
 import com.graduate.touslestemp.domain.dto.ProductDto;
-import com.graduate.touslestemp.domain.dto.StoreDto;
 import com.graduate.touslestemp.domain.entity.Product;
-import com.graduate.touslestemp.domain.entity.Store;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;

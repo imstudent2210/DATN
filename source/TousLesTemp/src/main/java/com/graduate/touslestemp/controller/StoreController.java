@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
@@ -32,60 +33,67 @@ public class StoreController {
 
     /*===========================DTO v2=========================*/
 
-    @GetMapping("/get/dto")
-    public ResponseEntity<List<StoreDto>> allStoreDTO() {
+    @GetMapping("/get-all")
+    public ResponseEntity<List<StoreDto>> getAllStoreDTO() {
         return new ResponseEntity<>(storeMapper.toStoreDTOs(storeRepository.findAll()), HttpStatus.OK);
     }
 
-    @GetMapping("/get/dto/{id}")
-    public ResponseEntity<StoreDto> getStoreDTOById(@PathVariable(name = "id") Long id) {
+    @GetMapping("/get/{id}")
+    public ResponseEntity<StoreDto> getStoreDTO(@PathVariable(name = "id") Long id) {
         return new ResponseEntity<>(storeService.find(id), HttpStatus.OK);
     }
 
-    @PostMapping("/create/dto")
+    @PostMapping("/create")
     public ResponseEntity<StoreDto> createStoreDTO(@RequestBody @Valid Store store) throws Exception {
         return new ResponseEntity<>(storeService.create(store), HttpStatus.OK);
     }
 
-    @PutMapping("/update/dto/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<StoreDto> updateStoreDTO(@RequestBody @Valid StoreDto storeDto, @PathVariable(name = "id") Long id) throws Exception {
         return new ResponseEntity<>(storeService.update(storeDto, id), HttpStatus.OK);
     }
 
+    @DeleteMapping("/delete/{id}")
+    public void deleteStoreDTO(@PathVariable("id") Long id) throws Exception {
+        this.storeService.delete(id);
+    }
 
+    @GetMapping("/search/{store}")
+    List<StoreDto> searchStoreDTO(@PathVariable("store") String store) throws Exception {
+        return this.storeService.search(store);
+    }
+    @GetMapping("/filter/{addressId}")
+    List<StoreDto> filterStoreDTO(@PathVariable("addressId") Long addressId) throws Exception {
+        return this.storeService.filter(addressId);
+    }
+
+    @GetMapping("/paging")
+    public PageResponseDTO<?> pagingStoreDTO(Pageable request) {
+        return storeService.getAllStore(request);
+    }
     /*==========================end DTO==============================*/
-    @GetMapping("/get")
+    @GetMapping("/get1")
     List<Store> allStore() {
         return this.storeRepository.findAll();
     }
 
     @Transactional
-    @PostMapping("/create")
+    @PostMapping("/create1")
     public Store createStore(@RequestBody @Valid Store store) throws Exception {
         return this.storeService.save(store);
     }
 
-    @GetMapping("/get/{store}")
+    @GetMapping("/get1/{store}")
     Store getStoreByName(@PathVariable("store") String store) throws Exception {
         return this.storeService.findStore(store);
     }
-
-    @GetMapping("/get-page")
-    public PageResponseDTO<?> getAllCourse(Pageable request) {
-        return storeService.getAllStore(request);
-    }
-
-    @PatchMapping("/update/{storename}")
+    @PatchMapping("/update1/{storename}")
     public Store updateStore(@RequestBody @Valid Store store, @PathVariable("storename") String storename) throws Exception {
 
         return this.storeService.update(store, storename);
     }
 
 
-    @DeleteMapping("/delete/{id}")
-    public void deleteStore(@PathVariable("id") Long id) throws Exception {
-        this.storeService.delete(id);
-    }
 
 
 }

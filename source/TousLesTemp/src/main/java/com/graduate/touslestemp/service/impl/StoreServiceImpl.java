@@ -25,6 +25,7 @@ public class StoreServiceImpl implements StoreService {
     private StoreRepository storeRepository;
     @Autowired
     private StoreMapper storeMapper;
+
     @Override
     public StoreDto create(Store store) throws Exception {
         if (isExisStore(store.getName())) {
@@ -58,12 +59,34 @@ public class StoreServiceImpl implements StoreService {
                 .orElseThrow(() -> new RequestException("Can't found this store id: " + id)));
     }
 
+    @Override
+    public List<StoreDto> search(String name) {
+        List<Store> stores = this.storeRepository.searchStoreByName("%" + name + "%");
+        if (stores.isEmpty()) {
+            throw new RequestException("No data!");
+        } else {
+            List<StoreDto> storeDtos = this.storeMapper.toStoreDTOs(stores);
+            return storeDtos;
+        }
+    }
+
+    @Override
+    public List<StoreDto> filter(Long id) {
+        List<Store> stores = this.storeRepository.filterStoreByAddressId(id);
+        if (stores.isEmpty()) {
+            throw new RequestException("No data!");
+        } else {
+            List<StoreDto> storeDtos = this.storeMapper.toStoreDTOs(stores);
+            return storeDtos;
+        }
+    }
     /*===============================end DTO==========================*/
 
     final ModelMapper modelMapper = new ModelMapper();
 
     @Autowired
     private AddressRepository addressRepository;
+
     @Override
     public List<Store> findAll() {
         return this.storeRepository.findAll();
@@ -132,7 +155,9 @@ public class StoreServiceImpl implements StoreService {
         } else
             return this.storeRepository.findStoreByName(store);
     }
-
+//    public Optional<Store> findStoreDTOByName(String name){
+//        return this.storeRepository.findStoreDTOByName(name);
+//    }
 
     public boolean isExisStore(String name) {
         Store checkStore = storeRepository.findStoreByName(name);

@@ -20,5 +20,6 @@ public interface StoreService {
     StoreDto create(Store store) throws Exception;
     void delete (Long id);
     StoreDto update(StoreDto storeDto, Long id) throws Exception;
-
+    List<StoreDto> search(String keyword);
+    List<StoreDto> filter(Long id);
 }

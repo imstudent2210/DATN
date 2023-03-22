@@ -49,17 +49,17 @@ public class StoreController {
 
     @GetMapping("/get/dto/{id}")
     public ResponseEntity<StoreDto> getStoreDTOById(@PathVariable(name = "id") Long id) {
-        return new ResponseEntity<>(storeService.findStoreDTOById(id), HttpStatus.OK);
+        return new ResponseEntity<>(storeService.find(id), HttpStatus.OK);
     }
     @PostMapping("/create/dto")
     public ResponseEntity<StoreDto> createStoreDTO(@RequestBody @Valid Store store ) throws Exception {
         return new ResponseEntity<>(storeService.create(store), HttpStatus.OK);
     }
+    @PutMapping("/update/dto/{id}")
+    public ResponseEntity<StoreDto> updateStoreDTO(@RequestBody @Valid StoreDto storeDto, @PathVariable(name = "id") Long id ) throws Exception {
+        return new ResponseEntity<>(storeService.update(storeDto, id), HttpStatus.OK);
+    }
 
-//    @DeleteMapping("/delete/dto/{id}")
-//    public ResponseEntity<StoreDto> createStoreDTO(@PathVariable(name = "id") Long id ) throws Exception {
-//        return new ResponseEntity<>(storeService.create(store), HttpStatus.OK);
-//    }
 
     /*==========================end DTO==============================*/
     @GetMapping("/get")
@@ -95,7 +95,6 @@ public class StoreController {
         this.storeService.delete(id);
     }
 
-    //
     @GetMapping("/product")
     List<Product> allProduct() {
         return this.productRepository.findAll();

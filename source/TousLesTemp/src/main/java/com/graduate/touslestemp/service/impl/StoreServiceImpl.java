@@ -12,8 +12,6 @@ import com.graduate.touslestemp.service.StoreService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,41 +37,26 @@ public class StoreServiceImpl implements StoreService {
         if (isExisStore(store.getName())) {
             System.out.println("This store has already");
             throw new RequestException("This store has already!");
-        }else{
+        } else {
             return (storeMapper.toStoreDTO(storeRepository.save(store)));
         }
     }
+
     @Override
-    public StoreDto findStoreDTOById(Long id) {
+    public StoreDto find(Long id) {
         Optional<Store> store = storeRepository.findById(id);
         if (store.isEmpty()) {
-            throw new RequestException("Not found store, id: "+id);
+            throw new RequestException("Not found store, id: " + id);
         }
         return (storeMapper.toStoreDTO(storeRepository.findById(id).get()));
     }
 
     @Override
-    public StoreDto update(Store store, Long id) throws Exception {
-        Optional<Store> local = storeRepository.findById(id);
-        if (local.isEmpty()) {
-            throw new RequestException("Not found store, id: "+id);
-        }else {
-            if (isExisStore(store.getName())) {
-                System.out.println("This store has already");
-                throw new RequestException("This store has already!");
-            } else {
-                Address address = store.getAddress();
-                if (this.addressRepository.findAddressById(address.getId()) == null)
-                    throw new RequestException("This address not exist!");
-
-                address.setName(address.getName());
-                store.setAddress(address);
-
-                StoreDto a = storeMapper.toStoreDTO(store);
-
-            }
-        }
-        return null;
+    public StoreDto update(StoreDto storeDto, Long id) throws Exception {
+        Store local = this.storeRepository.findById(id)
+                .orElseThrow(() -> new RequestException("Can't found this store id: " + id));
+        storeMapper.updateEntity(storeDto, local);
+        return (storeMapper.toStoreDTO(storeRepository.save(local)));
     }
 
     @Override

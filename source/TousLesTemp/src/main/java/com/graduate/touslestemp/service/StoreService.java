@@ -1,7 +1,6 @@
 package com.graduate.touslestemp.service;
 
 import com.graduate.touslestemp.domain.dto.PageResponseDTO;
-//import com.graduate.touslestemp.domain.dto.StoreDTO;
 import com.graduate.touslestemp.domain.entity.Store;
 import com.graduate.touslestemp.domain.mapper.StoreDto;
 import org.springframework.data.domain.Pageable;
@@ -17,10 +16,10 @@ public interface StoreService {
 
     /*====================== DTO==================*/
     PageResponseDTO<?> getAllStore(Pageable request);
-    StoreDto findStoreDTOById(Long id);
+    StoreDto find(Long id);
     StoreDto create(Store store) throws Exception;
 //    List<StoreDTO> findStoreDTOByName(String name);
     void delete (Long id);
-    StoreDto update(Store store, Long id) throws Exception;
+    StoreDto update(StoreDto storeDto, Long id) throws Exception;
 
 }

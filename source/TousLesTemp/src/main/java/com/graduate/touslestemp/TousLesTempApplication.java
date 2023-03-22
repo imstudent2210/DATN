@@ -9,10 +9,10 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
-//@Configuration
-//@ComponentScan("com.graduate.touslestemp.repository")
+@EnableSwagger2
 public class TousLesTempApplication {
 
     public static void main(String[] args) {

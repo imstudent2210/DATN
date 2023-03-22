@@ -1,9 +1,9 @@
 package com.graduate.touslestemp.controller;
 
-import com.graduate.touslestemp.model.Role;
-import com.graduate.touslestemp.model.AccountRole;
-import com.graduate.touslestemp.model.Account;
-import com.graduate.touslestemp.repository.AccountRepository;
+import com.graduate.touslestemp.config.authenticate.Role;
+import com.graduate.touslestemp.config.authenticate.AccountRole;
+import com.graduate.touslestemp.config.authenticate.Account;
+import com.graduate.touslestemp.domain.repository.AccountRepository;
 import com.graduate.touslestemp.service.AccountService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

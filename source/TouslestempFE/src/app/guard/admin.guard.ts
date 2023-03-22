@@ -1,0 +1,29 @@
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Route, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
+// import { SignUpComponent } from '../pages/sign-up/sign-up.component';
+
+import { LoginService } from '../services/login.service';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AdminGuard implements CanActivate {
+
+
+  constructor(private login:LoginService,private route:Router){}
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+      if(this.login.isLogin() && this.login.getUserRole()=="Admin"){
+        return true;
+      }
+
+      this.route.navigate(['login']);
+    return false;
+  }
+  //quyết định định tuyến dựa trên thời gian hết hạn của token
+
+
+
+}

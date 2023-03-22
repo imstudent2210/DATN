@@ -3,6 +3,7 @@ package com.graduate.touslestemp.domain.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -25,27 +26,23 @@ public class Product {
     @NotEmpty(message = "Enter product name !")
     private String name;
     private String description;
-    @NotEmpty(message = "Enter current quantity !")
+    @NotNull(message = "Enter current quantity !")
     private int inventory;
     private double price;
     @Lob
     @Column(columnDefinition = "MEDIUMBLOB")
     private String image;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "category", referencedColumnName = "category_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Category category;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "size", referencedColumnName = "size_id")
     private Size size;
-
 
     @ManyToOne
     @JoinColumn(name = "store", referencedColumnName = "store_id")
     private Store store;
-
-
 
 }

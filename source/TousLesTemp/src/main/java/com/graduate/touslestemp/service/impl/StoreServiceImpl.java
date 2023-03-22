@@ -3,7 +3,7 @@ package com.graduate.touslestemp.service.impl;
 import com.graduate.touslestemp.domain.dto.PageResponseDTO;
 import com.graduate.touslestemp.domain.entity.Address;
 import com.graduate.touslestemp.domain.entity.Store;
-import com.graduate.touslestemp.domain.mapper.StoreDto;
+import com.graduate.touslestemp.domain.dto.StoreDto;
 import com.graduate.touslestemp.domain.mapper.StoreMapper;
 import com.graduate.touslestemp.domain.repository.AddressRepository;
 import com.graduate.touslestemp.domain.repository.StoreRepository;
@@ -20,18 +20,11 @@ import java.util.Optional;
 @Service
 public class StoreServiceImpl implements StoreService {
 
-    final ModelMapper modelMapper = new ModelMapper();
+    /*================================ DTO v2==========================*/
     @Autowired
     private StoreRepository storeRepository;
     @Autowired
-    private AddressRepository addressRepository;
-    @Autowired
     private StoreMapper storeMapper;
-
-    @Autowired
-    private StoreService storeService;
-
-    /*====================DTO v2==========================*/
     @Override
     public StoreDto create(Store store) throws Exception {
         if (isExisStore(store.getName())) {
@@ -61,10 +54,16 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     public void delete(Long id) {
-        storeRepository.delete(storeRepository.findById(id).orElseThrow(() -> new RequestException("Can't found this store id: " + id)));
+        storeRepository.delete(storeRepository.findById(id)
+                .orElseThrow(() -> new RequestException("Can't found this store id: " + id)));
     }
 
-    /*===================end DTO==========================*/
+    /*===============================end DTO==========================*/
+
+    final ModelMapper modelMapper = new ModelMapper();
+
+    @Autowired
+    private AddressRepository addressRepository;
     @Override
     public List<Store> findAll() {
         return this.storeRepository.findAll();

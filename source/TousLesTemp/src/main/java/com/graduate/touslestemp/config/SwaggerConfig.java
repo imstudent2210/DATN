@@ -1,8 +1,12 @@
 package com.graduate.touslestemp.config;
 
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.*;
@@ -17,6 +21,7 @@ import java.util.List;
 
 @Configuration
 @EnableSwagger2
+//@EnableWebMvc
 public class SwaggerConfig {
     public static final String AUTHORIZATION_HEADER = "Authorization";
 
@@ -56,4 +61,21 @@ public class SwaggerConfig {
                 "API license URL",
                 Collections.emptyList());
     }
+
+
+//    @Bean
+//    public WebMvcConfigurer webMvcConfigurer()
+//    {
+//        return new WebMvcConfigurer()
+//        {
+//            @Override
+//            public void addResourceHandlers( ResourceHandlerRegistry registry )
+//            {
+//                registry.addResourceHandler( "swagger-ui.html" ).addResourceLocations( "classpath:/META-INF/resources/" );
+//                registry.addResourceHandler( "/webjars/**" ).addResourceLocations( "classpath:/META-INF/resources/webjars/" );
+//            }
+//        };
+//    }
+
+
 }

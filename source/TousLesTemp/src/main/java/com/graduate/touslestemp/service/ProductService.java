@@ -1,7 +1,10 @@
 package com.graduate.touslestemp.service;
 
 import com.graduate.touslestemp.domain.dto.PageResponseDTO;
+import com.graduate.touslestemp.domain.dto.ProductDto;
+import com.graduate.touslestemp.domain.dto.StoreDto;
 import com.graduate.touslestemp.domain.entity.Product;
+import com.graduate.touslestemp.domain.entity.Store;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
@@ -13,4 +16,11 @@ public interface ProductService {
     Product update(Product product, String name) throws Exception;
     void deleteProduct (Long id);
     PageResponseDTO<?> getAllProduct(Pageable request);
+    /*====================== DTO==================*/
+
+    ProductDto find(Long id);
+    ProductDto create(Product product) throws Exception;
+    void delete (Long id);
+    ProductDto update(ProductDto productDto, Long id) throws Exception;
+
 }

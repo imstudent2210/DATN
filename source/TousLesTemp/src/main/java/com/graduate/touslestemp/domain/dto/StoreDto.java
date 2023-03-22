@@ -1,4 +1,4 @@
-package com.graduate.touslestemp.domain.mapper;
+package com.graduate.touslestemp.domain.dto;
 
 import com.graduate.touslestemp.domain.entity.Address;
 import jakarta.persistence.Id;

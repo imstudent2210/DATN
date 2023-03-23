@@ -10,6 +10,7 @@ public class SecurityConstant {
     public static final String[] AUTH_WHITELIST = {
             "/v3/api-docs/**", "/swagger-ui/**",
             "/login", "/register/**", "/address/**",
-            "/store/**", "/category/**", "/product/**"
+            "/store/**", "/category/**", "/product/**",
+            "/staff/**"
     };
 }

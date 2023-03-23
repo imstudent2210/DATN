@@ -23,7 +23,6 @@ public interface StoreService {
     StoreDto update(StoreDto storeDto, Long id) throws Exception;
     List<StoreDto> search(String keyword);
     List<StoreDto> filter(Long id);
-    //RSQL
-//    List<Store> findAllRsql(Specification<Store> storeSpecification);
+
 
 }

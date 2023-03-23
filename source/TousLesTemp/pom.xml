@@ -106,6 +106,13 @@
         </dependency>
         <!---->
 
+        <!--RSQL-->
+        <dependency>
+            <groupId>cz.jirutka.rsql</groupId>
+            <artifactId>rsql-parser</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+        <!---->
         <!--Devtool, Lombok, Test, Validation-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

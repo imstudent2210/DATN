@@ -8,10 +8,14 @@ import com.graduate.touslestemp.domain.mapper.StoreMapper;
 import com.graduate.touslestemp.domain.repository.AddressRepository;
 import com.graduate.touslestemp.domain.repository.StoreRepository;
 import com.graduate.touslestemp.exception.RequestException;
+import com.graduate.touslestemp.rsql.CustomRsqlVisitor;
 import com.graduate.touslestemp.service.StoreService;
+import cz.jirutka.rsql.parser.RSQLParser;
+import cz.jirutka.rsql.parser.ast.Node;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -80,6 +84,13 @@ public class StoreServiceImpl implements StoreService {
             return storeDtos;
         }
     }
+
+//    @Override
+//    public List<Store> findAllRsql(Specification<Store> search) {
+//        Node rootNode = new RSQLParser().parse(search);
+//        Specification<Store> spec = rootNode.accept(new CustomRsqlVisitor<Store>());
+//        return (List<Store>) spec;
+//    }
     /*===============================end DTO==========================*/
 
     final ModelMapper modelMapper = new ModelMapper();

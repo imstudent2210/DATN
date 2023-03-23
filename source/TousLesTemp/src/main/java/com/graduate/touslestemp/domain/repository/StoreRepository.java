@@ -19,4 +19,6 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
     @Query("select s from Store s join Address a where s.address.id = a.id and a.id = :id" )
     List<Store> filterStoreByAddressId(@Param("id") Long id);
 
+
+
 }

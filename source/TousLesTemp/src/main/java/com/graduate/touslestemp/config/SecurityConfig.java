@@ -56,10 +56,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
         http.csrf().disable().cors().disable().authorizeHttpRequests()
                 .requestMatchers("/login", "/register/**",
                         "/address/**","/store/**","/category/**",
-                        "/swagger-ui.html","/product/**").permitAll()
+                        "/product/**").permitAll()
                 .requestMatchers(HttpMethod.OPTIONS).permitAll()
                 .requestMatchers(AUTH_WHITELIST).permitAll()
-                .anyRequest().authenticated().and()
+                .anyRequest().permitAll().and()
                 .exceptionHandling()
                 .authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

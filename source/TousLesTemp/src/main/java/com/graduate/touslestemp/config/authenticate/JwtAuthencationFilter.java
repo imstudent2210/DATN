@@ -39,7 +39,8 @@ public class JwtAuthencationFilter extends OncePerRequestFilter {
                 e.printStackTrace();
                 System.out.println("Error! ");
             }
-        } else {
+        }
+        else {
             System.out.println("Valid token! ");
         }
         // validated

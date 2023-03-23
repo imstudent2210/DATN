@@ -32,8 +32,8 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category findCategory(String name) {
         if (!isExisCategory(name)) {
-            System.out.println("This category has already");
-            throw new RequestException("This category has already!");
+            System.out.println("Not found this category");
+            throw new RequestException("Not found this category: "+name);
         } else return this.categoryRepository.findCategoryByName(name);
     }
 

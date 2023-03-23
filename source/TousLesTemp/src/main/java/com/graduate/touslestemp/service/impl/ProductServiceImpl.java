@@ -13,18 +13,18 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-    /*================================ DTO v2==========================*/
+
     @Autowired
     private ProductRepository productRepository;
     @Autowired
     private ProductMapper productMapper;
+    final ModelMapper modelMapper = new ModelMapper();
 
     @Override
     public ProductDto create(Product product) throws Exception {
@@ -54,8 +54,6 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(() -> new RequestException("Can't found this address id: " + id)));
     }
 
-    /*================================ end DTO==========================*/
-    final ModelMapper modelMapper = new ModelMapper();
 
     @Override
     public List<Product> findAll() {
@@ -63,27 +61,29 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product save(Product product) throws Exception {
-        return null;
-    }
-
-    @Override
-    public Product findStore(String name) {
-        return null;
-    }
-
-    @Override
-    public Product update(Product product, String name) throws Exception {
-        return null;
-    }
-
-    @Override
-    public void deleteProduct(Long id) {
-
-    }
-
-    @Override
     public PageResponseDTO<?> getAllProduct(Pageable request) {
         return modelMapper.map(productRepository.findAll(request), PageResponseDTO.class);
+    }
+
+    @Override
+    public List<ProductDto> filter(Long id) {
+        List<Product> products = this.productRepository.filterStoreByCategoryId(id);
+        if (products.isEmpty()) {
+            throw new RequestException("No data!");
+        } else {
+            List<ProductDto> productDtos = this.productMapper.toProductDTOs(products);
+            return productDtos;
+        }
+    }
+
+    @Override
+    public List<ProductDto> search(String name) {
+        List<Product> products = this.productRepository.searchProductByName("%" + name + "%");
+        if (products.isEmpty()) {
+            throw new RequestException("No data!");
+        } else {
+            List<ProductDto> productDtos = this.productMapper.toProductDTOs(products);
+            return productDtos;
+        }
     }
 }

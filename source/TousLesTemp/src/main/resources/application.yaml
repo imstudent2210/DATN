@@ -28,10 +28,3 @@ spring:
   mvc:
     path match:
       matching-strategy: ant_path_matcher
-
-
-
-#springdoc:
-#  swagger-ui:
-#    path: /swagger-ui.html
-#

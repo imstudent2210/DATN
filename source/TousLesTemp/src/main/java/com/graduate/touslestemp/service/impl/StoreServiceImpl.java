@@ -25,6 +25,7 @@ public class StoreServiceImpl implements StoreService {
     private StoreRepository storeRepository;
     @Autowired
     private StoreMapper storeMapper;
+    final ModelMapper modelMapper = new ModelMapper();
 
     @Override
     public StoreDto create(Store store) throws Exception {
@@ -81,84 +82,18 @@ public class StoreServiceImpl implements StoreService {
         }
     }
 
-    /*===============================end DTO==========================*/
 
-    final ModelMapper modelMapper = new ModelMapper();
-
-    @Autowired
-    private AddressRepository addressRepository;
 
     @Override
     public List<Store> findAll() {
         return this.storeRepository.findAll();
     }
 
-
-    //save store using model mapper
     @Override
-    public Store save(Store store) throws Exception {
-        if (isExisStore(store.getName())) {
-            System.out.println("This store has already");
-            throw new RequestException("This store has already!");
-        } else {
-            Address address = store.getAddress();
-            if (this.addressRepository.findAddressById(address.getId()) == null)
-                throw new RequestException("This address not exist!");
-            else {
-                address.setName(address.getName());
-                store.setAddress(address);
-
-                return modelMapper.map(
-                        storeRepository.save(modelMapper.map(store, Store.class)),
-                        Store.class
-                );
-            }
-        }
+    public PageResponseDTO<?> getAllStore(Pageable pageable) {
+        return modelMapper.map(storeRepository.findAll(pageable), PageResponseDTO.class);
     }
 
-    @Override
-    public Store update(Store store, String name) throws Exception {
-        Store updateStore = this.storeRepository.findStoreByName(name);
-
-        if (updateStore == null) {
-            System.out.println("Not found this store: " + name);
-            throw new RequestException("Not found this store: " + name);
-        } else {
-            if (isExisStore(store.getName())) {
-                System.out.println("This store has already");
-                throw new RequestException("This store has already!");
-            } else {
-                Address address = store.getAddress();
-                if (this.addressRepository.findAddressById(address.getId()) == null)
-                    throw new RequestException("This address not exist!");
-
-                address.setName(address.getName());
-                store.setAddress(address);
-
-                updateStore.setName(store.getName());
-                updateStore.setPhone(store.getPhone());
-                updateStore.setEmail(store.getEmail());
-                updateStore.setAddress(store.getAddress());
-//                updateStore.setProducts(store.getProducts());
-
-            }
-        }
-        return this.storeRepository.save(updateStore);
-    }
-
-
-    @Override
-    public Store findStore(String store) {
-        Store local = this.storeRepository.findStoreByName(store);
-        if (local == null) {
-            System.out.println("Not found this store: " + store);
-            throw new RequestException("Not found this store: " + store);
-        } else
-            return this.storeRepository.findStoreByName(store);
-    }
-//    public Optional<Store> findStoreDTOByName(String name){
-//        return this.storeRepository.findStoreDTOByName(name);
-//    }
 
     public boolean isExisStore(String name) {
         Store checkStore = storeRepository.findStoreByName(name);
@@ -168,9 +103,5 @@ public class StoreServiceImpl implements StoreService {
         return false;
     }
 
-    @Override
-    public PageResponseDTO<?> getAllStore(Pageable pageable) {
-        return modelMapper.map(storeRepository.findAll(pageable), PageResponseDTO.class);
-    }
 
 }

@@ -2,6 +2,7 @@ package com.graduate.touslestemp.controller;
 
 import com.graduate.touslestemp.domain.dto.PageResponseDTO;
 import com.graduate.touslestemp.domain.dto.ProductDto;
+import com.graduate.touslestemp.domain.dto.StoreDto;
 import com.graduate.touslestemp.domain.entity.Product;
 import com.graduate.touslestemp.domain.mapper.ProductMapper;
 import com.graduate.touslestemp.domain.repository.ProductRepository;
@@ -24,34 +25,47 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    /*===========================DTO v2=========================*/
+
     @Autowired
     private ProductMapper productMapper;
 
-    @GetMapping("/all")
+
+    @GetMapping("/paging")
     public PageResponseDTO<?> getAllProduct(Pageable request) {
         return productService.getAllProduct(request);
     }
 
-    @GetMapping("/get/dto")
+    @GetMapping("/get")
     public ResponseEntity<List<ProductDto>> allProductDTO() {
         return new ResponseEntity<>(productMapper.toProductDTOs(productRepository.findAll()), HttpStatus.OK);
     }
 
-    @GetMapping("/get/dto/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<ProductDto> getProductDTOById(@PathVariable(name = "id") Long id) {
         return new ResponseEntity<>(productService.find(id), HttpStatus.OK);
     }
 
-    @PostMapping("/create/dto")
+    @PostMapping("/create")
     public ResponseEntity<ProductDto> createProductDTO(@RequestBody @Valid Product product) throws Exception {
         return new ResponseEntity<>(productService.create(product), HttpStatus.OK);
     }
 
-    @PutMapping("/update/dto/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<ProductDto> updateProductDTO(@RequestBody @Valid ProductDto productDto, @PathVariable(name = "id") Long id) throws Exception {
         return new ResponseEntity<>(productService.update(productDto, id), HttpStatus.OK);
     }
 
-    /*==========================end DTO==============================*/
+    @GetMapping("/filter/desc-price")
+    public ResponseEntity <List<ProductDto>> filterProductDTO() {
+        return new ResponseEntity<>(productMapper.toProductDTOs(productRepository.filterHighPrice()), HttpStatus.OK);
+    }
+    @GetMapping("/search/{name}")
+    List<ProductDto> searchStoreDTO(@PathVariable("name") String name) throws Exception {
+        return this.productService.search(name);
+    }
+    @GetMapping("/filter/{categoryId}")
+    List<ProductDto> filterStoreDTO(@PathVariable("categoryId") Long categoryId) throws Exception {
+        return this.productService.filter(categoryId);
+    }
+
 }

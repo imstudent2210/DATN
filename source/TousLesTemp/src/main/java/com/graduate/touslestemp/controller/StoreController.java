@@ -77,21 +77,7 @@ public class StoreController {
         return this.storeRepository.findAll();
     }
 
-    @Transactional
-    @PostMapping("/create1")
-    public Store createStore(@RequestBody @Valid Store store) throws Exception {
-        return this.storeService.save(store);
-    }
 
-    @GetMapping("/get1/{store}")
-    Store getStoreByName(@PathVariable("store") String store) throws Exception {
-        return this.storeService.findStore(store);
-    }
-    @PatchMapping("/update1/{storename}")
-    public Store updateStore(@RequestBody @Valid Store store, @PathVariable("storename") String storename) throws Exception {
-
-        return this.storeService.update(store, storename);
-    }
 
 
 

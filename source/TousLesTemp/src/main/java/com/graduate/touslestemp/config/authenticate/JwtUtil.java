@@ -11,8 +11,11 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.security.Keys;
+
 import java.security.Key;
+
 import io.jsonwebtoken.io.Decoders;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -66,10 +69,6 @@ public class JwtUtil {
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }
 
-    //    public Boolean validateToken(String token, UserDetails userDetails) {
-//        final String username = extractUsername(token);
-//        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
-//    }
     public Boolean validateToken(String token, String username) {
         final String usernameToken = extractUsername(token);
         return (usernameToken.equals(username) && !isTokenExpired(token));

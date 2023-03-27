@@ -1,0 +1,86 @@
+<nav class="sidebar">
+  <div class="menu-bar">
+    <div class="menu">
+      <li class="search-box">
+       <i class="fa-solid fa-magnifying-glass icon"></i>
+        <input type="text" placeholder="Tìm kiếm" />
+      </li>
+
+      <ul class="menu-links">
+        <li class="links">
+          <a routerLink="/admin">
+            <i class="fa-solid fa-house-laptop icon"></i>
+            <span class="text">Tổng quan</span>
+          </a>
+        </li>
+
+        <li class="links">
+          <a routerLink="/store">
+            <i class="fa-solid fa-house icon"></i>
+            <span class="text">Chuỗi cửa hàng</span>
+          </a>
+        </li>
+
+        <li class="links">
+          <a routerLink="/product">
+            <i class="fa-solid fa-list icon"></i>
+            <span class="text">Sản phẩm</span>
+          </a>
+        </li>
+
+        <li class="links">
+          <a routerLink="/category">
+            <i class="fa-solid fa-sitemap icon"></i>
+            <span class="text">Danh mục</span>
+          </a>
+        </li>
+
+        <li class="links">
+          <a routerLink="/staff">
+            <i class="fa-regular fa-address-book icon"></i>
+            <span class="text">Nhân viên</span>
+          </a>
+        </li>
+        <li class="links">
+          <a routerLink="/admin">
+            <i class="fa-solid fa-circle-user icon"></i>
+            <span class="text">Tài khoản</span>
+          </a>
+        </li>
+
+        <li class="links">
+          <a routerLink="/admin">
+            <i class="fa-solid fa-flag icon"></i>
+            <span class="text">Báo cáo</span>
+          </a>
+        </li>
+
+        <li class="links">
+          <a routerLink="/admin">
+            <i class="fa-brands fa-google icon"></i>
+            <span class="text">Về chúng tôi</span>
+          </a>
+        </li>
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const body = document.querySelector("body"),
+    sidebar = body.querySelector("nav"),
+    toggle = body.querySelector(".toggle"),
+    searchBtn = body.querySelector(".search-box"),
+    modeSwitch = body.querySelector(".toggle-switch"),
+    modeText = body.querySelector(".mode-text");
+
+  toggle.addEventListener("click", () => {
+    sidebar.classList.toggle("close");
+  });
+
+  searchBtn.addEventListener("click", () => {
+    sidebar.classList.remove("close");
+  });
+</script>

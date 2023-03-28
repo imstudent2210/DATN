@@ -1,2 +1,22 @@
-<p>admin works!</p>
+<!-- <app-navbar></app-navbar> -->
+<!-- <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2" >
+        <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-md-10">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+ -->
+
+
+
+ <app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
+ <app-body
+
+    [collapsed]="isSideNavCollapsed"
+    [screenWidth]="screenWidth"
+></app-body>
 

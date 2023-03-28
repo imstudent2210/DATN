@@ -28,3 +28,10 @@ spring:
   mvc:
     path match:
       matching-strategy: ant_path_matcher
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 3186051837-t55lgfkuoo54jmsdfjkboeounfgn8vng.apps.googleusercontent.com
+            client-secret: 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

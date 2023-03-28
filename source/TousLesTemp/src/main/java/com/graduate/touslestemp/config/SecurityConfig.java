@@ -1,4 +1,5 @@
 package com.graduate.touslestemp.config;
+
 import com.graduate.touslestemp.config.authenticate.JwtAuthencationFilter;
 import com.graduate.touslestemp.config.authenticate.JwtAuthenticationEntryPoint;
 import com.graduate.touslestemp.constant.SecurityConstant;
@@ -17,12 +18,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+//import static org.springframework.security.config.Customizer.withDefaults;
+
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 
-    public class SecurityConfig {
+public class SecurityConfig {
     @Autowired
     private JwtAuthencationFilter jwtAuthencationFilter;
     @Autowired
@@ -38,6 +41,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
         return new BCryptPasswordEncoder();
     }
 
+
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.csrf().disable().cors().disable().authorizeHttpRequests()
@@ -46,6 +50,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
                 .anyRequest().authenticated().and()
                 .exceptionHandling()
                 .authenticationEntryPoint(unauthorizedHandler).and()
+//                .oauth2Login(withDefaults())
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtAuthencationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();

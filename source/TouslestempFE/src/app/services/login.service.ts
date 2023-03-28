@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { api } from './baseUrl';
+import { environment } from '../environment/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -8,10 +8,10 @@ import { api } from './baseUrl';
 export class LoginService {
   constructor(private http: HttpClient) { }
   public generateToken(loginData: any) {
-    return this.http.post(`${api}/login`, loginData);
+    return this.http.post(`${environment.apiUrl}/login`, loginData);
   }
   public getCurrentUser() {
-    return this.http.get(`${api}/current-user`);
+    return this.http.get(`${environment.apiUrl}/current-user`);
   }
   //set token to localstorage
   public loginToken(token: any) {
@@ -47,5 +47,13 @@ export class LoginService {
   public getUserRole() {
     let user = this.getUser();
     return user.authorities[0].authority;
+  }
+  public getUserName(){
+    let username = this.getUser().username;
+    return username;
+  }
+  public getEmail(){
+    let email = this.getUser().email;
+    return email;
   }
 }

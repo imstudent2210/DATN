@@ -3,7 +3,6 @@ package com.graduate.touslestemp.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.*;
@@ -12,16 +11,17 @@ import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import static com.graduate.touslestemp.constant.SecurityConstant.HEADER_STRING;
 
 @Configuration
 @EnableSwagger2
 //@EnableWebMvc
 public class SwaggerConfig {
-    public static final String AUTHORIZATION_HEADER = "Authorization";
+    public static final String AUTHORIZATION_HEADER = HEADER_STRING ;
 
     private ApiKey apiKey() {
         return new ApiKey("JWT", AUTHORIZATION_HEADER, "header");
@@ -61,21 +61,5 @@ public class SwaggerConfig {
                 "API license URL",
                 Collections.emptyList());
     }
-
-
-//    @Bean
-//    public WebMvcConfigurer webMvcConfigurer()
-//    {
-//        return new WebMvcConfigurer()
-//        {
-//            @Override
-//            public void addResourceHandlers( ResourceHandlerRegistry registry )
-//            {
-//                registry.addResourceHandler( "swagger-ui.html" ).addResourceLocations( "classpath:/META-INF/resources/" );
-//                registry.addResourceHandler( "/webjars/**" ).addResourceLocations( "classpath:/META-INF/resources/webjars/" );
-//            }
-//        };
-//    }
-
 
 }

@@ -181,7 +181,8 @@ button:hover {
   height: 1px;
   transition: all 0.4s;
 
-  background: #d41872;
+  /* background: #d41872; */
+  background: var(--yellow);
   background: linear-gradient(left, #a445b2, #d41872, #fa4299);
 }
 
@@ -251,7 +252,7 @@ button:hover {
   height: 42px;
   border-radius: 21px;
 
-  background: #d41872;
+  background: var(--yellow);
 
   background: linear-gradient(left, #a445b2, #d41872, #fa4299);
   position: relative;

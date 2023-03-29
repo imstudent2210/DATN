@@ -14,9 +14,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AuthInterceptorProvider } from './guard/auth.interceptor';
-// import { StoresComponent } from './components/stores/stores.component';
-import { ProductsComponent } from './components/products/products.component';
 import { SublevelMenuComponent } from './components/sidenav/sublevel-menu.component';
+import { NgToastModule } from 'ng-angular-popup';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { StoresModule } from './components/stores/stores.module';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,8 +30,6 @@ import { SublevelMenuComponent } from './components/sidenav/sublevel-menu.compon
     HomeComponent,
     NavbarComponent,
     LoginComponent,
-    // StoresComponent,
-    ProductsComponent,
     SublevelMenuComponent
   ],
   imports: [
@@ -37,7 +40,11 @@ import { SublevelMenuComponent } from './components/sidenav/sublevel-menu.compon
     BrowserAnimationsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgToastModule,
+    // MatPaginatorModule,
+    // MatTableModule
+
   ],
   providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent]

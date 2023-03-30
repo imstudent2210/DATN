@@ -16,12 +16,10 @@ public class AddressServiceImpl implements AddressService {
 
     @Autowired
     private AddressRepository addressRepository;
-    @Autowired
-    private AddressService addressService;
 
     @Override
     public List<Address> findAll() {
-        return null;
+        return this.addressRepository.findAll();
     }
 
     @Override

@@ -1,0 +1,25 @@
+a {
+  font-size:13px;
+  font-weight:700;
+  cursor: pointer;
+}
+.superNav {
+  font-size:13px;
+  background: var(--gray);
+}
+.form-control {
+  outline:none !important;
+  box-shadow: none !important;
+}
+
+.search{
+  background-color: cyan;
+}
+.brand{
+  color: var(--yellow);
+  letter-spacing: 2px;
+  font-size: 15px;
+}
+
+
+

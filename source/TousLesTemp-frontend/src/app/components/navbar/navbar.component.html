@@ -1,0 +1,29 @@
+<div class="superNav border-bottom">
+  <nav class="navbar navbar-expand-lg bg-white sticky-top navbar-light p-3 shadow-sm">
+    <div class="container-fluid">
+      <a class="navbar-brand brand" routerLink="/home"> <strong>TOUS LES TEMP</strong></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto ">
+          <li class="nav-item">
+            <a class="nav-link mx-2 text-uppercase active" aria-current="page"
+            href="#"> Quản lí chuỗi cửa hàng Tous Les Temp</a>
+          </li>
+
+        </ul>
+        <ul class="navbar-nav ms-auto ">
+          <li class="nav-item">
+            <a class="nav-link mx-2 active">
+              <i class="fa-solid fa-circle-user me-1"></i><strong>{{username}}</strong></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mx-2 text-uppercase active" (click)="logout()"><i
+                class="fa-solid fa-right-from-bracket"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>

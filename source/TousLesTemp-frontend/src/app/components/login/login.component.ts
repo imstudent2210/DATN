@@ -24,13 +24,6 @@ export class LoginComponent {
     this.login.generateToken(this.loginData).subscribe(
       (data: any) => {
         console.log(data);
-        // Swal.fire({
-        //   icon: 'success',
-        //   title: 'Sign in successfully !',
-        //   width:'270px',
-        //   showConfirmButton: false,
-        //   timer: 1500,
-        // });
         this.toast.success({detail:"Success Message", summary:"Sign in successfully !", duration:3000})
         this.login.loginToken(data.token);
         this.profile =  this.loginData.username;
@@ -46,12 +39,6 @@ export class LoginComponent {
       },
       (error) => {
         console.log(error);
-        // Swal.fire({
-        //   icon: 'error',
-        //   text: 'Username or password is incorrect',
-        //   width:'270px',
-        //   confirmButtonColor:'var(--yellow)',
-        // });
         this.toast.error({detail:"Error Message", summary:"Username or password is incorrect !", duration:3000})
       }
     );

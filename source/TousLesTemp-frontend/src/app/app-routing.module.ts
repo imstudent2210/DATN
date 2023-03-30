@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: 'home', component: HomeComponent, children: [
       { path: 'products', loadChildren: () => import('./components/products/products.module').then(m => m.ProductsModule) },
-      { path: 'stores', loadChildren: () => import('./components/stores/stores.module').then(m => m.StoresModule) },
+      { path: 'stores', loadChildren: () => import('./components/stores/stores.module').then(m => m.StoresModule)},
     ], canActivate: [HomeGuard]
   },
   { path: 'login', component: LoginComponent, pathMatch: "full" },

@@ -17,8 +17,9 @@ import { AuthInterceptorProvider } from './guard/auth.interceptor';
 import { SublevelMenuComponent } from './components/sidenav/sublevel-menu.component';
 import { NgToastModule } from 'ng-angular-popup';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { StoresModule } from './components/stores/stores.module';
+import { StoresComponent } from './components/stores/stores.component';
 
 
 
@@ -30,7 +31,7 @@ import { StoresModule } from './components/stores/stores.module';
     HomeComponent,
     NavbarComponent,
     LoginComponent,
-    SublevelMenuComponent
+    SublevelMenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,9 +43,6 @@ import { StoresModule } from './components/stores/stores.module';
     ReactiveFormsModule,
     FormsModule,
     NgToastModule,
-    // MatPaginatorModule,
-    // MatTableModule
-
   ],
   providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent]

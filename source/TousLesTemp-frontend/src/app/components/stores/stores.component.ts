@@ -9,49 +9,55 @@ import { Store } from 'src/app/share/store.module';
   styleUrls: ['./stores.component.scss']
 })
 export class StoresComponent {
-  // constructor(private service: StoresService) { }
-  // ngOnInit(): void {
-  //   this.getStores(this.pageIndex, this.pageSize)
-  // }
-
-  // stores: Store[] = [];
-  // columns: string[] = ['id', 'name', 'phone', 'email', 'address']
-
-  // // ================Paging frontend======================
-  // length = 20;
-  // pageSize = 10;
-  // pageIndex = 0;
-  // pageSizeOption = [3, 5, 10];
-
-  // hidePageSize = false;
-  // showPageSizeOption = true;
-  // showFirstLastButton = true;
-  // disabled = false;
-
-  // pageEvent?: PageEvent;
-
-  // // ================call api backend======================
-  // getStores(pageIndex: number, pageSize: number): void {
-  //   this.service.getStores(pageIndex, pageSize).subscribe(
-  //     data => {
-  //       this.stores = data.content;
-  //       this.length = data.totalElements;
-  //       console.log(data);
-  //     }
-  //   )
-  // }
-  // handlePageEvent(e: PageEvent) {
-  //   this.pageEvent = e;
-  //   this.length = e.length;
-  //   this.pageSize = e.pageSize;
-  //   this.pageIndex = e.pageIndex;
-  //   this.getStores(this.pageIndex, this.pageSize);
-  // }
-  // setPageSizeOption(setPageSizeOptionInput: string) {
-  //   if (setPageSizeOptionInput) {
-  //     this.pageSizeOption = setPageSizeOptionInput.split(',').map(str => +str);
-  //   }
-  // }
+  constructor(private service: StoresService) { }
 
 
+  stores: Store[] = [];
+
+  columns: string[] = ['id', 'name', 'phone', 'email', 'address']
+
+  getStores(pageIndex: number, pageSize: number): void {
+    this.service.getStores(pageIndex, pageSize).subscribe(
+      data => {
+        this.stores = data.content;
+        this.length = data.totalElements;
+        console.log(data);
+      }
+    )
+  }
+
+  // ================Paging frontend======================
+  length = 50;
+  pageSize = 10;
+  pageIndex = 0;
+  pageSizeOptions = [5, 10, 25];
+
+  hidePageSize = false;
+  showPageSizeOptions = true;
+  showFirstLastButtons = true;
+  disabled = false;
+
+  pageEvent?: PageEvent;
+
+  handlePageEvent(e: PageEvent) {
+    this.pageEvent = e;
+    this.length = e.length;
+    this.pageSize = e.pageSize;
+    this.pageIndex = e.pageIndex;
+    this.getStores(this.pageIndex, this.pageSize)
+  }
+
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    if (setPageSizeOptionsInput) {
+      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+    }
+  }
+
+
+  // ================call api backend======================
+
+
+  ngOnInit(): void {
+    this.getStores(this.pageIndex, this.pageSize)
+  }
 }

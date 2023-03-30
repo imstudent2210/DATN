@@ -1,16 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    position: relative;
-    font-family: 'Roboto', sans-serif;
+  position: relative;
+  font-family: 'Roboto', sans-serif;
 }
+
 :root {
   --yellow: #FF9900;
   --blue: #146EB4;
@@ -20,23 +22,76 @@ body {
   --gray: #CACCCE;
   --black2: #313335;
 }
+
 .card {
-    display: flex;
-    flex-direction: column;
-    border-radius: .5rem;
-    background-color: #fff;
-    margin: 1.25rem 0 1.25rem 0;
-    box-shadow: 0 .25rem .5rem #e6edef;
+  display: flex;
+  flex-direction: column;
+  border-radius: .5rem;
+  background-color: #fff;
+  margin: 1.25rem 0 1.25rem 0;
+  box-shadow: 0 .25rem .5rem #e6edef;
 
-    .card-head {
-        padding: 1rem 1.5rem;
-        border-bottom: 1px solid #edf1f7;
-        font-size: 1rem;
-        font-weight: 600;
-    }
+  .card-head {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #edf1f7;
+    font-size: 1rem;
+    font-weight: 600;
+  }
 
-    .card-body {
-        padding: 1rem 1.5rem;
-    }
+  .card-body {
+    padding: 1rem 1.5rem;
+  }
 }
 
+
+// Button
+.btn-1 {
+  border: none;
+  margin: 0 0.2em 0.2em 0;
+  color: #000000;
+  text-align: center;
+  transition: all 0.15s;
+  background-color:var(--yellow);
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  width:auto;
+  border-radius: 0.625rem;
+
+  .btn-1-icon{
+    font-size: 22px;
+    width: 2rem;
+    height: 2rem;
+    min-width: 2rem;
+    margin: 0 0.5rem;
+    line-height: 2rem;
+  }
+  .btn-1-text {
+    font-size: 13px;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+    padding-right: 20px;
+}
+}
+
+.btn-1:hover {
+    text-shadow: 0 0 2em rgba(255, 255, 255, 1);
+    color: #FFFFFF;
+    border-color: #FFFFFF;
+}
+
+@media all and (max-width:30em) {
+  .btn-tls{
+    display: block;
+    margin: 0.4em auto;
+  }
+}
+
+// title page
+.title-page{
+  font-size: 17px;
+  font-weight: 500;
+  padding-left: 20px;
+  align-items: center;
+}

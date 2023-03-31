@@ -7,53 +7,55 @@
     </div>
   </div>
   <div>
-
   </div>
+
   <div class="row">
-    <div class="effect my-2" >
-      <input class="effect-2" (keyup)="doFilter($event)" type="text" [(ngModel)]="name">
-      <i class="fa-solid fa-magnifying-glass"></i>
-        <span class="focus-border"></span>
+    <div class="col-md-6">
+      <div class="effect my-2" >
+        <input class="effect-2" (keyup)="doFilter($event)" type="text" [(ngModel)]="name">
+        <i class="fa-solid fa-magnifying-glass"></i>
+          <span class="focus-border"></span>
+      </div>
+      <button class="btn-1 ms-auto my-2">
+        <i class="fa fa-plus btn-1-icon"></i><span class="btn-1-text">Thêm mới</span>
+      </button>
+      <table mat-table matSort [dataSource]="categories" class="mat-elevation-z8 table-tlt">
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef >Loại sản phẩm</th>
+          <td mat-cell *matCellDef="let element"class="col-name-tlt">{{ element.id }}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Loại</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="activated" >
+          <th mat-header-cell *matHeaderCellDef>Kích hoạt</th>
+          <td mat-cell *matCellDef="let element"  ><span *ngIf="element.activated == true;else x"  >Còn hàng</span>
+            <ng-template #x>Hết hàng</ng-template>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-mini-fab color="basic" (click)="getCurrentItem(element)">
+             <i class="fa fa-edit"></i>
+            </button>
+
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr  mat-row *matRowDef="let row; columns: columns"></tr>
+      </table>
+      <mat-paginator
+        [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+        [showFirstLastButtons]="showFirstLastButtons">
+      </mat-paginator>
     </div>
-    <button class="btn-1 ms-auto my-2">
-      <i class="fa fa-plus btn-1-icon"></i><span class="btn-1-text">Thêm mới</span>
-    </button>
-    <table mat-table matSort [dataSource]="categories" class="mat-elevation-z8 table-tlt">
-
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef >Loại sản phẩm</th>
-        <td mat-cell *matCellDef="let element"class="col-name-tlt">{{ element.id }}</td>
-      </ng-container>
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Loại</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-      </ng-container>
-
-
-
-      <ng-container matColumnDef="activated" >
-        <th mat-header-cell *matHeaderCellDef>Kích hoạt</th>
-        <td mat-cell *matCellDef="let element"  ><span *ngIf="element.activated == true;else x"  >Còn hàng</span>
-          <ng-template #x>Hết hàng</ng-template>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let element">
-          <button mat-mini-fab color="basic" (click)="getCurrentItem(element)">
-           <i class="fa fa-edit"></i>
-          </button>
-
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="columns"></tr>
-      <tr  mat-row *matRowDef="let row; columns: columns"></tr>
-    </table>
-    <mat-paginator
-      [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
-      [showFirstLastButtons]="showFirstLastButtons">
-    </mat-paginator>
-  </div>
+    </div>
 </div>
 
 

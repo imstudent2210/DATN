@@ -20,6 +20,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { StoresModule } from './components/stores/stores.module';
 import { StoresComponent } from './components/stores/stores.component';
+import { AddressComponent } from './components/address/address.component';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { StaffComponent } from './components/staff/staff.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -32,6 +37,9 @@ import { StoresComponent } from './components/stores/stores.component';
     NavbarComponent,
     LoginComponent,
     SublevelMenuComponent,
+    // AddressComponent,
+    // CategoriesComponent,
+    // StaffComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +51,8 @@ import { StoresComponent } from './components/stores/stores.component';
     ReactiveFormsModule,
     FormsModule,
     NgToastModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [AuthInterceptorProvider],
   bootstrap: [AppComponent]

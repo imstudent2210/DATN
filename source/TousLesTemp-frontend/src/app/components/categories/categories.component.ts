@@ -2,24 +2,25 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ProductsService } from 'src/app/services/products.service';
+import { CategoriesService } from 'src/app/services/categories.service';
 import { Store } from 'src/app/share/store.module';
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss']
+  selector: 'app-categories',
+  templateUrl: './categories.component.html',
+  styleUrls: ['./categories.component.scss']
 })
-export class ProductsComponent {
-  constructor(private service: ProductsService) { }
+export class CategoriesComponent {
+  constructor(private service: CategoriesService){}
+
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
   @Input() name?: any;
 
   empty?: any;
   item?:any;
-  products?: any;
-  columns: string[] = ['name','description','price','inventory','category','size','store','image','action']
+  categories?: any;
+  columns: string[] = ['id','name','activated']
 
   pageSizeOptions = [5,3, 10, 25];
   showPageSizeOptions = true;
@@ -30,45 +31,31 @@ export class ProductsComponent {
     }
   }
   // ================== Call Api BackEnd====================
-  getProducts(): void {
-    this.service.getProducts().subscribe(
+  getCategories(): void {
+    this.service.getCategories().subscribe(
       data => {
         this.empty = data
         console.log(this.empty);
-        this.products = new MatTableDataSource<Store>(this.empty);
-        this.products.sort = this.sort;
-        this.products.paginator = this.paginator;
+        this.categories = new MatTableDataSource<Store>(this.empty);
+
+        this.categories.sort = this.sort;
+        this.categories.paginator = this.paginator;
       }
     )
   }
 
-  // getStoresByName(name:string):void{
-  //   this.service.getStoresByName(name).subscribe(
-  //     data=>{
-  //       this.empty = data;
-  //       console.log(this.empty);
-
-  //     }
-  //   )
-  // }
-  search() {
-    // this.getStoresByName(this.name);
-    this.getProducts();
-  }
   getCurrentItem(item: any) {
     console.log(item);
     console.log(item.id +"fffff"+ item.store.name);
-    // alert("sản phẩm của cửa hàng: "+ item.store.name);
-
   }
 
   doFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.products.filter = filterValue;
+    this.categories.filter = filterValue;
     console.log(filterValue);
   }
 
   ngOnInit(): void {
-    this.getProducts();
+    this.getCategories();
   }
 }

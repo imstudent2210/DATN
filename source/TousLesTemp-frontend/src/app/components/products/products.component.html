@@ -3,7 +3,8 @@
     <div class="col-md-4">
       <p class="title-page">Danh sách sản phẩm</p>
     </div>
-    <div class="col-md-8 d-flex">
+    <div class="col-md-8">
+      <!-- <h4 class="linetext"><span>Danh sách sản phẩm</span></h4> -->
     </div>
   </div>
   <div>
@@ -24,8 +25,8 @@
         <td mat-cell *matCellDef="let element">{{ element.inventory }}</td>
       </ng-container> -->
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Tên sản phẩm</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        <th mat-header-cell *matHeaderCellDef >Tên sản phẩm</th>
+        <td mat-cell *matCellDef="let element"class="col-name-tlt">{{ element.name }}</td>
       </ng-container>
       <ng-container matColumnDef="inventory">
         <th mat-header-cell *matHeaderCellDef>Số lượng</th>
@@ -37,8 +38,8 @@
         <td mat-cell *matCellDef="let element">{{ element.description }}</td>
       </ng-container>
       <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef>Đơn giá</th>
-        <td mat-cell *matCellDef="let element">{{ element.price}}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Đơn giá</th>
+        <td mat-cell *matCellDef="let element">{{ element.price | currency}}</td>
       </ng-container>
       <ng-container matColumnDef="image">
         <th mat-header-cell *matHeaderCellDef>Ảnh</th>
@@ -56,16 +57,44 @@
         <th mat-header-cell *matHeaderCellDef>Cửa hàng</th>
         <td mat-cell *matCellDef="let element">{{ element.store.name}}</td>
       </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-mini-fab color="basic" (click)="getCurrentItem(element)">
+           <i class="fa fa-edit"></i>
+          </button>
+
+      </ng-container>
       <tr mat-header-row *matHeaderRowDef="columns"></tr>
-      <tr (click)="getCurrentItem(row)" mat-row *matRowDef="let row; columns: columns"></tr>
+      <tr  mat-row *matRowDef="let row; columns: columns"></tr>
     </table>
     <mat-paginator
       [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
       [showFirstLastButtons]="showFirstLastButtons">
-
     </mat-paginator>
   </div>
 </div>
 
 
+<!--
+<ng-container>
+  <th mat-header-cell *matHeaderCellDef>Cửa hàng</th>
+  <td mat-cell *matCellDef="let element">{{ element.store.name}}
+    <mat-list-item *matCellDef="let element">
+      <div matLine>
+        dsad
+        <button><mat-chip-listbox>
+          <ng-container *ngFor="let item of element.size">
 
+            <mat-chip-option selected="{{item}}">
+
+            </mat-chip-option>
+            </ng-container>
+        </mat-chip-listbox>
+
+        </button>
+      </div>
+    </mat-list-item>
+
+  </td>
+</ng-container> -->

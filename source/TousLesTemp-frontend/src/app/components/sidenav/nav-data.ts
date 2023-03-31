@@ -60,20 +60,20 @@ export const navbarData: INavbarData[] = [
     ],
   },
   {
-    routeLink: 'stafff',
+    routeLink: 'staff',
     icon: 'fad fa-users-cog',
     label: 'Nhân viên',
     items: [
       {
-        routeLink: 'stafff/list',
+        routeLink: 'staff/list',
         label: 'Thông tin nhân viên',
       },
       {
-        routeLink: 'stafff/role',
+        routeLink: 'staff/role',
         label: 'Vị trí',
       },
       {
-        routeLink: 'stafff/create',
+        routeLink: 'staff/create',
         label: 'Thêm mới',
       },
     ],
@@ -84,11 +84,11 @@ export const navbarData: INavbarData[] = [
     icon: 'fal fa-file-export',
     label: 'Thống kê',
   },
-  {
-    routeLink: 'account',
-    icon: 'fad fa-address-card',
-    label: 'Tài khoản',
-  },
+  // {
+  //   routeLink: 'account',
+  //   icon: 'fad fa-address-card',
+  //   label: 'Tài khoản',
+  // },
 
   {
     routeLink: 'address',

@@ -13,7 +13,6 @@ import { MatInput, MatInputModule } from '@angular/material/input';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { MatSortModule } from '@angular/material/sort';
 
-// import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [

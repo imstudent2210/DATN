@@ -26,12 +26,12 @@ export const navbarData: INavbarData[] = [
     label: 'Sản phẩm',
     items: [
       {
-        routeLink: 'products/list',
-        label: 'Tấc cả sản phẩm',
+        routeLink: 'products/create',
+        label: 'Thêm sản phẩm mới',
       },
       {
-        routeLink: 'products/create',
-        label: 'Thêm mới',
+        routeLink: 'products/list',
+        label: 'Danh sách sản phẩm',
       },
       {
         routeLink: 'products/sell',
@@ -47,11 +47,11 @@ export const navbarData: INavbarData[] = [
     items: [
       {
         routeLink: 'categories/list',
-        label: 'Loại sản phẩm',
+        label: 'Danh sách loại',
       },
       {
         routeLink: 'categories/create',
-        label: 'Thêm mới',
+        label: 'Thêm loại mới',
       },
       {
         routeLink: 'categories/update',
@@ -97,11 +97,11 @@ export const navbarData: INavbarData[] = [
     items: [
       {
         routeLink: 'address/list',
-        label: 'Thông tin chi tiết',
+        label: 'Tấc cả chi nhánh',
       },
       {
         routeLink: 'address/create',
-        label: 'Thêm địa chỉ mới',
+        label: 'Thêm chi nhánh mới',
       },
     ],
   },

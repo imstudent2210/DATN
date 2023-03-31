@@ -17,4 +17,14 @@ export class StoresService {
   getStores():Observable<any>{
     return this.http.get(`${environment.apiUrl}/store/get1`);
   }
+
+  getStoresByName(name:string):Observable<any>{
+    return this.http.get(`${environment.apiUrl}/store/search/${name}`);
+  }
+
+  getStoresByAddress(name:string):Observable<any>{
+    return this.http.get(`${environment.apiUrl}/store/filter/${name}`);
+  }
+
+
 }

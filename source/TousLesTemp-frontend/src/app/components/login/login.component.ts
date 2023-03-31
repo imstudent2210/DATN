@@ -3,7 +3,6 @@ import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { LoginService } from 'src/app/services/login.service';
-import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-login',

@@ -12,11 +12,14 @@ import { CustomPaginator } from 'src/app/share/paginator-config';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { MatSortModule } from '@angular/material/sort';
+import { MatButtonModule } from '@angular/material/button';
+import { StoreDetailComponent } from './store-detail/store-detail.component';
 
 
 @NgModule({
   declarations: [
     StoresComponent,
+    StoreDetailComponent,
 
 
   ],
@@ -30,6 +33,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatTableModule,
     MatInputModule,
     Ng2SearchPipeModule,
+    MatButtonModule
 
 
 

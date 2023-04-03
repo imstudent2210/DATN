@@ -26,5 +26,8 @@ export class StoresService {
     return this.http.get(`${environment.apiUrl}/store/filter/${name}`);
   }
 
+  getStoreById(id:number):Observable<any>{
+    return this.http.get(`${environment.apiUrl}/store/get/${id}`);
+  }
 
 }

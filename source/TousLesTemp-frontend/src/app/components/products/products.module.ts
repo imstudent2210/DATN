@@ -14,11 +14,17 @@ import {  MatListModule } from '@angular/material/list';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-
+import { MycurrencyPipe } from 'src/app/share/custom.currencypipe';
+import { CreateProductComponent } from './create-product/create-product.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
-    ProductsComponent
+    ProductsComponent,
+    MycurrencyPipe,
+    CreateProductComponent
   ],
   imports: [
     CommonModule,
@@ -33,10 +39,14 @@ import { MatButtonModule } from '@angular/material/button';
     MatListModule,
     MatChipsModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
+    MatGridListModule,
+    MatSelectModule
   ],
   providers:[
-    { provide: MatPaginatorIntl, useValue: CustomPaginator() }
+    { provide: MatPaginatorIntl, useValue: CustomPaginator(),
+       }
   ],
 })
 export class ProductsModule { }

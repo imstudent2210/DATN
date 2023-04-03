@@ -7,76 +7,76 @@
       <!-- <h4 class="linetext"><span>Danh sách sản phẩm</span></h4> -->
     </div>
   </div>
-  <div>
 
-  </div>
   <div class="row">
-    <div class="effect my-2" >
-      <input class="effect-2" (keyup)="doFilter($event)" type="text" [(ngModel)]="name">
-      <i class="fa-solid fa-magnifying-glass" (click)="search()"></i>
+    <div class="col-md-6">
+      <div class="effect my-2">
+        <input class="effect-2" (keyup)="doFilter($event)" type="text" [(ngModel)]="name" placeholder="Tìm kiếm">
+        <i class="fa-solid fa-magnifying-glass icon-search" (click)="search()"></i>
         <span class="focus-border"></span>
+      </div>
     </div>
-    <button class="btn-1 ms-auto my-2">
-      <i class="fa fa-plus btn-1-icon"></i><span class="btn-1-text">Thêm mới</span>
-    </button>
-    <table mat-table matSort [dataSource]="products" class="mat-elevation-z8 table-tlt">
-      <!-- <ng-container matColumnDef="phone">
-        <th mat-header-cell *matHeaderCellDef>Số lượng</th>
-        <td mat-cell *matCellDef="let element">{{ element.inventory }}</td>
-      </ng-container> -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef >Tên sản phẩm</th>
-        <td mat-cell *matCellDef="let element"class="col-name-tlt">{{ element.name }}</td>
-      </ng-container>
-      <ng-container matColumnDef="inventory">
-        <th mat-header-cell *matHeaderCellDef>Số lượng</th>
-        <td mat-cell *matCellDef="let element">{{ element.inventory }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="description">
-        <th mat-header-cell *matHeaderCellDef>Mô tả</th>
-        <td mat-cell *matCellDef="let element">{{ element.description }}</td>
-      </ng-container>
-      <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Đơn giá</th>
-        <td mat-cell *matCellDef="let element">{{ element.price | currency}}</td>
-      </ng-container>
-      <ng-container matColumnDef="image">
-        <th mat-header-cell *matHeaderCellDef>Ảnh</th>
-        <td mat-cell *matCellDef="let element">{{ element.image}}</td>
-      </ng-container>
-      <ng-container matColumnDef="category">
-        <th mat-header-cell *matHeaderCellDef>Loại sản phẩm</th>
-        <td mat-cell *matCellDef="let element">{{ element.category.name}}</td>
-      </ng-container>
-      <ng-container matColumnDef="size">
-        <th mat-header-cell *matHeaderCellDef>Size</th>
-        <td mat-cell *matCellDef="let element">{{ element.size.size}}</td>
-      </ng-container>
-      <ng-container matColumnDef="store">
-        <th mat-header-cell *matHeaderCellDef>Cửa hàng</th>
-        <td mat-cell *matCellDef="let element">{{ element.store.name}}</td>
-      </ng-container>
-      <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let element">
-          <button mat-mini-fab color="basic" (click)="getCurrentItem(element)">
-           <i class="fa fa-edit"></i>
-          </button>
-
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="columns"></tr>
-      <tr  mat-row *matRowDef="let row; columns: columns"></tr>
-    </table>
-    <mat-paginator
-      [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
-      [showFirstLastButtons]="showFirstLastButtons">
-    </mat-paginator>
+    <div class="col-md-6">
+      <button class="btn-1 ms-auto my-2" [routerLink]="'../create'">
+        <i class="fa fa-plus btn-1-icon"></i><span class="btn-1-text">Thêm mới</span>
+      </button>
+    </div>
   </div>
-</div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table mat-table matSort [dataSource]="products" class="mat-elevation-z8 table-tlt">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Tên sản phẩm</th>
+          <td mat-cell *matCellDef="let element" class="col-name-tlt">{{ element.name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="inventory">
+          <th mat-header-cell *matHeaderCellDef>Số lượng</th>
+          <td mat-cell *matCellDef="let element">{{ element.inventory }}</td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Mô tả</th>
+          <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+        </ng-container>
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Đơn giá</th>
+          <td mat-cell *matCellDef="let element">{{ element.price | currency:"VND":"symbol"}}</td>
+        </ng-container>
+        <ng-container matColumnDef="image">
+          <th mat-header-cell *matHeaderCellDef>Ảnh</th>
+          <td mat-cell *matCellDef="let element">{{ element.image}}</td>
+        </ng-container>
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef>Loại sản phẩm</th>
+          <td mat-cell *matCellDef="let element">{{ element.category.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="size">
+          <th mat-header-cell *matHeaderCellDef>Size</th>
+          <td mat-cell *matCellDef="let element">{{ element.size.size}}</td>
+        </ng-container>
+        <ng-container matColumnDef="store">
+          <th mat-header-cell *matHeaderCellDef>Cửa hàng</th>
+          <td mat-cell *matCellDef="let element">{{ element.store.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef class="col-action-tlt"></th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-mini-fab color="basic" (click)="getCurrentItem(element)">
+              <i class="fa fa-edit"></i>
+            </button>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+        [showFirstLastButtons]="showFirstLastButtons">
+      </mat-paginator>
+    </div>
+  </div>
 
 
-<!--
+
+  <!--
 <ng-container>
   <th mat-header-cell *matHeaderCellDef>Cửa hàng</th>
   <td mat-cell *matCellDef="let element">{{ element.store.name}}

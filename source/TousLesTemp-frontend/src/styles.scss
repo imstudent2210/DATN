@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
+
 * {
   margin: 0;
   padding: 0;
@@ -55,15 +56,36 @@ body {
   background-color: red !important;
 
 }
+// mat input
+.mat-mdc-form-field-infix {
+  min-height: 25px;
+}
 
-.col-name-tlt {
+// custome table column
+.col-name-tlt{
   font-size: 15px;
   font-weight: 700;
   text-transform: uppercase;
 
 }
+.col-action-tlt{
+  width: 60px !important;
+}
+
+.icon-search{
+  color: var(--yellow);
+
+}
 
 
+.icon-search:hover{
+  cursor: pointer;
+}
+
+.mat-mdc-text-field-wrapper{
+  color:var(--yellow);
+  border: none !important;
+}
 .mdc-data-table__header-cell {
   color: var(--black);
   background-color: var(--yellow) !important;
@@ -87,6 +109,7 @@ body {
   padding-left: 36px !important;
   font-size: 12px;
 }
+
 
 // Button
 .btn-1 {
@@ -135,7 +158,9 @@ body {
   font-weight: 500;
 }
 
-
+.mat-mdc-fab, .mat-mdc-mini-fab {
+  box-shadow: none !important;
+}
 
 
 //=================
@@ -147,7 +172,7 @@ body {
 
 .effect {
   float: left;
-  width: 500px;
+  width: 400px;
   position: relative;
   padding: 0;
 
@@ -160,6 +185,11 @@ body {
 }
 
 /* necessary to give position: relative to parent. */
+.full-width{
+  width: 100%;
+  color: var(--yellow);
+}
+
 input[type="text"] {
   color: #333;
   width: 100%;

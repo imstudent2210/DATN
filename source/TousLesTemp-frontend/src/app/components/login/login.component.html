@@ -4,34 +4,56 @@
       <span class="login100-form-title my-3">
         Tous Les Temp
       </span>
-      <form class="login100-form"  (ngSubmit)="formSubmit()" >
+      <form class="login100-form" (ngSubmit)="formSubmit()">
 
-        <div class="wrap-input100 validate-input" data-validate="Enter username" >
-            <input matInput class="input100" type="text" name="username"
+        <div class="wrap-input100 validate-input" data-validate="Enter username">
+          <input matInput class="input100" type="text" name="username" [formControl]="username"
             [(ngModel)]="loginData.username" placeholder="User name">
-            <i class="fa-regular fa-user"></i>
-            <span class="focus-input100"></span>
+
+          <i class="fa-solid fa-user"></i>
+          <!-- <mat-error *ngIf="username.invalid">{{errror()}}</mat-error>   -->
+          <span class="focus-input100"></span>
         </div>
 
 
-        <div class="wrap-input100 validate-input" data-validate="Enter password" >
-          <input matInput class="input100" type="password" name="password"
-          [(ngModel)]="loginData.password" placeholder="Password">
+        <div class="wrap-input100 validate-input" data-validate="Enter password">
+          <input matInput class="input100" type="password" name="password" [(ngModel)]="loginData.password"
+            placeholder="Password">
           <i class="fa-solid fa-lock"></i>
           <span class="focus-input100"></span>
         </div>
 
         <div class="container-login100-form-btn ">
-          <button class="login100-form-btn my-3">
+          <button class="login100-form-btn my-2">
             Login
           </button>
+        </div>
+        <div class="container-login100-form-btn ">
+
+
+
+          <div id="g_id_onload"
+            data-client_id="420281420455-qrdb5immn7snuqbprfvd03s45h0nq226.apps.googleusercontent.com"
+            data-context="signin" data-ux_mode="popup" data-login_uri="http://localhost:4200"
+            data-auto_prompt="false">
+          </div>
+
+          <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="outline" data-text="signin_with"
+            data-size="large" data-logo_alignment="left" (click)="formSubmit()">
+          </div>
         </div>
       </form>
     </div>
   </div>
 </div>
 
+<!--
+<div id="g_id_onload"
+data-client_id="420281420455-qrdb5immn7snuqbprfvd03s45h0nq226.apps.googleusercontent.com"
+data-context="signin" data-ux_mode="popup" data-login_uri="http://localhost:4200/login" (click)="signInWithGoogle()"
+data-auto_prompt="false">
+</div>
 
-
-
-
+<div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="outline" data-text="signin_with"
+data-size="large" data-logo_alignment="left">
+</div> -->

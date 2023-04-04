@@ -1,0 +1,78 @@
+<div class="container ">
+  <mat-card>
+    <mat-card-header>
+      <p class="title-page">Thêm cửa hàng mới</p>
+      {{newStore|json}}
+    </mat-card-header>
+
+    <!-- <form class="example-form my-3 mx-3" #productForm="ngForm" (ngSubmit)="createProduct(productForm)"> -->
+      <form class="example-form my-3 mx-3" (ngSubmit)="createStore()">
+
+      <div class="row">
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Tên cửa hàng</mat-label>
+                <input type="email" matInput [formControl]="namef" [errorStateMatcher]="matcher"
+                  [(ngModel)]="newStore.name" name="name">
+                <mat-error *ngIf="namef.hasError('required')">
+                  Vui lòng nhập tên cửa hàng
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Email</mat-label>
+              <input type="text" [(ngModel)]="newStore.email" name="email"
+                matInput placeholder="pat@example.com" [formControl]="email" required>
+              <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Điện thoại</mat-label>
+                <input type="number" matInput [(ngModel)]="newStore.phone" name="phone"
+                  [formControl]="phonef" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="phonef.hasError('required')">
+                  Vui lòng nhập số điện thoại
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Địa chỉ cửa hàng</mat-label>
+                <mat-select required [(ngModel)]="newStore.address.id" name="address">
+                  <mat-option *ngFor="let item of address" [value]="item.id"> {{item.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+
+        </div>
+        <!-- <div class="col-md-4 overflow-auto">
+          <input type="file"
+            style="color:var(--yellow); font-size: 15px;font-weight: 700;font-family: 'Roboto', sans-serif;" multiple
+            value="select" #selectFile (change)="onFileSelected($event)">
+
+            <div class="my-3" *ngFor="let item of newProduct.image; let i = index" >
+                <div style="position:relative">
+                  <span (click)="removeImage(i)" class="close-img">x</span>
+                <img [src]="item.url" width="350px" height="320px">
+              </div>
+            </div>
+        </div> -->
+
+      </div>
+      <div class="d-flex">
+        <button class="btn-1 me-auto my-2">
+          <i class="fa-regular fa-floppy-disk btn-1-icon"></i><span class="btn-1-text">Lưu</span>
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>
+

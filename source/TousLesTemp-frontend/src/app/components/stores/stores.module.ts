@@ -14,12 +14,16 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
 import { StoreDetailComponent } from './store-detail/store-detail.component';
+import { MatCardModule } from '@angular/material/card';
+import { CreateStoreComponent } from './create-store/create-store.component';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
   declarations: [
     StoresComponent,
     StoreDetailComponent,
+    CreateStoreComponent,
 
 
   ],
@@ -33,7 +37,9 @@ import { StoreDetailComponent } from './store-detail/store-detail.component';
     MatTableModule,
     MatInputModule,
     Ng2SearchPipeModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
+    MatSelectModule
 
 
 

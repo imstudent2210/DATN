@@ -1,88 +1,100 @@
 <div class="container ">
-
   <mat-card>
     <mat-card-header>
       <p class="title-page">Thêm sản phẩm mới</p>
-
     </mat-card-header>
 
-    <form class="example-form my-3 mx-3" #productForm="ngForm" (ngSubmit)="createProduct2(productForm)">
+    <form class="example-form my-3 mx-3" #productForm="ngForm" (ngSubmit)="createProduct(productForm)">
       <div class="row">
         <div class="col-md-8">
           <div class="row">
             <div class="col-md-12">
               <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Tên sản phẩm</mat-label>
-                <input type="email" matInput  [formControl]="name" [errorStateMatcher]="matcher"
-                [(ngModel)]="createProduct.name" name="name">
-                <mat-error *ngIf="name.hasError('required')">
-                 Vui lòng nhập tên sản phẩm
+                <input type="email" matInput [formControl]="namef" [errorStateMatcher]="matcher"
+                  [(ngModel)]="newProduct.name" name="name">
+                <mat-error *ngIf="namef.hasError('required')">
+                  Vui lòng nhập tên sản phẩm
                 </mat-error>
               </mat-form-field>
             </div>
-
           </div>
           <div class="row">
             <div class="col-md-6">
               <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Đơn giá</mat-label>
-                <input type="number" min="15000" matInput [(ngModel)]="createProduct.price" name="price">
+                <input type="number" min="17000" matInput [(ngModel)]="newProduct.price" name="price"
+                  [formControl]="pricef" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="pricef.hasError('required')">
+                  Vui lòng nhập đơn giá
+                </mat-error>
               </mat-form-field>
             </div>
             <div class="col-md-6">
-              <mat-form-field appearance="outline" class="full-width" appearance="outline">
+              <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Loại sản phẩm</mat-label>
-                <mat-select [(ngModel)]="createProduct.category.id" name="category">
-                  <mat-option *ngFor="let item of categories" [value]="item.id" >{{item.name}}</mat-option>
+                <mat-select [formControl]="categoriesf" required [(ngModel)]="newProduct.category.id" name="category">
+                  <mat-option *ngFor="let item of categories" [value]="item.id"> {{item.name}}</mat-option>
                 </mat-select>
+                <mat-error *ngIf="categoriesf.hasError('required')">Vui lòng chọn loại sản phẩm</mat-error>
               </mat-form-field>
             </div>
           </div>
-          <!-- </div> -->
           <div class="row">
             <div class="col-md-6">
               <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Số lượng</mat-label>
-                <input type="number" min="0" matInput [(ngModel)]="createProduct.inventory" name="inventory">
+                <input type="number" min="1" matInput [(ngModel)]="newProduct.inventory" name="inventory"
+                  [formControl]="inventoryf" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="inventoryf.hasError('required')">
+                  Vui lòng nhập số lượng
+                </mat-error>
               </mat-form-field>
             </div>
 
             <div class="col-md-6">
               <mat-form-field appearance="outline" class="full-width" appearance="outline">
                 <mat-label>Kích thước</mat-label>
-                <mat-select name="category" [(ngModel)]="createProduct.size.id" >
-                  <mat-option *ngFor="let item of size" [value]="item.id" >{{item.size}}</mat-option>
+                <mat-select name="size" [(ngModel)]="newProduct.size.id">
+                  <mat-option *ngFor="let item of sizes" [value]="item.id">{{item.size}}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
-
           </div>
-
-            <mat-form-field appearance="outline" class="full-width" appearance="outline">
-              <mat-label>Cửa hàng</mat-label>
-              <mat-select [(ngModel)]="createProduct.store.id" name="store">
-                <mat-option *ngFor="let item of stores" [value]="item.id" >{{item.name}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-
-          <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Chi tiết</mat-label>
-            <textarea matInput [(ngModel)]="createProduct.description" rows="8" name="description"></textarea>
+          <mat-form-field appearance="outline" class="full-width" appearance="outline">
+            <mat-label>Cửa hàng</mat-label>
+            <mat-select [(ngModel)]="newProduct.store.id" name="store">
+              <mat-option *ngFor="let item of stores" [value]="item.id">{{item.name}}</mat-option>
+            </mat-select>
           </mat-form-field>
-
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Thông tin chi tiết sản phẩm</mat-label>
+            <textarea matInput [(ngModel)]="newProduct.description" rows="6" name="description"></textarea>
+          </mat-form-field>
         </div>
         <div class="col-md-4 overflow-auto">
-          <!-- <input type="file" class="file-upload" onchange="console.log(event.target.files)"> -->
-          <input type="file" multiple value="select" #selectFile (change)="onFileSelected($event)">
+          <input type="file"
+            style="color:var(--yellow); font-size: 15px;font-weight: 700;font-family: 'Roboto', sans-serif;" multiple
+            value="select" #selectFile (change)="onFileSelected($event)">
+
+            <div class="my-3" *ngFor="let item of newProduct.image; let i = index" >
+                <div style="position:relative">
+                  <span (click)="removeImage(i)" class="close-img">x</span>
+                <img [src]="item.url" width="350px" height="320px">
+              </div>
+            </div>
         </div>
+
       </div>
-      <button class="btn-1 me-auto my-2">
-        <i class="fa fa-plus btn-1-icon"></i><span class="btn-1-text">Lưu</span>
-      </button>
-      <button class="btn-2 me-auto my-2">
-        <i class="fa fa-close btn-2-icon"></i><span class="btn-2-text">Huỷ</span>
-      </button>
+      <div class="d-flex">
+        <button class="btn-1 mx-auto my-2" *ngIf="isNewProduct">
+          <i class="fa-regular fa-floppy-disk btn-1-icon"></i><span class="btn-1-text">Lưu</span>
+        </button>
+        <button class="btn-1 mx-auto my-2" *ngIf="!isNewProduct">
+          <i class="fa-regular fa-floppy-disk btn-1-icon"></i><span class="btn-1-text">Cập nhật</span>
+        </button>
+
+      </div>
     </form>
-    {{createProduct|json}}
   </mat-card>
 </div>

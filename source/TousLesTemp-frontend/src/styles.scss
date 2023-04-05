@@ -61,6 +61,7 @@ body {
   min-height: 25px;
 }
 
+
 // custome table column
 .col-name-tlt{
   font-size: 15px;
@@ -80,9 +81,7 @@ body {
   font-weight: 500;
   color: #212529;
 }
-.mat-form-field-appearance-outline .mat-form-field-outline {
-  color: red !important;
-}
+
  .mat-mdc-select-value{
   font-weight: 500
 }
@@ -116,7 +115,7 @@ body {
 .mat-mdc-option {
   min-height: 35px !important;
   padding-left: 36px !important;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 
@@ -197,6 +196,21 @@ body {
   }
 }
 
+
+.close-img{
+  position: absolute;
+  background: var(--yellow);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-weight: 800;
+  cursor: pointer;
+  top: -10px;
+  right: 42px;
+  color: black;
+  text-align: center;
+  line-height: 28px;
+}
 // title page
 .title-page {
   font-size: 17px;
@@ -352,12 +366,6 @@ input::-webkit-inner-spin-button {
 }
 
 .date div {
-  /*visiblity: hidden; */
-/*<li class="date">
-      <a href="#event1">Aug. 21-22</a>
-      <div <h2>Leadership Retreat</h2>
-        <p>Family Group Leaders and Vision Team will be
-    </li>*/
   display: none;
   position: absolute;
   top: 100%;

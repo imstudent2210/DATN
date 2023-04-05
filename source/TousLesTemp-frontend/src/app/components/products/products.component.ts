@@ -2,6 +2,7 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { ProductsService } from 'src/app/services/products.service';
 import { Store } from 'src/app/share/store.module';
 
@@ -11,7 +12,7 @@ import { Store } from 'src/app/share/store.module';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent {
-  constructor(private service: ProductsService) { }
+  constructor(private service: ProductsService, private route:Router) { }
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
   @Input() name?: any;
@@ -61,7 +62,11 @@ export class ProductsComponent {
     // alert("sản phẩm của cửa hàng: "+ item.store.name);
 
   }
+  updateProduct(id:any){
+    // console.log(id);
+    this.route.navigate(["/home/products/create", {id:id}]);
 
+  }
   doFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.products.filter = filterValue;

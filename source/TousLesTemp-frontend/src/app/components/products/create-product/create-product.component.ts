@@ -11,12 +11,10 @@ import { NgToastService } from 'ng-angular-popup';
 import { FileHandle } from 'src/app/share/file-handle.module';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Product } from 'src/app/share/product.module';
+import { SizeService } from 'src/app/services/size.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
-interface Size {
-  id: number;
-  size: string;
-}
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -31,57 +29,36 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class CreateProductComponent implements OnInit {
 
-  constructor(private category: CategoriesService, private store: StoresService,
-    private productService: ProductsService, private toast: NgToastService, private sanitizer: DomSanitizer) { }
+  constructor(private category: CategoriesService, private store: StoresService, private sizeService: SizeService,
+    private productService: ProductsService, private toast: NgToastService, private sanitizer: DomSanitizer,
+    private route: Router, private activatedRoute:ActivatedRoute) { }
 
   // Validators
   matcher = new MyErrorStateMatcher();
-  name = new FormControl('', [Validators.required]);
+  namef = new FormControl('', [Validators.required]);
+  inventoryf = new FormControl('', [Validators.required]);
+  pricef = new FormControl('', [Validators.required]);
+
+  categoriesf = new FormControl('', Validators.required);
   selectFormControl = new FormControl('', Validators.required);
+
   //======================
-  // model
 
-  public newProduct = {
-    name: "", description: "", inventory: "", price: "", image: [] , category: {
-      cid: ''
-    }, store: {
-      stid: ''
-    }, size: {
-      sid: ''
-    },
-  };
-  size: Size[] = [
-    { id: 1, size: 'S' },
-    { id: 2, size: 'M' },
-    { id: 3, size: 'L' },
-  ];
-
-
-  createProduct: Product = {
+  // Model
+  isNewProduct = true;
+  newProduct: Product = {
     name: "",
     description: "",
     inventory: 0,
     price: 0,
-    category:{
-      id:0,
-      // name:'',
-      // activated:''
-    },
-    size:{
-      id:0,
-      // name:'',
-      // activated:''
-    },
-    store:{
-      id:0,
-      // name:'',
-      // activated:''
-    },
-    image:[]
+    category: { id: 1 },
+    size: { id: 1 },
+    store: { id: 1,address:{} },
+    image: []
   }
-  //=========== Call api===========
 
-  // function
+
+  // =========== Call api===========
   categories?: any;
   getCategories(): void {
     this.category.getCategories().subscribe(
@@ -98,44 +75,57 @@ export class CreateProductComponent implements OnInit {
       }
     )
   }
-
-  onFileSelected(event:any){
-   if(event.target.files){
-   const file = event.target.files[0];
-   const fileHandle: FileHandle = {
-    file: file,
-    url: this.sanitizer.bypassSecurityTrustUrl(
-      window.URL.createObjectURL(file)
+  sizes?: any;
+  getSize(): void {
+    this.sizeService.getSize().subscribe(
+      data => {
+        this.sizes = data;
+      }
     )
-   }
-  //  this.createProduct.image.push(fileHandle);
-    this.createProduct.image?.push(fileHandle);
-   }
-
   }
-  createProduct2(productForm: NgForm){
-    const productFormData = this.prepareFormData(this.createProduct);
+  onFileSelected(event: any) {
+    if (event.target.files) {
+      const file = event.target.files[0];
+      const fileHandle: FileHandle = {
+        file: file,
+        url: this.sanitizer.bypassSecurityTrustUrl(
+          window.URL.createObjectURL(file)
+        )
+      }
+      this.newProduct.image?.push(fileHandle);
+    }
+  }
+  removeImage(index:number){
+    this.newProduct.image.splice(index,1)
+  }
+  // create new product
+  createProduct(productForm: NgForm) {
+    if (this.newProduct.name == '' || this.newProduct.name == null || this.newProduct.inventory == 0
+      || this.newProduct.inventory == null || this.newProduct.price == 0 || this.newProduct.price == null) {
+      this.toast.error({ detail: "Thông báo lỗi", summary: "Vui lòng nhập đủ thông tin!", duration: 3000 })
+      return;
+    }
 
+    const productFormData = this.prepareFormData(this.newProduct);
     this.productService.createProduct2(productFormData).subscribe(
-      (data)=>{
+      (data) => {
         console.log(data);
-        this.toast.success({detail:"Thông báo thành công", summary:" Đã thêm sản phẩm!", duration:3000})
-        productForm.reset();
+        this.toast.success({ detail: "Thông báo thành công", summary: " Đã thêm sản phẩm!", duration: 3000 })
+        this.route.navigate(['home/products/list']);
       },
-      (error)=>{
+      (error) => {
         console.log(error);
-        this.toast.error({detail:"Thông báo lỗi", summary:" Sản phẩm chưa được thêm!", duration:3000})
+        this.toast.error({ detail: "Thông báo lỗi", summary: " Sản phẩm chưa được thêm!", duration: 3000 })
 
       }
     )
-
   }
 
-  prepareFormData(product:Product):FormData{
+  prepareFormData(product: Product): FormData {
     const formData = new FormData();
     formData.append(
       'product',
-      new Blob([JSON.stringify(product)], {type:'application/json'})
+      new Blob([JSON.stringify(product)], { type: 'application/json' })
     );
     for (let index = 0; index < product.image.length; index++) {
       formData.append(
@@ -156,28 +146,22 @@ export class CreateProductComponent implements OnInit {
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
-  //======== ngOnInit ==========
-  // formSubmit() {
-    // this.productService.createProduct(this.newProduct).subscribe(
-    //   (data) => {
-    //     console.log(data);
-    //     this.toast.success({ detail: "Thông báo thành công", summary: " Đã thêm sản phẩm!", duration: 3000 })
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //     this.toast.error({ detail: "Thông báo lỗi", summary: " Sản phẩm chưa được thêm!", duration: 3000 })
-    //   }
-    // )
 
-  // }
-
+  //=====================================
   ngOnInit(): void {
+    this.newProduct = this.activatedRoute.snapshot.data['product'];
     this.getCategories();
     this.getStores();
+    this.getSize();
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
     );
+
+    if(this.newProduct && this.newProduct.id){
+      this.isNewProduct = false;
+
+    }
   }
 }
 

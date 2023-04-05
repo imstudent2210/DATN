@@ -29,5 +29,7 @@ export class StoresService {
   getStoreById(id:number):Observable<any>{
     return this.http.get(`${environment.apiUrl}/store/get/${id}`);
   }
-
+  createStore(store:any):Observable<any>{
+    return this.http.post(`${environment.apiUrl}/store/create`, store);
+  }
 }

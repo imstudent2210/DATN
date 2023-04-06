@@ -1,10 +1,15 @@
 import { Component, Input, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ProductsService } from 'src/app/services/products.service';
+import { Product } from 'src/app/share/product.module';
 import { Store } from 'src/app/share/store.module';
+import { ImageDialogComponent } from './image-dialog/image-dialog.component';
+import { ImageProcessingService } from 'src/app/services/image-processing.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-products',
@@ -12,7 +17,8 @@ import { Store } from 'src/app/share/store.module';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent {
-  constructor(private service: ProductsService, private route:Router) { }
+  constructor(private service: ProductsService, private route:Router,
+              public imageDialog:MatDialog,private imageProcessing:ImageProcessingService) { }
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
   @Input() name?: any;
@@ -22,7 +28,7 @@ export class ProductsComponent {
   products?: any;
   columns: string[] = ['name','description','price','inventory','category','size','store','image','action']
 
-  pageSizeOptions = [5,3, 10, 25];
+  pageSizeOptions = [5, 10, 25, 50];
   showPageSizeOptions = true;
   showFirstLastButtons = true;
   setPageSizeOptions(setPageSizeOptionsInput: string) {
@@ -32,40 +38,28 @@ export class ProductsComponent {
   }
   // ================== Call Api BackEnd====================
   getProducts(): void {
-    this.service.getProducts().subscribe(
+    this.service.getProducts()
+    .pipe(
+      map((x:Product[],i)=>x.map((product:Product)=>this.imageProcessing.createImages(product)))
+    )
+    .subscribe(
       data => {
         this.empty = data
         console.log(this.empty);
         this.products = new MatTableDataSource<Store>(this.empty);
         this.products.sort = this.sort;
         this.products.paginator = this.paginator;
+
       }
     )
   }
 
-  // getStoresByName(name:string):void{
-  //   this.service.getStoresByName(name).subscribe(
-  //     data=>{
-  //       this.empty = data;
-  //       console.log(this.empty);
-
-  //     }
-  //   )
-  // }
   search() {
-    // this.getStoresByName(this.name);
     this.getProducts();
   }
-  getCurrentItem(item: any) {
-    console.log(item);
-    console.log(item.id +"fffff"+ item.store.name);
-    // alert("sản phẩm của cửa hàng: "+ item.store.name);
 
-  }
   updateProduct(id:any){
-    // console.log(id);
-    this.route.navigate(["/home/products/create", {id:id}]);
-
+    this.route.navigate(["/home/products/update", {id:id}]);
   }
   doFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -73,7 +67,20 @@ export class ProductsComponent {
     console.log(filterValue);
   }
 
+  showImages(product:Product){
+    console.log(product);
+    this.imageDialog.open(ImageDialogComponent,{
+      data:{
+          images:product.images
+      },
+     height: '400px',
+     width:'600px'
+    })
+
+  }
+
   ngOnInit(): void {
     this.getProducts();
+
   }
 }

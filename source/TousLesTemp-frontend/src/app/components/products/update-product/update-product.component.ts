@@ -1,37 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher, ThemePalette } from '@angular/material/core';
-import { Observable } from 'rxjs';
-import { CategoriesService } from 'src/app/services/categories.service';
-import { StoresService } from 'src/app/services/stores.service';
-import { map, startWith } from 'rxjs/operators';
-import { Store } from 'src/app/share/store.module';
-import { ProductsService } from 'src/app/services/products.service';
-import { NgToastService } from 'ng-angular-popup';
-import { FileHandle } from 'src/app/share/file-handle.module';
+import { Component } from '@angular/core';
+import { FormControl, Validators, NgForm } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Product } from 'src/app/share/product.module';
+import { Router, ActivatedRoute } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
+import { Observable, startWith, map } from 'rxjs';
+import { CategoriesService } from 'src/app/services/categories.service';
+import { ProductsService } from 'src/app/services/products.service';
 import { SizeService } from 'src/app/services/size.service';
-import { ActivatedRoute, Router } from '@angular/router';
-
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
+import { StoresService } from 'src/app/services/stores.service';
+import { FileHandle } from 'src/app/share/file-handle.module';
+import { Product } from 'src/app/share/product.module';
+import { MyErrorStateMatcher } from '../create-product/create-product.component';
 
 @Component({
-  selector: 'app-create-product',
-  templateUrl: './create-product.component.html',
-  styleUrls: ['./create-product.component.scss']
+  selector: 'app-update-product',
+  templateUrl: './update-product.component.html',
+  styleUrls: ['./update-product.component.scss']
 })
-export class CreateProductComponent implements OnInit {
-
+export class UpdateProductComponent {
   constructor(private category: CategoriesService, private store: StoresService, private sizeService: SizeService,
     private productService: ProductsService, private toast: NgToastService, private sanitizer: DomSanitizer,
-    private route: Router, private activatedRoute:ActivatedRoute) { }
+    private route: Router, private activatedRoute: ActivatedRoute) { }
 
   // Validators
   matcher = new MyErrorStateMatcher();
@@ -43,17 +32,17 @@ export class CreateProductComponent implements OnInit {
   selectFormControl = new FormControl('', Validators.required);
 
   //======================
-
+  pId=0;
   // Model
   isNewProduct = true;
-  newProduct: Product = {
+  currentProduct: Product = {
     name: "",
     description: "",
     inventory: 0,
     price: 0,
     category: { id: 1 },
     size: { id: 1 },
-    store: { id: 1,address:{} },
+    store: { id: 1, address: {} },
     images: []
   }
 
@@ -92,24 +81,26 @@ export class CreateProductComponent implements OnInit {
           window.URL.createObjectURL(file)
         )
       }
-      this.newProduct.images?.push(fileHandle);
+      this.currentProduct.images?.push(fileHandle);
     }
   }
-  removeImage(index:number){
-    this.newProduct.images.splice(index,1)
+  removeImage(index: number) {
+    this.currentProduct.images.splice(index, 1)
   }
-  // create new product
-  createProduct(productForm: NgForm) {
-    if (this.newProduct.name == '' || this.newProduct.name == null || this.newProduct.inventory == 0
-      || this.newProduct.inventory == null || this.newProduct.price == 0 || this.newProduct.price == null) {
+
+
+  // upate new product
+  updateProduct(productForm: NgForm) {
+    if (this.currentProduct.name == '' || this.currentProduct.name == null || this.currentProduct.inventory == 0
+      || this.currentProduct.inventory == null || this.currentProduct.price == 0 || this.currentProduct.price == null) {
       this.toast.error({ detail: "Thông báo lỗi", summary: "Vui lòng nhập đủ thông tin!", duration: 3000 })
       return;
     }
 
-    const productFormData = this.prepareFormData(this.newProduct);
-    this.productService.createProduct2(productFormData).subscribe(
+    const productFormData = this.prepareFormData(this.currentProduct);
+    this.productService.updateProduct(productFormData, this.pId).subscribe(
       (data) => {
-        console.log("---->"+data);
+        console.log(data);
         this.toast.success({ detail: "Thông báo thành công", summary: " Đã thêm sản phẩm!", duration: 3000 })
         this.route.navigate(['home/products/list']);
       },
@@ -139,17 +130,21 @@ export class CreateProductComponent implements OnInit {
   //======================
 
 
+  // currentProduct:any;
+  getCurrentProduct(id:number):void {
+    this.productService.getProductById(id).subscribe(
+      data => {
+        this.currentProduct = data
+      }
+    )
+  }
   //=====================================
   ngOnInit(): void {
-    this.newProduct = this.activatedRoute.snapshot.data['product'];
-    this.getCategories();
-    this.getStores();
-    this.getSize();
-
-    if(this.newProduct && this.newProduct.id){
-      this.isNewProduct = false;
-
-    }
+   this.pId = this.activatedRoute.snapshot.params['pid'];
+  //  this.updateProduct(this.currentProduct,this.pId);
+   this.getCurrentProduct(this.pId);
+   this.getCategories();
+   this.getStores();
+   this.getSize();
   }
 }
-

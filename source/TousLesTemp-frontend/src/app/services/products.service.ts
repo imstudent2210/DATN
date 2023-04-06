@@ -16,19 +16,25 @@ export class ProductsService {
   }
 
   getProducts():Observable<any>{
-    return this.http.get(`${environment.apiUrl}/product/get`);
+    return this.http.get(`${environment.apiUrl}/product/get2`);
   }
   getProductById(id:any){
-    return this.http.get<Product>(`${environment.apiUrl}/product/get/${id}`);
+    return this.http.get<Product>(`${environment.apiUrl}/product/get2/${id}`);
+  }
+
+  // 1 usage
+  createProduct2(product:FormData):Observable<any>{
+    return this.http.post<Product>(`${environment.apiUrl}/product/create2`, product);
+  }
+  updateProduct(product:FormData, id:any){
+    return this.http.put<Product>(`${environment.apiUrl}/product/update/${id}`, product);
   }
 
   createProduct(product:any):Observable<any>{
     return this.http.post(`${environment.apiUrl}/product/create2`, product);
   }
 
-  createProduct2(product:FormData){
-    return this.http.post<Product>(`${environment.apiUrl}/product/create2`, product);
-  }
+
 
 
   // getStoresByName(name:string):Observable<any>{

@@ -1,0 +1,9 @@
+<div class="linetext mt-3" ><span>Ảnh sản phẩm</span></div>
+<mat-grid-list cols="2" rowHeight="1:1">
+
+  <mat-grid-tile *ngFor="let item of data.images">
+    <img [src]="item.url" alt="" style="width: 200px;height: 200px; background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); ">
+
+  </mat-grid-tile>
+</mat-grid-list>

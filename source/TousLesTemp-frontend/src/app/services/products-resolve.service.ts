@@ -30,7 +30,7 @@ export class ProductsResolveService implements Resolve<Product>{
       category: { id: 1 },
       size: { id: 1 },
       store: { id: 1, address: {} },
-      image: []
+      images: []
     };
   }
 }

@@ -20,12 +20,17 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { UpdateProductComponent } from './update-product/update-product.component';
+import { ImageDialogComponent } from './image-dialog/image-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     ProductsComponent,
     MycurrencyPipe,
-    CreateProductComponent
+    CreateProductComponent,
+    UpdateProductComponent,
+    ImageDialogComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +49,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatCardModule,
     MatGridListModule,
     MatSelectModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatDialogModule
   ],
   providers:[
     { provide: MatPaginatorIntl, useValue: CustomPaginator(),

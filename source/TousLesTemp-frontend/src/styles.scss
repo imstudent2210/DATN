@@ -342,10 +342,13 @@ input::-webkit-inner-spin-button {
   position: relative;
   text-align: center;
   span {
-    background: #f3f7fa;
+    background: #fff;
     padding: 0 10px;
     position: relative;
     z-index: 1;
+    font-size: 16px;
+    font-weight: 500;
+    // text-transform: uppercase;
   }
 }
 .linetext:before {

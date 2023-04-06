@@ -2,20 +2,21 @@ package com.graduate.touslestemp.service.impl;
 
 import com.graduate.touslestemp.domain.dto.PageResponseDTO;
 import com.graduate.touslestemp.domain.dto.ProductDto;
-import com.graduate.touslestemp.domain.dto.StoreDto;
+import com.graduate.touslestemp.domain.entity.Image;
 import com.graduate.touslestemp.domain.entity.Product;
-import com.graduate.touslestemp.domain.entity.Store;
 import com.graduate.touslestemp.domain.mapper.ProductMapper;
 import com.graduate.touslestemp.domain.repository.ProductRepository;
 import com.graduate.touslestemp.exception.RequestException;
 import com.graduate.touslestemp.service.ProductService;
+import com.graduate.touslestemp.utils.ImageUpload;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-import java.util.Optional;
+import java.io.IOException;
+import java.util.*;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -38,6 +39,15 @@ public class ProductServiceImpl implements ProductService {
             throw new RequestException("Not found product, id: " + id);
         }
         return (productMapper.toProductDTO(productRepository.findById(id).get()));
+    }
+
+    @Override
+    public Product findProduct(Long id) {
+        Optional<Product> product = productRepository.findById(id);
+        if (product.isEmpty()) {
+            throw new RequestException("Not found product, id: " + id);
+        }
+        return productRepository.findById(id).get();
     }
 
     @Override
@@ -86,4 +96,53 @@ public class ProductServiceImpl implements ProductService {
             return productDtos;
         }
     }
+
+
+    //======================= Upload file image ==============
+    @Autowired
+    private ImageUpload imageUpload;
+    @Override
+    public Product create2(Product product, MultipartFile[] img) throws Exception {
+       try{
+           Set<Image> images = imageUpload(img);
+           product.setImages(images);
+//           return (productMapper.toProductDTO(productRepository.save(product)));
+           productMapper.toProductDTO(productRepository.save(product));
+           return (productMapper.toProductEntity( productMapper.toProductDTO(productRepository.save(product))));
+       }catch(Exception e){
+           e.getMessage();
+           return null;
+       }
+    }
+    @Override
+    public Product update2(Product product, Long id, MultipartFile[] img) throws Exception {
+        try{
+
+            Set<Image> images = imageUpload(img);
+            product.setImages(images);
+            Product local = this.productRepository.findById(id)
+                    .orElseThrow(() -> new RequestException("Can't found this product id: " + id));
+            ProductDto a = productMapper.toProductDTO(product);
+            productMapper.updateEntity(a, local);
+            return (productMapper.toProductEntity( productMapper.toProductDTO(productRepository.save(local))));
+        }catch(Exception e){
+            e.getMessage();
+            return null;
+        }
+    }
+
+    public Set<Image> imageUpload(MultipartFile[] multipartFiles)throws IOException{
+        Set<Image> images = new HashSet<>();
+
+        for(MultipartFile file :multipartFiles){
+            Image image = new Image(
+                    file.getOriginalFilename(),
+                    file.getContentType(),
+                    file.getBytes()
+            );
+            images.add(image);
+        }
+        return images;
+    }
+
 }

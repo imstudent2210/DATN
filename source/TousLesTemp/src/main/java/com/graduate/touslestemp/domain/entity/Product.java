@@ -29,20 +29,27 @@ public class Product {
     @NotNull(message = "Enter current quantity !")
     private int inventory;
     private double price;
-    @Lob
-    @Column(columnDefinition = "MEDIUMBLOB")
-    private String image;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToMany
+    @JoinTable(name = "product-images",
+            joinColumns = {
+                    @JoinColumn(name = "product_id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "img_id")
+            })
+    private Set<Image> images;
+
+    @ManyToOne
     @JoinColumn(name = "category", referencedColumnName = "category_id")
     private Category category;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name = "size", referencedColumnName = "size_id")
     private Size size;
 
     @ManyToOne
     @JoinColumn(name = "store", referencedColumnName = "store_id")
     private Store store;
-
+//(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 }

@@ -30,11 +30,4 @@ public class Store {
     @ManyToOne
     @JoinColumn(name = "Address", referencedColumnName = "address_id")
     private Address address;
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinTable(name = "store_product",
-            joinColumns = {@JoinColumn(name = "store_id")},
-            inverseJoinColumns = {@JoinColumn(name = "id")})
-    private Set<Product> products = new HashSet<>();
-
 }

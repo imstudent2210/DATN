@@ -26,9 +26,10 @@ export class ProductsService {
   createProduct2(product:FormData):Observable<any>{
     return this.http.post<Product>(`${environment.apiUrl}/product/create2`, product);
   }
-  updateProduct(product:FormData, id:any){
-    return this.http.put<Product>(`${environment.apiUrl}/product/update/${id}`, product);
+  updateProduct2(product:FormData, id:any):Observable<any>{
+    return this.http.put<Product>(`${environment.apiUrl}/product/update2/${id}`, product);
   }
+
 
   createProduct(product:any):Observable<any>{
     return this.http.post(`${environment.apiUrl}/product/create2`, product);

@@ -1,4 +1,4 @@
-export class Size{
+export interface Size{
   id?:number;
   size?:string;
 

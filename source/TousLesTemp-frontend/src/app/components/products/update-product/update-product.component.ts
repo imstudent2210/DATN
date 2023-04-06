@@ -11,6 +11,7 @@ import { StoresService } from 'src/app/services/stores.service';
 import { FileHandle } from 'src/app/share/file-handle.module';
 import { Product } from 'src/app/share/product.module';
 import { MyErrorStateMatcher } from '../create-product/create-product.component';
+import { ImageProcessingService } from 'src/app/services/image-processing.service';
 
 @Component({
   selector: 'app-update-product',
@@ -20,57 +21,46 @@ import { MyErrorStateMatcher } from '../create-product/create-product.component'
 export class UpdateProductComponent {
   constructor(private category: CategoriesService, private store: StoresService, private sizeService: SizeService,
     private productService: ProductsService, private toast: NgToastService, private sanitizer: DomSanitizer,
-    private route: Router, private activatedRoute: ActivatedRoute) { }
+    private route: Router, private activatedRoute: ActivatedRoute, private imageProcessing: ImageProcessingService) { }
 
   // Validators
   matcher = new MyErrorStateMatcher();
   namef = new FormControl('', [Validators.required]);
   inventoryf = new FormControl('', [Validators.required]);
   pricef = new FormControl('', [Validators.required]);
-
   categoriesf = new FormControl('', Validators.required);
-  selectFormControl = new FormControl('', Validators.required);
 
   //======================
-  pId=0;
+  pId = 0;
   // Model
-  isNewProduct = true;
+
   currentProduct: Product = {
     name: "",
     description: "",
     inventory: 0,
     price: 0,
-    category: { id: 1 },
-    size: { id: 1 },
-    store: { id: 1, address: {} },
+    category: { id: 0 },
+    size: "",
+    store: { id: 0, address: {} },
     images: []
   }
 
 
-  // =========== Call api===========
-  categories?: any;
-  getCategories(): void {
-    this.category.getCategories().subscribe(
-      data => {
-        this.categories = data
-      }
-    )
-  }
-  stores?: any;
-  getStores(): void {
-    this.store.getStores().subscribe(
-      data => {
-        this.stores = data;
-      }
-    )
-  }
-  sizes?: any;
-  getSize(): void {
-    this.sizeService.getSize().subscribe(
-      data => {
-        this.sizes = data;
-      }
-    )
+  // File
+  prepareFormData(product: Product): FormData {
+    const formData = new FormData();
+    formData.append(
+      'product',
+      new Blob([JSON.stringify(product)], { type: 'application/json' })
+    );
+    for (let index = 0; index < product.images.length; index++) {
+      formData.append(
+        'file',
+        product.images[index].file,
+        product.images[index].file.name
+      );
+    }
+    return formData;
   }
   onFileSelected(event: any) {
     if (event.target.files) {
@@ -88,6 +78,31 @@ export class UpdateProductComponent {
     this.currentProduct.images.splice(index, 1)
   }
 
+  // =========== Call api===========
+  categories: any;
+  getCategories(): void {
+    this.category.getCategories().subscribe(
+      data => {
+        this.categories = data
+      }
+    )
+  }
+  stores: any;
+  getStores(): void {
+    this.store.getStores().subscribe(
+      data => {
+        this.stores = data;
+      }
+    )
+  }
+  sizes: any;
+  getSize(): void {
+    this.sizeService.getSize().subscribe(
+      data => {
+        this.sizes = data;
+      }
+    )
+  }
 
   // upate new product
   updateProduct(productForm: NgForm) {
@@ -96,55 +111,42 @@ export class UpdateProductComponent {
       this.toast.error({ detail: "Thông báo lỗi", summary: "Vui lòng nhập đủ thông tin!", duration: 3000 })
       return;
     }
-
     const productFormData = this.prepareFormData(this.currentProduct);
-    this.productService.updateProduct(productFormData, this.pId).subscribe(
-      (data) => {
-        console.log(data);
-        this.toast.success({ detail: "Thông báo thành công", summary: " Đã thêm sản phẩm!", duration: 3000 })
-        this.route.navigate(['home/products/list']);
-      },
-      (error) => {
-        console.log(error);
-        this.toast.error({ detail: "Thông báo lỗi", summary: " Sản phẩm chưa được thêm!", duration: 3000 })
-
-      }
-    )
+    this.productService.updateProduct2(productFormData, this.pId)
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.toast.success({ detail: "Thông báo thành công", summary: " Đã thêm sản phẩm!", duration: 3000 })
+          this.route.navigate(['home/products/list']);
+        },
+        (error) => {
+          console.log(error);
+          this.toast.error({ detail: "Thông báo lỗi", summary: " Sản phẩm chưa được thêm!", duration: 3000 })
+        }
+      )
   }
-
-  prepareFormData(product: Product): FormData {
-    const formData = new FormData();
-    formData.append(
-      'product',
-      new Blob([JSON.stringify(product)], { type: 'application/json' })
-    );
-    for (let index = 0; index < product.images.length; index++) {
-      formData.append(
-        'file',
-        product.images[index].file,
-        product.images[index].file.name
-      );
-    }
-    return formData;
-  }
-  //======================
-
 
   // currentProduct:any;
-  getCurrentProduct(id:number):void {
-    this.productService.getProductById(id).subscribe(
-      data => {
-        this.currentProduct = data
-      }
-    )
+  getCurrentProduct(id: number): void {
+    this.productService.getProductById(id)
+      .pipe(
+        map((x: Product) => {
+          return this.imageProcessing.createImages(x);
+        })
+      )
+      .subscribe(
+        data => {
+          this.currentProduct = data
+        }
+      )
   }
+
   //=====================================
   ngOnInit(): void {
-   this.pId = this.activatedRoute.snapshot.params['pid'];
-  //  this.updateProduct(this.currentProduct,this.pId);
-   this.getCurrentProduct(this.pId);
-   this.getCategories();
-   this.getStores();
-   this.getSize();
+    this.getCategories();
+    this.getStores();
+    this.getSize();
+    this.pId = this.activatedRoute.snapshot.params['pid'];
+    this.getCurrentProduct(this.pId);
   }
 }

@@ -11,7 +11,7 @@ export interface Product{
   name?:string;
   price?:number;
   category:Category;
-  size:Size;
+  size:any;
   store:Store;
   images:FileHandle[];
 }

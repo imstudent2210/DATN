@@ -1,21 +1,26 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { Product } from '../share/product.module';
 import { Route } from '@angular/router';
 import { Router } from '@angular/router';
 import { ProductsService } from './products.service';
+import { ImageProcessingService } from './image-processing.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsResolveService implements Resolve<Product>{
 
-  constructor(private productService: ProductsService) { }
+  constructor(private productService: ProductsService, private imageProcessingService:ImageProcessingService) { }
+    
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Product> {
     const id = route.paramMap.get("id")
     if (id) {
-      return this.productService.getProductById(id);
+      return this.productService.getProductById(id)
+      .pipe(
+        map(p=>this.imageProcessingService.createImages(p))
+      )
     } else {
       return of(this.getProductDetail());
     }

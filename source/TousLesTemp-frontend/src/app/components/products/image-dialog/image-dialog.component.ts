@@ -8,13 +8,11 @@ import { FileHandle } from 'src/app/share/file-handle.module';
   styleUrls: ['./image-dialog.component.scss']
 })
 export class ImageDialogComponent implements OnInit {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
-  ngOnInit():void{
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
+  ngOnInit(): void {
     this.reciveImage();
   }
-
-  reciveImage(){
+  reciveImage() {
     console.log(this.data);
-
   }
 }

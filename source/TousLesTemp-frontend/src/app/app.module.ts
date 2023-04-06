@@ -16,12 +16,14 @@ import { RouterModule } from '@angular/router';
 import { AuthInterceptorProvider } from './guard/auth.interceptor';
 import { SublevelMenuComponent } from './components/sidenav/sublevel-menu.component';
 import { NgToastModule } from 'ng-angular-popup';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { StoresModule } from './components/stores/stores.module';
-import { StoresComponent } from './components/stores/stores.component';
 
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MycurrencyPipe } from './share/custom.currencypipe';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 
 @NgModule({
   declarations: [
@@ -39,12 +41,37 @@ import { StoresComponent } from './components/stores/stores.component';
     CommonModule,
     RouterModule,
     BrowserAnimationsModule,
+    SocialLoginModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
     NgToastModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
+    MatInputModule,
   ],
-  providers: [AuthInterceptorProvider],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              // '961395380673-hduap46bhfg3ifi0fc4r380gfsjqv595.apps.googleusercontent.com'
+              '420281420455-qrdb5immn7snuqbprfvd03s45h0nq226.apps.googleusercontent.com'
+            )
+          }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    },
+    AuthInterceptorProvider,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

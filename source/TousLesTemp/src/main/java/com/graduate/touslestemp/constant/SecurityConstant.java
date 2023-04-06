@@ -11,6 +11,6 @@ public class SecurityConstant {
             "/v3/api-docs/**", "/swagger-ui/**",
             "/login", "/register/**", "/address/**",
             "/store/**", "/category/**", "/product/**",
-            "/staff/**"
+            "/staff/**","/sendmail"
     };
 }

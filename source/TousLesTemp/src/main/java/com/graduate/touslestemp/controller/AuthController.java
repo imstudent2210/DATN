@@ -1,10 +1,12 @@
 package com.graduate.touslestemp.controller;
 
 import com.graduate.touslestemp.config.authenticate.JwtUtil;
+import com.graduate.touslestemp.domain.dto.EmailMessage;
 import com.graduate.touslestemp.exception.RequestException;
 import com.graduate.touslestemp.config.authenticate.Account;
 import com.graduate.touslestemp.config.authenticate.JwtRequest;
 import com.graduate.touslestemp.config.authenticate.JwtRespone;
+import com.graduate.touslestemp.service.EmailSendersService;
 import com.graduate.touslestemp.service.impl.AccountDetailServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +58,14 @@ public class AuthController {
     @GetMapping("/current-user")
     public Account getCurrentUser(Principal principal ){
         return ((Account)this.adminDetailService.loadUserByUsername(principal.getName()));
+    }
+
+    @Autowired
+    private EmailSendersService emailSendersService;
+
+    @PostMapping("/sendmail")
+    public ResponseEntity sendEmail(@RequestBody EmailMessage emailMessage) {
+        this.emailSendersService.sendEmail(emailMessage.getTo(), emailMessage.getSubject(), emailMessage.getMessage());
+        return ResponseEntity.ok("Success");
     }
 }

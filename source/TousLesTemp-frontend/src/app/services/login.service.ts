@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environment/environment';
+import { catchError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -48,12 +49,23 @@ export class LoginService {
     let user = this.getUser();
     return user.authorities[0].authority;
   }
-  public getUserName(){
+  public getUserName() {
     let username = this.getUser().username;
     return username;
   }
-  public getEmail(){
+  public getEmail() {
     let email = this.getUser().email;
     return email;
+  }
+  //============ Social Login =================
+  googleSignIn(token: any) {
+    return this.http.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithIdp?key=${environment.apiKey}`,
+      {
+        postBody: `id_token=${token}&providerId=google.com`,
+        requestUri: 'http://localhost:4200',
+        returnIdpCredential: true,
+        returnSecureToken: true
+      }
+    )
   }
 }

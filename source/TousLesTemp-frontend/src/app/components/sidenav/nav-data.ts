@@ -14,10 +14,7 @@ export const navbarData: INavbarData[] = [
         routeLink: 'stores/list',
         label: 'Danh sách cửa hàng',
       },
-      {
-        routeLink: 'stores/stores',
-        label: 'Thêm cửa hàng mới',
-      },
+    
     ],
   },
   {
@@ -26,12 +23,12 @@ export const navbarData: INavbarData[] = [
     label: 'Sản phẩm',
     items: [
       {
-        routeLink: 'products/list',
-        label: 'Tấc cả sản phẩm',
+        routeLink: 'products/create',
+        label: 'Thêm sản phẩm mới',
       },
       {
-        routeLink: 'products/create',
-        label: 'Thêm mới',
+        routeLink: 'products/list',
+        label: 'Danh sách sản phẩm',
       },
       {
         routeLink: 'products/sell',
@@ -47,11 +44,11 @@ export const navbarData: INavbarData[] = [
     items: [
       {
         routeLink: 'categories/list',
-        label: 'Loại sản phẩm',
+        label: 'Danh sách loại',
       },
       {
         routeLink: 'categories/create',
-        label: 'Thêm mới',
+        label: 'Thêm loại mới',
       },
       {
         routeLink: 'categories/update',
@@ -60,20 +57,20 @@ export const navbarData: INavbarData[] = [
     ],
   },
   {
-    routeLink: 'stafff',
+    routeLink: 'staff',
     icon: 'fad fa-users-cog',
     label: 'Nhân viên',
     items: [
       {
-        routeLink: 'stafff/list',
+        routeLink: 'staff/list',
         label: 'Thông tin nhân viên',
       },
       {
-        routeLink: 'stafff/role',
+        routeLink: 'staff/role',
         label: 'Vị trí',
       },
       {
-        routeLink: 'stafff/create',
+        routeLink: 'staff/create',
         label: 'Thêm mới',
       },
     ],
@@ -84,11 +81,11 @@ export const navbarData: INavbarData[] = [
     icon: 'fal fa-file-export',
     label: 'Thống kê',
   },
-  {
-    routeLink: 'account',
-    icon: 'fad fa-address-card',
-    label: 'Tài khoản',
-  },
+  // {
+  //   routeLink: 'account',
+  //   icon: 'fad fa-address-card',
+  //   label: 'Tài khoản',
+  // },
 
   {
     routeLink: 'address',
@@ -97,11 +94,11 @@ export const navbarData: INavbarData[] = [
     items: [
       {
         routeLink: 'address/list',
-        label: 'Thông tin chi tiết',
+        label: 'Tấc cả chi nhánh',
       },
       {
         routeLink: 'address/create',
-        label: 'Thêm địa chỉ mới',
+        label: 'Thêm chi nhánh mới',
       },
     ],
   },

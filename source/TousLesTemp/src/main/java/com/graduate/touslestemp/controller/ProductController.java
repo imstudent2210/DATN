@@ -11,8 +11,10 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -39,11 +41,19 @@ public class ProductController {
     public ResponseEntity<List<ProductDto>> allProductDTO() {
         return new ResponseEntity<>(productMapper.toProductDTOs(productRepository.findAll()), HttpStatus.OK);
     }
-
     @GetMapping("/get/{id}")
     public ResponseEntity<ProductDto> getProductDTOById(@PathVariable(name = "id") Long id) {
         return new ResponseEntity<>(productService.find(id), HttpStatus.OK);
     }
+    @GetMapping("/get2")
+    public ResponseEntity<List<Product>> allProduct() {
+        return new ResponseEntity<>(productRepository.findAll(), HttpStatus.OK);
+    }
+    @GetMapping("/get2/{id}")
+    public ResponseEntity<Product> getProductById(@PathVariable(name = "id") Long id) {
+        return new ResponseEntity<>(productService.findProduct(id), HttpStatus.OK);
+    }
+
 
     @PostMapping("/create")
     public ResponseEntity<ProductDto> createProductDTO(@RequestBody @Valid Product product) throws Exception {
@@ -67,5 +77,19 @@ public class ProductController {
     List<ProductDto> filterStoreDTO(@PathVariable("categoryId") Long categoryId) throws Exception {
         return this.productService.filter(categoryId);
     }
+
+
+
+
+    @PostMapping(value = {"/create2"}, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_OCTET_STREAM_VALUE, })
+    public ResponseEntity<Product> createProductDTO2(@RequestPart @Valid Product product, @RequestPart MultipartFile[] file) throws Exception {
+        return new ResponseEntity<>(productService.create2(product, file), HttpStatus.OK);
+    }
+    @PutMapping(value = "/update2/{id}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_OCTET_STREAM_VALUE, })
+    public ResponseEntity<Product> updateProductDTO2(@RequestPart @Valid Product product, @PathVariable(name = "id") Long id,  @RequestPart MultipartFile[] file) throws Exception {
+        return new ResponseEntity<>(productService.update2(product, id, file), HttpStatus.OK);
+    }
+
+
 
 }

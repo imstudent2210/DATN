@@ -125,9 +125,11 @@
   min-width: 2rem;
   margin: auto 0.5rem auto auto;
   text-align: center;
-  color: #f3f3f3;
+  color: var(--yellow);
 }
-
+.menu-collapse-icon:hover{
+  color: #000;
+}
 .sublevel-nav {
   list-style: none;
 
@@ -136,7 +138,7 @@
           display: flex;
           align-items: center;
           height: 3rem;
-          color: #898989;
+          color: #000;
           text-decoration: none;
           border-radius: 0.625rem;
           transition: all .3s ease;
@@ -148,11 +150,12 @@
               min-width: 2rem;
               margin: 0 0.5rem;
               text-align: center;
+              color: var(--yellow);
           }
       }
 
       .sublevel-nav-link:hover {
-          color: #000;
+          color: var(--yellow);
       }
   }
 }

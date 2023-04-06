@@ -28,3 +28,14 @@ spring:
   mvc:
     path match:
       matching-strategy: ant_path_matcher
+  mail:
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: 'true'
+          auth: 'true'
+    host: smtp.gmail.com
+    username: imstudent2210@gmail.com
+    password: mcpauyptjfcsjgcq
+    port: '587'

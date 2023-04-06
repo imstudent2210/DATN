@@ -30,7 +30,7 @@ public class Product {
     private int inventory;
     private double price;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "product-images",
             joinColumns = {
                     @JoinColumn(name = "product_id")
@@ -51,5 +51,5 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "store", referencedColumnName = "store_id")
     private Store store;
-//(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+
 }

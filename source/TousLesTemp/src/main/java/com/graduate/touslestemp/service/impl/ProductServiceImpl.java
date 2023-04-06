@@ -103,16 +103,17 @@ public class ProductServiceImpl implements ProductService {
     private ImageUpload imageUpload;
     @Override
     public Product create2(Product product, MultipartFile[] img) throws Exception {
-       try{
+//       try{
            Set<Image> images = imageUpload(img);
            product.setImages(images);
-//           return (productMapper.toProductDTO(productRepository.save(product)));
-           productMapper.toProductDTO(productRepository.save(product));
-           return (productMapper.toProductEntity( productMapper.toProductDTO(productRepository.save(product))));
-       }catch(Exception e){
-           e.getMessage();
-           return null;
-       }
+//           ProductDto newproduct = productMapper.toProductDTO(productRepository.save(product));
+////           return (productMapper.toProductEntity( productMapper.toProductDTO(productRepository.save(product))));
+//           return productMapper.toProductEntity(newproduct);
+    return this.productRepository.save(product);
+//       }catch(Exception e){
+//           e.getMessage();
+//           throw new RequestException("Không thể thêm sản phẩm");
+//       }
     }
     @Override
     public Product update2(Product product, Long id, MultipartFile[] img) throws Exception {
@@ -127,7 +128,7 @@ public class ProductServiceImpl implements ProductService {
             return (productMapper.toProductEntity( productMapper.toProductDTO(productRepository.save(local))));
         }catch(Exception e){
             e.getMessage();
-            return null;
+            throw new RequestException("Không thể cập nhật");
         }
     }
 

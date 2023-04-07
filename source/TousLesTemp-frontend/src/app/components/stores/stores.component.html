@@ -27,7 +27,7 @@
       <div class="col-md-12">
         <table mat-table matSort [dataSource]="stores" class="mat-elevation-z8 table-tlt">
           <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Tên cửa hàng</th>
+            <th mat-header-cell *matHeaderCellDef disableClear>Tên cửa hàng</th>
             <td mat-cell *matCellDef="let element" (click)="getCurrentItem(element)" class="col-name-tlt"
               [routerLink]="'../detail/' + element.id">
               {{ element.name }}

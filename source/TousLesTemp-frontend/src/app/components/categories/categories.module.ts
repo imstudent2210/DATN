@@ -14,11 +14,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatSortModule } from '@angular/material/sort';
 import { CategoriesComponent } from './categories.component';
+import { UpdateCategoryComponent } from './update-category/update-category.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSelectModule } from '@angular/material/select';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { CreateCategoryComponent } from './create-category/create-category.component';
+
 
 
 @NgModule({
   declarations: [
-    CategoriesComponent
+    CategoriesComponent,
+    UpdateCategoryComponent,
+    CreateCategoryComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +42,11 @@ import { CategoriesComponent } from './categories.component';
     MatListModule,
     MatChipsModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule,
+    MatGridListModule,
+    MatSelectModule,
+    MatSlideToggleModule
 
   ], providers:[
     { provide: MatPaginatorIntl, useValue: CustomPaginator() }

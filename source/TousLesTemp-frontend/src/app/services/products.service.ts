@@ -35,7 +35,12 @@ export class ProductsService {
     return this.http.post(`${environment.apiUrl}/product/create2`, product);
   }
 
-
+  deleteProduct(id:any){
+    return this.http.delete(`${environment.apiUrl}/product/delete2/${id}`);
+  }
+  getProductsByStoreId(id:number):Observable<any>{
+    return this.http.get(`${environment.apiUrl}/product/getByStoreId/${id}`);
+  }
 
 
   // getStoresByName(name:string):Observable<any>{

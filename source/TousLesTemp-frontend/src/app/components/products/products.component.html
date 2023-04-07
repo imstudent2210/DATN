@@ -62,19 +62,30 @@
           <th mat-header-cell *matHeaderCellDef>Cửa hàng</th>
           <td mat-cell *matCellDef="let element">{{ element.store.name}}</td>
         </ng-container>
-        <ng-container matColumnDef="action">
+        <ng-container matColumnDef="edit">
           <th mat-header-cell *matHeaderCellDef class="col-action-tlt"></th>
           <td mat-cell *matCellDef="let element">
             <button mat-mini-fab color="basic" (click)="editProduct(element.id)">
-              <i class="fa fa-edit"></i>
+              <i class="fa fa-edit" style="color:var(--yellow)"></i>
             </button>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef class="col-action-tlt"></th>
+          <td mat-cell *matCellDef="let element" >
+            <button mat-mini-fab color="basic" (click)="deleteProduct(element.id)">
+              <i class="fa-solid fa-trash" style="color:red"></i>
+            </button>
+          </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="columns"></tr>
         <tr mat-row *matRowDef="let row; columns: columns"></tr>
       </table>
+      <mat-divider></mat-divider>
       <mat-paginator [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
         [showFirstLastButtons]="showFirstLastButtons">
       </mat-paginator>
+      <mat-divider></mat-divider>
     </div>
 
   </div>

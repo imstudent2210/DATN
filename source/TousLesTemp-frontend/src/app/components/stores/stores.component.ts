@@ -19,7 +19,7 @@ export class StoresComponent implements OnInit {
   @Input() name?:any;
 
   sId=0;
-  empty?:any;
+  listStore?:any;
   stores?:any;
   columns: string[] = ['name', 'phone', 'email', 'address','action']
 
@@ -35,9 +35,9 @@ export class StoresComponent implements OnInit {
   getStores(): void {
     this.service.getStores().subscribe(
       data => {
-        this.empty = data
-        console.log(this.empty);
-        this.stores = new MatTableDataSource<Store>(this.empty);
+        this.listStore = data
+        console.log(this.listStore);
+        this.stores = new MatTableDataSource<Store>(this.listStore);
         this.stores.sort = this.sort;
         this.stores.paginator = this.paginator;
       }
@@ -47,9 +47,8 @@ export class StoresComponent implements OnInit {
   getStoresByName(name:string):void{
     this.service.getStoresByName(name).subscribe(
       data=>{
-        this.empty = data;
-        console.log(this.empty);
-
+        this.listStore = data;
+        console.log(this.listStore);
       }
     )
   }
@@ -57,9 +56,8 @@ export class StoresComponent implements OnInit {
   getStoresByAddress(name:string):void{
     this.service.getStoresByAddress(name).subscribe(
       data=>{
-        this.empty = data;
-        console.log(this.empty);
-
+        this.listStore = data;
+        console.log(this.listStore);
       }
     )
   }
@@ -73,15 +71,9 @@ export class StoresComponent implements OnInit {
   }
 
   search(){
-    // this.getStoresByName(this.name);
     this.getStoresByAddress(this.name);
   }
-
-
-
   ngOnInit(): void {
     this.getStores();
   }
-
-
 }

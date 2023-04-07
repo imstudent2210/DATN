@@ -14,7 +14,7 @@ export const navbarData: INavbarData[] = [
         routeLink: 'stores/list',
         label: 'Danh sách cửa hàng',
       },
-    
+
     ],
   },
   {
@@ -30,10 +30,6 @@ export const navbarData: INavbarData[] = [
         routeLink: 'products/list',
         label: 'Danh sách sản phẩm',
       },
-      {
-        routeLink: 'products/sell',
-        label: 'Sản phẩm bán chạy',
-      },
     ],
   },
   {
@@ -43,17 +39,13 @@ export const navbarData: INavbarData[] = [
     label: 'Danh mục ',
     items: [
       {
-        routeLink: 'categories/list',
-        label: 'Danh sách loại',
-      },
-      {
         routeLink: 'categories/create',
         label: 'Thêm loại mới',
       },
       {
-        routeLink: 'categories/update',
-        label: 'Cập nhật',
-      },
+        routeLink: 'categories/list',
+        label: 'Danh sách loại',
+      }
     ],
   },
   {

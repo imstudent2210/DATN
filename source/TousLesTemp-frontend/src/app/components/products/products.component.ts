@@ -10,6 +10,7 @@ import { Store } from 'src/app/share/store.module';
 import { ImageDialogComponent } from './image-dialog/image-dialog.component';
 import { ImageProcessingService } from 'src/app/services/image-processing.service';
 import { map } from 'rxjs';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-products',
@@ -21,16 +22,19 @@ export class ProductsComponent {
     private service: ProductsService,
     private route: Router,
     public imageDialog: MatDialog,
-    private imageProcessing: ImageProcessingService,) { }
+    private imageProcessing: ImageProcessingService,
+    public deleteDialog: MatDialog) { }
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
   @Input() name?: any;
 
+  productNumber?:number;
+  pId: any;
   listProduct?: any;
   item?: any;
   products?: any;
-  columns: string[] = ['name', 'description', 'price', 'inventory', 'category', 'size', 'store', 'image', 'action']
+  columns: string[] = ['name', 'description', 'price', 'inventory', 'category', 'size', 'store', 'image', 'edit', 'delete']
 
   pageSizeOptions = [5, 10, 25, 50];
   showPageSizeOptions = true;
@@ -70,15 +74,26 @@ export class ProductsComponent {
       )
       .subscribe(
         data => {
-          this.listProduct = data
-          console.log(this.listProduct);
+          this.listProduct = data;
+          console.log(this.listProduct.length);
           this.products = new MatTableDataSource<Store>(this.listProduct);
           this.products.sort = this.sort;
           this.products.paginator = this.paginator;
+          this.productNumber = data.length;
         }
       )
   }
 
+
+  deleteProduct(pId: number) {
+    this.deleteDialog.open(DeleteDialogComponent, {
+      data: {
+        productId: pId
+      }
+    }).afterClosed().subscribe(result => {
+      this.getProducts();
+    })
+  }
 
   ngOnInit(): void {
     this.getProducts();

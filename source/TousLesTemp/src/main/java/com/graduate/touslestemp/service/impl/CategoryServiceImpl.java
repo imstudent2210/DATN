@@ -1,6 +1,7 @@
 package com.graduate.touslestemp.service.impl;
 
 import com.graduate.touslestemp.domain.entity.Category;
+import com.graduate.touslestemp.domain.entity.Product;
 import com.graduate.touslestemp.domain.repository.CategoryRepository;
 import com.graduate.touslestemp.exception.RequestException;
 import com.graduate.touslestemp.exception.RequestSuccess;
@@ -38,7 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category update(Category category, String name) throws Exception {
+    public Category updateByName(Category category, String name) throws Exception {
         Category updateCategory = this.categoryRepository.findCategoryByName(name);
         String updateName = category.getName();
         Category local = this.categoryRepository.findCategoryByName(updateName);
@@ -65,6 +66,40 @@ public class CategoryServiceImpl implements CategoryService {
             category.setName(local.get().getName());
             categoryRepository.save(category);
             throw new RequestSuccess("Delete category id " + id + " completed! ");
+        }
+    }
+
+    @Override
+    public Category findCategory(Long id) {
+        Optional<Category> category = categoryRepository.findById(id);
+        if (category.isEmpty()) {
+            throw new RequestException("Not found category, id: " + id);
+        }
+        return categoryRepository.findById(id).get();
+    }
+
+    @Override
+    public Category update(Category category, Long id) throws Exception {
+        Optional<Category> local = categoryRepository.findById(id);
+        if (local.isEmpty()) {
+            throw new RequestException("Not found category, id: " + id);
+        }
+        else {
+            Category updateCategory = this.categoryRepository.findCategoryByName(local.get().getName());
+            String updateName = category.getName();
+            Category local1 = this.categoryRepository.findCategoryByName(updateName);
+            local1.isActivated();
+            if (updateCategory == null) {
+                System.out.println("Not found this category: " + id);
+                throw new RequestException("Not found this category: " + id);
+            } else {
+                if (local1 == null | (local1 !=null &&  (local1.isActivated()!=category.isActivated())) ) {
+                    updateCategory.setName(category.getName());
+                    updateCategory.setActivated(category.isActivated());
+                }
+                else throw new RequestException("This category has already: " + updateName);
+            }
+            return this.categoryRepository.save(updateCategory);
         }
     }
 

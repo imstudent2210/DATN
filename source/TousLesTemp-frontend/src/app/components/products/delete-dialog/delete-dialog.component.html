@@ -1,0 +1,12 @@
+<div class="my-2 mx-2">
+  <h6 class="me-auto"><strong>Xoá sản phẩm</strong></h6>
+  <div mat-dialog-content>
+   Bạn có chắc muốn xoá sản phẩm này?
+  </div>
+  <div mat-dialog-actions>
+ <button mat-button mat-dialog-close>Trở lại</button>
+    <button class="btn-1 ms-auto" [mat-dialog-close] cdkFocusInitial (click)="deleteProduct()">
+      <i class="fa-solid fa-trash btn-1-icon"></i><span class="btn-1-text">Xoá</span>
+    </button>
+  </div>
+</div>

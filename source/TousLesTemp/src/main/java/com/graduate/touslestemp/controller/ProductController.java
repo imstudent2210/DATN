@@ -82,14 +82,21 @@ public class ProductController {
 
 
     @PostMapping(value = {"/create2"}, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_OCTET_STREAM_VALUE, })
-    public ResponseEntity<Product> createProductDTO2(@RequestPart @Valid Product product, @RequestPart MultipartFile[] file) throws Exception {
+    public ResponseEntity<Product> createProductDTO2(@RequestPart("product") @Valid Product product, @RequestPart("file") MultipartFile[] file) throws Exception {
         return new ResponseEntity<>(productService.create2(product, file), HttpStatus.OK);
     }
     @PutMapping(value = "/update2/{id}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_OCTET_STREAM_VALUE, })
-    public ResponseEntity<Product> updateProductDTO2(@RequestPart @Valid Product product, @PathVariable(name = "id") Long id,  @RequestPart MultipartFile[] file) throws Exception {
+    public ResponseEntity<Product> updateProductDTO2(@RequestPart("product") @Valid Product product, @PathVariable(name = "id") Long id,  @RequestPart("file") MultipartFile[] file) throws Exception {
         return new ResponseEntity<>(productService.update2(product, id, file), HttpStatus.OK);
     }
 
-
+    @DeleteMapping("/delete2/{id}")
+    public void deleteProduct(@PathVariable("id") Long id) throws Exception{
+        this.productService.delete(id);
+    }
+    @GetMapping("/getByStoreId/{id}")
+    List<Product> getByStoreId(@PathVariable("id") Long id) throws Exception {
+        return this.productRepository.getProductByStoreId(id);
+    }
 
 }

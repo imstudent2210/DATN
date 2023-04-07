@@ -2,11 +2,13 @@ package com.graduate.touslestemp.service.impl;
 
 import com.graduate.touslestemp.domain.dto.PageResponseDTO;
 import com.graduate.touslestemp.domain.dto.ProductDto;
+import com.graduate.touslestemp.domain.entity.Address;
 import com.graduate.touslestemp.domain.entity.Image;
 import com.graduate.touslestemp.domain.entity.Product;
 import com.graduate.touslestemp.domain.mapper.ProductMapper;
 import com.graduate.touslestemp.domain.repository.ProductRepository;
 import com.graduate.touslestemp.exception.RequestException;
+import com.graduate.touslestemp.exception.RequestSuccess;
 import com.graduate.touslestemp.service.ProductService;
 import com.graduate.touslestemp.utils.ImageUpload;
 import org.modelmapper.ModelMapper;
@@ -99,43 +101,39 @@ public class ProductServiceImpl implements ProductService {
 
 
     //======================= Upload file image ==============
-    @Autowired
-    private ImageUpload imageUpload;
     @Override
     public Product create2(Product product, MultipartFile[] img) throws Exception {
-//       try{
-           Set<Image> images = imageUpload(img);
-           product.setImages(images);
-//           ProductDto newproduct = productMapper.toProductDTO(productRepository.save(product));
-////           return (productMapper.toProductEntity( productMapper.toProductDTO(productRepository.save(product))));
-//           return productMapper.toProductEntity(newproduct);
-    return this.productRepository.save(product);
-//       }catch(Exception e){
-//           e.getMessage();
-//           throw new RequestException("Không thể thêm sản phẩm");
-//       }
-    }
-    @Override
-    public Product update2(Product product, Long id, MultipartFile[] img) throws Exception {
-        try{
-
+        try {
             Set<Image> images = imageUpload(img);
             product.setImages(images);
+            return this.productRepository.save(product);
+        } catch (Exception e) {
+            e.getMessage();
+            throw new RequestException("Không thể thêm sản phẩm");
+        }
+    }
+
+    @Override
+    public Product update2(Product product, Long id, MultipartFile[] img) throws Exception {
+        try {
+            Set<Image> images = imageUpload(img);
             Product local = this.productRepository.findById(id)
                     .orElseThrow(() -> new RequestException("Can't found this product id: " + id));
+
+            local.setImages(images);
             ProductDto a = productMapper.toProductDTO(product);
             productMapper.updateEntity(a, local);
-            return (productMapper.toProductEntity( productMapper.toProductDTO(productRepository.save(local))));
-        }catch(Exception e){
+            return this.productRepository.save(local);
+        } catch (Exception e) {
             e.getMessage();
             throw new RequestException("Không thể cập nhật");
         }
     }
 
-    public Set<Image> imageUpload(MultipartFile[] multipartFiles)throws IOException{
+    public Set<Image> imageUpload(MultipartFile[] multipartFiles) throws IOException {
         Set<Image> images = new HashSet<>();
 
-        for(MultipartFile file :multipartFiles){
+        for (MultipartFile file : multipartFiles) {
             Image image = new Image(
                     file.getOriginalFilename(),
                     file.getContentType(),
@@ -145,5 +143,4 @@ public class ProductServiceImpl implements ProductService {
         }
         return images;
     }
-
 }

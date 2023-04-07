@@ -26,4 +26,6 @@ public interface ProductService {
     //   ============= Upload file image ============
     Product create2( Product product, MultipartFile [] img) throws Exception;
     Product update2(Product product, Long id,MultipartFile [] img ) throws Exception;
+
+//    void delete2(Long id) throws Exception;
 }

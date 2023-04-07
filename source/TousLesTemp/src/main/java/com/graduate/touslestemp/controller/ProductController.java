@@ -90,6 +90,9 @@ public class ProductController {
         return new ResponseEntity<>(productService.update2(product, id, file), HttpStatus.OK);
     }
 
-
+    @DeleteMapping("/delete2/{id}")
+    public void deleteProduct(@PathVariable("id") Long id) throws Exception{
+        this.productService.delete(id);
+    }
 
 }

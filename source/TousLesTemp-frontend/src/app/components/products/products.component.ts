@@ -29,6 +29,7 @@ export class ProductsComponent {
   @ViewChild(MatSort) sort?: MatSort;
   @Input() name?: any;
 
+  productNumber?:number;
   pId: any;
   listProduct?: any;
   item?: any;
@@ -78,6 +79,7 @@ export class ProductsComponent {
           this.products = new MatTableDataSource<Store>(this.listProduct);
           this.products.sort = this.sort;
           this.products.paginator = this.paginator;
+          this.productNumber = data.length;
         }
       )
   }

@@ -8,28 +8,24 @@ import { environment } from '../environment/environment';
 })
 export class StoresService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getStoresPaging(page:number = 0, size:number = 5):Observable<any>{
-    return this.http.get(`${environment.apiUrl}/store/paging?page=` + page.toString()+`&size=` + size.toString());
-  }
-
-  getStores():Observable<any>{
+  getStores(): Observable<any> {
     return this.http.get(`${environment.apiUrl}/store/get1`);
   }
 
-  getStoresByName(name:string):Observable<any>{
+  getStoresByName(name: string): Observable<any> {
     return this.http.get(`${environment.apiUrl}/store/search/${name}`);
   }
 
-  getStoresByAddress(name:string):Observable<any>{
+  getStoresByAddress(name: string): Observable<any> {
     return this.http.get(`${environment.apiUrl}/store/filter/${name}`);
   }
 
-  getStoreById(id:number):Observable<any>{
+  getStoreById(id: number): Observable<any> {
     return this.http.get(`${environment.apiUrl}/store/get/${id}`);
   }
-  createStore(store:any):Observable<any>{
+  createStore(store: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/store/create`, store);
   }
 }

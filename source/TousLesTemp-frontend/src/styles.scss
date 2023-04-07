@@ -60,7 +60,10 @@ body {
 .mat-mdc-form-field-infix {
   min-height: 25px;
 }
-
+.mat-mdc-table .mdc-data-table__row {
+  height: 52px;
+  // background: var(--gray);
+}
 
 // custome table column
 .col-name-tlt{

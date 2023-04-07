@@ -38,7 +38,9 @@ export class ProductsService {
   deleteProduct(id:any){
     return this.http.delete(`${environment.apiUrl}/product/delete2/${id}`);
   }
-
+  getProductsByStoreId(id:number):Observable<any>{
+    return this.http.get(`${environment.apiUrl}/product/getByStoreId/${id}`);
+  }
 
 
   // getStoresByName(name:string):Observable<any>{

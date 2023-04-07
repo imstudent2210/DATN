@@ -1,9 +1,9 @@
 <div class="backgound-image" style="background-image: url('bg-01.jpg');">
   <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-12">
       <mat-card>
         <div class="container text-center">
-          <mat-card-title class="text-center my-2 linetext"><span>Đăng nhập</span></mat-card-title>
+          <mat-card-title class="text-center my-2 linetext"><span>Hệ thống quản lí Tous Les Temp</span></mat-card-title>
           <form (ngSubmit)="formSubmit()">
             <mat-form-field class="full-width" appearance="outline">
               <mat-label>Tên đăng nhập</mat-label>
@@ -21,7 +21,8 @@
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>
             </mat-form-field>
-            <div class="text-center mx-3 mb-3">
+            <div class="text-center mx-3 my-2">
+              <div class="linetext my-2"><span></span></div>
               <button mat-fab extended><mat-icon>login</mat-icon>Đăng nhập</button>
             </div>
           </form>

@@ -25,6 +25,10 @@ public class CategoryController {
     List<Category> allCategory() {
         return this.categoryRepository.findAll();
     }
+    @GetMapping("/getActivated")
+    List<Category> findCategoryActivated() {
+        return this.categoryRepository.findCategoryActivated();
+    }
 
     @PostMapping("/create")
     public Category createCategory(@RequestBody @Valid Category category) throws Exception {
@@ -56,5 +60,6 @@ public class CategoryController {
     public void deleteAddress(@PathVariable("id") Long id) throws Exception{
        this.categoryService.deleteCategory(id);
     }
+
 
 }

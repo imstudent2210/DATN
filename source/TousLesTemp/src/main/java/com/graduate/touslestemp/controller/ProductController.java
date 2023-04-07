@@ -94,5 +94,9 @@ public class ProductController {
     public void deleteProduct(@PathVariable("id") Long id) throws Exception{
         this.productService.delete(id);
     }
+    @GetMapping("/getByStoreId/{id}")
+    List<Product> getByStoreId(@PathVariable("id") Long id) throws Exception {
+        return this.productRepository.getProductByStoreId(id);
+    }
 
 }

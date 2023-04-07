@@ -18,6 +18,6 @@ public class Category {
     private Long id;
     @NotEmpty(message = "Enter category !")
     private String name;
-    private boolean isActivated= true;
+    private boolean isActivated;
 
 }

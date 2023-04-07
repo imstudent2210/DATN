@@ -1,6 +1,7 @@
 package com.graduate.touslestemp.service;
 
 import com.graduate.touslestemp.domain.entity.Category;
+import com.graduate.touslestemp.domain.entity.Product;
 
 import java.util.List;
 
@@ -11,8 +12,10 @@ public interface CategoryService {
 
     Category findCategory(String name);
 
-    Category update(Category category, String name) throws Exception;
+    Category updateByName(Category category, String name) throws Exception;
 
     void deleteCategory(Long id);
+    Category findCategory(Long id);
+    Category update(Category category, Long id) throws Exception;
 
 }

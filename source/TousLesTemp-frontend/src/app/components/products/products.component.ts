@@ -29,7 +29,7 @@ export class ProductsComponent {
   @ViewChild(MatSort) sort?: MatSort;
   @Input() name?: any;
 
-  pId:any;
+  pId: any;
   listProduct?: any;
   item?: any;
   products?: any;
@@ -73,8 +73,8 @@ export class ProductsComponent {
       )
       .subscribe(
         data => {
-          this.listProduct = data
-          console.log(this.listProduct);
+          this.listProduct = data;
+          console.log(this.listProduct.length);
           this.products = new MatTableDataSource<Store>(this.listProduct);
           this.products.sort = this.sort;
           this.products.paginator = this.paginator;
@@ -89,24 +89,11 @@ export class ProductsComponent {
         productId: pId
       }
     }).afterClosed().subscribe(result => {
-      this.service.getProducts()
-        .pipe(
-          map((x: Product[], i) => x.map((product: Product) => this.imageProcessing.createImages(product)))
-        )
-        .subscribe(
-          data => {
-            this.listProduct = data;
-            console.log(this.listProduct);
-
-            console.log("êrr");
-          })
-    });
-
+      this.getProducts();
+    })
   }
 
   ngOnInit(): void {
     this.getProducts();
-
-
   }
 }

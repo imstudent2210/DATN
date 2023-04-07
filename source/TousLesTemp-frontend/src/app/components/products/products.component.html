@@ -81,9 +81,11 @@
         <tr mat-header-row *matHeaderRowDef="columns"></tr>
         <tr mat-row *matRowDef="let row; columns: columns"></tr>
       </table>
+      <mat-divider></mat-divider>
       <mat-paginator [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
         [showFirstLastButtons]="showFirstLastButtons">
       </mat-paginator>
+      <mat-divider></mat-divider>
     </div>
 
   </div>

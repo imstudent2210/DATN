@@ -10,43 +10,42 @@
   </div>
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8">
       <div class="effect my-2" >
         <input class="effect-2" (keyup)="doFilter($event)" type="text" [(ngModel)]="name" placeholder="Tìm kiếm">
         <i class="fa-solid fa-magnifying-glass icon-search"></i>
           <span class="focus-border"></span>
       </div>
-      <button class="btn-1 ms-auto my-2">
+      <button class="btn-1 ms-auto my-2"  [routerLink]="'../create'">
         <i class="fa fa-plus btn-1-icon"></i><span class="btn-1-text">Thêm mới</span>
       </button>
       <table mat-table matSort [dataSource]="categories" class="mat-elevation-z8 table-tlt">
 
         <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef >Loại sản phẩm</th>
+          <th mat-header-cell *matHeaderCellDef >Mã loại sản phẩm</th>
           <td mat-cell *matCellDef="let element"class="col-name-tlt">{{ element.id }}</td>
         </ng-container>
         <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef>Loại</th>
+          <th mat-header-cell *matHeaderCellDef>Tên loại sản phẩm</th>
           <td mat-cell *matCellDef="let element">{{ element.name }}</td>
         </ng-container>
 
-
-
         <ng-container matColumnDef="activated" >
-          <th mat-header-cell *matHeaderCellDef>Kích hoạt</th>
+          <th mat-header-cell *matHeaderCellDef>Trạng thái</th>
           <td mat-cell *matCellDef="let element"  ><span *ngIf="element.activated == true;else x"  >Còn hàng</span>
             <ng-template #x>Hết hàng</ng-template>
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef></th>
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef class="col-action-tlt"></th>
           <td mat-cell *matCellDef="let element">
-            <button mat-mini-fab color="basic" (click)="getCurrentItem(element)">
-             <i class="fa fa-edit"></i>
+            <button mat-mini-fab color="basic" (click)="editCategory(element.id)">
+              <i class="fa fa-edit" style="color:var(--yellow)"></i>
             </button>
-
+          </td>
         </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="columns"></tr>
         <tr  mat-row *matRowDef="let row; columns: columns"></tr>
       </table>

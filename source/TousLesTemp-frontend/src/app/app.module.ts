@@ -50,6 +50,7 @@ import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
     MatButtonModule,
     MatCardModule,
     MatInputModule,
+
   ],
   providers: [
     {

@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Route } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -14,11 +15,7 @@ export class DeleteDialogComponent {
     private toast: NgToastService) { }
 
   pId: any;
-  ngOnInit(): void {
-    this.reciveData();
-    this.productService.getProducts();
 
-  }
   reciveData() {
     console.log(this.data);
     this.pId = this.data.productId;
@@ -31,9 +28,10 @@ export class DeleteDialogComponent {
       }, (error) => {
         this.toast.error({ detail: "Thông báo lỗi", summary: " Không thể xoá sản phẩm!", duration: 3000 })
       }
-    );
+    )
   }
-
-
+  ngOnInit(): void {
+    this.reciveData();
+  }
 }
 

@@ -1,0 +1,38 @@
+<div class="container ">
+  <mat-card>
+    <mat-card-header>
+      <p class="title-page">Cập nhật thông tin loại sản phẩm</p>
+    </mat-card-header>
+    <form class="example-form my-3 mx-3" (ngSubmit)="updateCategory()">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Tên loại sản phẩm</mat-label>
+                <input type="text" matInput [formControl]="namef" [errorStateMatcher]="matcher"
+                  [(ngModel)]="currentCategory.name" name="name">
+                <mat-error *ngIf="namef.hasError('required')">
+                  Vui lòng nhập tên loại sản phẩm
+                </mat-error>
+              </mat-form-field>
+              <mat-slide-toggle name="activated" [(ngModel)]="currentCategory.activated">
+                <span class="slide-toggle">Còn hàng ?</span>
+              </mat-slide-toggle>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+            </div>
+            <div class="d-flex">
+              <button class="btn-1 me-auto my-3">
+                <i class="fa-regular fa-floppy-disk btn-1-icon"></i><span class="btn-1-text">Cập nhật</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+</div>

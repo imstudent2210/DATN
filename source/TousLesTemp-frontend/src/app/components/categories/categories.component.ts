@@ -1,7 +1,8 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Route, Router } from '@angular/router';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { Store } from 'src/app/share/store.module';
 
@@ -10,8 +11,8 @@ import { Store } from 'src/app/share/store.module';
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss']
 })
-export class CategoriesComponent {
-  constructor(private service: CategoriesService){}
+export class CategoriesComponent implements OnInit {
+  constructor(private service: CategoriesService, private route:Router){}
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
@@ -20,7 +21,7 @@ export class CategoriesComponent {
   empty?: any;
   item?:any;
   categories?: any;
-  columns: string[] = ['id','name','activated']
+  columns: string[] = ['id','name','activated','edit']
 
   pageSizeOptions = [5,3, 10, 25];
   showPageSizeOptions = true;
@@ -54,6 +55,12 @@ export class CategoriesComponent {
     this.categories.filter = filterValue;
     console.log(filterValue);
   }
+
+
+  editCategory(cId:any){
+    this.route.navigate(["/home/categories/update", cId]);
+  }
+
 
   ngOnInit(): void {
     this.getCategories();

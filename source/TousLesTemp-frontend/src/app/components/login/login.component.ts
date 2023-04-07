@@ -17,22 +17,30 @@ export class LoginComponent implements OnInit {
   @Output() profile?:string;
 
   username = new FormControl('', [Validators.required]);
+  password = new FormControl('', [Validators.required]);
   hide = true;
   loginData = { username: '', password: '' };
   // GoogleLoginProvider = GoogleLoginProvider;
 
   errror() {
     if (this.username.hasError('required')) {
-      return 'You must enter a value';
+      return 'Tên đăng nhập không được để trống';
     }
-    return this.username.hasError('username') ? 'Not a valid email' : '';
+    return this.username.hasError('username') ? 'Không hợp lệ' : '';
   }
+  errrorPassword() {
+    if (this.password.hasError('required')) {
+      return 'Mật khẩu không được để trống';
+    }
+    return this.password.hasError('password') ? 'Không hợp lệ' : '';
+  }
+
 
   formSubmit() {
     this.login.generateToken(this.loginData).subscribe(
       (data: any) => {
         console.log(data);
-        this.toast.success({detail:"Success Message", summary:"Sign in successfully !", duration:3000})
+        this.toast.success({detail:"Thành công", summary:"Đăng nhập quản trị thành công!", duration:3000})
         this.login.loginToken(data.token);
         this.profile =  this.loginData.username;
         this.login.getCurrentUser().subscribe((user: any) => {
@@ -47,7 +55,7 @@ export class LoginComponent implements OnInit {
       },
       (error) => {
         console.log(error);
-        this.toast.error({detail:"Error Message", summary:"Username or password is incorrect !", duration:3000})
+        this.toast.error({detail:"Lỗi", summary:"Tài khoản không tồn tại !", duration:3000})
       }
     );
   }

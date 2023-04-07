@@ -97,6 +97,14 @@
         }
       )
     }
+    categoriesActivated?:any;
+    getCategoriesActivated(){
+      this.category.getCategorisActivated().subscribe(
+        data => {
+          this.categoriesActivated = data
+        }
+      )
+    }
     stores?: any;
     getStores(): void {
       this.store.getStores().subscribe(
@@ -138,6 +146,7 @@
       this.getCategories();
       this.getStores();
       this.getSize();
+      this.getCategoriesActivated();
     }
   }
 

@@ -10,6 +10,7 @@ import { Store } from 'src/app/share/store.module';
 import { ImageDialogComponent } from './image-dialog/image-dialog.component';
 import { ImageProcessingService } from 'src/app/services/image-processing.service';
 import { map } from 'rxjs';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-products',
@@ -21,16 +22,18 @@ export class ProductsComponent {
     private service: ProductsService,
     private route: Router,
     public imageDialog: MatDialog,
-    private imageProcessing: ImageProcessingService,) { }
+    private imageProcessing: ImageProcessingService,
+    public deleteDialog: MatDialog) { }
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
   @Input() name?: any;
 
+  pId:any;
   listProduct?: any;
   item?: any;
   products?: any;
-  columns: string[] = ['name', 'description', 'price', 'inventory', 'category', 'size', 'store', 'image', 'action']
+  columns: string[] = ['name', 'description', 'price', 'inventory', 'category', 'size', 'store', 'image', 'edit', 'delete']
 
   pageSizeOptions = [5, 10, 25, 50];
   showPageSizeOptions = true;
@@ -80,7 +83,30 @@ export class ProductsComponent {
   }
 
 
+  deleteProduct(pId: number) {
+    this.deleteDialog.open(DeleteDialogComponent, {
+      data: {
+        productId: pId
+      }
+    }).afterClosed().subscribe(result => {
+      this.service.getProducts()
+        .pipe(
+          map((x: Product[], i) => x.map((product: Product) => this.imageProcessing.createImages(product)))
+        )
+        .subscribe(
+          data => {
+            this.listProduct = data;
+            console.log(this.listProduct);
+
+            console.log("êrr");
+          })
+    });
+
+  }
+
   ngOnInit(): void {
     this.getProducts();
+
+
   }
 }

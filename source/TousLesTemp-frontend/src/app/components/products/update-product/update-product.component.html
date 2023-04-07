@@ -10,7 +10,7 @@
             <div class="col-md-12">
               <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Tên sản phẩm</mat-label>
-                <input type="email" matInput [formControl]="namef" [errorStateMatcher]="matcher"
+                <input type="text" matInput [formControl]="namef" [errorStateMatcher]="matcher"
                   [(ngModel)]="currentProduct.name" name="name">
                 <mat-error *ngIf="namef.hasError('required')">
                   Vui lòng nhập tên sản phẩm
@@ -62,10 +62,15 @@
             </div>
           </div>
           <mat-form-field appearance="outline" class="full-width" appearance="outline">
-            <mat-label>Cửa hàng</mat-label>
-            <mat-select [(ngModel)]="currentProduct.store.id" name="store">
-              <mat-option *ngFor="let item of stores" [value]="item.id">{{item.name}}</mat-option>
-            </mat-select>
+
+            <!-- <mat-label>Cửa hàng</mat-label>
+            <input type="email" matInput readonly="true"
+              [(ngModel)]="currentProduct.store.name" name="store"> -->
+              <mat-label>Cửa hàng</mat-label>
+              <mat-select name="size" [(ngModel)]="currentProduct.store.id">
+                <mat-option *ngFor="let item of stores" [value]="item.id">{{item.name}}</mat-option>
+              </mat-select>
+
           </mat-form-field>
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Thông tin chi tiết sản phẩm</mat-label>
@@ -95,3 +100,6 @@
     </form>
   </mat-card>
 </div>
+
+
+

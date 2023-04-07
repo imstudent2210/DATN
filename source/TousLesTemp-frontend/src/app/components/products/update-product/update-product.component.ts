@@ -116,12 +116,12 @@ export class UpdateProductComponent {
       .subscribe(
         (data) => {
           console.log(data);
-          this.toast.success({ detail: "Thông báo thành công", summary: " Đã thêm sản phẩm!", duration: 3000 })
+          this.toast.success({ detail: "Thông báo thành công", summary: " Đã cập nhật sản phẩm!", duration: 3000 })
           this.route.navigate(['home/products/list']);
         },
         (error) => {
           console.log(error);
-          this.toast.error({ detail: "Thông báo lỗi", summary: " Sản phẩm chưa được thêm!", duration: 3000 })
+          this.toast.error({ detail: "Thông báo lỗi", summary: " Sản phẩm chưa được cập nhật!", duration: 3000 })
         }
       )
   }

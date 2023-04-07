@@ -23,6 +23,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { UpdateProductComponent } from './update-product/update-product.component';
 import { ImageDialogComponent } from './image-dialog/image-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MycurrencyPipe,
     CreateProductComponent,
     UpdateProductComponent,
-    ImageDialogComponent
+    ImageDialogComponent,
+    DeleteDialogComponent
   ],
   imports: [
     CommonModule,

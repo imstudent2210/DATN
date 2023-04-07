@@ -35,6 +35,9 @@ export class ProductsService {
     return this.http.post(`${environment.apiUrl}/product/create2`, product);
   }
 
+  deleteProduct(id:any){
+    return this.http.delete(`${environment.apiUrl}/product/delete2/${id}`);
+  }
 
 
 

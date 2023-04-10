@@ -13,5 +13,6 @@ public class StoreDto {
     private String name;
     private String email;
     private String phone;
+    private String addressDetail;
     Address address;
 }

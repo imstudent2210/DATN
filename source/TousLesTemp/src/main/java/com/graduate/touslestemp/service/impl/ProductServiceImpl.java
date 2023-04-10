@@ -99,6 +99,15 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
+    @Override
+    public Product findProduct(String name) {
+        Product local = this.productRepository.findProductByName(name);
+        if (local == null) {
+            System.out.println("Not found this product: " + local);
+            throw new RequestException("Not found : " + local);
+        } else
+            return this.productRepository.findProductByName(name);
+    }
 
     //======================= Upload file image ==============
     @Override

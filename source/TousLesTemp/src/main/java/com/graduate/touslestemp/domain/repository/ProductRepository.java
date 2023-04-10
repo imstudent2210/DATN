@@ -1,6 +1,7 @@
 package com.graduate.touslestemp.domain.repository;
 
 import com.graduate.touslestemp.domain.dto.ProductDto;
+import com.graduate.touslestemp.domain.entity.Address;
 import com.graduate.touslestemp.domain.entity.Product;
 import com.graduate.touslestemp.domain.entity.Store;
 import org.springframework.data.domain.Page;
@@ -22,4 +23,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> filterStoreByCategoryId(@Param("id") Long id);
     @Query("select p from Product p join Store s where p.store.id = s.id and s.id = :id" )
     List<Product> getProductByStoreId(@Param("id") Long id);
+    @Query("select p from Product p where p.name = :name" )
+    Product findProductByName(@Param("name") String name);
 }

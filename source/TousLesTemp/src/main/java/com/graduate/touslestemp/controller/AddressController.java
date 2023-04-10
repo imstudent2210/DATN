@@ -40,11 +40,6 @@ public class AddressController {
         return this.addressService.update(address, addressname);
     }
 
-    // can not work
-//    @DeleteMapping("/delete/{addressname}")
-//    public void deleteAddress( @PathVariable("addressname") Long name ) throws Exception{
-//        addressRepository.deleteById(name);
-//    }
     @DeleteMapping("/delete/{id}")
     public void deleteAddress(@PathVariable("id") Long id) throws Exception{
        this.addressService.deleteAddress(id);

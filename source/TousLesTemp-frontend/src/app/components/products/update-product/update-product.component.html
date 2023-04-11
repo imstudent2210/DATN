@@ -62,10 +62,6 @@
             </div>
           </div>
           <mat-form-field appearance="outline" class="full-width" appearance="outline">
-
-            <!-- <mat-label>Cửa hàng</mat-label>
-            <input type="email" matInput readonly="true"
-              [(ngModel)]="currentProduct.store.name" name="store"> -->
               <mat-label>Cửa hàng</mat-label>
               <mat-select name="size" [(ngModel)]="currentProduct.store.id">
                 <mat-option *ngFor="let item of stores" [value]="item.id">{{item.name}}</mat-option>

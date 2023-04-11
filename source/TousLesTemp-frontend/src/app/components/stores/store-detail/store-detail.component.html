@@ -1,6 +1,85 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>{{currentStore?.name}}</mat-card-title>
+          <mat-card-subtitle>{{currentStore?.email}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions>
+          <button mat-button>Cập nhật</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table mat-table matSort [dataSource]="listProductByStoreId" class="mat-elevation-z8 table-tlt">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Tên sản phẩm</th>
+          <td mat-cell *matCellDef="let element" class="col-name-tlt">{{ element.name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="inventory">
+          <th mat-header-cell *matHeaderCellDef>Số lượng</th>
+          <td mat-cell *matCellDef="let element">{{ element.inventory }}</td>
+        </ng-container>
+        <ng-container matColumnDef="image">
+          <th mat-header-cell *matHeaderCellDef>Ảnh</th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-mini-fab color="basic" (click)="showImages(element)">
+              <i class="fa-solid fa-image"></i>
+            </button>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef>Loại sản phẩm</th>
+          <td mat-cell *matCellDef="let element">{{ element.category.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="size">
+          <th mat-header-cell *matHeaderCellDef>Size</th>
+          <td mat-cell *matCellDef="let element">{{ element.size.size}}</td>
+        </ng-container>
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef class="col-action-tlt"></th>
+          <td mat-cell *matCellDef="let element">
+            <!-- <button mat-mini-fab color="basic">
+              <i class="fa-sharp fa-solid fa-minus" (click)="dec()"></i>
+            </button>
+            <input style="width: 30px;" mat-cell value="{{inventory}}">
 
+            <button mat-mini-fab color="wanrnig" (click)="inc()">
+              <i class="fa-solid fa-plus"></i>
+            </button> -->
+          </td>
+        </ng-container>
+        <!-- <ng-container matColumnDef="save">
+          <th mat-header-cell *matHeaderCellDef class="col-action-tlt"></th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-mini-fab color="wanrnig" (click)="(element.id)">
+              <i class="fa-solid fa-save"></i>
+            </button>
+          </td>
+        </ng-container> -->
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+        [showFirstLastButtons]="showFirstLastButtons">
+      </mat-paginator>
+    </div>
 
+    <div class="col-md-2">
+      <!-- <table mat-table matSort class="mat-elevation-z8 table-tlt">
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef class="col-action-tlt"></th>
+          <td mat-cell *matCellDef="let element" >
+            <button mat-mini-fab color="basic">
+              <i class="fa-solid fa-trash" style="color:red"></i>
+            </button>
+          </td>
+        </ng-container>
+      </table> -->
+    </div>
 
-<button class="btn-1 mx-auto my-2" [routerLink]="'../../../stores/list'">
-  <i class="fa-regular fa-floppy-disk btn-1-icon"></i><span class="btn-1-text">Trở về</span>
-</button>
+  </div>
+</div>

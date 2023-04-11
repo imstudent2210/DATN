@@ -28,7 +28,7 @@ export class UpdateCategoryComponent  implements OnInit{
     activated:""
   }
 
-  getCurrentcategory(id: number): void {
+  getCurrentCategory(id: number): void {
     this.categoriesService.getCategoryById(id)
       .subscribe(
         data => {
@@ -54,12 +54,6 @@ export class UpdateCategoryComponent  implements OnInit{
 
   ngOnInit(){
     this.cId = this.activatedRoute.snapshot.params['cid'];
-    this.getCurrentcategory(this.cId);
-    // this.updateCategory();
-
-
+    this.getCurrentCategory(this.cId);
   }
-
-
-
 }

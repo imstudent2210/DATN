@@ -68,11 +68,11 @@ export const navbarData: INavbarData[] = [
     ],
   },
 
-  {
-    routeLink: 'report',
-    icon: 'fal fa-file-export',
-    label: 'Thống kê',
-  },
+  // {
+  //   routeLink: 'report',
+  //   icon: 'fal fa-file-export',
+  //   label: 'Thống kê',
+  // },
   // {
   //   routeLink: 'account',
   //   icon: 'fad fa-address-card',

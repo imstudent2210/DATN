@@ -1,7 +1,7 @@
 <ngx-ui-loader fgsColor="#FF9900" pbColor="#FF9900" text="Vui lòng đợi" textColor="#FF9900"></ngx-ui-loader>
-<div class="body" [ngClass]="getBodyClass()">
+<div class="body" [ngClass]="getBodyClass()" >
   <div class="sticky-top"><app-navbar></app-navbar></div>
-  <div class="mx-2 my-2">
+  <div class="mx-2 my-2" onload="realtimeClock()">
     <router-outlet></router-outlet>
   </div>
-</div>s
+</div>

@@ -8,12 +8,7 @@ import { HomeGuard } from './guard/home.guard';
 
 const routes: Routes = [
   {
-    path: 'home', component: HomeComponent, data:{breadcrumb: [
-      {
-        label: 'Home',
-        url: ''
-      }
-    ]}, children: [
+    path: 'home', component: HomeComponent, children: [
       { path: 'products', loadChildren: () => import('./components/products/products.module').then(m => m.ProductsModule) },
       { path: 'stores', loadChildren: () => import('./components/stores/stores.module').then(m => m.StoresModule)},
       { path: 'address', loadChildren: () => import('./components/address/address.module').then(m => m.AddressModule)},

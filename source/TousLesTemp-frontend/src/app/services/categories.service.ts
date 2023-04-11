@@ -26,7 +26,4 @@ export class CategoriesService {
   createCategory(category: Category): Observable<any> {
     return this.http.post<Category>(`${environment.apiUrl}/category/create`, category);
   }
-  // getProductsPaging(page:number = 0, size:number = 5):Observable<any>{
-  //   return this.http.get(`${environment.apiUrl}/product/paging?page=` + page.toString()+`&size=` + size.toString());
-  // }
 }

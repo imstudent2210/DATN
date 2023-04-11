@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailSenderServiceImpl implements EmailSendersService {
     private final JavaMailSender mailSender;
+//    @Value("${username}")
+//    private String email;
 
     public EmailSenderServiceImpl(JavaMailSender mailSender) {
         this.mailSender = mailSender;

@@ -33,7 +33,7 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public StaffDto create(Staff staff) throws Exception {
-        if (isExisStore(staff.getName())) {
+        if (isExisStaff(staff.getName())) {
             System.out.println("This staff has already");
             throw new RequestException("This staff has already!");
         } else {
@@ -78,7 +78,7 @@ public class StaffServiceImpl implements StaffService {
             return staffDtos;
         }
     }
-    public boolean isExisStore(String name) {
+    public boolean isExisStaff(String name) {
         Staff checkStaff = staffRepository.findStaffByName(name);
         if (checkStaff != null) {
             return true;

@@ -20,5 +20,7 @@ public class StaffGroup {
     private Long id;
     @NotEmpty(message = "Enter staff group name !")
     private String name;
+    private boolean isActivated = true;
+
 
 }

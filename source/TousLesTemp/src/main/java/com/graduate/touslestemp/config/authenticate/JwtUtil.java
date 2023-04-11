@@ -1,9 +1,9 @@
 package com.graduate.touslestemp.config.authenticate;
 
 import com.graduate.touslestemp.constant.SecurityConstant;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import com.graduate.touslestemp.exception.RequestException;
+import io.jsonwebtoken.*;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -45,7 +45,20 @@ public class JwtUtil {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parserBuilder().setSigningKey(getSignInKey()).build().parseClaimsJws(token).getBody();
+//        return Jwts.parserBuilder().setSigningKey(getSignInKey()).build().parseClaimsJws(token).getBody();
+        Claims claims = null;
+        try{
+            claims = Jwts.parserBuilder().setSigningKey(getSignInKey()).build().parseClaimsJws(token).getBody();
+        }catch (ExpiredJwtException e){
+            throw new RequestException((HttpStatus.UNAUTHORIZED.value()) + " - Token expiration");
+        }catch (UnsupportedJwtException e){
+            throw new RequestException((HttpStatus.UNAUTHORIZED.value()) + " - Token's not supported");
+        }catch (MalformedJwtException e){
+            throw new RequestException((HttpStatus.UNAUTHORIZED.value()) + " - Invalid format 3 part of token ");
+        }catch (SignatureException e){
+            throw new RequestException((HttpStatus.UNAUTHORIZED.value()) + " - Invalid format");
+        }
+        return claims;
     }
 
     private Boolean isTokenExpired(String token) {

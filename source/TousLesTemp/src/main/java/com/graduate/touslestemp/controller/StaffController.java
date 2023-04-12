@@ -5,15 +5,24 @@ import com.graduate.touslestemp.domain.entity.Product;
 import com.graduate.touslestemp.domain.entity.Staff;
 import com.graduate.touslestemp.domain.mapper.StaffMapper;
 import com.graduate.touslestemp.domain.repository.StaffRepository;
+import com.graduate.touslestemp.exception.RequestException;
 import com.graduate.touslestemp.service.StaffService;
+import com.graduate.touslestemp.utils.ExportUtils;
+import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayInputStream;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
@@ -82,4 +91,20 @@ public class StaffController {
         this.staffService.delete(id);
     }
 
+    @GetMapping("/export")
+    public ResponseEntity<InputStreamResource> exportStaffFile() throws Exception {
+        List<Staff> staffList = this.staffRepository.findAll();
+        if(!CollectionUtils.isEmpty(staffList)){
+            String fileName = "Staff Export File "+".xlsx";
+            ByteArrayInputStream inputStream = ExportUtils.exportStaff(staffList,fileName);
+            InputStreamResource inputStreamResource = new InputStreamResource(inputStream);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION,
+                            "attachment; filename = " + URLEncoder.encode(fileName, StandardCharsets.UTF_8))
+                    .contentType(MediaType.parseMediaType("application/vnd.ms-excel;charset=UTF-8"))
+                    .body(inputStreamResource);
+        }else{
+        throw new RequestException("Không thể xuất file");
+        }
+    }
 }

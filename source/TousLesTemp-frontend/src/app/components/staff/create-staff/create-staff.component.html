@@ -1,0 +1,86 @@
+<div class="container ">
+  <mat-card>
+    <mat-card-header>
+      <p class="title-page">Thêm nhân viên mới</p>
+    </mat-card-header>
+    <form class="example-form my-3 mx-3" #staffForm="ngForm" (ngSubmit)="createStaff(staffForm)">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Tên nhân viên</mat-label>
+                <input type="text" matInput [formControl]="namef" [errorStateMatcher]="matcher"
+                  [(ngModel)]="newStaff.name" name="name">
+                <mat-error *ngIf="namef.hasError('required')">
+                  Vui lòng nhập tên nhân viên
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput [(ngModel)]="newStaff.email" name="email"
+                  [formControl]="emailf" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="emailf.hasError('required')">
+                  Vui lòng nhập email
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Nhóm nhân viên</mat-label>
+                <mat-select required [(ngModel)]="newStaff.staffGroup.id" name="staffGroup">
+                  <mat-option *ngFor="let item of staffGroups" [value]="item.id"> {{item.name}}</mat-option>
+                </mat-select>
+
+              </mat-form-field>
+            </div>
+          </div>a
+          <div class="row">
+            <div class="col-md-6">
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Điện thoại</mat-label>
+                <input type="number"  matInput [(ngModel)]="newStaff.phone" name="phone"
+                  [formControl]="phonef" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="phonef.hasError('required')">
+                  Vui lòng nhập điện thoại
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <mat-form-field appearance="outline" class="full-width" appearance="outline">
+            <mat-label>Cửa hàng</mat-label>
+            <mat-select [(ngModel)]="newStaff.store.id" name="store">
+              <mat-option *ngFor="let item of stores" [value]="item.id">{{item.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+        <div class="col-md-4 overflow-auto">
+          <input type="file"
+            style="color:var(--yellow); font-size: 15px;font-weight: 700;font-family: 'Roboto', sans-serif;" multiple
+            value="select" #selectFile (change)="onFileSelected($event)">
+
+          <div class="my-3" *ngFor="let item of newStaff.images; let i = index">
+            <div style="position:relative">
+              <img [src]="item.url" width="350px" height="320px">
+              <button type="button" class="btn-1 me-auto my-2" (click)="removeImage(i)">
+                <i class="fa-solid fa-close btn-1-icon"></i><span class="btn-1-text">Loại bỏ</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="d-flex">
+        <button class="btn-1 mx-auto my-2">
+          <i class="fa-regular fa-floppy-disk btn-1-icon"></i><span class="btn-1-text">Lưu</span>
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>
+

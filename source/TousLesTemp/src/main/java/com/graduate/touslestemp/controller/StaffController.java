@@ -1,6 +1,7 @@
 package com.graduate.touslestemp.controller;
 
 import com.graduate.touslestemp.domain.dto.StaffDto;
+import com.graduate.touslestemp.domain.entity.Product;
 import com.graduate.touslestemp.domain.entity.Staff;
 import com.graduate.touslestemp.domain.mapper.StaffMapper;
 import com.graduate.touslestemp.domain.repository.StaffRepository;
@@ -8,8 +9,10 @@ import com.graduate.touslestemp.service.StaffService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -28,9 +31,12 @@ public class StaffController {
     public ResponseEntity<List<StaffDto>> getAllStaffDTO() {
         return new ResponseEntity<>(staffMapper.toStaffDTOs(staffRepository.findAll()), HttpStatus.OK);
     }
-
+    @GetMapping("/get")
+    public ResponseEntity<List<Staff>> allProduct() {
+        return new ResponseEntity<>(staffRepository.findAll(), HttpStatus.OK);
+    }
     @GetMapping("/get/{id}")
-    public ResponseEntity<StaffDto> getStaffDTO(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<Staff> getStaffDTO(@PathVariable(name = "id") Long id) {
         return new ResponseEntity<>(staffService.find(id), HttpStatus.OK);
     }
 
@@ -58,8 +64,22 @@ public class StaffController {
         return this.staffService.filter(storeid);
     }
 
-//    @GetMapping("/paging")
-//    public PageResponseDTO<?> pagingStoreDTO(Pageable request) {
-//        return staffService.getAllStore(request);
-//    }
+    @PostMapping(value = {"/create2"}, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_OCTET_STREAM_VALUE, })
+    public ResponseEntity<Staff> createStaff(@RequestPart("staff") @Valid Staff staff, @RequestPart("file") MultipartFile[] file) throws Exception {
+        return new ResponseEntity<>(staffService.create2(staff, file), HttpStatus.OK);
+    }
+    @PutMapping(value = "/update2/{id}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_OCTET_STREAM_VALUE, })
+    public ResponseEntity<Staff> updateStaff(@RequestPart("staff") @Valid Staff staff, @PathVariable(name = "id") Long id,  @RequestPart("file") MultipartFile[] file) throws Exception {
+        return new ResponseEntity<>(staffService.update2(staff, id, file), HttpStatus.OK);
+    }
+
+    @GetMapping("/get2/{id}")
+    public ResponseEntity<Staff> getStaffById(@PathVariable(name = "id") Long id) {
+        return new ResponseEntity<>(staffService.find(id), HttpStatus.OK);
+    }
+    @DeleteMapping("/delete2/{id}")
+    public void deleteStaff(@PathVariable("id") Long id) throws Exception{
+        this.staffService.delete(id);
+    }
+
 }

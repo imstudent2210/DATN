@@ -4,8 +4,9 @@ package com.graduate.touslestemp.domain.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+
+
+import java.util.Set;
 
 @Getter
 @Setter
@@ -24,15 +25,21 @@ public class Staff {
     @NotEmpty(message = "Enter staff email !")
     private String email;
     private String phone;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "StaffGroup", referencedColumnName = "staff_group_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private StaffGroup staffGroup;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "Store", referencedColumnName = "store_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Store store;
 
-
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "staff-images",
+            joinColumns = {
+                    @JoinColumn(name = "id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "img_id")
+            })
+    private Set<StaffImage> images;
 }

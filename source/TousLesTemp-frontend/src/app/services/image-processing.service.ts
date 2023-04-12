@@ -10,16 +10,15 @@ export class ImageProcessingService {
 
   constructor(private sanitizer: DomSanitizer) { }
 
-  public createImages(product: Product) {
+  public createImages(product: any) {
     const productImages: any[] = product.images;
-    // console.log(productImages);
     const productImagesToFileHandle: FileHandle[] = [];
 
     for (let index = 0; index < productImages.length; index++) {
       const imageFileData = productImages[index];
       const imageBlog = this.dataURItoBlog(imageFileData.picByte, imageFileData.type);
       const imageFile = new File([imageBlog], imageFileData.name, { type: imageFileData.type });
-      
+
       const finalFileHandle: FileHandle = {
         file: imageFile,
         url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(imageFile))

@@ -27,6 +27,7 @@ export class CreateStoreComponent implements OnInit {
   namef = new FormControl('', [Validators.required]);
   phonef = new FormControl('', [Validators.required]);
   emailf = new FormControl('', [Validators.required]);
+  addressDetailf = new FormControl('', [Validators.required]);
 
   email = new FormControl('', [Validators.required, Validators.email]);
 
@@ -43,6 +44,7 @@ export class CreateStoreComponent implements OnInit {
     email: "",
     phone: "",
     address: { id: 1 },
+    addressDetail:""
     // image: []
   }
   // get list address

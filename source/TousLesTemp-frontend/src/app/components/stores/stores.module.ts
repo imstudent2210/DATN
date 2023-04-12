@@ -17,6 +17,9 @@ import { StoreDetailComponent } from './store-detail/store-detail.component';
 import { MatCardModule } from '@angular/material/card';
 import { CreateStoreComponent } from './create-store/create-store.component';
 import { MatSelectModule } from '@angular/material/select';
+import { UpdateStoreComponent } from './update-store/update-store.component';
+import { MatDialogModule } from '@angular/material/dialog';
+// import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
 
 
 @NgModule({
@@ -24,6 +27,7 @@ import { MatSelectModule } from '@angular/material/select';
     StoresComponent,
     StoreDetailComponent,
     CreateStoreComponent,
+    UpdateStoreComponent,
 
 
   ],
@@ -39,11 +43,8 @@ import { MatSelectModule } from '@angular/material/select';
     Ng2SearchPipeModule,
     MatButtonModule,
     MatCardModule,
-    MatSelectModule
-
-
-
-
+    MatSelectModule,
+    MatDialogModule
   ],
   exports:[],
   providers:[

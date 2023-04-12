@@ -26,7 +26,7 @@ public class Store {
     private String name;
     private String phone;
     private String email;
-
+    private String addressDetail;
     @ManyToOne
     @JoinColumn(name = "Address", referencedColumnName = "address_id")
     private Address address;

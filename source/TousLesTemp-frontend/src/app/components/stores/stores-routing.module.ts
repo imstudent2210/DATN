@@ -4,6 +4,9 @@ import { AppMaterialModule } from 'src/material.module';
 import { StoresComponent } from './stores.component';
 import { StoreDetailComponent } from './store-detail/store-detail.component';
 import { CreateStoreComponent } from './create-store/create-store.component';
+import { UpdateCategoryComponent } from '../categories/update-category/update-category.component';
+import { UpdateStoreComponent } from './update-store/update-store.component';
+import { UpdateProductComponent } from '../products/update-product/update-product.component';
 
 const routes: Routes = [
   {
@@ -14,8 +17,8 @@ const routes: Routes = [
   },
   { path: 'detail/:sid', component: StoreDetailComponent }
   ,
-  { path: 'create', component: CreateStoreComponent }
-
+  { path: 'create', component: CreateStoreComponent },
+  { path: 'update/:sid', component: UpdateStoreComponent },
 ];
 
 @NgModule({

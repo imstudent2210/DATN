@@ -6,4 +6,5 @@ export interface Store{
   address:Address;
   phone?:string;
   email?:string;
+  addressDetail?:string;
 }

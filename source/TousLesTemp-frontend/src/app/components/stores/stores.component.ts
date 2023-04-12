@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StoresService } from 'src/app/services/stores.service';
 import { CustomPaginator } from 'src/app/share/paginator-config';
 import { Store } from 'src/app/share/store.module';
@@ -13,7 +13,8 @@ import { Store } from 'src/app/share/store.module';
   styleUrls: ['./stores.component.scss']
 })
 export class StoresComponent implements OnInit {
-  constructor(private service: StoresService) { }
+  constructor(private service: StoresService, private route: Router) { }
+
   @ViewChild(MatPaginator) paginator?:MatPaginator;
   @ViewChild(MatSort) sort?:MatSort;
   @Input() name?:any;
@@ -21,9 +22,9 @@ export class StoresComponent implements OnInit {
   sId=0;
   listStore?:any;
   stores?:any;
-  columns: string[] = ['name', 'phone', 'email', 'address','action']
+  columns: string[] = ['name', 'phone', 'email', 'addressDetail','address','action']
 
-  pageSizeOptions = [3, 5, 10, 25];
+  pageSizeOptions = [5, 10, 25];
   showPageSizeOptions = true;
   showFirstLastButtons = true;
   setPageSizeOptions(setPageSizeOptionsInput: string) {
@@ -66,13 +67,18 @@ export class StoresComponent implements OnInit {
     this.stores.filter = filterValue;
     console.log(filterValue);
   }
-  getCurrentItem(item:any){
-    console.log(item);
-  }
+  // getCurrentItem(item:any){
+  //   console.log(item);
+  // }
 
   search(){
     this.getStoresByAddress(this.name);
   }
+
+  editStore(sId:any){
+    this.route.navigate(["/home/stores/update", sId]);
+  }
+
   ngOnInit(): void {
     this.getStores();
   }

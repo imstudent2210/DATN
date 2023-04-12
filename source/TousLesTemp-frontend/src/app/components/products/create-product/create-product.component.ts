@@ -129,7 +129,7 @@
         return;
       }
       const productFormData = this.prepareFormData(this.newProduct);
-      this.productService.createProduct2(productFormData).subscribe(
+      this.productService.createProduct(productFormData).subscribe(
         (data) => {
           this.toast.success({ detail: "Thông báo thành công", summary: " Đã thêm sản phẩm!", duration: 3000 })
           this.route.navigate(['home/products/list']);

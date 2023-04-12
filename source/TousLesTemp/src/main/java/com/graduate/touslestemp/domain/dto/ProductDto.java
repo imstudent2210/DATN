@@ -17,7 +17,6 @@ public class ProductDto {
     @Id
     private Long id;
     private String description;
-//    private String image;
     private Integer inventory;
     private String name;
     private Double price;

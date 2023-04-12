@@ -3,6 +3,7 @@ package com.graduate.touslestemp.service;
 import com.graduate.touslestemp.domain.dto.PageResponseDTO;
 import com.graduate.touslestemp.domain.dto.ProductDto;
 import com.graduate.touslestemp.domain.dto.StoreDto;
+import com.graduate.touslestemp.domain.entity.Address;
 import com.graduate.touslestemp.domain.entity.Product;
 import com.graduate.touslestemp.domain.entity.Store;
 import org.springframework.data.domain.Page;
@@ -22,7 +23,7 @@ public interface ProductService {
     List<ProductDto> filter(Long id);
     List<ProductDto> search(String keyword);
 
-
+    Product findProduct(String name);
     //   ============= Upload file image ============
     Product create2( Product product, MultipartFile [] img) throws Exception;
     Product update2(Product product, Long id,MultipartFile [] img ) throws Exception;

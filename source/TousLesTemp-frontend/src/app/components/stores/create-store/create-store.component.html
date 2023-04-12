@@ -28,6 +28,16 @@
             </mat-form-field>
           </div>
           <div class="row">
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Địa chỉ</mat-label>
+              <input type="text" [(ngModel)]="newStore.addressDetail" name="email"
+                matInput placeholder="02 Nguyễn Đình Chiểu" [formControl]="addressDetailf" required>
+                <mat-error *ngIf="addressDetailf.hasError('required')">
+                  Vui lòng nhập thông tin địa chỉ
+                </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row">
             <div class="col-md-6">
               <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Điện thoại</mat-label>
@@ -40,7 +50,7 @@
             </div>
             <div class="col-md-6">
               <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Địa chỉ cửa hàng</mat-label>
+                <mat-label>Chi nhánh</mat-label>
                 <mat-select required [(ngModel)]="newStore.address.id" name="address">
                   <mat-option *ngFor="let item of address" [value]="item.id"> {{item.name}}</mat-option>
                 </mat-select>

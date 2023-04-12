@@ -63,7 +63,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void delete(Long id) {
         productRepository.delete(productRepository.findById(id)
-                .orElseThrow(() -> new RequestException("Can't found this address id: " + id)));
+                .orElseThrow(() -> new RequestException("Không tìm thấy sản phẩm này: " + id)));
     }
 
 
@@ -81,7 +81,7 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductDto> filter(Long id) {
         List<Product> products = this.productRepository.filterStoreByCategoryId(id);
         if (products.isEmpty()) {
-            throw new RequestException("No data!");
+            throw new RequestException("Không có dữ liệu!");
         } else {
             List<ProductDto> productDtos = this.productMapper.toProductDTOs(products);
             return productDtos;
@@ -99,6 +99,15 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
+    @Override
+    public Product findProduct(String name) {
+        Product local = this.productRepository.findProductByName(name);
+        if (local == null) {
+            System.out.println("Không tìm thấy sản phẩm này: " + local);
+            throw new RequestException("Không tìm thấy : " + local);
+        } else
+            return this.productRepository.findProductByName(name);
+    }
 
     //======================= Upload file image ==============
     @Override
@@ -118,7 +127,7 @@ public class ProductServiceImpl implements ProductService {
         try {
             Set<Image> images = imageUpload(img);
             Product local = this.productRepository.findById(id)
-                    .orElseThrow(() -> new RequestException("Can't found this product id: " + id));
+                    .orElseThrow(() -> new RequestException("Không tìm thấy sản phâmr này: " + id));
 
             local.setImages(images);
             ProductDto a = productMapper.toProductDTO(product);

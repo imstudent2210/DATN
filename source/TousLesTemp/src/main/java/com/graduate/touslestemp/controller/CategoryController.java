@@ -2,14 +2,24 @@ package com.graduate.touslestemp.controller;
 
 import com.graduate.touslestemp.domain.entity.Category;
 import com.graduate.touslestemp.domain.entity.Product;
+import com.graduate.touslestemp.domain.entity.Staff;
 import com.graduate.touslestemp.domain.repository.CategoryRepository;
+import com.graduate.touslestemp.exception.RequestException;
 import com.graduate.touslestemp.service.CategoryService;
+import com.graduate.touslestemp.utils.ExportUtils;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.ByteArrayInputStream;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
@@ -61,5 +71,20 @@ public class CategoryController {
        this.categoryService.deleteCategory(id);
     }
 
-
+//    @GetMapping("/export")
+//    public ResponseEntity<InputStreamResource> exportStaffFile() throws Exception {
+//        List<Category> categories = this.categoryRepository.findAll();
+//        if(!CollectionUtils.isEmpty(categories)){
+//            String fileName = "Export File "+".xlsx";
+//            ByteArrayInputStream inputStream = ExportUtils.exportStaff(categories,fileName);
+//            InputStreamResource inputStreamResource = new InputStreamResource(inputStream);
+//            return ResponseEntity.ok()
+//                    .header(HttpHeaders.CONTENT_DISPOSITION,
+//                            "attachment; filename = " + URLEncoder.encode(fileName, StandardCharsets.UTF_8))
+//                    .contentType(MediaType.parseMediaType("application/vnd.ms-excel;charset=UTF-8"))
+//                    .body(inputStreamResource);
+//        }else{
+//            throw new RequestException("Không thể xuất file");
+//        }
+//    }
 }

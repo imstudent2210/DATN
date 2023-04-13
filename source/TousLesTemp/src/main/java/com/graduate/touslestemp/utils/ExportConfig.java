@@ -1,5 +1,7 @@
 package com.graduate.touslestemp.utils;
 
+import com.graduate.touslestemp.domain.entity.Category;
+import com.graduate.touslestemp.domain.entity.Size;
 import com.graduate.touslestemp.domain.entity.Staff;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,17 +24,17 @@ public class ExportConfig {
         staffExport = new ExportConfig();
         staffExport.setSheetIndex(0);
         staffExport.setStartRow(1);
-        staffExport.setDataClass(Staff.class);
+        staffExport.setDataClass(Size.class);
 
         List<CellConfig> staffCellConfig = new ArrayList<>();
 
-        staffCellConfig.add(new CellConfig(0, "id"));
-        staffCellConfig.add(new CellConfig(1, "name"));
-        staffCellConfig.add(new CellConfig(2, "email"));
-        staffCellConfig.add(new CellConfig(3, "phone"));
-        staffCellConfig.add(new CellConfig(4, "StaffGroup"));
-        staffCellConfig.add(new CellConfig(5, "Store"));
-        staffCellConfig.add(new CellConfig(6, "images"));
+        staffCellConfig.add(new CellConfig(0, "size_id"));
+        staffCellConfig.add(new CellConfig(1, "size"));
+//        staffCellConfig.add(new CellConfig(2, "isActivated"));
+//        staffCellConfig.add(new CellConfig(3, "phone"));
+//        staffCellConfig.add(new CellConfig(4, "StaffGroup"));
+//        staffCellConfig.add(new CellConfig(5, "Store"));
+//        staffCellConfig.add(new CellConfig(6, "images"));
 
         staffExport.setCellConfigList(staffCellConfig);
 

@@ -1,5 +1,7 @@
 package com.graduate.touslestemp.utils;
 
+import com.graduate.touslestemp.domain.entity.Category;
+import com.graduate.touslestemp.domain.entity.Size;
 import com.graduate.touslestemp.domain.entity.Staff;
 import com.graduate.touslestemp.exception.RequestException;
 import org.apache.poi.ss.usermodel.*;
@@ -23,7 +25,7 @@ import static com.graduate.touslestemp.utils.FileFactory.PATH_TEMPLATE;
 
 @Component
 public class ExportUtils {
-    public static ByteArrayInputStream exportStaff(List<Staff> staff, String fileName) throws Exception {
+    public static ByteArrayInputStream exportStaff(List<Size> staff, String fileName) throws Exception {
         XSSFWorkbook xssfWorkbook = new XSSFWorkbook();
         File file;
         FileInputStream fileInputStream;
@@ -32,7 +34,6 @@ public class ExportUtils {
             fileInputStream = new FileInputStream(file);
 
         } catch (Exception e) {
-//            throw new RequestException("...");
             file = FileFactory.createFile(fileName, xssfWorkbook);
             fileInputStream = new FileInputStream(file);
 
@@ -48,7 +49,7 @@ public class ExportUtils {
         XSSFCellStyle titleCellStyle = xssfWorkbook.createCellStyle();
         titleCellStyle.setAlignment(HorizontalAlignment.CENTER);
         titleCellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-        titleCellStyle.setFillBackgroundColor(IndexedColors.SKY_BLUE.getIndex());
+//        titleCellStyle.setFillBackgroundColor(IndexedColors.LIGHT_GREEN.index);
         titleCellStyle.setBorderBottom(BorderStyle.MEDIUM);
         titleCellStyle.setBorderLeft(BorderStyle.MEDIUM);
         titleCellStyle.setBorderRight(BorderStyle.MEDIUM);
@@ -74,6 +75,7 @@ public class ExportUtils {
         insertFieldNameAsTitleWorkbook(ExportConfig.staffExport.getCellConfigList(), xssfSheet, titleCellStyle);
 
         insertDataToWorkbook(xssfWorkbook, ExportConfig.staffExport, staff, dataCellStyle);
+
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         xssfWorkbook.write(outputStream);
         outputStream.close();
@@ -128,39 +130,40 @@ public class ExportUtils {
             currnetCell.setCellValue(cellValue);
             sheet.autoSizeColumn(cellConfig.getColumnIndex());
             currnetCell.setCellStyle(xssfCellStyle);
-
-
         }
     }
 
     private static <T> String getCellValue(T data, CellConfig cellConfig, Class staff) {
         String fieldName = cellConfig.getFieldName();
+
         try {
             Field field = getDeclaredField(staff, fieldName);
-            if (ObjectUtils.isEmpty(field)) {
+            if (!ObjectUtils.isEmpty(field)) {
                 field.setAccessible(true);
                 return !ObjectUtils.isEmpty(field.get(data)) ? field.get(data).toString() : "";
             }
             return "";
         } catch (Exception e) {
-            throw new RequestException("...");
+            e.printStackTrace();
+            return "";
         }
     }
 
-    public static Field getDeclaredField(Class staff, String fielName) {
-        if (ObjectUtils.isEmpty(staff) || ObjectUtils.isEmpty(fielName)) {
+    private static Field getDeclaredField(Class staff, String fieldName) {
+        if (ObjectUtils.isEmpty(staff) || ObjectUtils.isEmpty(fieldName)) {
             return null;
         }
         do {
             try {
-                Field field = staff.getDeclaredField(fielName);
+                Field field = staff.getDeclaredField(fieldName);
                 field.setAccessible(true);
                 return field;
 
             } catch (Exception e) {
-                throw new RequestException("...");
+                e.printStackTrace();
             }
 
         } while ((staff = staff.getSuperclass()) != null);
+        return null;
     }
 }

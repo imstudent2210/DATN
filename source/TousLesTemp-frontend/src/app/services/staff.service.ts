@@ -27,4 +27,7 @@ export class StaffService {
   deleteStaff(id:any){
     return this.http.delete(`${environment.apiUrl}/staff/delete2/${id}`);
   }
+  sendmail(email:any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/sendmail`, email);
+  }
 }

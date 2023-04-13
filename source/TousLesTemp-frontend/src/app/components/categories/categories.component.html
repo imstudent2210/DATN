@@ -19,7 +19,10 @@
       <button class="btn-1 ms-auto my-2"  [routerLink]="'../create'">
         <i class="fa fa-plus btn-1-icon"></i><span class="btn-1-text">Thêm mới</span>
       </button>
-      <table mat-table matSort [dataSource]="categories" class="mat-elevation-z8 table-tlt">
+      <button class="btn-1 ms-auto my-2"  (click)="export()">
+        <i class="fa-solid fa-file-excel btn-1-icon"></i><span class="btn-1-text">Xuất Excel</span>
+      </button>
+      <table mat-table matSort [dataSource]="categories" class="mat-elevation-z8 table-tlt" id="categoryExport">
 
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef >Mã loại sản phẩm</th>

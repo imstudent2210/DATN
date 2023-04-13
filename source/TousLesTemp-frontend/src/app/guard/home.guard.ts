@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Route, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LoginService } from '../services/login.service';
 
@@ -7,7 +7,6 @@ import { LoginService } from '../services/login.service';
   providedIn: 'root'
 })
 export class HomeGuard implements CanActivate {
-
 
   constructor(private login:LoginService,private route:Router){}
   canActivate(
@@ -20,7 +19,4 @@ export class HomeGuard implements CanActivate {
       this.route.navigate(['login']);
     return false;
   }
-
-
-
 }

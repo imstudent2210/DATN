@@ -54,17 +54,18 @@ export const navbarData: INavbarData[] = [
     label: 'Nhân viên',
     items: [
       {
+        routeLink: 'staff/create',
+        label: 'Thêm nhân viên',
+      },
+      {
         routeLink: 'staff/list',
         label: 'Thông tin nhân viên',
       },
       {
         routeLink: 'staff/role',
-        label: 'Vị trí',
+        label: 'Nhóm nhân viên',
       },
-      {
-        routeLink: 'staff/create',
-        label: 'Thêm mới',
-      },
+
     ],
   },
 

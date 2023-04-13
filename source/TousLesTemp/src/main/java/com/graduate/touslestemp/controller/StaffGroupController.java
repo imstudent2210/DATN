@@ -48,7 +48,6 @@ public class StaffGroupController {
         return this.staffGroupService.update(staffGroup, id);
     }
 
-
     @DeleteMapping("/delete/{id}")
     public void deleteStaffGroup(@PathVariable("id") Long id) throws Exception{
         this.staffGroupService.deleteStaffGroup(id);

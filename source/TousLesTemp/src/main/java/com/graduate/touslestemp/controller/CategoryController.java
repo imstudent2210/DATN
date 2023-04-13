@@ -70,21 +70,4 @@ public class CategoryController {
     public void deleteAddress(@PathVariable("id") Long id) throws Exception{
        this.categoryService.deleteCategory(id);
     }
-
-//    @GetMapping("/export")
-//    public ResponseEntity<InputStreamResource> exportStaffFile() throws Exception {
-//        List<Category> categories = this.categoryRepository.findAll();
-//        if(!CollectionUtils.isEmpty(categories)){
-//            String fileName = "Export File "+".xlsx";
-//            ByteArrayInputStream inputStream = ExportUtils.exportStaff(categories,fileName);
-//            InputStreamResource inputStreamResource = new InputStreamResource(inputStream);
-//            return ResponseEntity.ok()
-//                    .header(HttpHeaders.CONTENT_DISPOSITION,
-//                            "attachment; filename = " + URLEncoder.encode(fileName, StandardCharsets.UTF_8))
-//                    .contentType(MediaType.parseMediaType("application/vnd.ms-excel;charset=UTF-8"))
-//                    .body(inputStreamResource);
-//        }else{
-//            throw new RequestException("Không thể xuất file");
-//        }
-//    }
 }

@@ -90,21 +90,4 @@ public class StaffController {
     public void deleteStaff(@PathVariable("id") Long id) throws Exception{
         this.staffService.delete(id);
     }
-
-//    @GetMapping("/export")
-//    public ResponseEntity<InputStreamResource> exportStaffFile() throws Exception {
-//        List<Staff> staffList = this.staffRepository.findAll();
-//        if(!CollectionUtils.isEmpty(staffList)){
-//            String fileName = "Staff Export File "+".xlsx";
-//            ByteArrayInputStream inputStream = ExportUtils.exportStaff(staffList,fileName);
-//            InputStreamResource inputStreamResource = new InputStreamResource(inputStream);
-//            return ResponseEntity.ok()
-//                    .header(HttpHeaders.CONTENT_DISPOSITION,
-//                            "attachment; filename = " + URLEncoder.encode(fileName, StandardCharsets.UTF_8))
-//                    .contentType(MediaType.parseMediaType("application/vnd.ms-excel;charset=UTF-8"))
-//                    .body(inputStreamResource);
-//        }else{
-//        throw new RequestException("Không thể xuất file");
-//        }
-//    }
 }

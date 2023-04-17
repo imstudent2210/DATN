@@ -8,11 +8,9 @@ import org.springframework.beans.factory.annotation.Value;
 
 @Service
 public class EmailSenderServiceImpl implements EmailSendersService {
-    @Value("${mymail}")
+    @Value("${username}")
     private String mail;
     private final JavaMailSender mailSender;
-//    @Value("${username}")
-//    private String email;
 
     public EmailSenderServiceImpl(JavaMailSender mailSender) {
         this.mailSender = mailSender;

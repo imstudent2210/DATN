@@ -27,7 +27,12 @@ import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { AgmCoreModule } from '@agm/core';
+import { environment } from './environment/environment.prod';
+import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,13 +59,15 @@ import { AgmCoreModule } from '@agm/core';
     MatCardModule,
     MatInputModule,
     NgxUiLoaderModule,
-    GoogleMapsModule,
-    AgmCoreModule.forRoot({
-      // please get your own API key here:
-      // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
-      apiKey: 'AIzaSyAvcDy5ZYc2ujCS6TTtI3RYX5QmuoV8Ffw'
-    }),
+    // GoogleMapsModule,
+    // AgmCoreModule.forRoot({
+    //   apiKey: 'AIzaSyCGS2odTG4m-VIUOC_3oIoIOn0Ma5AL-4k'
+    // }),
 
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+    // provideFirebaseApp(() => initializeApp( environment.firebaseConfig)),
+    // providerDa(() => getFirestore()),
 
     NgxUiLoaderHttpModule.forRoot({
       showForeground:true

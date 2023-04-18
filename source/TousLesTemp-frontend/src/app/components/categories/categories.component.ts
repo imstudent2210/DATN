@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Route, Router } from '@angular/router';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { Store } from 'src/app/share/store.module';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-categories',
@@ -61,6 +62,14 @@ export class CategoriesComponent implements OnInit {
     this.route.navigate(["/home/categories/update", cId]);
   }
 
+  fileName ="Export.xlsx";
+  export():void{
+    let element = document.getElementById('categoryExport');
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb,ws,'Sheet1');
+    XLSX.writeFile(wb,this.fileName);
+  }
 
   ngOnInit(): void {
     this.getCategories();

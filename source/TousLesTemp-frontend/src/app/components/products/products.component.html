@@ -16,16 +16,20 @@
         <span class="focus-border"></span>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 d-flex">
+      <button class="btn-1 my-2" style="margin-left: 320px;" (click)="export()">
+        <i class="fa-solid fa-file-excel btn-1-icon"></i><span class="btn-1-text">Xuất Excel</span>
+      </button>
       <button class="btn-1 ms-auto my-2" [routerLink]="'../create'">
         <i class="fa fa-plus btn-1-icon"></i><span class="btn-1-text">Thêm mới</span>
       </button>
+
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-12">
-      <table mat-table matSort [dataSource]="products" class="mat-elevation-z8 table-tlt">
+      <table mat-table matSort [dataSource]="products" class="mat-elevation-z8 table-tlt" id="productExport">
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Tên sản phẩm</th>
           <td mat-cell *matCellDef="let element" class="col-name-tlt">{{ element.name }}</td>

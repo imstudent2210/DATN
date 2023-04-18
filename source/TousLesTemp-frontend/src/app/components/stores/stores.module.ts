@@ -19,7 +19,9 @@ import { CreateStoreComponent } from './create-store/create-store.component';
 import { MatSelectModule } from '@angular/material/select';
 import { UpdateStoreComponent } from './update-store/update-store.component';
 import { MatDialogModule } from '@angular/material/dialog';
-// import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { UploadImageComponent } from './upload-image/upload-image.component';
 
 
 @NgModule({
@@ -28,7 +30,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     StoreDetailComponent,
     CreateStoreComponent,
     UpdateStoreComponent,
-
+    UploadImageComponent,
 
   ],
   imports: [
@@ -44,7 +46,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatButtonModule,
     MatCardModule,
     MatSelectModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSlideToggleModule,
+    MatGridListModule,
+
   ],
   exports:[],
   providers:[

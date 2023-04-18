@@ -12,6 +12,7 @@ import { Staff } from 'src/app/share/staff.module';
 import { StaffGroupService } from 'src/app/services/staffgroup.service';
 import { StaffService } from 'src/app/services/staff.service';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { Mail } from 'src/app/share/mail.module';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -117,7 +118,21 @@ export class CreateStaffComponent implements OnInit {
         this.toast.error({ detail: "Thông báo lỗi", summary: " Nhân viên chưa được thêm!", duration: 3000 })
       }
     )
+    this.sendmail.to = this.newStaff.email;
+    this.staffService.sendmail(this.sendmail).subscribe(
+      (data)=>{
+        this.toast.success({ detail: "Thông báo thành công", summary: " Đã gửi thư xác nhận!", duration: 3000 })
+      }
+    )
   }
+
+  sendmail: Mail = {
+    to: "",
+    subject: "Tạo thông tin thành công",
+    message:"To confirm your account, please click here : http://localhost:4200/home/categories/list"
+  }
+
+
 
   //============
   ngOnInit(): void {

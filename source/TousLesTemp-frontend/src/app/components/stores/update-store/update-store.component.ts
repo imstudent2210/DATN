@@ -6,6 +6,8 @@ import { AddressService } from 'src/app/services/address.service';
 import { StoresService } from 'src/app/services/stores.service';
 import { Store } from 'src/app/share/store.module';
 import { MyErrorStateMatcher } from '../create-store/create-store.component';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Observable, finalize } from 'rxjs';
 
 @Component({
   selector: 'app-update-store',
@@ -15,7 +17,7 @@ import { MyErrorStateMatcher } from '../create-store/create-store.component';
 export class UpdateStoreComponent {
   constructor(private addressService: AddressService, private storeService: StoresService,
     private toast: NgToastService, private route: Router,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute,  private storage: AngularFireStorage) { }
   sId = 0;
   matcher = new MyErrorStateMatcher();
   namef = new FormControl('', [Validators.required]);
@@ -24,7 +26,11 @@ export class UpdateStoreComponent {
   addressDetailf = new FormControl('', [Validators.required]);
 
   email = new FormControl('', [Validators.required, Validators.email]);
-
+  private firebasePath = '/uploads';
+  fileUpload?: any[];
+  imageUrl?: string;
+  fireBaseUrl?:string;
+  downloadURL?: Observable<string>;
   getErrorMessage() {
     if (this.email.hasError('required')) {
       return 'Vui lòng nhập email';
@@ -60,6 +66,32 @@ export class UpdateStoreComponent {
       )
   }
 
+  onFileSelected(event:any) {
+    const file = event.target.files[0];
+    const filePath = `${this.firebasePath}/${file.name}`;
+    const fileRef = this.storage.ref(filePath);
+    const uploadTask = this.storage.upload(filePath, file);
+    uploadTask
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          console.log(this.currentStore.image);
+          this.downloadURL.subscribe(url => {
+            if (url) {
+              this.fireBaseUrl = url;
+            }
+            console.log(this.fireBaseUrl);
+            this.currentStore.image = this.fireBaseUrl;
+          });
+        })
+      )
+      .subscribe(url => {
+        if (url) {
+          console.log(url);
+        }
+      });
+  }
 
   //================== Call Api=======================
   updateStore() {

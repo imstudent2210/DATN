@@ -1,4 +1,5 @@
 import { Address } from "./address.module";
+import { FileHandle } from "./file-handle.module";
 
 export interface Store{
   id?:number;
@@ -7,4 +8,6 @@ export interface Store{
   phone?:string;
   email?:string;
   addressDetail?:string;
+  image?:string
+  // image?:FileHandle
 }

@@ -3,7 +3,7 @@
     <mat-card-header>
       <p class="title-page">Thêm cửa hàng mới</p>
     </mat-card-header>
-      <form class="example-form my-3 mx-3" (ngSubmit)="createStore()">
+    <form class="example-form my-3 mx-3" (ngSubmit)="createStore()">
 
       <div class="row">
         <div class="col-md-8">
@@ -22,27 +22,27 @@
           <div class="row">
             <mat-form-field class="full-width" appearance="outline">
               <mat-label>Email</mat-label>
-              <input type="text" [(ngModel)]="newStore.email" name="email"
-                matInput placeholder="pat@example.com" [formControl]="email" required>
+              <input type="text" [(ngModel)]="newStore.email" name="email" matInput placeholder="pat@example.com"
+                [formControl]="email" required>
               <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
           </div>
           <div class="row">
             <mat-form-field class="full-width" appearance="outline">
               <mat-label>Địa chỉ</mat-label>
-              <input type="text" [(ngModel)]="newStore.addressDetail" name="email"
-                matInput placeholder="02 Nguyễn Đình Chiểu" [formControl]="addressDetailf" required>
-                <mat-error *ngIf="addressDetailf.hasError('required')">
-                  Vui lòng nhập thông tin địa chỉ
-                </mat-error>
+              <input type="text" [(ngModel)]="newStore.addressDetail" name="email" matInput
+                placeholder="02 Nguyễn Đình Chiểu" [formControl]="addressDetailf" required>
+              <mat-error *ngIf="addressDetailf.hasError('required')">
+                Vui lòng nhập thông tin địa chỉ
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="row">
             <div class="col-md-6">
               <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Điện thoại</mat-label>
-                <input type="number" matInput [(ngModel)]="newStore.phone" name="phone"
-                  [formControl]="phonef" [errorStateMatcher]="matcher">
+                <input type="number" matInput [(ngModel)]="newStore.phone" name="phone" [formControl]="phonef"
+                  [errorStateMatcher]="matcher">
                 <mat-error *ngIf="phonef.hasError('required')">
                   Vui lòng nhập số điện thoại
                 </mat-error>
@@ -57,6 +57,13 @@
               </mat-form-field>
             </div>
           </div>
+
+        </div>
+        <div class="col-md-4 overflow-auto">
+          <input type="file"
+            style="color:var(--yellow); font-size: 15px;font-weight: 700;font-family: 'Roboto', sans-serif; margin-bottom: 10px;" multiple
+            value="select" (change)="onFileSelected($event)">
+          <img [src]="newStore.image" width="350px" height="280px" name="image">
         </div>
       </div>
       <div class="d-flex">
@@ -67,4 +74,3 @@
     </form>
   </mat-card>
 </div>
-

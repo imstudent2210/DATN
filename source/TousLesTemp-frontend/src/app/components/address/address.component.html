@@ -1,0 +1,17 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-10">
+      <google-map height="90vh" width="950px" [center]="center" [zoom]="zoom" (mapClick)="moveMap($event)"
+      (mapMousemove)="move($event)">
+      <map-marker  #marker="mapMarker" *ngFor="let markerPosition of markerPositions"
+              [position]="markerPosition"
+              [options]="markerOptions"
+              (mapClick)="openInfoWindow(marker)"></map-marker>
+              <map-info-window>Info Window content</map-info-window>
+    </google-map>
+    </div>
+  </div>
+</div>
+
+
+

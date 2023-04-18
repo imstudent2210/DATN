@@ -40,7 +40,7 @@ export class UpdateProductComponent {
     inventory: 0,
     price: 0,
     category: { id: 0 },
-    size: "",
+    size: {id:0},
     store: { id: 0, address: {} },
     images: []
   }

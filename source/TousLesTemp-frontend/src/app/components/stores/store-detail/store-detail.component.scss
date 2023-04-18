@@ -1,3 +1,23 @@
 .mdc-data-table__cell {
   width: 160px;
 }
+.mat-grid-tile{
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+.images-container{
+ position: relative;
+ height: 300px;
+}
+.product-images{
+  max-width: 90%;
+  max-height: 90%;
+  margin:auto;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+

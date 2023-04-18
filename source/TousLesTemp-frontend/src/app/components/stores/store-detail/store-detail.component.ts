@@ -21,7 +21,9 @@ export class StoreDetailComponent implements OnInit {
 
   sId = 0;
   currentStore?: Store;
-  columns: string[] = ['name', 'category', 'image', 'size','inventory', 'action']
+  inventory = 0;
+  update = false;
+  columns: string[] = ['name', 'category', 'image', 'size','inventory']
   pageSizeOptions = [5, 10, 25, 50];
   showPageSizeOptions = true;
   showFirstLastButtons = true;
@@ -67,6 +69,12 @@ export class StoreDetailComponent implements OnInit {
       width: '600px'
     })
 
+}
+dec(){
+  this.inventory = this.inventory-1;
+}
+inc(){
+  this.inventory++;
 }
 
   ngOnInit(): void {

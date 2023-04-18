@@ -30,4 +30,5 @@ public class Store {
     @ManyToOne
     @JoinColumn(name = "Address", referencedColumnName = "address_id")
     private Address address;
+    private String image;
 }

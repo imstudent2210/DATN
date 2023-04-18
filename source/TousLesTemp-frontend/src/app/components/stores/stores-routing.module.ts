@@ -7,6 +7,7 @@ import { CreateStoreComponent } from './create-store/create-store.component';
 import { UpdateCategoryComponent } from '../categories/update-category/update-category.component';
 import { UpdateStoreComponent } from './update-store/update-store.component';
 import { UpdateProductComponent } from '../products/update-product/update-product.component';
+import { UploadImageComponent } from './upload-image/upload-image.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
   ,
   { path: 'create', component: CreateStoreComponent },
   { path: 'update/:sid', component: UpdateStoreComponent },
+  { path: 'upload', component: UploadImageComponent },
 ];
 
 @NgModule({

@@ -15,4 +15,5 @@ public class StoreDto {
     private String phone;
     private String addressDetail;
     Address address;
+    private String image;
 }

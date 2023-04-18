@@ -1,57 +1,62 @@
-import { Component } from '@angular/core';
-interface marker {
-	lat: number;
-	lng: number;
-	label?: string;
-	draggable: boolean;
-}
+import { GoogleMapsAPIWrapper } from '@agm/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MapInfoWindow, MapMarker } from '@angular/google-maps';
+
+// interface marker {
+//   lat: number;
+//   lng: number;
+//   label?: string;
+//   draggable: boolean;
+// }
 
 @Component({
   selector: 'app-address',
   templateUrl: './address.component.html',
   styleUrls: ['./address.component.scss']
 })
-export class AddressComponent {
-  zoom: number = 8;
+export class AddressComponent implements OnInit {
+  constructor() {}
+    ngOnInit(): void {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.center = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        }
+      })
+    }
+    display: any;
+    @ViewChild(MapInfoWindow) infoWindow: MapInfoWindow | undefined;
+    center: google.maps.LatLngLiteral = {
+        lat: 12.238791,
+        lng: 109.196749
+    };
+    zoom = 15;
+    moveMap(event: google.maps.MapMouseEvent) {
+        if (event.latLng != null) this.center = (event.latLng.toJSON());
+    }
+    move(event: google.maps.MapMouseEvent) {
+        if (event.latLng != null) this.display = event.latLng.toJSON();
+    }
 
-  // initial center position for the map
-  lat: number = 12.25308681634095;
-  lng: number = 109.18813488645958;
+    markerOptions: google.maps.MarkerOptions = {
+      draggable: false
+  };
+  markerPositions: google.maps.LatLngLiteral[] = [
+   {
+    lat: 12.238791,
+    lng: 109.196749
+   },
+   {
+    lat:  12.249500,
+    lng: 109.188049
+   }
+  ];
 
-  clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`)
+  addMarker(event: google.maps.MapMouseEvent) {
+      if (event.latLng != null) this.markerPositions.push(event.latLng.toJSON());
   }
+  openInfoWindow(marker: MapMarker) {
+    if (this.infoWindow != undefined) this.infoWindow.open(marker);
+}
 
-  // mapClicked($event: MouseEvent) {
-  //   this.markers.push({
-  //     lat: $event.coords.lat,
-  //     lng: $event.coords.lng,
-  //     draggable: true
-  //   });
-  // }
-
-  markerDragEnd(m: marker, $event: MouseEvent) {
-    console.log('dragEnd', m, $event);
-  }
-
-  markers: marker[] = [
-	  {
-		  lat: 13.710723269085635,
-		  lng: 109.17056322025972,
-		  label: 'A',
-		  draggable: true
-	  },
-	  // {
-		//   lat: 51.373858,
-		//   lng: 7.215982,
-		//   label: 'B',
-		//   draggable: false
-	  // },
-	  // {
-		//   lat: 51.723858,
-		//   lng: 7.895982,
-		//   label: 'C',
-		//   draggable: true
-	  // }
-  ]
 }

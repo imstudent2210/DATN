@@ -51,7 +51,7 @@
       inventory: 0,
       price: 0,
       category: { id: 1 },
-      size: "",
+      size: {id:1},
       store: { id: 1, address: {} },
       images: []
     }

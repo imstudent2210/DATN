@@ -13,7 +13,7 @@ import java.util.List;
 public interface StoreRepository extends JpaRepository<Store, Long> , JpaSpecificationExecutor<Store> {
     Store findStoreByName(String name);
     Page<Store> findAll(Pageable pageable);
-    @Query("select s from Store s where s.name like :name" )
+    @Query("select s from Store s where s.name like :name")
     List<Store> searchStoreByName(@Param("name") String name);
 
     @Query("select s from Store s join Address a where s.address.id = a.id and a.id = :id" )

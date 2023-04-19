@@ -11,6 +11,8 @@ import java.util.List;
 public interface StoreService {
     List<Store> findAll();
     PageResponseDTO<?> getAllStore(Pageable request);
+
+
     StoreDto find(Long id);
     StoreDto create(Store store) throws Exception;
     void delete (Long id);

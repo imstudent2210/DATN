@@ -1,8 +1,9 @@
-package com.graduate.touslestemp.service;
+package com.graduate.touslestemp.service.impl;
 
 import com.graduate.touslestemp.domain.dto.LocalUser;
 import com.graduate.touslestemp.exception.ResourceNotFoundException;
 import com.graduate.touslestemp.domain.entity.User;
+import com.graduate.touslestemp.service.UserService;
 import com.graduate.touslestemp.util.GeneralUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;

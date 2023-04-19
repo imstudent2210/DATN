@@ -1,7 +1,7 @@
 package com.graduate.touslestemp.security.jwt;
 
 import com.graduate.touslestemp.domain.entity.Role;
-import com.graduate.touslestemp.service.LocalUserDetailService;
+import com.graduate.touslestemp.service.impl.LocalUserDetailService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,8 +18,6 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;

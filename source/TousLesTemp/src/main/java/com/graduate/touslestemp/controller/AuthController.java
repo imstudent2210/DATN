@@ -45,14 +45,17 @@ public class AuthController {
 	@Autowired
 	TokenProvider tokenProvider;
 
-	@Autowired
+//	@Autowired
 	private QrDataFactory qrDataFactory;
 
-	@Autowired
+//	@Autowired
 	private QrGenerator qrGenerator;
 
-	@Autowired
+//	@Autowired
 	private CodeVerifier verifier;
+
+	public AuthController() {
+	}
 
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {

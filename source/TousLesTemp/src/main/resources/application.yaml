@@ -16,6 +16,19 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: update
+  security:
+    oauth2:
+      client:
+        registration:
+          facebook:
+            clientId: <your-client-id>
+            clientSecret: <your-client-secret>
+          github:
+            clientId: d5b203b2846697af4f80
+            clientSecret: a40baca8ee68cc01ac5199f8591a641f87974fe2
+        provider:
+          facebook:
+            user-info-uri: https://graph.facebook.com/me?fields=id,name,email,picture
 #  jpa:
 #    properties:
 #      hibernate:
@@ -56,3 +69,13 @@ spring:
     password: ${MAIL_PASSWORD:mcpauyptjfcsjgcq}
     port: '587'
 
+app:
+  auth:
+    tokenExpirationMsec: '864000000'
+    tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
+  oauth2:
+    authorizedRedirectUris: http://localhost:4200/oauth2/redirect,myandroidapp://oauth2/redirect,myiosapp://oauth2/redirect
+logging:
+  level:
+    org:
+      springframework: INFO

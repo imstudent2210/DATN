@@ -280,8 +280,6 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-
-
 .effect-1,
 .effect-2,
 .effect-3 {
@@ -296,7 +294,7 @@ input::-webkit-inner-spin-button {
   left: 0;
   width: 0;
   height: 2px;
-  background-color: #3399FF;
+  background-color:var(--yellow);
   transition: 0.4s;
 }
 
@@ -338,7 +336,7 @@ input::-webkit-inner-spin-button {
   left: 0;
   width: 0;
   height: 100%;
-  background-color: #3399FF;
+  background-color:var(--yellow);
   transition: 0.4s;
 }
 

@@ -1,17 +1,21 @@
 import { GoogleMapsAPIWrapper } from '@agm/core';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { NgToastService } from 'ng-angular-popup';
+import { Observable, map, startWith } from 'rxjs';
 import { GeocodingService } from 'src/app/services/geocoding.service';
+import { StoresService } from 'src/app/services/stores.service';
 import { GeocoderResponse } from 'src/app/share/geocoder-response.model';
 
-// interface marker {
-//   lat: number;
-//   lng: number;
-//   label?: string;
-//   draggable: boolean;
-// }
+export interface PlaceSearchResult {
+  address: string;
+  location?: google.maps.LatLng;
+  imageUrl?: string;
+  iconUrl?: string;
+  name?: string;
+}
 
 @Component({
   selector: 'app-address',
@@ -19,76 +23,25 @@ import { GeocoderResponse } from 'src/app/share/geocoder-response.model';
   styleUrls: ['./address.component.scss']
 })
 export class AddressComponent implements OnInit {
-  //   constructor( ) {}
-  //     ngOnInit(): void {
-  //       navigator.geolocation.getCurrentPosition((position) => {
-  //         this.center = {
-  //           lat: position.coords.latitude,
-  //           lng: position.coords.longitude,
-  //         }
-  //       })
-  //     }
-  //     display: any;
-  //     @ViewChild(MapInfoWindow) infoWindow: MapInfoWindow | undefined;
-  //     center: google.maps.LatLngLiteral = {
-  //         lat: 12.238791,
-  //         lng: 109.196749
-  //     };
-  //     zoom = 15;
-  //     moveMap(event: google.maps.MapMouseEvent) {
-  //         if (event.latLng != null) this.center = (event.latLng.toJSON());
-  //     }
-  //     move(event: google.maps.MapMouseEvent) {
-  //         if (event.latLng != null) this.display = event.latLng.toJSON();
-  //     }
 
-  //     markerOptions: google.maps.MarkerOptions = {
-  //       draggable: false
-  //   };
-  //   markerPositions: google.maps.LatLngLiteral[] = [
-  //    {
-  //     lat: 12.238791,
-  //     lng: 109.196749
-  //    },
-  //    {
-  //     lat:  12.249500,
-  //     lng: 109.188049
-  //    }
-  //   ];
-
-  //   addMarker(event: google.maps.MapMouseEvent) {
-  //       if (event.latLng != null) this.markerPositions.push(event.latLng.toJSON());
-  //   }
-  //   openInfoWindow(marker: MapMarker) {
-  //     if (this.infoWindow != undefined) this.infoWindow.open(marker);
-  // }
-
-  //https://maps.googleapis.com/maps/api/geocode/json?address=${storeAddress}&sensor=false&key=API_KEY
-  constructor(private geocodingService: GeocodingService, private toast: NgToastService) { }
+  constructor(private geocodingService: GeocodingService, private toast: NgToastService,
+    private fb: FormBuilder, private storeService: StoresService, private ngZone: NgZone) { }
 
   @ViewChild(GoogleMap, { static: false }) map!: GoogleMap;
   @ViewChild(MapInfoWindow, { static: false }) infoWindow!: MapInfoWindow;
+  @ViewChild('scroller1') scrollbar!: ElementRef;
 
+  myControl = new FormControl('');
   mapZoom = 15;
-  mapCenter: google.maps.LatLngLiteral = {
-            lat: 12.238791,
-            lng: 109.196749
-        };
-    // mapCenter!: go:{
-    //           lat: 12.238791,
-    //           lng: 109.196749
-    //       };
-    //       center: google.maps.LatLngLiteral = {
-    //                 lat: 12.238791,
-    //                 lng: 109.196749
-    //             };
+  mapCenter!: google.maps.LatLng;
   mapOptions: google.maps.MapOptions = {
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     zoomControl: true,
     scrollwheel: false,
     disableDoubleClickZoom: true,
-    maxZoom: 15,
-    minZoom: 10,
+    maxZoom: 20,
+    minZoom: 15,
+    center: { lat: 12.238791, lng: 109.196749 },
   };
 
   markerInfoContent = '';
@@ -100,10 +53,13 @@ export class AddressComponent implements OnInit {
   geocoderWorking = false;
   geolocationWorking = false;
 
-  address?:any;
+  address?: any;
   formattedAddress?: string | null = null;
   locationCoords?: google.maps.LatLng | null = null;
 
+  reset() {
+    this.address = "";
+  }
   get isWorking(): boolean {
     return this.geolocationWorking || this.geocoderWorking;
   }
@@ -132,7 +88,7 @@ export class AddressComponent implements OnInit {
 
               this.locationCoords = new google.maps.LatLng(point);
 
-              // this.mapCenter = new google.maps.LatLng(point);
+              this.mapCenter = new google.maps.LatLng(point);
               this.map?.panTo(point);
 
               this.address = value.formatted_address;
@@ -174,24 +130,19 @@ export class AddressComponent implements OnInit {
   }
 
   findAddress() {
-    if ( this.address.length === 0) {
+    if (this.address.length === 0) {
       return;
     }
-
     this.geocoderWorking = true;
-    this.geocodingService
-      .getLocation(this.address)
+
+    this.geocodingService.getLocation(this.address)
       .subscribe(
         (response: GeocoderResponse) => {
-
           if (response.status === 'OK' && response.results.length) {
             const location = response.results[0];
             const loc: any = location.geometry.location;
-
             this.locationCoords = new google.maps.LatLng(loc.lat, loc.lng);
-
-            // this.mapCenter = location.geometry.location;
-
+            this.mapCenter = location.geometry.location;
             setTimeout(() => {
               if (this.map !== undefined) {
                 this.map.panTo(location.geometry.location);
@@ -207,7 +158,45 @@ export class AddressComponent implements OnInit {
               animation: google.maps.Animation.DROP,
             };
           } else {
-            this.toast.error({ detail: "Thông báo lỗi", summary: " Sản phẩm chưa được cập nhật!", duration: 3000 })
+            this.toast.error({ detail: "Thông báo lỗi", summary: " Lỗi!", duration: 3000 })
+
+          }
+        },
+        (err: HttpErrorResponse) => {
+          console.error('Geocoder error', err);
+        }
+      )
+      .add(() => {
+        this.geocoderWorking = false;
+      });
+  }
+
+  findAddres2(addressDetail:any) {
+    this.geocoderWorking = true;
+    this.geocodingService.getLocation(addressDetail)
+      .subscribe(
+        (response: GeocoderResponse) => {
+          if (response.status === 'OK' && response.results.length) {
+            const location = response.results[0];
+            const loc: any = location.geometry.location;
+            this.locationCoords = new google.maps.LatLng(loc.lat, loc.lng);
+            this.mapCenter = location.geometry.location;
+            setTimeout(() => {
+              if (this.map !== undefined) {
+                this.map.panTo(location.geometry.location);
+              }
+            }, 500);
+
+            this.address = location.formatted_address;
+            this.formattedAddress = location.formatted_address;
+            this.markerInfoContent = location.formatted_address;
+
+            this.markerOptions = {
+              draggable: true,
+              animation: google.maps.Animation.DROP,
+            };
+          } else {
+            this.toast.error({ detail: "Thông báo lỗi", summary: " Lỗi!", duration: 3000 })
 
           }
         },
@@ -236,7 +225,7 @@ export class AddressComponent implements OnInit {
 
             this.locationCoords = new google.maps.LatLng(point);
 
-            // this.mapCenter = new google.maps.LatLng(point);
+            this.mapCenter = new google.maps.LatLng(point);
             this.map?.panTo(point);
 
             this.address = value.formatted_address;
@@ -255,7 +244,77 @@ export class AddressComponent implements OnInit {
         this.geocoderWorking = false;
       });
   }
-   ngOnInit(): void {
 
+  filteredOptions?: Observable<string[]>;
+  options: string[] = [];
+
+  ngOnInit() {
+    this.address = this.inputField;
+    this.getListStore();
+
+    const div = this.scrollbar.nativeElement as HTMLDivElement;
+    div.addEventListener('mouseover', e => {
+      console.log('Mouse Over');
+    });
+    div.addEventListener('mouseout', e => {
+      console.log('Mouse Out');
+    });
+  }
+
+
+  @ViewChild('inputField')
+  inputField!: ElementRef;
+
+
+  @Output() placeChanged = new EventEmitter<PlaceSearchResult>();
+  autocomplete!: google.maps.places.Autocomplete;
+  listener: any;
+
+  ngAfterViewInit() {
+    this.autocomplete = new google.maps.places.Autocomplete(
+      this.inputField.nativeElement
+    );
+
+    this.autocomplete.addListener('place_changed', () => {
+      this.ngZone.run(() => {
+        const place = this.autocomplete?.getPlace();
+        const result: PlaceSearchResult = {
+          address: this.inputField.nativeElement.value,
+          name: place?.name,
+          location: place?.geometry?.location,
+          imageUrl: this.getPhotoUrl(place),
+          iconUrl: place?.icon,
+        };
+
+        this.placeChanged.emit(result);
+      });
+    });
+
+  }
+
+  listStore?:any;
+
+  getListStore(){
+    this.storeService.getStores().subscribe(
+      data => {
+        this.listStore = data
+        console.log(this.listStore);
       }
+    )
+  }
+
+
+  getPhotoUrl(
+    place: google.maps.places.PlaceResult | undefined
+  ): string | undefined {
+    return place?.photos && place?.photos.length > 0
+      ? place?.photos[0].getUrl({ maxWidth: 500 })
+      : undefined;
+  }
+
+  ngOnDestroy() {
+    if (this.autocomplete) {
+      google.maps.event.clearInstanceListeners(this.autocomplete);
+    }
+  }
 }

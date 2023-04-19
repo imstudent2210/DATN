@@ -1,56 +1,72 @@
 <div class="container-fluid">
+  <!-- <div class="row">
+    <div class="col-md-10">
+      <google-map height="90vh" width="950px" [center]="center" [zoom]="zoom" (mapClick)="moveMap($event)"
+      (mapMousemove)="move($event)">
+      <map-marker  #marker="mapMarker" *ngFor="let markerPosition of markerPositions"
+              [position]="markerPosition"
+              [options]="markerOptions"
+              (mapClick)="openInfoWindow(marker)"></map-marker>
+              <map-info-window>Info Window content</map-info-window>
+    </google-map>
+    </div>
+  </div> -->
+
+
   <div class="row">
-    <div class="col-md-12">
-      <div class="row">
-        <div class="effect my-2">
-          <input class="effect-3" [disabled]="isWorking" #inputField [(ngModel)]="address"
-            (keydown.enter)="findAddress()" type="text" placeholder="Địa chỉ cửa hàng">
-          <i class="fa-solid fa-close icon-search" (click)="reset()"></i>
-          <span class="focus-border"></span>
+    <div class="row">
+      <div class="col col-md-8 offset-md-2">
+        <div class="row">
+          <div class="col pr-0">
+            <input type="search" class="form-control" [(ngModel)]="address" (keydown.enter)="findAddress()" placeholder="Enter an address here" [disabled]="isWorking">
+          </div>
+          <div class="col-auto ml-auto">
+            <button class="btn btn-primary mr-1" (click)="findAddress()" [disabled]="isWorking || !address?.length">
+              <i class="bi bi-map mr-md-1"></i> <span class="d-none d-md-inline-block">Find address</span>
+            </button>
+            <button type="button" class="btn btn-primary" (click)="getCurrentLocation()" [disabled]="isWorking">
+              <i class="bi bi-geo mr-md-1"></i> <span class="d-none d-md-inline-block">Find me</span>
+            </button>
+          </div>
         </div>
-        <button class="btn-1 ms-auto my-2" (click)="findAddress()" [disabled]="isWorking || !address?.length">
-          <i class="fa-solid fa-magnifying-glass btn-1-icon"></i><span class="btn-1-text">Tìm kiếm</span>
-        </button>
-        <button class="btn-1 ms-auto my-2" (click)="getCurrentLocation()" [disabled]="isWorking">
-          <i class="fad fa-map-marker-alt btn-1-icon"></i><span class="btn-1-text">Vị trí của tôi</span>
-        </button>
-      </div>
-      <hr>
-      <div class="row">
-        <div class="col-12 col-md-4 pr-md-0">
-          <!-- <div id="info" class="shadow-sm rounded border p-3 h-100">
-              <h5>Địa chỉ</h5>
+
+        <hr>
+
+        <div class="row">
+          <div class="col-12 col-md-6 pr-md-0">
+            <div id="info" class="shadow-sm rounded border p-3 h-100">
+              <h5>Formatted Address</h5>
               <p>
                 {{ formattedAddress?.length ? formattedAddress : 'N/A' }}
               </p>
-              <h5>Thông tin vị trí</h5>
+              <h5>Coordinates</h5>
               <p class="mb-0">
-                Vĩ độ: {{ locationCoords ? locationCoords.lat() : 'N/A' }}<br>
-                Kinh độ: {{ locationCoords ? locationCoords.lng() : 'N/A' }}
+                Latitude: {{ locationCoords ? locationCoords.lat() : 'N/A' }}<br>
+                Longitude: {{ locationCoords ? locationCoords.lng() : 'N/A' }}
               </p>
-            </div> -->
-          <div class="scrollbar" #scrollbar>
-            <mat-list>
-              <div mat-subheader>Cửa hàng</div>
-              <mat-list-item *ngFor="let store of listStore" (click)="findAddres2(store.addressDetail)">
-                <div matListItemTitle>{{store.name}}</div>
-                <div matListItemLine>{{store.addressDetail}}</div>
-              </mat-list-item>
-
-            </mat-list>
+            </div>
           </div>
-        </div>
-        <div class="col-12 col-md-8">
-          <div class="google_map_container shadow-sm rounded mt-3 mt-md-0">
-            <google-map width="100%" [zoom]="mapZoom" [center]="mapCenter" [options]="mapOptions">
-              <map-marker #marker="mapMarker" [position]="mapCenter" [options]="markerOptions"
-                (mapClick)="openInfoWindow(marker)" (mapDragend)="onMapDragEnd($event)">
-              </map-marker>
-              <map-info-window>{{ markerInfoContent }}</map-info-window>
-            </google-map>
+          <div class="col-12 col-md-6">
+            <div class="google_map_container shadow-sm rounded mt-3 mt-md-0">
+              <google-map [zoom]="mapZoom" [center]="mapCenter" [options]="mapOptions">
+                <map-marker
+                  #marker="mapMarker"
+                  [position]="mapCenter"
+                  [options]="markerOptions"
+                  (mapClick)="openInfoWindow(marker)"
+                  (mapDragend)="onMapDragEnd($event)">
+                </map-marker>
+                <map-info-window>{{ markerInfoContent }}</map-info-window>
+              </google-map>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
+
+
+

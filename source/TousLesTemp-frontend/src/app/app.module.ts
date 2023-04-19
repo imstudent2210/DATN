@@ -59,8 +59,16 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     MatCardModule,
     MatInputModule,
     NgxUiLoaderModule,
+    // GoogleMapsModule,
+    // AgmCoreModule.forRoot({
+    //   apiKey: 'AIzaSyCGS2odTG4m-VIUOC_3oIoIOn0Ma5AL-4k'
+    // }),
+
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    // provideFirebaseApp(() => initializeApp( environment.firebaseConfig)),
+    // providerDa(() => getFirestore()),
+
     NgxUiLoaderHttpModule.forRoot({
       showForeground:true
     })

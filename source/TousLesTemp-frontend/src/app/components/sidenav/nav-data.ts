@@ -86,7 +86,7 @@ export const navbarData: INavbarData[] = [
     label: 'Địa chỉ',
     items: [
       {
-        routeLink: 'address/map',
+        routeLink: 'address/list',
         label: 'Tấc cả chi nhánh',
       },
       {

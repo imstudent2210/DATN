@@ -1,5 +1,5 @@
 import { GoogleMapsAPIWrapper } from '@agm/core';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { NgToastService } from 'ng-angular-popup';
@@ -64,31 +64,22 @@ export class AddressComponent implements OnInit {
   // }
 
   //https://maps.googleapis.com/maps/api/geocode/json?address=${storeAddress}&sensor=false&key=API_KEY
-  constructor(private geocodingService: GeocodingService, private toast: NgToastService) { }
+  constructor(private geocodingService: GeocodingService, private toast: NgToastService,
+    private http: HttpClient) { }
 
   @ViewChild(GoogleMap, { static: false }) map!: GoogleMap;
   @ViewChild(MapInfoWindow, { static: false }) infoWindow!: MapInfoWindow;
 
   mapZoom = 15;
-  mapCenter: google.maps.LatLngLiteral = {
-            lat: 12.238791,
-            lng: 109.196749
-        };
-    // mapCenter!: go:{
-    //           lat: 12.238791,
-    //           lng: 109.196749
-    //       };
-    //       center: google.maps.LatLngLiteral = {
-    //                 lat: 12.238791,
-    //                 lng: 109.196749
-    //             };
+  mapCenter!: google.maps.LatLng;
   mapOptions: google.maps.MapOptions = {
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     zoomControl: true,
     scrollwheel: false,
     disableDoubleClickZoom: true,
-    maxZoom: 15,
-    minZoom: 10,
+    maxZoom: 20,
+    minZoom: 15,
+    center: { lat: 12.238791, lng: 109.196749 },
   };
 
   markerInfoContent = '';
@@ -100,10 +91,13 @@ export class AddressComponent implements OnInit {
   geocoderWorking = false;
   geolocationWorking = false;
 
-  address?:any;
+  address?: any;
   formattedAddress?: string | null = null;
   locationCoords?: google.maps.LatLng | null = null;
 
+  reset(){
+    this.address = "";
+  }
   get isWorking(): boolean {
     return this.geolocationWorking || this.geocoderWorking;
   }
@@ -132,7 +126,7 @@ export class AddressComponent implements OnInit {
 
               this.locationCoords = new google.maps.LatLng(point);
 
-              // this.mapCenter = new google.maps.LatLng(point);
+              this.mapCenter = new google.maps.LatLng(point);
               this.map?.panTo(point);
 
               this.address = value.formatted_address;
@@ -174,24 +168,19 @@ export class AddressComponent implements OnInit {
   }
 
   findAddress() {
-    if ( this.address.length === 0) {
+    if (this.address.length === 0) {
       return;
     }
-
     this.geocoderWorking = true;
-    this.geocodingService
-      .getLocation(this.address)
+
+    this.geocodingService.getLocation(this.address)
       .subscribe(
         (response: GeocoderResponse) => {
-
           if (response.status === 'OK' && response.results.length) {
             const location = response.results[0];
             const loc: any = location.geometry.location;
-
             this.locationCoords = new google.maps.LatLng(loc.lat, loc.lng);
-
-            // this.mapCenter = location.geometry.location;
-
+            this.mapCenter = location.geometry.location;
             setTimeout(() => {
               if (this.map !== undefined) {
                 this.map.panTo(location.geometry.location);
@@ -207,7 +196,7 @@ export class AddressComponent implements OnInit {
               animation: google.maps.Animation.DROP,
             };
           } else {
-            this.toast.error({ detail: "Thông báo lỗi", summary: " Sản phẩm chưa được cập nhật!", duration: 3000 })
+            this.toast.error({ detail: "Thông báo lỗi", summary: " Lỗi!", duration: 3000 })
 
           }
         },
@@ -236,7 +225,7 @@ export class AddressComponent implements OnInit {
 
             this.locationCoords = new google.maps.LatLng(point);
 
-            // this.mapCenter = new google.maps.LatLng(point);
+            this.mapCenter = new google.maps.LatLng(point);
             this.map?.panTo(point);
 
             this.address = value.formatted_address;
@@ -255,7 +244,7 @@ export class AddressComponent implements OnInit {
         this.geocoderWorking = false;
       });
   }
-   ngOnInit(): void {
+  ngOnInit(): void {
 
-      }
+  }
 }

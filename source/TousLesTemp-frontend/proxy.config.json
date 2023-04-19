@@ -1,0 +1,7 @@
+{
+  "/maps/*": {
+      "target": "https://maps.google.com",
+      "secure": false,
+      "logLevel": "debug"
+  }
+}

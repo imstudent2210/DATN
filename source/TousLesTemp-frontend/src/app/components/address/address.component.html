@@ -1,24 +1,24 @@
 <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="row">
-          <div class="effect my-2">
-            <input class="effect-3" [disabled]="isWorking" [(ngModel)]="address" (keydown.enter)="findAddress()"
-              type="text" placeholder="Địa chỉ cửa hàng">
-            <i class="fa-solid fa-close icon-search" (click)="reset()"></i>
-            <span class="focus-border"></span>
-          </div>
-          <button class="btn-1 ms-auto my-2" (click)="findAddress()" [disabled]="isWorking || !address?.length">
-            <i class="fa-solid fa-magnifying-glass btn-1-icon"></i><span class="btn-1-text">Tìm kiếm</span>
-          </button>
-          <button class="btn-1 ms-auto my-2" (click)="getCurrentLocation()" [disabled]="isWorking">
-            <i class="fa-solid fa-magnifying-glass btn-1-icon"></i><span class="btn-1-text">Vị trí của tôi</span>
-          </button>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="effect my-2">
+          <input class="effect-3" [disabled]="isWorking" #inputField [(ngModel)]="address"
+            (keydown.enter)="findAddress()" type="text" placeholder="Địa chỉ cửa hàng">
+          <i class="fa-solid fa-close icon-search" (click)="reset()"></i>
+          <span class="focus-border"></span>
         </div>
-        <hr>
-        <div class="row">
-          <div class="col-12 col-md-4 pr-md-0">
-            <div id="info" class="shadow-sm rounded border p-3 h-100">
+        <button class="btn-1 ms-auto my-2" (click)="findAddress()" [disabled]="isWorking || !address?.length">
+          <i class="fa-solid fa-magnifying-glass btn-1-icon"></i><span class="btn-1-text">Tìm kiếm</span>
+        </button>
+        <button class="btn-1 ms-auto my-2" (click)="getCurrentLocation()" [disabled]="isWorking">
+          <i class="fad fa-map-marker-alt btn-1-icon"></i><span class="btn-1-text">Vị trí của tôi</span>
+        </button>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-12 col-md-4 pr-md-0">
+          <!-- <div id="info" class="shadow-sm rounded border p-3 h-100">
               <h5>Địa chỉ</h5>
               <p>
                 {{ formattedAddress?.length ? formattedAddress : 'N/A' }}
@@ -28,20 +28,29 @@
                 Vĩ độ: {{ locationCoords ? locationCoords.lat() : 'N/A' }}<br>
                 Kinh độ: {{ locationCoords ? locationCoords.lng() : 'N/A' }}
               </p>
-            </div>
+            </div> -->
+          <div class="scrollbar" #scrollbar>
+            <mat-list>
+              <div mat-subheader>Cửa hàng</div>
+              <mat-list-item *ngFor="let store of listStore" (click)="findAddres2(store.addressDetail)">
+                <div matListItemTitle>{{store.name}}</div>
+                <div matListItemLine>{{store.addressDetail}}</div>
+              </mat-list-item>
+
+            </mat-list>
           </div>
-          <div class="col-12 col-md-8">
-            <div class="google_map_container shadow-sm rounded mt-3 mt-md-0">
-              <google-map width="100%" [zoom]="mapZoom" [center]="mapCenter" [options]="mapOptions">
-                <map-marker #marker="mapMarker" [position]="mapCenter" [options]="markerOptions"
-                  (mapClick)="openInfoWindow(marker)" (mapDragend)="onMapDragEnd($event)">
-                </map-marker>
-                <map-info-window>{{ markerInfoContent }}</map-info-window>
-              </google-map>
-            </div>
+        </div>
+        <div class="col-12 col-md-8">
+          <div class="google_map_container shadow-sm rounded mt-3 mt-md-0">
+            <google-map width="100%" [zoom]="mapZoom" [center]="mapCenter" [options]="mapOptions">
+              <map-marker #marker="mapMarker" [position]="mapCenter" [options]="markerOptions"
+                (mapClick)="openInfoWindow(marker)" (mapDragend)="onMapDragEnd($event)">
+              </map-marker>
+              <map-info-window>{{ markerInfoContent }}</map-info-window>
+            </google-map>
           </div>
         </div>
       </div>
     </div>
   </div>
-
+</div>

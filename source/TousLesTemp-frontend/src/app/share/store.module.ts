@@ -9,5 +9,4 @@ export interface Store{
   email?:string;
   addressDetail?:string;
   image?:string
-  // image?:FileHandle
 }

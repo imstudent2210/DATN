@@ -4,11 +4,6 @@ package com.graduate.touslestemp.domain.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 @Setter

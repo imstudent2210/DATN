@@ -9,8 +9,9 @@ import { StoresService } from 'src/app/services/stores.service';
 import { FileHandle } from 'src/app/share/file-handle.module';
 import { Staff } from 'src/app/share/staff.module';
 import { MyErrorStateMatcher } from '../create-staff/create-staff.component';
-import { map } from 'rxjs';
+import { Observable, finalize, map } from 'rxjs';
 import { ImageProcessingService } from 'src/app/services/image-processing.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-update-staff',
@@ -18,14 +19,19 @@ import { ImageProcessingService } from 'src/app/services/image-processing.servic
   styleUrls: ['./update-staff.component.scss']
 })
 export class UpdateStaffComponent implements OnInit {
-constructor(private store: StoresService,
-  private toast: NgToastService, private sanitizer: DomSanitizer,
-  private route: Router, private activatedRoute: ActivatedRoute,
-  private staffGroupService: StaffGroupService,private imageProcessing: ImageProcessingService,
-  private staffService: StaffService){}
+  constructor(private store: StoresService,
+    private toast: NgToastService, private sanitizer: DomSanitizer,
+    private route: Router, private activatedRoute: ActivatedRoute,
+    private staffGroupService: StaffGroupService, private imageProcessing: ImageProcessingService,
+    private staffService: StaffService, private storage: AngularFireStorage) { }
 
   stId = 0;
 
+  private firebasePath = '/uploads/staff';
+  fileUpload?: any[];
+  imageUrl?: string;
+  fireBaseUrl?: string;
+  downloadURL?: Observable<string>;
 
   matcher = new MyErrorStateMatcher();
   phonef = new FormControl('', [Validators.required]);
@@ -39,38 +45,34 @@ constructor(private store: StoresService,
     phone: "",
     store: { id: 1, address: {} },
     staffGroup: { id: 1 },
-    images: []
+    image: ""
   }
 
   onFileSelected(event: any) {
-    if (event.target.files) {
-      const file = event.target.files[0];
-      const fileHandle: FileHandle = {
-        file: file,
-        url: this.sanitizer.bypassSecurityTrustUrl(
-          window.URL.createObjectURL(file)
-        )
-      }
-      this.currentStaff.images?.push(fileHandle);
-    }
-  }
-  prepareFormData(staff: Staff): FormData {
-    const formData = new FormData();
-    formData.append(
-      'staff',
-      new Blob([JSON.stringify(staff)], { type: 'application/json' })
-    );
-    for (let index = 0; index < staff.images.length; index++) {
-      formData.append(
-        'file',
-        staff.images[index].file,
-        staff.images[index].file.name
-      );
-    }
-    return formData;
-  }
-  removeImage(index: number) {
-    this.currentStaff.images.splice(index, 1)
+    const file = event.target.files[0];
+    const filePath = `${this.firebasePath}/${file.name}`;
+    const fileRef = this.storage.ref(filePath);
+    const uploadTask = this.storage.upload(filePath, file);
+    uploadTask
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          console.log(this.currentStaff.image);
+          this.downloadURL.subscribe(url => {
+            if (url) {
+              this.fireBaseUrl = url;
+            }
+            console.log(this.fireBaseUrl);
+            this.currentStaff.image = this.fireBaseUrl;
+          });
+        })
+      )
+      .subscribe(url => {
+        if (url) {
+          console.log(url);
+        }
+      });
   }
 
   stores?: any;
@@ -95,11 +97,6 @@ constructor(private store: StoresService,
   }
   getCurrentStaff(id: number): void {
     this.staffService.getStaffById(id)
-      .pipe(
-        map((x: Staff) => {
-          return this.imageProcessing.createImages(x);
-        })
-      )
       .subscribe(
         data => {
           this.currentStaff = data
@@ -107,14 +104,13 @@ constructor(private store: StoresService,
       )
   }
 
-  updateStaff(staffForm: NgForm) {
+  updateStaff() {
     if (this.currentStaff.name == '' || this.currentStaff.name == null || this.currentStaff.phone == ''
       || this.currentStaff.phone == null || this.currentStaff.email == '' || this.currentStaff.email == null) {
       this.toast.error({ detail: "Thông báo lỗi", summary: "Vui lòng nhập đủ thông tin!", duration: 3000 })
       return;
     }
-    const staffFormData = this.prepareFormData(this.currentStaff);
-    this.staffService.updateStaff(staffFormData, this.stId).subscribe(
+    this.staffService.updateStaff(this.currentStaff, this.stId).subscribe(
       (data) => {
         this.toast.success({ detail: "Thông báo thành công", summary: " Đã cập nhật!", duration: 3000 })
         this.route.navigate(['home/staff/list']);

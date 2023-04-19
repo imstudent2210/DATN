@@ -33,7 +33,7 @@ export class CreateStoreComponent implements OnInit {
 
   email = new FormControl('', [Validators.required, Validators.email]);
 
-  private firebasePath = '/uploads';
+  private firebasePath = '/uploads/store';
 
   fileUpload?: any[];
   imageUrl?: string;
@@ -111,7 +111,7 @@ export class CreateStoreComponent implements OnInit {
         }
       });
   }
- 
+
 
 //=========================================
   ngOnInit(): void {

@@ -47,16 +47,16 @@ export class StaffComponent implements OnInit {
       this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
     }
   }
-  showImages(staff: Staff) {
-    console.log(staff);
-    this.imageDialog.open(ImageDialogComponent, {
-      data: {
-        images: staff.images
-      },
-      height: '400px',
-      width: '600px'
-    })
-  }
+  // showImages(staff: Staff) {
+  //   console.log(staff);
+  //   this.imageDialog.open(ImageDialogComponent, {
+  //     data: {
+  //       images: staff.images
+  //     },
+  //     height: '400px',
+  //     width: '600px'
+  //   })
+  // }
   editProduct(stId: any) {
     this.route.navigate(["/home/staff/update", stId]);
   }
@@ -76,9 +76,6 @@ export class StaffComponent implements OnInit {
   }
   getStaff(): void {
     this.staffService.getStaff()
-      .pipe(
-        map((x: Staff[], i) => x.map((staff: Staff) => this.imageProcessing.createImages(staff)))
-      )
       .subscribe(
         data => {
           this.listStaff = data;

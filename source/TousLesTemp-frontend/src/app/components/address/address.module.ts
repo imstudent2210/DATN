@@ -1,31 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { AddressRoutingModule } from './address-routing.module';
 import { AddressComponent } from './address.component';
+import { AgmCoreModule } from '@agm/core';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatTableModule } from '@angular/material/table';
-import {MatListModule} from '@angular/material/list';
-import {ScrollingModule} from '@angular/cdk/scrolling';
+import { environment } from 'src/app/environment/environment.prod';
+import { FormsModule } from '@angular/forms';
+
+
 @NgModule({
   declarations: [
-    AddressComponent,
+    AddressComponent
   ],
   imports: [
     CommonModule,
     AddressRoutingModule,
     GoogleMapsModule,
     FormsModule,
-    MatAutocompleteModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatTableModule,
-    MatInputModule,
-    MatListModule,
-    ScrollingModule
   ]
 })
 export class AddressModule { }

@@ -17,9 +17,9 @@ public class AccountDetailServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Account account = this.accountRepository.findByUsername(username);
-        if(account == null){
+        if (account == null) {
             throw new RequestException("Not found this account!");
         }
-    return  account;
+        return account;
     }
 }

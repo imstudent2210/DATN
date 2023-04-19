@@ -34,7 +34,7 @@ public class CategoryServiceImpl implements CategoryService {
     public Category findCategory(String name) {
         if (!isExisCategory(name)) {
             System.out.println("Not found this category");
-            throw new RequestException("Not found this category: "+name);
+            throw new RequestException("Not found this category: " + name);
         } else return this.categoryRepository.findCategoryByName(name);
     }
 
@@ -83,8 +83,7 @@ public class CategoryServiceImpl implements CategoryService {
         Optional<Category> local = categoryRepository.findById(id);
         if (local.isEmpty()) {
             throw new RequestException("Not found category, id: " + id);
-        }
-        else {
+        } else {
             Category updateCategory = this.categoryRepository.findCategoryByName(local.get().getName());
             String updateName = category.getName();
             Category local1 = this.categoryRepository.findCategoryByName(updateName);
@@ -93,11 +92,10 @@ public class CategoryServiceImpl implements CategoryService {
                 System.out.println("Not found this category: " + id);
                 throw new RequestException("Not found this category: " + id);
             } else {
-                if (local1 == null | (local1 !=null &&  (local1.isActivated()!=category.isActivated())) ) {
+                if (local1 == null | (local1 != null && (local1.isActivated() != category.isActivated()))) {
                     updateCategory.setName(category.getName());
                     updateCategory.setActivated(category.isActivated());
-                }
-                else throw new RequestException("This category has already: " + updateName);
+                } else throw new RequestException("This category has already: " + updateName);
             }
             return this.categoryRepository.save(updateCategory);
         }

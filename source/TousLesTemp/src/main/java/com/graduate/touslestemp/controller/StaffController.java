@@ -72,22 +72,4 @@ public class StaffController {
     List<StaffDto> filterStaffDTO(@PathVariable("storeid") Long storeid) throws Exception {
         return this.staffService.filter(storeid);
     }
-
-    @PostMapping(value = {"/create2"}, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_OCTET_STREAM_VALUE, })
-    public ResponseEntity<Staff> createStaff(@RequestPart("staff") @Valid Staff staff, @RequestPart("file") MultipartFile[] file) throws Exception {
-        return new ResponseEntity<>(staffService.create2(staff, file), HttpStatus.OK);
-    }
-    @PutMapping(value = "/update2/{id}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_OCTET_STREAM_VALUE, })
-    public ResponseEntity<Staff> updateStaff(@RequestPart("staff") @Valid Staff staff, @PathVariable(name = "id") Long id,  @RequestPart("file") MultipartFile[] file) throws Exception {
-        return new ResponseEntity<>(staffService.update2(staff, id, file), HttpStatus.OK);
-    }
-
-    @GetMapping("/get2/{id}")
-    public ResponseEntity<Staff> getStaffById(@PathVariable(name = "id") Long id) {
-        return new ResponseEntity<>(staffService.find(id), HttpStatus.OK);
-    }
-    @DeleteMapping("/delete2/{id}")
-    public void deleteStaff(@PathVariable("id") Long id) throws Exception{
-        this.staffService.delete(id);
-    }
 }

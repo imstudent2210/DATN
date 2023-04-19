@@ -12,7 +12,7 @@ export class StoresService {
   constructor(private http: HttpClient) { }
 
   getStores(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/store/get1`);
+    return this.http.get(`${environment.apiUrl}/store/get`);
   }
 
   getStoresByName(name: string): Observable<any> {

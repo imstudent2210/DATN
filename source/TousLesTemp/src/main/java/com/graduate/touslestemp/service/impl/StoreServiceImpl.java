@@ -33,11 +33,9 @@ public class StoreServiceImpl implements StoreService {
             System.out.println("This store has already");
             throw new RequestException("This store has already!");
         } else {
-//            store.setImage("https://firebasestorage.googleapis.com/v0/b/touslestemp-37361.appspot.com/o/hero-img-2-1.png?alt=media&token=1d26fd0e-7589-425f-a060-f95d08d724a5");
             return (storeMapper.toStoreDTO(storeRepository.save(store)));
         }
     }
-
     @Override
     public StoreDto find(Long id) {
         Optional<Store> store = storeRepository.findById(id);
@@ -83,8 +81,6 @@ public class StoreServiceImpl implements StoreService {
         }
     }
 
-
-
     @Override
     public List<Store> findAll() {
         return this.storeRepository.findAll();
@@ -103,6 +99,4 @@ public class StoreServiceImpl implements StoreService {
         }
         return false;
     }
-
-
 }

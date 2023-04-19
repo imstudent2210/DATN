@@ -95,48 +95,4 @@ public class StaffServiceImpl implements StaffService {
         return false;
     }
 
-
-    //==================
-
-    @Override
-    public Staff create2(Staff staff, MultipartFile[] img) throws Exception {
-        try {
-            Set<StaffImage> images = imageUpload(img);
-            staff.setImages(images);
-            return this.staffRepository.save(staff);
-        } catch (Exception e) {
-            e.getMessage();
-            throw new RequestException("Không thể thêm nhân viên");
-        }
-    }
-
-    @Override
-    public Staff update2(Staff staff, Long id, MultipartFile[] img) throws Exception {
-        try {
-            Set<StaffImage> images = imageUpload(img);
-            Staff local = this.staffRepository.findById(id)
-                    .orElseThrow(() -> new RequestException("Không tồn tại nhân viên này : " + id));
-
-            local.setImages(images);
-            StaffDto a = staffMapper.toStaffDTO(staff);
-            staffMapper.updateEntity(a, local);
-            return this.staffRepository.save(local);
-        } catch (Exception e) {
-            e.getMessage();
-            throw new RequestException("Không thể cập nhật");
-        }
-    }
-    public Set<StaffImage> imageUpload(MultipartFile[] multipartFiles) throws IOException {
-        Set<StaffImage> images = new HashSet<>();
-
-        for (MultipartFile file : multipartFiles) {
-            StaffImage image = new StaffImage(
-                    file.getOriginalFilename(),
-                    file.getContentType(),
-                    file.getBytes()
-            );
-            images.add(image);
-        }
-        return images;
-    }
 }

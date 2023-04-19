@@ -1,4 +1,5 @@
 package com.graduate.touslestemp.controller;
+
 import com.graduate.touslestemp.domain.dto.PageResponseDTO;
 import com.graduate.touslestemp.domain.dto.StoreDto;
 import com.graduate.touslestemp.domain.entity.Store;
@@ -27,13 +28,11 @@ public class StoreController {
     @Autowired
     private StoreService storeService;
     @Autowired
-    private ProductRepository productRepository;
-    @Autowired
     private StoreMapper storeMapper;
 
     /*===========================DTO v2=========================*/
 
-    @GetMapping("/get-all")
+    @GetMapping("/get")
     public ResponseEntity<List<StoreDto>> getAllStoreDTO() {
         return new ResponseEntity<>(storeMapper.toStoreDTOs(storeRepository.findAll()), HttpStatus.OK);
     }
@@ -62,6 +61,7 @@ public class StoreController {
     List<StoreDto> searchStoreDTO(@PathVariable("store") String store) throws Exception {
         return this.storeService.search(store);
     }
+
     @GetMapping("/filter/{addressId}")
     List<StoreDto> filterStoreDTO(@PathVariable("addressId") Long addressId) throws Exception {
         return this.storeService.filter(addressId);
@@ -72,11 +72,6 @@ public class StoreController {
         return storeService.getAllStore(request);
     }
     /*==========================end DTO==============================*/
-    @GetMapping("/get1")
-    List<Store> allStore() {
-        return this.storeRepository.findAll();
-    }
-
 
 
 }

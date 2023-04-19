@@ -34,7 +34,6 @@ public class AddressServiceImpl implements AddressService {
         return local;
     }
 
-
     @Override
     public Address findAddress(String address) {
         Address local = this.addressRepository.findAddressByName(address);

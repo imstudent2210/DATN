@@ -18,8 +18,4 @@ public interface StaffService {
     List<StaffDto> search(String keyword);
     List<StaffDto> filter(Long id);
 
-    //================
-    Staff create2(Staff staff, MultipartFile[] img) throws Exception;
-    Staff update2(Staff product, Long id,MultipartFile [] img ) throws Exception;
-
 }

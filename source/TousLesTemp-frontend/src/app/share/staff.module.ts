@@ -1,3 +1,6 @@
+import { Category } from "./category.module";
+import { FileHandle } from "./file-handle.module";
+import { Size } from "./size.module";
 import { StaffGroup } from "./staffgroup.module";
 import { Store } from "./store.module";
 
@@ -9,5 +12,5 @@ export interface Staff{
   phone?:string;
   store:Store;
   staffGroup:StaffGroup;
-  image?:string;
+  images:FileHandle[];
 }

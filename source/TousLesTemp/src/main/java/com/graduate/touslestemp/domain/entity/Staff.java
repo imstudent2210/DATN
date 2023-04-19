@@ -33,5 +33,13 @@ public class Staff {
     @JoinColumn(name = "Store", referencedColumnName = "store_id")
     private Store store;
 
-    private String image;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "staff-images",
+            joinColumns = {
+                    @JoinColumn(name = "id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "img_id")
+            })
+    private Set<StaffImage> images;
 }

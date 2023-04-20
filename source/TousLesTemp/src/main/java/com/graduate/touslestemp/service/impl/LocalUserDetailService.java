@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Chinna
  *
  */
-@Service("localUserDetailService")
+@Service
 public class LocalUserDetailService implements UserDetailsService {
 
 	@Autowired
@@ -38,10 +38,7 @@ public class LocalUserDetailService implements UserDetailsService {
 		return createLocalUser(user);
 	}
 
-	/**
-	 * @param user
-	 * @return
-	 */
+
 	private LocalUser createLocalUser(User user) {
 		return new LocalUser(user.getEmail(), user.getPassword(), user.isEnabled(), true, true, true, GeneralUtils.buildSimpleGrantedAuthorities(user.getRoles()), user);
 	}

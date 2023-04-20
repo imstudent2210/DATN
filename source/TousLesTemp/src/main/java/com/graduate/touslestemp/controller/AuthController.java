@@ -21,6 +21,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,7 @@ import static dev.samstevens.totp.util.Utils.getDataUriForImage;
 
 @Slf4j
 @RestController
+@Service
 @RequestMapping("/api/auth")
 public class AuthController {
 
@@ -43,7 +45,7 @@ public class AuthController {
 	UserService userService;
 
 	@Autowired
-	TokenProvider tokenProvider;
+	private TokenProvider tokenProvider;
 
 //	@Autowired
 	private QrDataFactory qrDataFactory;
@@ -53,9 +55,6 @@ public class AuthController {
 
 //	@Autowired
 	private CodeVerifier verifier;
-
-	public AuthController() {
-	}
 
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {

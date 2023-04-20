@@ -15,6 +15,7 @@ import com.graduate.touslestemp.security.oauth2.user.OAuth2UserInfoFactory;
 import com.graduate.touslestemp.service.UserService;
 import com.graduate.touslestemp.util.GeneralUtils;
 //import dev.samstevens.totp.secret.SecretGenerator;
+import dev.samstevens.totp.secret.SecretGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
@@ -39,7 +40,7 @@ public class UserServiceImpl implements UserService {
 	private PasswordEncoder passwordEncoder;
 
 //	@Autowired
-//	private SecretGenerator secretGenerator;
+	private SecretGenerator secretGenerator;
 
 	@Override
 	@Transactional(value = "transactionManager")
@@ -71,7 +72,7 @@ public class UserServiceImpl implements UserService {
 		user.setProviderUserId(formDTO.getProviderUserId());
 		if (formDTO.isUsing2FA()) {
 			user.setUsing2FA(true);
-			user.setSecret(user.getSecret());
+			user.setSecret(secretGenerator.generate());
 		}
 		return user;
 	}

@@ -11,10 +11,7 @@ import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * @author Chinna
- * @since 26/3/18
- */
+
 public interface UserService {
 
 	public User registerNewUser(SignUpRequest signUpRequest) throws UserAlreadyExistAuthenticationException;

@@ -1,10 +1,9 @@
 <div class="col-md-12">
-  {{form.code}}
 	<div class="card card-container">
 		<img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
 		<form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
 			<div class="form-group">
-				<label for="code">Enter the 6-digit code from your authenticator app</label> <input type="text" class="form-control" name="code" [(ngModel)]="form.code" required minlength="6" #code="ngModel" />
+				<label for="code">Bạn có thể sử dụng các mật khẩu một lần được tạo bởi ứng dụng Google Authentication để xác minh đăng nhập của bạn</label> <input type="text" class="form-control" name="code" [(ngModel)]="form.code" required minlength="6" #code="ngModel" />
 				<div class="alert alert-danger" role="alert" *ngIf="f.submitted && code.invalid">
 					<!-- <div *ngIf="code.errors.required">Code is required</div>
 					<div *ngIf="code.errors.minlength">Code must be at least 6 characters</div> -->
@@ -14,9 +13,9 @@
 				<button class="btn btn-primary btn-block">Login</button>
 			</div>
 			<div class="form-group">
-				<div class="alert alert-danger" role="alert" *ngIf="isLoginFailed">Login failed: {{ errorMessage }}</div>
+				<div class="alert alert-danger" role="alert" *ngIf="isLoginFailed">Xác thực hất bại: {{ errorMessage }}</div>
 			</div>
 		</form>
-		<div class="alert alert-success" *ngIf="isLoggedIn">Welcome {{currentUser.displayName}} <br>Logged in as {{ currentUser.roles }}.</div>
+		<!-- <div class="alert alert-success" *ngIf="isLoggedIn">Welcome {{currentUser.displayName}} <br>Logged in as {{ currentUser.roles }}.</div> -->
 	</div>
 </div>

@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { LoginService } from '../services/login.service';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomeGuard implements CanActivate {
 
-  constructor(private login:LoginService,private route:Router){}
+  constructor(private login:AuthService,private route:Router){}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(this.login.isLogin() && this.login.getUserRole()=="Admin"){
+      if(this.login.isLogin() && this.login.getUserRole()=="ROLE_USER"){
         return true;
       }
 

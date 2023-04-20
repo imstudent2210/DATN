@@ -7,13 +7,17 @@ import com.graduate.touslestemp.domain.entity.User;
 import com.graduate.touslestemp.security.jwt.TokenProvider;
 import com.graduate.touslestemp.service.UserService;
 import com.graduate.touslestemp.util.GeneralUtils;
+import dev.samstevens.totp.code.CodeGenerator;
 import dev.samstevens.totp.code.CodeVerifier;
+import dev.samstevens.totp.code.DefaultCodeGenerator;
 import dev.samstevens.totp.code.DefaultCodeVerifier;
 import dev.samstevens.totp.exceptions.QrGenerationException;
 import dev.samstevens.totp.qr.QrData;
 import dev.samstevens.totp.qr.QrDataFactory;
 import dev.samstevens.totp.qr.QrGenerator;
 import dev.samstevens.totp.qr.ZxingPngQrGenerator;
+import dev.samstevens.totp.time.SystemTimeProvider;
+import dev.samstevens.totp.time.TimeProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +27,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -56,8 +61,12 @@ public class AuthController {
 //	@Autowired
 	private QrGenerator qrGenerator = new ZxingPngQrGenerator();
 
+	TimeProvider timeProvider = new SystemTimeProvider();
+	CodeGenerator codeGenerator = new DefaultCodeGenerator();
 //	@Autowired
-	private CodeVerifier verifier ;
+	private  CodeVerifier verifier = new DefaultCodeVerifier(codeGenerator,timeProvider);
+
+
 
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {

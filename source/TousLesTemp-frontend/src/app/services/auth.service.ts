@@ -37,4 +37,54 @@ export class AuthService {
     	  headers: new HttpHeaders({ 'Content-Type': 'text/plain' })
     });
   }
+
+
+// public getCurrentUser() {
+//   return this.http.get(`${environment.apiUrl}/current-user`);
+// }
+//set token to localstorage
+public loginToken(token: any) {
+  sessionStorage.setItem('auth-token', token);
+  return true;
+}
+public isLogin() {
+  let token = sessionStorage.getItem('auth-token');
+  if (token == undefined || token == '' || token == null) {
+    return false;
+  }
+  return true;
+}
+public isLogout() {
+  sessionStorage.removeItem('auth-token');
+  sessionStorage.removeItem('auth-user');
+  return true;
+}
+public getToken() {
+  return sessionStorage.getItem('auth-token');
+}
+public setUser(user: any) {
+  sessionStorage.setItem('auth-user', JSON.stringify(user));
+}
+public getUser() {
+  let user = sessionStorage.getItem('auth-user');
+  if (user != null) return JSON.parse(user);
+  else {
+    this.isLogout();
+    return null;
+  }
+}
+public getUserRole() {
+  let user = this.getUser();
+  // return user.authorities[0].authority;
+  return user.roles[0];
+}
+public getUserName() {
+  let username = this.getUser().displayName;
+  return username;
+}
+public getEmail() {
+  let email = this.getUser().email;
+  return email;
+}
+
 }

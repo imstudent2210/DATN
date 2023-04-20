@@ -18,8 +18,9 @@ export class AuthInterceptor implements HttpInterceptor {
     let authReq = req;
     const loginPath = '/login';
     const token = this.token.getToken();
-    if (token != null) {
+    if (token != null && (!authReq.url.includes('maps.google.com'))) {
       authReq = req.clone({ headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token) });
+      // this.router.navigate(['home/stores/list']);
     }
     return next.handle(authReq).pipe(tap(() => { },
       (err: any) => {

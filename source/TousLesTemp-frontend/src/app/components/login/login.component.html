@@ -4,17 +4,17 @@
       <mat-card>
         <div class="container text-center">
           <mat-card-title class="text-center my-2 linetext"><span>Hệ thống quản lí Tous Les Temp</span></mat-card-title>
-          <form (ngSubmit)="formSubmit()">
+          <form name="form" (ngSubmit)="f.form.valid && formSubmit()" #f="ngForm" novalidate>
             <mat-form-field class="full-width" appearance="outline">
               <mat-label>Tên đăng nhập</mat-label>
-              <input matInput type="text" name="username" [formControl]="username" [(ngModel)]="loginData.username"
+              <input matInput type="text" name="username" [(ngModel)]="form.username" required #username="ngModel"
                 placeholder="User name">
               <mat-error *ngIf="username.invalid">{{errror()}}</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>Mật khẩu</mat-label>
-              <input matInput [type]="hide ? 'password' : 'text'" name="password" [(ngModel)]="loginData.password"
-                [formControl]="password">
+              <input matInput [type]="hide ? 'password' : 'text'" name="password" [(ngModel)]="form.password" required minlength="6"
+              #password="ngModel">
               <mat-error *ngIf="password.invalid">{{errrorPassword()}}</mat-error>
               <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                 [attr.aria-pressed]="hide">
@@ -24,6 +24,7 @@
             <div class="text-center mx-3 my-2">
               <div class="linetext my-2"><span></span></div>
               <button mat-fab extended><mat-icon>login</mat-icon>Đăng nhập</button>
+              <button type="button" mat-fab extended [routerLink]="'/register'"><mat-icon>register</mat-icon>Đăng ký</button>
             </div>
           </form>
         </div>

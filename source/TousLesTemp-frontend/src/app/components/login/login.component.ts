@@ -1,9 +1,10 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
-import { LoginService } from 'src/app/services/login.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -11,17 +12,22 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  constructor( private login: LoginService, private route: Router,
-               private toast:NgToastService, private socialService: SocialAuthService) {}
+  constructor(private route1: Router, private authService: AuthService,
+    private tokenStorage: TokenStorageService, private toast: NgToastService,
+    private route: ActivatedRoute,
+    private userService: UserService) { }
 
-  @Output() profile?:string;
+  @Output() profile?: string;
 
   username = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
   hide = true;
   loginData = { username: '', password: '' };
-  // GoogleLoginProvider = GoogleLoginProvider;
-
+  form: any = {};
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
+  currentUser: any;
   errror() {
     if (this.username.hasError('required')) {
       return 'Tên đăng nhập không được để trống';
@@ -36,70 +42,57 @@ export class LoginComponent implements OnInit {
   }
 
 
-  formSubmit() {
-    this.login.generateToken(this.loginData).subscribe(
-      (data: any) => {
-        console.log(data);
+
+  login(user: any): void {
+    this.tokenStorage.saveUser(user);
+    this.isLoginFailed = false;
+    this.isLoggedIn = true;
+    this.currentUser = this.tokenStorage.getUser();
+    window.location.reload();
+  }
+  formSubmit(): void {
+    this.authService.login(this.form).subscribe(
+      data => {
+        this.tokenStorage.saveToken(data.accessToken);
+        if(data.authenticated){
+	        this.login(data.user);
+        } else {
+        	this.route1.navigate(['/otp']);
+        }
         this.toast.success({detail:"Thành công", summary:"Đăng nhập quản trị thành công!", duration:3000})
-        this.login.loginToken(data.token);
-        this.profile =  this.loginData.username;
-        this.login.getCurrentUser().subscribe((user: any) => {
-          this.login.setUser(user);
-          console.log(user);
-          if (this.login.getUserRole() == 'Admin') {
-            this.route.navigate(['home/stores/list']);
-          }  else {
-            this.login.isLogout();
-          }
-        });
       },
-      (error) => {
-        console.log(error);
+      err => {
+        this.errorMessage = err.error.message;
+        this.isLoginFailed = true;
         this.toast.error({detail:"Lỗi", summary:"Tài khoản không tồn tại !", duration:3000})
       }
     );
   }
 
 
-  //================== Social Login=================
-  user?: SocialUser;
-  loggedIn?: boolean;
-  // GoogleLoginProvider?:any;
-  signInWithGoogle(): void {
-    this.socialService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
-      (user)=>{
-        this.login.googleSignIn(user.idToken).subscribe(
-          (res)=>{
-            console.log(res);
-            this.route.navigate(['home']);
-          },
-          (error)=>{
-            console.log(error);
-          }
-        )
-      }
-    );
-  }
-
-  // signInWithFB(): void {
-  //   this.socialService.signIn(FacebookLoginProvider.PROVIDER_ID);
-  // }
-
-  signOut(): void {
-    this.socialService.signOut();
-  }
-  refreshToken(): void {
-    this.socialService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);
-  }
-
-
-
-
-//=========================
+  //=========================
   ngOnInit(): void {
-    this.socialService.authState.subscribe((user) => {
-      this.user = user;
-      this.loggedIn = (user != null);
-    });
+    const token: string = this.route.snapshot.queryParamMap.get('token')!;
+    const error: string = this.route.snapshot.queryParamMap.get('error')!;
+    if (this.tokenStorage.getUser()) {
+      this.isLoggedIn = true;
+      this.currentUser = this.tokenStorage.getUser();
+    }
+    else if (token) {
+      this.tokenStorage.saveToken(token);
+      this.userService.getCurrentUser().subscribe(
+        data => {
+          this.login(data);
+        },
+        err => {
+          this.errorMessage = err.error.message;
+          this.isLoginFailed = true;
+        }
+      );
+    }
+    else if (error) {
+      this.errorMessage = error;
+      this.isLoginFailed = true;
+    }
   }
 }

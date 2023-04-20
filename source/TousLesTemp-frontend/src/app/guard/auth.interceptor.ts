@@ -1,34 +1,40 @@
+import { HTTP_INTERCEPTORS, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HTTP_INTERCEPTORS
-} from '@angular/common/http';
-
+import { HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { LoginService } from '../services/login.service';
-import { environment } from '../environment/environment.prod';
-import { and } from 'firebase/firestore';
+import { TokenStorageService } from '../services/token-storage.service';
+
+const TOKEN_HEADER_KEY = 'Authorization';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+  constructor(private token: TokenStorageService, private router: Router) {
 
-  constructor(private login: LoginService) { }
+  }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let authReq = req;
-    const token = this.login.getToken();
-
-    if (token != null && (!authReq.url.includes('maps.google.com'))) {
-        authReq = authReq.clone({ setHeaders: { Authorization: `Bearer ${token}` }});
+    const loginPath = '/login';
+    const token = this.token.getToken();
+    if (token != null) {
+      authReq = req.clone({ headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token) });
     }
-    return next.handle(authReq);
-
+    return next.handle(authReq).pipe(tap(() => { },
+      (err: any) => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status !== 401 || window.location.pathname === loginPath) {
+            return;
+          }
+          this.token.signOut();
+          window.location.href = loginPath;
+        }
+      }
+    ));
   }
 }
 
-export const AuthInterceptorProvider = [
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true,
-  }
-]
+export const AuthInterceptorProviders = [
+  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+];

@@ -1,10 +1,8 @@
 package com.graduate.touslestemp.service.impl;
 
 import com.graduate.touslestemp.domain.dto.PageResponseDTO;
-import com.graduate.touslestemp.domain.dto.ProductDto;
 import com.graduate.touslestemp.domain.dto.StaffDto;
-import com.graduate.touslestemp.domain.dto.StoreDto;
-import com.graduate.touslestemp.domain.entity.*;
+import com.graduate.touslestemp.domain.entity.Staff;
 import com.graduate.touslestemp.domain.mapper.StaffMapper;
 import com.graduate.touslestemp.domain.repository.StaffRepository;
 import com.graduate.touslestemp.exception.RequestException;
@@ -12,13 +10,9 @@ import com.graduate.touslestemp.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class StaffServiceImpl implements StaffService {

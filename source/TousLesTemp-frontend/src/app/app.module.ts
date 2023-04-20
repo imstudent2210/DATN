@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { AuthInterceptorProvider } from './guard/auth.interceptor';
+// import { AuthInterceptorProvider } from './guard/auth.interceptor';
 import { SublevelMenuComponent } from './components/sidenav/sublevel-menu.component';
 import { NgToastModule } from 'ng-angular-popup';
 
@@ -33,6 +33,10 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { TotpComponent } from './components/totp/totp.component';
+import { RegisterComponent } from './components/register/register.component';
+import { AuthInterceptor, AuthInterceptorProviders } from './guard/auth.interceptor';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +46,8 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     NavbarComponent,
     LoginComponent,
     SublevelMenuComponent,
+    TotpComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -67,25 +73,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
   ],
   providers: [
-    {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: false,
-        providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(
-              // '961395380673-hduap46bhfg3ifi0fc4r380gfsjqv595.apps.googleusercontent.com'
-              '420281420455-qrdb5immn7snuqbprfvd03s45h0nq226.apps.googleusercontent.com'
-            )
-          }
-        ],
-        onError: (err) => {
-          console.error(err);
-        }
-      } as SocialAuthServiceConfig,
-    },
-    AuthInterceptorProvider,
+    AuthInterceptorProviders,
   ],
   bootstrap: [AppComponent]
 })

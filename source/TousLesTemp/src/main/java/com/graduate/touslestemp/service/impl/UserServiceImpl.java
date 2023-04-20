@@ -14,7 +14,7 @@ import com.graduate.touslestemp.security.oauth2.user.OAuth2UserInfo;
 import com.graduate.touslestemp.security.oauth2.user.OAuth2UserInfoFactory;
 import com.graduate.touslestemp.service.UserService;
 import com.graduate.touslestemp.util.GeneralUtils;
-//import dev.samstevens.totp.secret.SecretGenerator;
+import dev.samstevens.totp.secret.DefaultSecretGenerator;
 import dev.samstevens.totp.secret.SecretGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -39,8 +39,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-//	@Autowired
-	private SecretGenerator secretGenerator;
+	private SecretGenerator secretGenerator = new DefaultSecretGenerator();
 
 	@Override
 	@Transactional(value = "transactionManager")
@@ -65,7 +64,7 @@ public class UserServiceImpl implements UserService {
 		user.setEmail(formDTO.getEmail());
 		user.setPassword(passwordEncoder.encode(formDTO.getPassword()));
 		final HashSet<Role> roles = new HashSet<Role>();
-		roles.add(roleRepository.findByName(Role.ROLE_USER));
+		roles.add(roleRepository.findByName(Role.USER));
 		user.setRoles(roles);
 		user.setProvider(formDTO.getSocialProvider().getProviderType());
 		user.setEnabled(true);

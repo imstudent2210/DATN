@@ -24,40 +24,41 @@ import java.util.List;
 
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
-	@Autowired
-	private TokenProvider tokenProvider;
-	@Autowired
-	private LocalUserDetailService customUserDetailsService;
-	private static final Logger logger = LoggerFactory.getLogger(TokenAuthenticationFilter.class);
+    @Autowired
+    private TokenProvider tokenProvider;
+    @Autowired
+    private LocalUserDetailService customUserDetailsService;
+    private static final Logger logger = LoggerFactory.getLogger(TokenAuthenticationFilter.class);
 
-	@Override
-	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-				try {
-			String jwt = getJwtFromRequest(request);
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        try {
+            String jwt = getJwtFromRequest(request);
 
-			if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
-				Long userId = tokenProvider.getUserIdFromToken(jwt);
+            if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
+                Long userId = tokenProvider.getUserIdFromToken(jwt);
 
-				UserDetails userDetails = customUserDetailsService.loadUserById(userId);
-				Collection<? extends GrantedAuthority> authorities = tokenProvider.isAuthenticated(jwt)
-						? userDetails.getAuthorities()
-						: List.of(new SimpleGrantedAuthority(Role.ROLE_PRE_VERIFICATION_USER));
-				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
-				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails((jakarta.servlet.http.HttpServletRequest) request));
+                UserDetails userDetails = customUserDetailsService.loadUserById(userId);
+                Collection<? extends GrantedAuthority> authorities = tokenProvider.isAuthenticated(jwt)
+                        ? userDetails.getAuthorities()
+                        : List.of(new SimpleGrantedAuthority(Role.ROLE_PRE_VERIFICATION_USER));
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
+                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails( request));
 
-				SecurityContextHolder.getContext().setAuthentication(authentication);
-			}
-		} catch (Exception ex) {
-			logger.error("Could not set user authentication in security context", ex);
-		}
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
+        } catch (Exception ex) {
+            logger.error("Could not set user authentication in security context", ex);
+        }
 
-		filterChain.doFilter(request, response);
-	}
-		private String getJwtFromRequest(HttpServletRequest request) {
-		String bearerToken = request.getHeader("Authorization");
-		if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
-			return bearerToken.substring(7, bearerToken.length());
-		}
-		return null;
-	}
+        filterChain.doFilter(request, response);
+    }
+
+    private String getJwtFromRequest(HttpServletRequest request) {
+        String bearerToken = request.getHeader("Authorization");
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
+            return bearerToken.substring(7, bearerToken.length());
+        }
+        return null;
+    }
 }

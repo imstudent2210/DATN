@@ -8,10 +8,12 @@ import com.graduate.touslestemp.security.jwt.TokenProvider;
 import com.graduate.touslestemp.service.UserService;
 import com.graduate.touslestemp.util.GeneralUtils;
 import dev.samstevens.totp.code.CodeVerifier;
+import dev.samstevens.totp.code.DefaultCodeVerifier;
 import dev.samstevens.totp.exceptions.QrGenerationException;
 import dev.samstevens.totp.qr.QrData;
 import dev.samstevens.totp.qr.QrDataFactory;
 import dev.samstevens.totp.qr.QrGenerator;
+import dev.samstevens.totp.qr.ZxingPngQrGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,6 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 
+import static dev.samstevens.totp.code.HashingAlgorithm.SHA256;
 import static dev.samstevens.totp.util.Utils.getDataUriForImage;
 
 @Slf4j
@@ -48,13 +51,13 @@ public class AuthController {
 	private TokenProvider tokenProvider;
 
 //	@Autowired
-	private QrDataFactory qrDataFactory;
+	private QrDataFactory qrDataFactory = new QrDataFactory(SHA256,6,30);
 
 //	@Autowired
-	private QrGenerator qrGenerator;
+	private QrGenerator qrGenerator = new ZxingPngQrGenerator();
 
 //	@Autowired
-	private CodeVerifier verifier;
+	private CodeVerifier verifier ;
 
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {

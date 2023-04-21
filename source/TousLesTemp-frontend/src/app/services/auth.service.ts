@@ -38,6 +38,9 @@ export class AuthService {
     });
   }
 
+  sendmail(email:any): Observable<any> {
+    return this.http.post(`${environment.API_BASE_URL}/sendmail`, email);
+  }
 
 // public getCurrentUser() {
 //   return this.http.get(`${environment.apiUrl}/current-user`);

@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
         } else {
         	this.route1.navigate(['/otp']);
         }
-        this.toast.success({detail:"Thành công", summary:"Đăng nhập quản trị thành công!", duration:3000})
+        this.toast.info({detail:"Đăng nhập", summary:"Vui lòng nhập mã xác thực!", duration:3000})
       },
       err => {
         this.errorMessage = err.error.message;

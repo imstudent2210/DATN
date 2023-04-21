@@ -31,11 +31,13 @@ import { environment } from './environment/environment.prod';
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
+import { InputNumberModule } from 'primeng/inputnumber';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { TotpComponent } from './components/totp/totp.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthInterceptor, AuthInterceptorProviders } from './guard/auth.interceptor';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { AuthInterceptor, AuthInterceptorProviders } from './guard/auth.intercep
     MatButtonModule,
     MatCardModule,
     MatInputModule,
+    MatCheckboxModule,
     NgxUiLoaderModule,
+    InputNumberModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     NgxUiLoaderHttpModule.forRoot({

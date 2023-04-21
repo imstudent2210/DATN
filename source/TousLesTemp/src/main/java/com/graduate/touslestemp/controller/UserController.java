@@ -36,9 +36,4 @@ public class UserController {
 		return ResponseEntity.ok("Admin content goes here");
 	}
 
-	@GetMapping("/mod")
-	@PreAuthorize("hasRole('MODERATOR')")
-	public ResponseEntity<?> getModeratorContent() {
-		return ResponseEntity.ok("Moderator content goes here");
-	}
 }

@@ -1,5 +1,6 @@
 package com.graduate.touslestemp.config;
 
+import com.graduate.touslestemp.exception.RequestException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;

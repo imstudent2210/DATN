@@ -3,7 +3,7 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/compat/storage';
 import { Observable, finalize, map } from 'rxjs';
 import { FileUploadService } from 'src/app/services/file-upload.service';
-import { FileUpload } from 'src/app/share/file-upload.module';
+import { FileUpload } from 'src/app/model/file-upload.model';
 
 @Component({
   selector: 'app-upload-image',

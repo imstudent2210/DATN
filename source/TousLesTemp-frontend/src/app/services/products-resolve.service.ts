@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Observable, map, of } from 'rxjs';
-import { Product } from '../share/product.module';
+import { Product } from '../model/product.model';
 import { Route } from '@angular/router';
 import { Router } from '@angular/router';
 import { ProductsService } from './products.service';
@@ -13,7 +13,7 @@ import { ImageProcessingService } from './image-processing.service';
 export class ProductsResolveService implements Resolve<Product>{
 
   constructor(private productService: ProductsService, private imageProcessingService:ImageProcessingService) { }
-    
+
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Product> {
     const id = route.paramMap.get("id")
     if (id) {

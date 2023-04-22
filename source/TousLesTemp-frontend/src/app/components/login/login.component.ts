@@ -2,6 +2,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
+import { environment } from 'src/environment/environment.prod';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { UserService } from 'src/app/services/user.service';
@@ -14,8 +15,7 @@ import { UserService } from 'src/app/services/user.service';
 export class LoginComponent implements OnInit {
   constructor(private route1: Router, private authService: AuthService,
     private tokenStorage: TokenStorageService, private toast: NgToastService,
-    private route: ActivatedRoute,
-    private userService: UserService) { }
+    private route: ActivatedRoute, private userService: UserService) { }
 
   @Output() profile?: string;
 
@@ -48,8 +48,18 @@ export class LoginComponent implements OnInit {
     this.isLoginFailed = false;
     this.isLoggedIn = true;
     this.currentUser = this.tokenStorage.getUser();
-    window.location.reload();
+
+    if (this.authService.getUserRole() == 'ROLE_ADMIN') {
+      this.route1.navigate([environment.AUTH_REDIRECT_URL]);
+           this.toast.success({detail:"Đăng nhập thành công", summary:"Chào mừng đến với trang quản trị!", duration:3000})
+    } else if (this.authService.getUserRole() == 'ROLE_STOREMANAGER') {
+      this.route1.navigate(["/user"]);
+           this.toast.success({detail:"Đăng nhập thành công", summary:"Chào mừng đến với trang người dùng!", duration:3000})
+    } else {
+      this.authService.isLogout();
+    }
   }
+
   formSubmit(): void {
     this.authService.login(this.form).subscribe(
       data => {
@@ -58,8 +68,8 @@ export class LoginComponent implements OnInit {
 	        this.login(data.user);
         } else {
         	this.route1.navigate(['/otp']);
+          this.toast.info({detail:"Đăng nhập", summary:"Vui lòng nhập mã xác thực!", duration:3000})
         }
-        this.toast.info({detail:"Đăng nhập", summary:"Vui lòng nhập mã xác thực!", duration:3000})
       },
       err => {
         this.errorMessage = err.error.message;
@@ -69,8 +79,6 @@ export class LoginComponent implements OnInit {
     );
   }
 
-
-  //=========================
   ngOnInit(): void {
     const token: string = this.route.snapshot.queryParamMap.get('token')!;
     const error: string = this.route.snapshot.queryParamMap.get('error')!;

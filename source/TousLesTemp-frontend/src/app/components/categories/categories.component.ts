@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Route, Router } from '@angular/router';
 import { CategoriesService } from 'src/app/services/categories.service';
-import { Store } from 'src/app/share/store.module';
+import { Store } from 'src/app/model/store.model';
 import * as XLSX from 'xlsx';
 
 @Component({

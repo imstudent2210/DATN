@@ -1,5 +1,5 @@
-import { StaffGroup } from "./staffgroup.module";
-import { Store } from "./store.module";
+import { StaffGroup } from "./staffgroup.model";
+import { Store } from "./store.model";
 
 
 export interface Staff{

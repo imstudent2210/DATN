@@ -7,7 +7,7 @@ import { NgToastService } from 'ng-angular-popup';
 import { Observable, map, startWith } from 'rxjs';
 import { GeocodingService } from 'src/app/services/geocoding.service';
 import { StoresService } from 'src/app/services/stores.service';
-import { GeocoderResponse } from 'src/app/share/geocoder-response.model';
+import { GeocoderResponse } from 'src/app/model/geocoder-response.model';
 
 export interface PlaceSearchResult {
   address: string;

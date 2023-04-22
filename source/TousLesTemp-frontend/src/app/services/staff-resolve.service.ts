@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Observable, map, of } from 'rxjs';
-import { Product } from '../share/product.module';
+import { Product } from '../model/product.model';
 import { Route } from '@angular/router';
 import { Router } from '@angular/router';
 import { ProductsService } from './products.service';
 import { ImageProcessingService } from './image-processing.service';
 import { StaffService } from './staff.service';
-import { Staff } from '../share/staff.module';
+import { Staff } from '../model/staff.model';
 
 @Injectable({
   providedIn: 'root'

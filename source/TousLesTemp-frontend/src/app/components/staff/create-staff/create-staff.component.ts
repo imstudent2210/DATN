@@ -7,12 +7,12 @@ import { CategoriesService } from 'src/app/services/categories.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { SizeService } from 'src/app/services/size.service';
 import { StoresService } from 'src/app/services/stores.service';
-import { FileHandle } from 'src/app/share/file-handle.module';
-import { Staff } from 'src/app/share/staff.module';
+import { FileHandle } from 'src/app/model/file-handle.model';
+import { Staff } from 'src/app/model/staff.model';
 import { StaffGroupService } from 'src/app/services/staffgroup.service';
 import { StaffService } from 'src/app/services/staff.service';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { Mail } from 'src/app/share/mail.module';
+import { Mail } from 'src/app/model/mail.model';
 import { Observable, finalize } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 

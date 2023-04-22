@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { CategoriesService } from 'src/app/services/categories.service';
-import { Category } from 'src/app/share/category.module';
+import { Category } from 'src/app/model/category.model';
 import { MyErrorStateMatcher } from '../../products/create-product/create-product.component';
 
 @Component({

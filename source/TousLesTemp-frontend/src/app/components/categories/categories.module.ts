@@ -6,7 +6,7 @@ import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { CustomPaginator } from 'src/app/share/paginator-config';
+import { CustomPaginator } from 'src/app/model/paginator-config';
 import {  MatListModule } from '@angular/material/list';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';

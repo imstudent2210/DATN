@@ -2,12 +2,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from 'src/app/services/products.service';
 import { StoresService } from 'src/app/services/stores.service';
-import { Product } from 'src/app/share/product.module';
+import { Product } from 'src/app/model/product.model';
 import { ImageDialogComponent } from '../../products/image-dialog/image-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ImageProcessingService } from 'src/app/services/image-processing.service';
 import { map } from 'rxjs';
-import { Store } from 'src/app/share/store.module';
+import { Store } from 'src/app/model/store.model';
 
 @Component({
   selector: 'app-store-detail',

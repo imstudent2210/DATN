@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../environment/environment.prod';
-import { GeocoderResponse } from '../share/geocoder-response.model';
+import { environment } from '../../environment/environment.prod';
+import { GeocoderResponse } from '../model/geocoder-response.model';
 
 @Injectable({
   providedIn: 'root',

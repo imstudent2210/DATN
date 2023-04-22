@@ -7,12 +7,12 @@ import { Router } from '@angular/router';
 import { ImageProcessingService } from 'src/app/services/image-processing.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { StaffService } from 'src/app/services/staff.service';
-import { Staff } from 'src/app/share/staff.module';
+import { Staff } from 'src/app/model/staff.model';
 import { ImageDialogComponent } from '../products/image-dialog/image-dialog.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { map } from 'rxjs';
-import { Product } from 'src/app/share/product.module';
-import { Store } from 'src/app/share/store.module';
+import { Product } from 'src/app/model/product.model';
+import { Store } from 'src/app/model/store.model';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 @Component({

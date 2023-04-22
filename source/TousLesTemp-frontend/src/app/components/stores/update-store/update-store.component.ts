@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { AddressService } from 'src/app/services/address.service';
 import { StoresService } from 'src/app/services/stores.service';
-import { Store } from 'src/app/share/store.module';
+import { Store } from 'src/app/model/store.model';
 import { MyErrorStateMatcher } from '../create-store/create-store.component';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Observable, finalize } from 'rxjs';

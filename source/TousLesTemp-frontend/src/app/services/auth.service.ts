@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AppConstants } from '../share/app.constants';
-import { environment } from '../environment/environment.prod';
+import { environment } from '../../environment/environment.prod';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -15,14 +14,14 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(credentials:any): Observable<any> {
-    return this.http.post(environment.AUTH_API + 'signin', {
+    return this.http.post(environment.AUTH_API + '/signin', {
       email: credentials.username,
       password: credentials.password
     }, httpOptions);
   }
 
   register(user:any): Observable<any> {
-    return this.http.post(environment.AUTH_API + 'signup', {
+    return this.http.post(environment.AUTH_API + '/signup', {
       displayName: user.displayName,
       email: user.email,
       password: user.password,
@@ -33,7 +32,7 @@ export class AuthService {
   }
 
   verify(credentials:any): Observable<any> {
-    return this.http.post(environment.AUTH_API + 'verify', credentials.code, {
+    return this.http.post(environment.AUTH_API + '/verify', credentials.code, {
     	  headers: new HttpHeaders({ 'Content-Type': 'text/plain' })
     });
   }
@@ -42,10 +41,6 @@ export class AuthService {
     return this.http.post(`${environment.API_BASE_URL}/sendmail`, email);
   }
 
-// public getCurrentUser() {
-//   return this.http.get(`${environment.apiUrl}/current-user`);
-// }
-//set token to localstorage
 public loginToken(token: any) {
   sessionStorage.setItem('auth-token', token);
   return true;
@@ -78,7 +73,6 @@ public getUser() {
 }
 public getUserRole() {
   let user = this.getUser();
-  // return user.authorities[0].authority;
   return user.roles[0];
 }
 public getUserName() {

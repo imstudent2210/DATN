@@ -4,8 +4,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StoresService } from 'src/app/services/stores.service';
-import { CustomPaginator } from 'src/app/share/paginator-config';
-import { Store } from 'src/app/share/store.module';
+import { CustomPaginator } from 'src/app/model/paginator-config';
+import { Store } from 'src/app/model/store.model';
 // import { MatPaginatorIntl } from '@angular/material';
 @Component({
   selector: 'app-stores',

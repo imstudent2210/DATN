@@ -64,10 +64,11 @@ spring:
             enable: 'true'
           auth: 'true'
     host: ${MAIL_HOST:smtp.gmail.com}
-
     username: ${MAIL_USERNAME:imstudent2210@gmail.com}
-    password: ${MAIL_PASSWORD:mcpauyptjfcsjgcq}
+    password: ${MAIL_PASSWORD:kfpxhfmutqimkqeh}
     port: '587'
+    protocol: smtp
+    isSSL: false
 
 app:
   auth:

@@ -3,7 +3,7 @@ package com.graduate.touslestemp.controller;
 import com.graduate.touslestemp.domain.entity.Size;
 import com.graduate.touslestemp.domain.repository.SizeRepository;
 import com.graduate.touslestemp.exception.RequestException;
-import com.graduate.touslestemp.utils.ExportUtils;
+import com.graduate.touslestemp.util.ExportUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;

@@ -140,7 +140,11 @@
             <version>2.1.0</version>
         </dependency>
         <!---->
-        <!--Devtool, Lombok, Test, Validation, Mail-->
+        <!--Devtool, Lombok, Test, Validation, Thymeleaf, Mail-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>

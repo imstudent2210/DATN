@@ -1,8 +1,6 @@
-package com.graduate.touslestemp.utils;
+package com.graduate.touslestemp.util;
 
-import com.graduate.touslestemp.domain.entity.Category;
 import com.graduate.touslestemp.domain.entity.Size;
-import com.graduate.touslestemp.domain.entity.Staff;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

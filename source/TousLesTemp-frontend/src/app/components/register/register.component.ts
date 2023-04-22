@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { NgToastService } from 'ng-angular-popup';
+import { Mail } from 'src/app/model/mail.model';
 import { AuthService } from 'src/app/services/auth.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -36,6 +37,14 @@ export class RegisterComponent implements OnInit {
   password = new FormControl('', [Validators.required]);
   email = new FormControl('', [Validators.required,Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]);
   sendmail =  this.form.email;
+
+  clientMail: Mail = {
+    displayName:"",
+    email:"",
+    username:"",
+    password:""
+
+  }
   errror() {
     if (this.password.hasError('required')) {
       return 'Mật khẩu không được để trống';
@@ -70,9 +79,15 @@ export class RegisterComponent implements OnInit {
 	      this.isSuccessful = true;
         this.isSignUpFailed = false;
         console.log(this.form.email);
-        this.authService.sendmail(this.sendmail).subscribe(
+
+        this.clientMail.email = this.form.email;
+        this.clientMail.password =this.form.password;
+        this.clientMail.displayName = this.form.displayName
+        this.clientMail.username = this.form.email;
+
+        this.authService.sendmail(this.clientMail).subscribe(
           (data)=>{
-            this.toast.success({ detail: "Thông báo thành công", summary: " Đã gửi thư xác nhận!", duration: 3000 })
+            console.log("Gửi mail thành công");
           }
         )
       },

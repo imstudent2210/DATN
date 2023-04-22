@@ -1,5 +1,6 @@
 export interface Mail{
-  to?:string;
-  subject?:string;
-  message?:string;
+  displayName?:string;
+  username?:string;
+  email?:string;
+  password?:string
 }

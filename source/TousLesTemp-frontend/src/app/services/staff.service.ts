@@ -28,6 +28,6 @@ export class StaffService {
   }
 
   sendmail(email:any): Observable<any> {
-    return this.http.post(`${environment.API_BASE_URL}/sendmail`, email);
+    return this.http.post(`${environment.API_BASE_URL}/api/auth/sendmail`, email);
   }
 }

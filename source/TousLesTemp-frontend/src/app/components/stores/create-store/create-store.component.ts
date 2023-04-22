@@ -7,7 +7,7 @@ import { NgToastService } from 'ng-angular-popup';
 import { Observable, finalize } from 'rxjs';
 import { AddressService } from 'src/app/services/address.service';
 import { StoresService } from 'src/app/services/stores.service';
-import { Store } from 'src/app/share/store.module';
+import { Store } from 'src/app/model/store.model';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {

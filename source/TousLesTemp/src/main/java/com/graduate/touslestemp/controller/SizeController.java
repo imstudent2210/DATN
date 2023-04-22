@@ -1,6 +1,5 @@
 package com.graduate.touslestemp.controller;
 
-import com.graduate.touslestemp.domain.entity.Category;
 import com.graduate.touslestemp.domain.entity.Size;
 import com.graduate.touslestemp.domain.repository.SizeRepository;
 import com.graduate.touslestemp.exception.RequestException;

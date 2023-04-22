@@ -12,10 +12,9 @@ export class HomeGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(this.login.isLogin() && this.login.getUserRole()=="ROLE_USER"){
+      if(this.login.isLogin() && this.login.getUserRole()=="ROLE_ADMIN"){
         return true;
       }
-
       this.route.navigate(['login']);
     return false;
   }

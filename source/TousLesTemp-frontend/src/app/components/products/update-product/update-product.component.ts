@@ -8,8 +8,8 @@ import { CategoriesService } from 'src/app/services/categories.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { SizeService } from 'src/app/services/size.service';
 import { StoresService } from 'src/app/services/stores.service';
-import { FileHandle } from 'src/app/share/file-handle.module';
-import { Product } from 'src/app/share/product.module';
+import { FileHandle } from 'src/app/model/file-handle.model';
+import { Product } from 'src/app/model/product.model';
 import { MyErrorStateMatcher } from '../create-product/create-product.component';
 import { ImageProcessingService } from 'src/app/services/image-processing.service';
 

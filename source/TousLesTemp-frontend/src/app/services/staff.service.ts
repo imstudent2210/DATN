@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Staff } from '../share/staff.module';
+import { Staff } from '../model/staff.model';
 import { Observable } from 'rxjs';
-import { environment } from '../environment/environment';
+import { environment } from '../../environment/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -11,32 +11,23 @@ export class StaffService {
 
   constructor(private http: HttpClient) { }
   getStaff(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/staff/get`);
+    return this.http.get(`${environment.API_BASE_URL}/staff/get`);
   }
   getStaffById(id: any) {
-    return this.http.get<Staff>(`${environment.apiUrl}/staff/get/${id}`);
+    return this.http.get<Staff>(`${environment.API_BASE_URL}/staff/get/${id}`);
   }
   createStaff(staff: any): Observable<any> {
-    return this.http.post<Staff>(`${environment.apiUrl}/staff/create`, staff);
+    return this.http.post<Staff>(`${environment.API_BASE_URL}/staff/create`, staff);
   }
 
   updateStaff(staff: any, id: any): Observable<any> {
-    return this.http.put<Staff>(`${environment.apiUrl}/staff/update/${id}`, staff);
+    return this.http.put<Staff>(`${environment.API_BASE_URL}/staff/update/${id}`, staff);
   }
    deleteStaff(id:any){
-    return this.http.delete(`${environment.apiUrl}/staff/delete/${id}`);
+    return this.http.delete(`${environment.API_BASE_URL}/staff/delete/${id}`);
   }
-  // 1 usage
-  // createStaff(staff: FormData): Observable<any> {
-  //   return this.http.post<Staff>(`${environment.apiUrl}/staff/create2`, staff);
-  // }
-  // updateStaff(staff: FormData, id: any): Observable<any> {
-  //   return this.http.put<Staff>(`${environment.apiUrl}/staff/update2/${id}`, staff);
-  // }
-  // deleteStaff(id:any){
-  //   return this.http.delete(`${environment.apiUrl}/staff/delete2/${id}`);
-  // }
+
   sendmail(email:any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/sendmail`, email);
+    return this.http.post(`${environment.API_BASE_URL}/sendmail`, email);
   }
 }

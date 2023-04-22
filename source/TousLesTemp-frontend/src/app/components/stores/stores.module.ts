@@ -8,7 +8,7 @@ import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginato
 import { MatTableModule } from '@angular/material/table';
 import { AppComponent } from 'src/app/app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CustomPaginator } from 'src/app/share/paginator-config';
+import { CustomPaginator } from 'src/app/model/paginator-config';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { MatSortModule } from '@angular/material/sort';
@@ -22,6 +22,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { UploadImageComponent } from './upload-image/upload-image.component';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { UploadImageComponent } from './upload-image/upload-image.component';
     MatDialogModule,
     MatSlideToggleModule,
     MatGridListModule,
+    MatIconModule
 
   ],
   exports:[],

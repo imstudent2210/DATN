@@ -5,7 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeGuard } from './guard/home.guard';
 import { TotpComponent } from './components/totp/totp.component';
 import { RegisterComponent } from './components/register/register.component';
-
+import { UserComponent } from './components/user/user.component';
 
 
 const routes: Routes = [
@@ -24,6 +24,7 @@ const routes: Routes = [
   { path: '', component: LoginComponent, pathMatch: "full" },
   { path: 'otp', component: TotpComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'user', component: UserComponent },
 
 ];
 

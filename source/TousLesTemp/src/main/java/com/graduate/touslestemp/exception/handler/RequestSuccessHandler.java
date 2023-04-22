@@ -1,5 +1,6 @@
-package com.graduate.touslestemp.exception;
+package com.graduate.touslestemp.exception.handler;
 
+import com.graduate.touslestemp.exception.RequestSuccess;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

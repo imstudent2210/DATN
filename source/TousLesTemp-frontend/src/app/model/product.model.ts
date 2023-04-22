@@ -1,7 +1,7 @@
-import { Category } from "./category.module";
-import { FileHandle } from "./file-handle.module";
-import { Size } from "./size.module";
-import { Store } from "./store.module";
+import { Category } from "./category.model";
+import { FileHandle } from "./file-handle.model";
+import { Size } from "./size.model";
+import { Store } from "./store.model";
 
 
 export interface Product{

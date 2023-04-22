@@ -1,4 +1,4 @@
-package com.graduate.touslestemp.exception;
+package com.graduate.touslestemp.exception.handler;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;

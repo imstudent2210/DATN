@@ -4,10 +4,8 @@ import com.graduate.touslestemp.domain.dto.PageResponseDTO;
 import com.graduate.touslestemp.domain.dto.StoreDto;
 import com.graduate.touslestemp.domain.entity.Store;
 import com.graduate.touslestemp.domain.mapper.StoreMapper;
-import com.graduate.touslestemp.domain.repository.ProductRepository;
 import com.graduate.touslestemp.domain.repository.StoreRepository;
 import com.graduate.touslestemp.service.StoreService;
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
@@ -29,8 +26,6 @@ public class StoreController {
     private StoreService storeService;
     @Autowired
     private StoreMapper storeMapper;
-
-    /*===========================DTO v2=========================*/
 
     @GetMapping("/get")
     public ResponseEntity<List<StoreDto>> getAllStoreDTO() {
@@ -71,7 +66,5 @@ public class StoreController {
     public PageResponseDTO<?> pagingStoreDTO(Pageable request) {
         return storeService.getAllStore(request);
     }
-    /*==========================end DTO==============================*/
-
 
 }

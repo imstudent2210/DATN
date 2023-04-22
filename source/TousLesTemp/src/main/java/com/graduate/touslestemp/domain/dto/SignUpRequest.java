@@ -22,7 +22,7 @@ public class SignUpRequest {
 
 	private SocialProvider socialProvider;
 
-	@Size(min = 6, message = "{Size.userDto.password}")
+	@Size(min = 6, message = "Password must be at least 6 characters")
 	private String password;
 
 	@NotEmpty

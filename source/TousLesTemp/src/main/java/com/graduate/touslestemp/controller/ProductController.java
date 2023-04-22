@@ -2,7 +2,6 @@ package com.graduate.touslestemp.controller;
 
 import com.graduate.touslestemp.domain.dto.PageResponseDTO;
 import com.graduate.touslestemp.domain.dto.ProductDto;
-import com.graduate.touslestemp.domain.dto.StoreDto;
 import com.graduate.touslestemp.domain.entity.Product;
 import com.graduate.touslestemp.domain.mapper.ProductMapper;
 import com.graduate.touslestemp.domain.repository.ProductRepository;
@@ -26,11 +25,8 @@ public class ProductController {
     private ProductRepository productRepository;
     @Autowired
     private ProductService productService;
-
-
     @Autowired
     private ProductMapper productMapper;
-
 
     @GetMapping("/paging")
     public PageResponseDTO<?> getAllProduct(Pageable request) {
@@ -41,14 +37,17 @@ public class ProductController {
     public ResponseEntity<List<ProductDto>> allProductDTO() {
         return new ResponseEntity<>(productMapper.toProductDTOs(productRepository.findAll()), HttpStatus.OK);
     }
+
     @GetMapping("/get/{id}")
     public ResponseEntity<ProductDto> getProductDTOById(@PathVariable(name = "id") Long id) {
         return new ResponseEntity<>(productService.find(id), HttpStatus.OK);
     }
+
     @GetMapping("/get2")
     public ResponseEntity<List<Product>> allProduct() {
         return new ResponseEntity<>(productRepository.findAll(), HttpStatus.OK);
     }
+
     @GetMapping("/get2/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable(name = "id") Long id) {
         return new ResponseEntity<>(productService.findProduct(id), HttpStatus.OK);
@@ -66,34 +65,36 @@ public class ProductController {
     }
 
     @GetMapping("/filter/desc-price")
-    public ResponseEntity <List<ProductDto>> filterProductDTO() {
+    public ResponseEntity<List<ProductDto>> filterProductDTO() {
         return new ResponseEntity<>(productMapper.toProductDTOs(productRepository.filterHighPrice()), HttpStatus.OK);
     }
+
     @GetMapping("/search/{name}")
     List<ProductDto> searchStoreDTO(@PathVariable("name") String name) throws Exception {
         return this.productService.search(name);
     }
+
     @GetMapping("/filter/{categoryId}")
     List<ProductDto> filterStoreDTO(@PathVariable("categoryId") Long categoryId) throws Exception {
         return this.productService.filter(categoryId);
     }
 
 
-
-
-    @PostMapping(value = {"/create2"}, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_OCTET_STREAM_VALUE, })
+    @PostMapping(value = {"/create2"}, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_OCTET_STREAM_VALUE,})
     public ResponseEntity<Product> createProductDTO2(@RequestPart("product") @Valid Product product, @RequestPart("file") MultipartFile[] file) throws Exception {
         return new ResponseEntity<>(productService.create2(product, file), HttpStatus.OK);
     }
-    @PutMapping(value = "/update2/{id}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_OCTET_STREAM_VALUE, })
-    public ResponseEntity<Product> updateProductDTO2(@RequestPart("product") @Valid Product product, @PathVariable(name = "id") Long id,  @RequestPart("file") MultipartFile[] file) throws Exception {
+
+    @PutMapping(value = "/update2/{id}", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_OCTET_STREAM_VALUE,})
+    public ResponseEntity<Product> updateProductDTO2(@RequestPart("product") @Valid Product product, @PathVariable(name = "id") Long id, @RequestPart("file") MultipartFile[] file) throws Exception {
         return new ResponseEntity<>(productService.update2(product, id, file), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete2/{id}")
-    public void deleteProduct(@PathVariable("id") Long id) throws Exception{
+    public void deleteProduct(@PathVariable("id") Long id) throws Exception {
         this.productService.delete(id);
     }
+
     @GetMapping("/getByStoreId/{id}")
     List<Product> getByStoreId(@PathVariable("id") Long id) throws Exception {
         return this.productRepository.getProductByStoreId(id);

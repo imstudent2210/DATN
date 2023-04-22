@@ -4,7 +4,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { FileUpload } from '../share/file-upload.module';
+import { FileUpload } from '../model/file-upload.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,7 @@ export class FileUploadService {
     ).subscribe();
     return uploadTask.percentageChanges();
   }
- 
+
 
   private saveFileData(fileUpload: FileUpload): void {
     this.db.list(this.basePath).push(fileUpload);

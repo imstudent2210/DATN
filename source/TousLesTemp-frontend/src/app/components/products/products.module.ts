@@ -9,12 +9,12 @@ import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginato
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { CustomPaginator } from 'src/app/share/paginator-config';
+import { CustomPaginator } from 'src/app/model/paginator-config';
 import { MatListModule } from '@angular/material/list';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MycurrencyPipe } from 'src/app/share/custom.currencypipe';
+import { MycurrencyPipe } from 'src/app/model/custom.currencypipe';
 import { CreateProductComponent } from './create-product/create-product.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';

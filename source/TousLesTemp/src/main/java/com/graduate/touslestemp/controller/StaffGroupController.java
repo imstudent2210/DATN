@@ -1,10 +1,7 @@
 package com.graduate.touslestemp.controller;
 
-import com.graduate.touslestemp.domain.entity.Category;
 import com.graduate.touslestemp.domain.entity.StaffGroup;
-import com.graduate.touslestemp.domain.repository.CategoryRepository;
 import com.graduate.touslestemp.domain.repository.StaffGroupRepository;
-import com.graduate.touslestemp.service.CategoryService;
 import com.graduate.touslestemp.service.StaffGroupService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +49,5 @@ public class StaffGroupController {
     public void deleteStaffGroup(@PathVariable("id") Long id) throws Exception{
         this.staffGroupService.deleteStaffGroup(id);
     }
-
 
 }

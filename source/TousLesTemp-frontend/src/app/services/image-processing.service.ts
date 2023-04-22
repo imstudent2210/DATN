@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../share/product.module';
-import { FileHandle } from '../share/file-handle.module';
+import { Product } from '../model/product.model';
+import { FileHandle } from '../model/file-handle.model';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({

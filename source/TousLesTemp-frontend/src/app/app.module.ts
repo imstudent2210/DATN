@@ -13,29 +13,23 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-// import { AuthInterceptorProvider } from './guard/auth.interceptor';
 import { SublevelMenuComponent } from './components/sidenav/sublevel-menu.component';
 import { NgToastModule } from 'ng-angular-popup';
-
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MycurrencyPipe } from './share/custom.currencypipe';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
-import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
-import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import { SocialLoginModule } from '@abacritt/angularx-social-login';
 import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
-import { GoogleMapsModule } from '@angular/google-maps';
-import { AgmCoreModule } from '@agm/core';
-import { environment } from './environment/environment.prod';
-import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-
+import { environment } from '../environment/environment.prod';
+import { InputNumberModule } from 'primeng/inputnumber';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { TotpComponent } from './components/totp/totp.component';
 import { RegisterComponent } from './components/register/register.component';
-import { AuthInterceptor, AuthInterceptorProviders } from './guard/auth.interceptor';
+import { AuthInterceptorProviders } from './guard/auth.interceptor';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +41,8 @@ import { AuthInterceptor, AuthInterceptorProviders } from './guard/auth.intercep
     LoginComponent,
     SublevelMenuComponent,
     TotpComponent,
-    RegisterComponent
+    RegisterComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -64,8 +59,10 @@ import { AuthInterceptor, AuthInterceptorProviders } from './guard/auth.intercep
     MatButtonModule,
     MatCardModule,
     MatInputModule,
+    MatCheckboxModule,
     NgxUiLoaderModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    InputNumberModule,
+    AngularFireModule.initializeApp(environment.FIREBASE_CONFIG),
     AngularFirestoreModule,
     NgxUiLoaderHttpModule.forRoot({
       showForeground:true

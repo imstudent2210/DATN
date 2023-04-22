@@ -38,8 +38,14 @@ public class TokenProvider {
 		Date now = new Date();
 		Date expiryDate = new Date(now.getTime() + (authenticated ? appProperties.getAuth().getTokenExpirationMsec() : TEMP_TOKEN_VALIDITY_IN_MILLIS));
 
-		return Jwts.builder().setSubject(Long.toString(userPrincipal.getUser().getId())).claim(AUTHENTICATED, authenticated).setIssuedAt(new Date()).setExpiration(expiryDate)
-				.signWith(SignatureAlgorithm.HS256, appProperties.getAuth().getTokenSecret()).compact();
+		return Jwts.builder()
+				.setSubject(Long.toString(userPrincipal.getUser().getId()))
+				.claim(AUTHENTICATED, authenticated)
+				.setAudience(userPrincipal.getUser().getRoles().toString())
+				.setIssuedAt(new Date())
+				.setExpiration(expiryDate)
+				.signWith(SignatureAlgorithm.HS256, appProperties.getAuth().getTokenSecret())
+				.compact();
 	}
 
 	public Long getUserIdFromToken(String token) {

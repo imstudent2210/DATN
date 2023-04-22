@@ -5,12 +5,12 @@
   import { CategoriesService } from 'src/app/services/categories.service';
   import { StoresService } from 'src/app/services/stores.service';
   import { map, startWith } from 'rxjs/operators';
-  import { Store } from 'src/app/share/store.module';
+  import { Store } from 'src/app/model/store.model';
   import { ProductsService } from 'src/app/services/products.service';
   import { NgToastService } from 'ng-angular-popup';
-  import { FileHandle } from 'src/app/share/file-handle.module';
+  import { FileHandle } from 'src/app/model/file-handle.model';
   import { DomSanitizer } from '@angular/platform-browser';
-  import { Product } from 'src/app/share/product.module';
+  import { Product } from 'src/app/model/product.model';
   import { SizeService } from 'src/app/services/size.service';
   import { ActivatedRoute, Router } from '@angular/router';
 

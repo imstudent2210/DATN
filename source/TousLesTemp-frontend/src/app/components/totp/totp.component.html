@@ -1,21 +1,27 @@
-<div class="col-md-12">
-	<div class="card card-container">
-		<img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
-		<form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-			<div class="form-group">
-				<label for="code">Bạn có thể sử dụng các mật khẩu một lần được tạo bởi ứng dụng Google Authentication để xác minh đăng nhập của bạn</label> <input type="text" class="form-control" name="code" [(ngModel)]="form.code" required minlength="6" #code="ngModel" />
-				<div class="alert alert-danger" role="alert" *ngIf="f.submitted && code.invalid">
-					<!-- <div *ngIf="code.errors.required">Code is required</div>
-					<div *ngIf="code.errors.minlength">Code must be at least 6 characters</div> -->
-				</div>
-			</div>
-			<div class="form-group">
-				<button class="btn btn-primary btn-block">Login</button>
-			</div>
-			<div class="form-group">
-				<div class="alert alert-danger" role="alert" *ngIf="isLoginFailed">Xác thực hất bại: {{ errorMessage }}</div>
-			</div>
-		</form>
-		<!-- <div class="alert alert-success" *ngIf="isLoggedIn">Welcome {{currentUser.displayName}} <br>Logged in as {{ currentUser.roles }}.</div> -->
-	</div>
+<div class="backgound-image" style="background-image: url('../../../assets/touslestemp.jpg');">
+  <div class="row">
+    <div class="col-md-12">
+      <mat-card>
+        <div class="otp-form">
+          <mat-card-title class="my-2 linetext"><span>đăng nhập</span></mat-card-title>
+          <img id="profile-img" src="../../../assets/register3.png" class="otp-img-card" />
+          <p class="content">Mật khẩu một lần được tạo bởi ứng dụng Google Authentication để xác minh đăng nhập của bạn
+          </p>
+          <form class="mx-3" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Nhập mã OTP</mat-label>
+              <input matInput type="number" name="code" [(ngModel)]="form.code" required maxlength="6" #code="ngModel">
+              <mat-error *ngIf="otp.invalid">{{errror()}}</mat-error>
+            </mat-form-field>
+
+            <div class="text-center mx-3 my-2">
+              <button mat-raised-button class="button-submit mx-2"><mat-icon>done</mat-icon>Xác nhận</button>
+              <button mat-raised-button class="mx-2" [routerLink]="'/login'"><mat-icon>keyboard_backspace</mat-icon>Trở
+                về</button>
+            </div>
+          </form>
+        </div>
+      </mat-card>
+    </div>
+  </div>
 </div>

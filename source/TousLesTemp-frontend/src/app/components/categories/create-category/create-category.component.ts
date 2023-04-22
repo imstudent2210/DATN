@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CategoriesService } from 'src/app/services/categories.service';
-import { Category } from 'src/app/share/category.module';
+import { Category } from 'src/app/model/category.model';
 import { MyErrorStateMatcher } from '../../products/create-product/create-product.component';
 import { NgToastService } from 'ng-angular-popup';
 
@@ -42,6 +42,6 @@ export class CreateCategoryComponent implements OnInit {
       )
   }
   ngOnInit(): void {
-    
+
   }
 }

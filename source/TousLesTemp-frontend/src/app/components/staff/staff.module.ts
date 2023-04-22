@@ -19,7 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { CustomPaginator } from 'src/app/share/paginator-config';
+import { CustomPaginator } from 'src/app/model/paginator-config';
 import { UpdateStaffComponent } from './update-staff/update-staff.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 

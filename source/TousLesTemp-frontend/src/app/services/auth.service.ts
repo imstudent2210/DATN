@@ -38,7 +38,7 @@ export class AuthService {
   }
 
   sendmail(email:any): Observable<any> {
-    return this.http.post(`${environment.API_BASE_URL}/sendmail`, email);
+    return this.http.post(`${environment.AUTH_API}/sendmail`, email);
   }
 
 public loginToken(token: any) {

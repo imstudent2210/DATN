@@ -1,4 +1,4 @@
-package com.graduate.touslestemp.utils;
+package com.graduate.touslestemp.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

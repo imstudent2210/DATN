@@ -1,5 +1,6 @@
 package com.graduate.touslestemp.config;
 
+import com.graduate.touslestemp.security.jwt.RestAuthenticationEntryPoint;
 import com.graduate.touslestemp.security.jwt.TokenAuthenticationFilter;
 import com.graduate.touslestemp.security.oauth2.*;
 import org.springframework.beans.factory.annotation.Autowired;

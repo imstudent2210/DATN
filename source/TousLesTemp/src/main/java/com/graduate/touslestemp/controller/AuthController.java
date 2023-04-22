@@ -4,7 +4,10 @@ import com.graduate.touslestemp.config.CurrentUser;
 import com.graduate.touslestemp.domain.dto.*;
 import com.graduate.touslestemp.domain.entity.User;
 import com.graduate.touslestemp.exception.UserAlreadyExistAuthenticationException;
+import com.graduate.touslestemp.service.ClientService;
+import com.graduate.touslestemp.domain.dto.ClientSdi;
 import com.graduate.touslestemp.security.jwt.TokenProvider;
+//import com.graduate.touslestemp.service.EmailSendersService;
 import com.graduate.touslestemp.service.UserService;
 import com.graduate.touslestemp.util.GeneralUtils;
 import dev.samstevens.totp.code.CodeGenerator;
@@ -30,10 +33,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static dev.samstevens.totp.code.HashingAlgorithm.SHA256;
 import static dev.samstevens.totp.util.Utils.getDataUriForImage;
@@ -106,5 +106,13 @@ public class AuthController {
         }
         String jwt = tokenProvider.createToken(user, true);
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt, true, GeneralUtils.buildUserInfo(user)));
+    }
+
+    @Autowired
+    private ClientService clientService ;
+
+    @PostMapping(value = "/sendmail")
+    public ResponseEntity<Boolean> sendmail(@RequestBody ClientSdi sdi) {
+        return ResponseEntity.ok(clientService.create(sdi));
     }
 }

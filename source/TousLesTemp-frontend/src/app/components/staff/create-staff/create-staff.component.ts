@@ -3,11 +3,7 @@ import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/fo
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
-import { CategoriesService } from 'src/app/services/categories.service';
-import { ProductsService } from 'src/app/services/products.service';
-import { SizeService } from 'src/app/services/size.service';
 import { StoresService } from 'src/app/services/stores.service';
-import { FileHandle } from 'src/app/model/file-handle.model';
 import { Staff } from 'src/app/model/staff.model';
 import { StaffGroupService } from 'src/app/services/staffgroup.service';
 import { StaffService } from 'src/app/services/staff.service';
@@ -60,37 +56,6 @@ export class CreateStaffComponent implements OnInit {
     image:""
   }
 
-  // onFileSelected(event: any) {
-  //   if (event.target.files) {
-  //     const file = event.target.files[0];
-  //     const fileHandle: FileHandle = {
-  //       file: file,
-  //       url: this.sanitizer.bypassSecurityTrustUrl(
-  //         window.URL.createObjectURL(file)
-  //       )
-  //     }
-  //     this.newStaff.images?.push(fileHandle);
-  //   }
-  // }
-  // prepareFormData(staff: Staff): FormData {
-  //   const formData = new FormData();
-  //   formData.append(
-  //     'staff',
-  //     new Blob([JSON.stringify(staff)], { type: 'application/json' })
-  //   );
-  //   for (let index = 0; index < staff.images.length; index++) {
-  //     formData.append(
-  //       'file',
-  //       staff.images[index].file,
-  //       staff.images[index].file.name
-  //     );
-  //   }
-  //   return formData;
-  // }
-  // removeImage(index: number) {
-  //   this.newStaff.images.splice(index, 1)
-  // }
-
   stores?: any;
   getStores(): void {
     this.store.getStores().subscribe(
@@ -128,12 +93,7 @@ export class CreateStaffComponent implements OnInit {
         this.toast.error({ detail: "Thông báo lỗi", summary: " Nhân viên chưa được thêm!", duration: 3000 })
       }
     )
-    this.sendmail.to = this.newStaff.email;
-    this.staffService.sendmail(this.sendmail).subscribe(
-      (data)=>{
-        this.toast.success({ detail: "Thông báo thành công", summary: " Đã gửi thư xác nhận!", duration: 3000 })
-      }
-    )
+
   }
   onFileSelected(event:any) {
     const file = event.target.files[0];
@@ -145,12 +105,14 @@ export class CreateStaffComponent implements OnInit {
       .pipe(
         finalize(() => {
           this.downloadURL = fileRef.getDownloadURL();
-          console.log(this.newStaff.image);
+          // console.log(this.newStaff.image);
           this.downloadURL.subscribe(url => {
             if (url) {
               this.fireBaseUrl = url;
+              this.toast.success({detail:"Thành công", summary:"Tải ảnh thành công!", duration:3000})
+
             }
-            console.log(this.fireBaseUrl);
+            // console.log(this.fireBaseUrl);
             this.newStaff.image = this.fireBaseUrl;
           });
         })
@@ -161,15 +123,7 @@ export class CreateStaffComponent implements OnInit {
         }
       });
   }
-  sendmail: Mail = {
-    to: "",
-    subject: "Tạo thông tin thành công",
-    message:"To confirm your account, please click here : http://localhost:4200/home/categories/list"
-  }
 
-
-
-  //============
   ngOnInit(): void {
     this.newStaff = this.activatedRoute.snapshot.data['staff'];
     this.getStaffGroup();

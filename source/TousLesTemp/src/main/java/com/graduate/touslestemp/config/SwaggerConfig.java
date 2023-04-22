@@ -60,20 +60,4 @@ public class SwaggerConfig {
                 Collections.emptyList());
     }
 
-
-//    @Bean
-//    public WebMvcConfigurer webMvcConfigurer()
-//    {
-//        return new WebMvcConfigurer()
-//        {
-//            @Override
-//            public void addResourceHandlers( ResourceHandlerRegistry registry )
-//            {
-//                registry.addResourceHandler( "swagger-ui.html" ).addResourceLocations( "classpath:/META-INF/resources/" );
-//                registry.addResourceHandler( "/webjars/**" ).addResourceLocations( "classpath:/META-INF/resources/webjars/" );
-//            }
-//        };
-//    }
-
-
 }

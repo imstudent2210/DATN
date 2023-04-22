@@ -1,6 +1,5 @@
 package com.graduate.touslestemp.domain.dto;
 
-//import com.graduate.touslestemp.domain.entity.User;
 import com.graduate.touslestemp.util.GeneralUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -14,14 +13,10 @@ import java.util.Map;
 
 /**
  * 
- * @author Chinna
+ * @author imstudent2210
  *
  */
 public class LocalUser extends User implements OAuth2User, OidcUser {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2845160792248762779L;
 	private final OidcIdToken idToken;
 	private final OidcUserInfo userInfo;

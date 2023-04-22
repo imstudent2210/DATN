@@ -6,7 +6,7 @@ import com.graduate.touslestemp.domain.dto.SignUpRequest;
 import com.graduate.touslestemp.domain.dto.SocialProvider;
 import com.graduate.touslestemp.domain.entity.User;
 import com.graduate.touslestemp.domain.entity.Role;
-import com.graduate.touslestemp.domain.repository.Role2Repository;
+import com.graduate.touslestemp.domain.repository.RoleRepository;
 import com.graduate.touslestemp.domain.repository.UserRepository;
 import com.graduate.touslestemp.exception.OAuth2AuthenticationProcessingException;
 import com.graduate.touslestemp.exception.UserAlreadyExistAuthenticationException;
@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 
 	@Autowired
-	private Role2Repository roleRepository;
+	private RoleRepository roleRepository;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional(value = "transactionManager")
-	public User registerNewUser(final SignUpRequest signUpRequest) throws UserAlreadyExistAuthenticationException {
+	public User registerNewAdmin(final SignUpRequest signUpRequest) throws UserAlreadyExistAuthenticationException {
 		if (signUpRequest.getUserID() != null && userRepository.existsById(signUpRequest.getUserID())) {
 			throw new UserAlreadyExistAuthenticationException("User with User id " + signUpRequest.getUserID() + " already exist");
 		} else if (userRepository.existsByEmail(signUpRequest.getEmail())) {
@@ -64,7 +64,8 @@ public class UserServiceImpl implements UserService {
 		user.setEmail(formDTO.getEmail());
 		user.setPassword(passwordEncoder.encode(formDTO.getPassword()));
 		final HashSet<Role> roles = new HashSet<Role>();
-		roles.add(roleRepository.findByName(Role.ROLE_USER));
+//		roles.add(roleRepository.findByName(Role.ROLE_USER));
+		roles.add(roleRepository.findByName(Role.ROLE_ADMIN));
 		user.setRoles(roles);
 		user.setProvider(formDTO.getSocialProvider().getProviderType());
 		user.setEnabled(true);
@@ -99,7 +100,7 @@ public class UserServiceImpl implements UserService {
 			}
 			user = updateExistingUser(user, oAuth2UserInfo);
 		} else {
-			user = registerNewUser(userDetails);
+			user = registerNewAdmin(userDetails);
 		}
 
 		return LocalUser.create(user, attributes, idToken, userInfo);

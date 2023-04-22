@@ -1,28 +1,16 @@
 package com.graduate.touslestemp.controller;
 
 import com.graduate.touslestemp.domain.dto.StaffDto;
-import com.graduate.touslestemp.domain.entity.Product;
 import com.graduate.touslestemp.domain.entity.Staff;
 import com.graduate.touslestemp.domain.mapper.StaffMapper;
 import com.graduate.touslestemp.domain.repository.StaffRepository;
-import com.graduate.touslestemp.exception.RequestException;
 import com.graduate.touslestemp.service.StaffService;
-import com.graduate.touslestemp.utils.ExportUtils;
-import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayInputStream;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController

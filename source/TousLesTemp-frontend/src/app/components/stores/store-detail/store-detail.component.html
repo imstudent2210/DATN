@@ -26,22 +26,22 @@
         <img class="image" mat-card-image src="{{product.image}}" alt="...">
         <mat-card-content>
           <p>
-            <strong>Số lượng: </strong> {{product.inventory}}
-          </p>
-          <p>
             <mat-chip-listbox aria-label="Size">
               <mat-chip-option selected>{{product.size.size}}
               </mat-chip-option>
             </mat-chip-listbox>
           </p>
           <p>
+            <strong>Số lượng: </strong> {{product.inventory}}
+          </p>
+          <p>
             <strong>Đơn giá: </strong> {{ product.price | currency: " VND " | uppercase }}
           </p>
 
         </mat-card-content>
-        <mat-card-actions class="button">
-          <button mat-raised-button class=" mx-2"><mat-icon>open_in_new</mat-icon>Chi tiết</button>
-          <button mat-raised-button class="button-submit mx-2" (click)="editProduct(product.id)"><mat-icon>edit</mat-icon>Cập nhập</button>
+        <mat-card-actions class="group-button-detail">
+          <button mat-raised-button class="button-submit me-auto" (click)="editProduct(product.id)"><mat-icon>edit</mat-icon>Cập nhập</button>
+          <button mat-raised-button class="ms-auto"><mat-icon>open_in_new</mat-icon>Chi tiết</button>
         </mat-card-actions>
       </mat-card>
     </div>

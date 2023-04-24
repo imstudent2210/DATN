@@ -10,7 +10,7 @@
   </div>
 
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-10">
       <div class="effect my-2" >
         <input class="effect-2" (keyup)="doFilter($event)" type="text" [(ngModel)]="name" placeholder="Tìm kiếm">
         <i class="fa-solid fa-magnifying-glass icon-search"></i>
@@ -18,9 +18,9 @@
       </div>
       <button mat-raised-button class="button-submit mt-2 ms-auto" [routerLink]="'../create'"><mat-icon>library_add</mat-icon>Thêm mới</button>
 
-      <button class="btn-1 ms-auto my-2"  (click)="export()">
+      <!-- <button class="btn-1 ms-auto my-2"  (click)="export()">
         <i class="fa-solid fa-file-excel btn-1-icon"></i><span class="btn-1-text">Xuất Excel</span>
-      </button>
+      </button> -->
       <table mat-table matSort [dataSource]="categories" class="mat-elevation-z8 table-tlt" id="categoryExport">
 
         <ng-container matColumnDef="id">

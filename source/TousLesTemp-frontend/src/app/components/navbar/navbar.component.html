@@ -8,29 +8,36 @@
       </button>
       <div class=" collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto ">
-          <!-- <li class="nav-item">
-            <a class="nav-link mx-2 text-uppercase active" aria-current="page"
-            href="#"> Quản lí chuỗi cửa hàng Tous Les Temp</a>
-          </li> -->
           <li class="nav-item">
              <a id="clock" class="nav-link mx-2 text-uppercase active" aria-current="page"
              href="#" style="cursor: none;" disabled="disabled"></a>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto ">
+
           <li class="nav-item">
             <a class="nav-link mx-2 active">
-              <i class="fad fa-coffee-togo me-1"></i><strong matBadge={{email}} matBadgeOverlap="false" class="demo-section">Sản phẩm</strong></a>
+              <i class="fa fa-user me-1 "></i><strong>{{email}}</strong></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link mx-2 active">
-              <i class="fa-solid fa-circle-user me-1"></i><strong>{{email}}</strong></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link mx-2 text-uppercase active" (click)="logout()"><i
-                class="fa-solid fa-right-from-bracket"></i></a>
+            <img [matMenuTriggerFor]="menu"  class="logo" src="../../../assets/logo.jpg" alt="">
           </li>
         </ul>
+
+        <mat-menu #menu="matMenu" class="menu">
+          <button mat-menu-item>
+            <mat-icon> local_offer</mat-icon>
+            <span class="menu-item">{{username}}</span>
+          </button>
+          <button mat-menu-item >
+            <mat-icon>supervisor_account</mat-icon>
+            <span class="menu-item" [routerLink]="'/profile'">Tài khoản </span>
+          </button>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span class="menu-item">Đăng xuất</span>
+          </button>
+        </mat-menu>
       </div>
     </div>
   </nav>

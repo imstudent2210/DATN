@@ -47,4 +47,27 @@
   background: #FF9900;
 }
 
-
+.store{
+  text-align: center;
+  height: 110px !important;
+  padding: 10px;
+  background: #fff;
+  // border-bottom: #000 1px solid;
+  margin-bottom: 2px;
+  cursor: pointer !important;
+  .store-name{
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+    color: #FF9900;
+  }
+  .store-address{
+    color: #000;
+    font-weight: 500;
+  }
+ 
+}
+.store:hover{
+  background:#eee ;
+}

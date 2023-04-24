@@ -47,6 +47,7 @@ body {
 
 .button-submit {
   background-color: var(--yellow, transparent) !important;
+  float: right;
 }
 
 // Table
@@ -405,6 +406,18 @@ input::-webkit-inner-spin-button {
   border-color: transparent #FFFFFF transparent transparent;
   top: 22px;
   left: -23px;
+}
+
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  min-width: 300px;
+}
+.group-button{
+  justify-content: center;
+  display: flex;
 }
 
 

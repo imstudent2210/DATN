@@ -1,9 +1,9 @@
 <div class="container ">
   <mat-card>
     <mat-card-header>
-      <p class="title-page">Cập nhật thông tin loại sản phẩm</p>
+      <p class="title-page">Thêm chi nhánh</p>
     </mat-card-header>
-    <form class="example-form my-3 mx-3" (ngSubmit)="updateCategory()">
+    <form class="example-form my-3 mx-3" (ngSubmit)="createCategory()">
       <div class="row">
         <div class="col-md-8">
           <div class="row">
@@ -11,14 +11,12 @@
               <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Tên loại sản phẩm</mat-label>
                 <input type="text" matInput [formControl]="namef" [errorStateMatcher]="matcher"
-                  [(ngModel)]="currentCategory.name" name="name">
+                  [(ngModel)]="newAddress.name" name="name">
                 <mat-error *ngIf="namef.hasError('required')">
                   Vui lòng nhập tên loại sản phẩm
                 </mat-error>
               </mat-form-field>
-              <mat-slide-toggle name="activated" [(ngModel)]="currentCategory.activated">
-                <span class="slide-toggle">Còn hàng ?</span>
-              </mat-slide-toggle>
+    
             </div>
 
           </div>
@@ -26,13 +24,15 @@
             <div class="col-md-6">
             </div>
             <div class="group-button">
-              <button mat-raised-button class="mt-2 mx-2" [routerLink]="'../../../categories/list'" type="button"><mat-icon>keyboard_backspace</mat-icon>Trở về</button>
-              <button mat-raised-button class="button-submit mt-2 mx-2"><mat-icon>save</mat-icon>Cập nhật</button>
+                <button mat-raised-button class="mt-2 mx-2" [routerLink]="'../../categories/list'" type="button"><mat-icon>keyboard_backspace</mat-icon>Trở về</button>
+                <button mat-raised-button class="button-submit mt-2 mx-2"><mat-icon>save</mat-icon>Lưu</button>
 
-          </div>
+            </div>
+
           </div>
         </div>
       </div>
     </form>
   </mat-card>
 </div>
+

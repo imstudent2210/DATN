@@ -1,54 +1,3 @@
-<!-- <div class="col-md-12">
-	<div class="card card-container">
-		<img id="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" class="profile-img-card" />
-		<form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-			<div class="form-group">
-				<label for="displayName">Display Name</label> <input type="text" class="form-control" name="displayName" [(ngModel)]="form.displayName" required minlength="3"
-					maxlength="20" #displayName="ngModel" />
-				<div class="alert-danger" *ngIf="f.submitted && displayName.invalid">
-
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="email">Email</label> <input type="email" class="form-control" name="email" [(ngModel)]="form.email" required email #email="ngModel" />
-				<div class="alert-danger" *ngIf="f.submitted && email.invalid">
-
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="password">Password</label> <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="6"
-					#password="ngModel" />
-				<div class="alert-danger" *ngIf="f.submitted && password.invalid">
-
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="matchingPassword">Confirm Password</label> <input type="password" class="form-control" name="matchingPassword" [(ngModel)]="form.matchingPassword"
-					required minlength="6" #matchingPassword="ngModel" />
-				<div class="alert-danger" *ngIf="f.submitted && matchingPassword.invalid">
-
-				</div>
-			</div>
-			<div class="form-group form-check">
-				<input type="checkbox" class="form-check-input" name="using2FA" [(ngModel)]="form.using2FA" #using2FA="ngModel" /><label class="form-check-label" for="using2FA">Use
-					Two Step Verification</label>
-			</div>
-			<div class="form-group">
-				<button class="btn btn-primary btn-block">Sign Up</button>
-			</div>
-			<div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
-				Signup failed!<br />{{ errorMessage }}
-			</div>
-		</form>
-		<div class="alert alert-success" *ngIf="isSuccessful">
-			Your registration is successful!
-			<div *ngIf="isUsing2FA">
-				<p>Scan this QR code using Google Authenticator app on your phone to use it later to login</p>
-				<img src="{{qrCodeImage}}" class="img-fluid" />
-			</div>
-		</div>
-	</div>
-</div> -->
 <div class="backgound-image" style="background-image: url('../../../assets/touslestemp.jpg');">
   <div class="row">
     <div class="col-md-12">
@@ -88,11 +37,10 @@
               <mat-error *ngIf="password.invalid">{{errrorPassword()}}</mat-error>
             </mat-form-field>
             <mat-checkbox name="using2FA" [(ngModel)]="form.using2FA" #using2FA="ngModel">Xác thực hai yếu tố </mat-checkbox>
-            <div class="text-center mx-3 my-2">
-              <!-- <div class="linetext my-2"><span></span></div> -->
-              <button mat-raised-button class="button-submit mx-2 mb-2"><mat-icon>login</mat-icon>Đăng ký</button>
+            <div class="group-button">
               <button type="button" class="mx-2 mb-2" mat-raised-button
                 [routerLink]="'/login'"><mat-icon>keyboard_backspace</mat-icon>Trở về</button>
+                <button mat-raised-button class="button-submit mx-2 mb-2"><mat-icon>login</mat-icon>Đăng ký</button>
             </div>
           </form>
 

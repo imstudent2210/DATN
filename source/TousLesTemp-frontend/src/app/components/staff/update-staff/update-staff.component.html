@@ -66,10 +66,9 @@
           <img [src]="currentStaff.image" width="350px" height="280px" name="image">
         </div>
       </div>
-      <div class="button">
+      <div class="group-button">
+        <button mat-raised-button class="mt-2 mx-2" [routerLink]="'../../../staff/list'"type="button"><mat-icon>keyboard_backspace</mat-icon>Trở về</button>
         <button mat-raised-button class="button-submit mt-2 mx-2"><mat-icon>edit</mat-icon>Cập nhật</button>
-        <button mat-raised-button class="mt-2 mx-2" [routerLink]="'../../../staff/list'"
-          type="button"><mat-icon>keyboard_backspace</mat-icon>Trở về</button>
       </div>
     </form>
   </mat-card>

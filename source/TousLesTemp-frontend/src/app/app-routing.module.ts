@@ -6,6 +6,7 @@ import { HomeGuard } from './guard/home.guard';
 import { TotpComponent } from './components/totp/totp.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UserComponent } from './components/user/user.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'otp', component: TotpComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'user', component: UserComponent },
+  { path: 'profile', component: ProfileComponent },
 
 ];
 

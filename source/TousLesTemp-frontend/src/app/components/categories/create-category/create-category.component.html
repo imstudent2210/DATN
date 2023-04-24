@@ -1,7 +1,7 @@
 <div class="container ">
   <mat-card>
     <mat-card-header>
-      <p class="title-page">Cập nhật thông tin loại sản phẩm</p>
+      <p class="title-page">Thêm loại sản phẩm</p>
     </mat-card-header>
     <form class="example-form my-3 mx-3" (ngSubmit)="createCategory()">
       <div class="row">
@@ -25,9 +25,10 @@
           <div class="row">
             <div class="col-md-6">
             </div>
-            <div class="d-flex">
+            <div class="group-button">
+                <button mat-raised-button class="mt-2 mx-2" [routerLink]="'../../categories/list'" type="button"><mat-icon>keyboard_backspace</mat-icon>Trở về</button>
                 <button mat-raised-button class="button-submit mt-2 mx-2"><mat-icon>save</mat-icon>Lưu</button>
-                <button mat-raised-button class="mt-2 mx-2" [routerLink]="'../categories/list'" type="button"><mat-icon>keyboard_backspace</mat-icon>Trở về</button>
+
             </div>
 
           </div>

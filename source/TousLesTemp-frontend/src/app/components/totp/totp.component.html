@@ -14,10 +14,10 @@
               <mat-error *ngIf="otp.invalid">{{errror()}}</mat-error>
             </mat-form-field>
 
-            <div class="text-center mx-3 my-2">
+            <div class="group-button">
+              <button mat-raised-button class="mx-2" [routerLink]="'/login'">
+                <mat-icon>keyboard_backspace</mat-icon>Trở về</button>
               <button mat-raised-button class="button-submit mx-2"><mat-icon>done</mat-icon>Xác nhận</button>
-              <button mat-raised-button class="mx-2" [routerLink]="'/login'"><mat-icon>keyboard_backspace</mat-icon>Trở
-                về</button>
             </div>
           </form>
         </div>

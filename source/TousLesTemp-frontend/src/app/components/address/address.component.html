@@ -6,9 +6,9 @@
           <!-- <input class="effect-3" [disabled]="isWorking" #inputField [(ngModel)]="address"
             (keydown.enter)="findAddress()" type="text" placeholder="Địa chỉ cửa hàng">
           <i class="fa-solid fa-close icon-search" (click)="reset()"></i> -->
-          <span class="focus-border"></span>
+          <!-- <span class="focus-border"></span> -->
 
-          <button mat-raised-button class="button-submit mt-2 ms-auto" (click)="getCurrentLocation()" [disabled]="isWorking"><mat-icon>place</mat-icon>Vị trí của tôi</button>
+          <button mat-raised-button class="button-submit mt-2" style="float:left" (click)="getCurrentLocation()" [disabled]="isWorking"><mat-icon>place</mat-icon>Vị trí của tôi</button>
         </div>
 
         <!-- <button mat-raised-button class="button-submit mt-2 ms-auto" (click)="findAddress()" [disabled]="isWorking || !address?.length"><mat-icon>location_searching</mat-icon>Tìm kiếm</button> -->
@@ -20,16 +20,16 @@
 
           <div class="scrollbar" #scrollbar>
             <mat-list>
-              <div mat-subheader>Cửa hàng</div>
-              <mat-list-item *ngFor="let store of listStore" (click)="findStores(store.addressDetail)">
-                <div matListItemTitle>{{store.name}}</div>
-                <div matListItemLine>{{store.addressDetail}}</div>
+              <mat-list-item class="store" *ngFor="let store of listStore" (click)="findStores(store.addressDetail)">
+                <div matListItemTitle class="store-name">{{store.name}}</div>
+                <div class="store-address">Địa chỉ: {{store.addressDetail}}</div>
+                <div class="store-address">Điện thoại: {{store.phone}}</div>
               </mat-list-item>
             </mat-list>
           </div>
         </div>
         <div class="col-12 col-md-8">
-          <div class="google_map_container shadow-sm rounded mt-3 mt-md-0">
+          <div class="google_map_container shadow-sm rounded mt-1">
             <google-map width="100%" [zoom]="mapZoom" [center]="mapCenter" [options]="mapOptions">
               <map-marker #marker="mapMarker" [position]="mapCenter" [options]="markerOptions"
                 (mapClick)="openInfoWindow(marker)" (mapDragend)="onMapDragEnd($event)">

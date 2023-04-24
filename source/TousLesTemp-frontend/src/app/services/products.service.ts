@@ -16,22 +16,22 @@ export class ProductsService {
   }
 
   getProducts():Observable<any>{
-    return this.http.get(`${environment.API_BASE_URL}/product/get2`);
+    return this.http.get(`${environment.API_BASE_URL}/product/get-all`);
   }
   getProductById(id:any){
-    return this.http.get<Product>(`${environment.API_BASE_URL}/product/get2/${id}`);
+    return this.http.get<Product>(`${environment.API_BASE_URL}/product/get/${id}`);
   }
 
   // 1 usage
-  createProduct(product:FormData):Observable<any>{
-    return this.http.post<Product>(`${environment.API_BASE_URL}/product/create2`, product);
+  createProduct(product:any):Observable<any>{
+    return this.http.post<Product>(`${environment.API_BASE_URL}/product/create`, product);
   }
-  updateProduct2(product:FormData, id:any):Observable<any>{
-    return this.http.put<Product>(`${environment.API_BASE_URL}/product/update2/${id}`, product);
+  updateProduct2(product:any, id:any):Observable<any>{
+    return this.http.put<Product>(`${environment.API_BASE_URL}/product/update/${id}`, product);
   }
 
   deleteProduct(id:any){
-    return this.http.delete(`${environment.API_BASE_URL}/product/delete2/${id}`);
+    return this.http.delete(`${environment.API_BASE_URL}/product/delete/${id}`);
   }
   getProductsByStoreId(id:number):Observable<any>{
     return this.http.get(`${environment.API_BASE_URL}/product/getByStoreId/${id}`);

@@ -21,7 +21,7 @@ import { UpdateStoreComponent } from './update-store/update-store.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { UploadImageComponent } from './upload-image/upload-image.component';
+// import { UploadImageComponent } from '../upload-image/upload-image.component';
 import { MatIconModule } from '@angular/material/icon';
 
 
@@ -31,8 +31,6 @@ import { MatIconModule } from '@angular/material/icon';
     StoreDetailComponent,
     CreateStoreComponent,
     UpdateStoreComponent,
-    UploadImageComponent,
-
   ],
   imports: [
     CommonModule,

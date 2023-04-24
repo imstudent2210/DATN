@@ -4,7 +4,7 @@
   import { Observable } from 'rxjs';
   import { CategoriesService } from 'src/app/services/categories.service';
   import { StoresService } from 'src/app/services/stores.service';
-  import { map, startWith } from 'rxjs/operators';
+  import { finalize, map, startWith } from 'rxjs/operators';
   import { Store } from 'src/app/model/store.model';
   import { ProductsService } from 'src/app/services/products.service';
   import { NgToastService } from 'ng-angular-popup';
@@ -13,6 +13,7 @@
   import { Product } from 'src/app/model/product.model';
   import { SizeService } from 'src/app/services/size.service';
   import { ActivatedRoute, Router } from '@angular/router';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 
   export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -33,7 +34,7 @@
       private category: CategoriesService, private store: StoresService,
       private sizeService: SizeService, private productService: ProductsService,
       private toast: NgToastService, private sanitizer: DomSanitizer,
-      private route: Router, private activatedRoute: ActivatedRoute) { }
+      private route: Router,  private storage: AngularFireStorage) { }
 
     // Validators
     matcher = new MyErrorStateMatcher();
@@ -42,7 +43,12 @@
     pricef = new FormControl('', [Validators.required]);
     categoriesf = new FormControl('', Validators.required);
 
+    private firebasePath = '/uploads/products';
 
+    fileUpload?: any[];
+    imageUrl?: string;
+    fireBaseUrl?:string;
+    downloadURL?: Observable<string>;
 
     // Model
     newProduct: Product = {
@@ -53,39 +59,38 @@
       category: { id: 1 },
       size: {id:1},
       store: { id: 1, address: {} },
-      images: []
+      image: ""
     }
 
     //File
-    onFileSelected(event: any) {
-      if (event.target.files) {
-        const file = event.target.files[0];
-        const fileHandle: FileHandle = {
-          file: file,
-          url: this.sanitizer.bypassSecurityTrustUrl(
-            window.URL.createObjectURL(file)
-          )
-        }
-        this.newProduct.images?.push(fileHandle);
-      }
-    }
-    prepareFormData(product: Product): FormData {
-      const formData = new FormData();
-      formData.append(
-        'product',
-        new Blob([JSON.stringify(product)], { type: 'application/json' })
-      );
-      for (let index = 0; index < product.images.length; index++) {
-        formData.append(
-          'file',
-          product.images[index].file,
-          product.images[index].file.name
-        );
-      }
-      return formData;
-    }
-    removeImage(index: number) {
-      this.newProduct.images.splice(index, 1)
+
+    onFileSelected(event:any) {
+      const file = event.target.files[0];
+      const filePath = `${this.firebasePath}/${file.name}`;
+      const fileRef = this.storage.ref(filePath);
+      const uploadTask = this.storage.upload(filePath, file);
+      uploadTask
+        .snapshotChanges()
+        .pipe(
+          finalize(() => {
+            this.downloadURL = fileRef.getDownloadURL();
+            // console.log(this.newStaff.image);
+            this.downloadURL.subscribe(url => {
+              if (url) {
+                this.fireBaseUrl = url;
+                this.toast.success({detail:"Thành công", summary:"Tải ảnh thành công!", duration:3000})
+
+              }
+              // console.log(this.fireBaseUrl);
+              this.newProduct.image = this.fireBaseUrl;
+            });
+          })
+        )
+        .subscribe(url => {
+          if (url) {
+            console.log(url);
+          }
+        });
     }
 
     // Call api
@@ -122,14 +127,14 @@
       )
     }
     // create new product
-    createProduct(productForm: NgForm) {
+    createProduct() {
       if (this.newProduct.name == '' || this.newProduct.name == null || this.newProduct.inventory == 0
         || this.newProduct.inventory == null || this.newProduct.price == 0 || this.newProduct.price == null) {
         this.toast.error({ detail: "Thông báo lỗi", summary: "Vui lòng nhập đủ thông tin!", duration: 3000 })
         return;
       }
-      const productFormData = this.prepareFormData(this.newProduct);
-      this.productService.createProduct(productFormData).subscribe(
+
+      this.productService.createProduct(this.newProduct).subscribe(
         (data) => {
           this.toast.success({ detail: "Thông báo thành công", summary: " Đã thêm sản phẩm!", duration: 3000 })
           this.route.navigate(['home/products/list']);
@@ -142,7 +147,6 @@
     }
     //=====================================
     ngOnInit(): void {
-      this.newProduct = this.activatedRoute.snapshot.data['product'];
       this.getCategories();
       this.getStores();
       this.getSize();

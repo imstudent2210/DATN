@@ -1,12 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from 'src/app/services/products.service';
 import { StoresService } from 'src/app/services/stores.service';
 import { Product } from 'src/app/model/product.model';
 import { ImageDialogComponent } from '../../products/image-dialog/image-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ImageProcessingService } from 'src/app/services/image-processing.service';
-import { map } from 'rxjs';
 import { Store } from 'src/app/model/store.model';
 
 @Component({
@@ -16,14 +14,13 @@ import { Store } from 'src/app/model/store.model';
 })
 export class StoreDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute, private service: StoresService,
-    private productService: ProductsService,  public imageDialog: MatDialog,
-    private imageProcessing: ImageProcessingService,) { }
+    private productService: ProductsService, public imageDialog: MatDialog) { }
 
   sId = 0;
   currentStore?: Store;
   inventory = 0;
   update = false;
-  columns: string[] = ['name', 'category', 'image', 'size','inventory']
+  columns: string[] = ['name', 'category', 'image', 'size', 'inventory']
   pageSizeOptions = [5, 10, 25, 50];
   showPageSizeOptions = true;
   showFirstLastButtons = true;
@@ -47,35 +44,26 @@ export class StoreDetailComponent implements OnInit {
   listProductByStoreId: any;
   getProductByStoreId(sId: number) {
     this.productService.getProductsByStoreId(this.sId)
-    .pipe(
-      map((x: Product[], i) => x.map((product: Product) => this.imageProcessing.createImages(product)))
-    )
-    .subscribe(
-      (data) => {
-        this.listProductByStoreId = data;
-        console.log(this.listProductByStoreId);
+      .subscribe(
+        (data) => {
+          this.listProductByStoreId = data;
+          console.log(this.listProductByStoreId);
 
-      }
-    )
+        }
+      )
   }
 
   showImages(product: Product) {
     console.log(product);
     this.imageDialog.open(ImageDialogComponent, {
       data: {
-        images: product.images
+        images: product.image
       },
       height: '400px',
       width: '600px'
     })
 
-}
-dec(){
-  this.inventory = this.inventory-1;
-}
-inc(){
-  this.inventory++;
-}
+  }
 
   ngOnInit(): void {
     this.sId = this.route.snapshot.params['sid'];

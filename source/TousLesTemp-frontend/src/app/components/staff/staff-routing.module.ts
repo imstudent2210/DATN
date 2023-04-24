@@ -2,19 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { StaffComponent } from './staff.component';
 import { CreateStaffComponent } from './create-staff/create-staff.component';
-import { StaffResolveService } from 'src/app/services/staff-resolve.service';
 import { UpdateStaffComponent } from './update-staff/update-staff.component';
 
 const routes: Routes = [
-  {path:'list',component:StaffComponent},
-  {
-    path:'create', component:CreateStaffComponent, resolve:{
-      staff: StaffResolveService
-    }
-  },
-  {
-    path:'update/:stid',component:UpdateStaffComponent,
-  },
+  { path: 'list', component: StaffComponent },
+  { path: 'create', component: CreateStaffComponent },
+  { path: 'update/:stid', component: UpdateStaffComponent },
 ];
 
 @NgModule({

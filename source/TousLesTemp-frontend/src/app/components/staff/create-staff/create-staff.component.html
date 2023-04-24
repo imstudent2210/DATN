@@ -22,8 +22,8 @@
             <div class="col-md-6">
               <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Email</mat-label>
-                <input type="email" matInput [(ngModel)]="newStaff.email" name="email"
-                  [formControl]="emailf" [errorStateMatcher]="matcher">
+                <input type="email" matInput [(ngModel)]="newStaff.email" name="email" [formControl]="emailf"
+                  [errorStateMatcher]="matcher">
                 <mat-error *ngIf="emailf.hasError('required')">
                   Vui lòng nhập email
                 </mat-error>
@@ -43,8 +43,8 @@
             <div class="col-md-6">
               <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Điện thoại</mat-label>
-                <input type="number"  matInput [(ngModel)]="newStaff.phone" name="phone"
-                  [formControl]="phonef" [errorStateMatcher]="matcher">
+                <input type="number" matInput [(ngModel)]="newStaff.phone" name="phone" [formControl]="phonef"
+                  [errorStateMatcher]="matcher">
                 <mat-error *ngIf="phonef.hasError('required')">
                   Vui lòng nhập điện thoại
                 </mat-error>
@@ -61,8 +61,8 @@
         </div>
         <div class="col-md-4 overflow-auto">
           <input type="file"
-            style="color:var(--yellow); font-size: 15px;font-weight: 700;font-family: 'Roboto', sans-serif; margin-bottom: 10px;" multiple
-            value="select" (change)="onFileSelected($event)">
+            style="color:var(--yellow); font-size: 15px;font-weight: 700;font-family: 'Roboto', sans-serif; margin-bottom: 10px;"
+            multiple value="select" (change)="onFileSelected($event)">
           <img [src]="newStaff.image" width="350px" height="280px" name="image">
         </div>
 
@@ -75,4 +75,3 @@
     </form>
   </mat-card>
 </div>
-

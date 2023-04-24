@@ -30,6 +30,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { AuthInterceptorProviders } from './guard/auth.interceptor';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { UserComponent } from './components/user/user.component';
+import { NgxCurrencyModule } from "ngx-currency";
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -59,6 +61,7 @@ import { UserComponent } from './components/user/user.component';
     MatButtonModule,
     MatCardModule,
     MatInputModule,
+    MatBadgeModule,
     MatCheckboxModule,
     NgxUiLoaderModule,
     InputNumberModule,

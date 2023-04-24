@@ -231,9 +231,6 @@ body {
 }
 
 
-//=================
-
-
 :focus {
   outline: none;
 }
@@ -252,7 +249,6 @@ body {
   }
 }
 
-/* necessary to give position: relative to parent. */
 .full-width{
   width: 100%;
   color: var(--yellow);

@@ -13,6 +13,8 @@ export class NavbarComponent {
 
   }
 
+  totalProduct?:any;
+
   isLogin = false;
   user = null;
   username = null;

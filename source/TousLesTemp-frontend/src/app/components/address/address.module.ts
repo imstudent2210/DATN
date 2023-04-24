@@ -10,6 +10,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import {MatListModule} from '@angular/material/list';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+
 @NgModule({
   declarations: [
     AddressComponent,
@@ -25,7 +28,9 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     MatTableModule,
     MatInputModule,
     MatListModule,
-    ScrollingModule
+    ScrollingModule,
+    MatIconModule,
+    MatButtonModule
   ]
 })
 export class AddressModule { }

@@ -1,23 +1,47 @@
 .mdc-data-table__cell {
   width: 160px;
 }
-.mat-grid-tile{
+.mat-grid-tile {
   border: 1px solid lightgray;
   border-radius: 5px;
 }
-.images-container{
- position: relative;
- height: 300px;
+.images-container {
+  position: relative;
+  height: 300px;
 }
-.product-images{
+.product-images {
   max-width: 90%;
   max-height: 90%;
-  margin:auto;
+  margin: auto;
   position: absolute;
-  top:0;
+  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
 }
 
-
+.a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: auto;
+  display: block;
+}
+.title{
+  color: #FF9900;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Roboto', sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.image{
+  margin: 5px auto;
+  width: 260px;
+  height: 260px;
+  display: block;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.button{
+  justify-content: center;
+}

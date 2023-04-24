@@ -7,8 +7,6 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
-
-
   },
   "private": true,
   "dependencies": {
@@ -31,8 +29,8 @@
     "firebase": "^9.19.1",
     "ng-angular-popup": "^0.2.0",
     "ng2-search-filter": "^0.5.1",
+    "ngx-currency": "^3.0.0",
     "ngx-ui-loader": "^13.0.0",
-    "primeflex": "^3.3.0",
     "primeicons": "^6.0.1",
     "primeng": "^15.2.1",
     "rxjs": "~7.8.0",

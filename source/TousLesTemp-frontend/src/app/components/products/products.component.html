@@ -20,9 +20,11 @@
       <button class="btn-1 my-2" style="margin-left: 320px;" (click)="export()">
         <i class="fa-solid fa-file-excel btn-1-icon"></i><span class="btn-1-text">Xuất Excel</span>
       </button>
-      <button class="btn-1 ms-auto my-2" [routerLink]="'../create'">
+      <!-- <button class="btn-1 ms-auto my-2" [routerLink]="'../create'">
         <i class="fa fa-plus btn-1-icon"></i><span class="btn-1-text">Thêm mới</span>
-      </button>
+      </button> -->
+      <button mat-raised-button class="button-submit mt-2 ms-auto" [routerLink]="'../create'"><mat-icon>library_add</mat-icon>Thêm mới</button>
+
 
     </div>
   </div>

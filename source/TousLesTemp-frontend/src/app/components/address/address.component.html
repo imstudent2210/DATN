@@ -3,17 +3,16 @@
     <div class="col-md-12">
       <div class="row">
         <div class="effect my-2">
-          <input class="effect-3" [disabled]="isWorking" #inputField [(ngModel)]="address"
+          <!-- <input class="effect-3" [disabled]="isWorking" #inputField [(ngModel)]="address"
             (keydown.enter)="findAddress()" type="text" placeholder="Địa chỉ cửa hàng">
-          <i class="fa-solid fa-close icon-search" (click)="reset()"></i>
+          <i class="fa-solid fa-close icon-search" (click)="reset()"></i> -->
           <span class="focus-border"></span>
+
+          <button mat-raised-button class="button-submit mt-2 ms-auto" (click)="getCurrentLocation()" [disabled]="isWorking"><mat-icon>place</mat-icon>Vị trí của tôi</button>
         </div>
-        <button class="btn-1 ms-auto my-2" (click)="findAddress()" [disabled]="isWorking || !address?.length">
-          <i class="fa-solid fa-magnifying-glass btn-1-icon"></i><span class="btn-1-text">Tìm kiếm</span>
-        </button>
-        <button class="btn-1 ms-auto my-2" (click)="getCurrentLocation()" [disabled]="isWorking">
-          <i class="fad fa-map-marker-alt btn-1-icon"></i><span class="btn-1-text">Vị trí của tôi</span>
-        </button>
+
+        <!-- <button mat-raised-button class="button-submit mt-2 ms-auto" (click)="findAddress()" [disabled]="isWorking || !address?.length"><mat-icon>location_searching</mat-icon>Tìm kiếm</button> -->
+
       </div>
       <hr>
       <div class="row">

@@ -14,7 +14,6 @@ export const navbarData: INavbarData[] = [
         routeLink: 'stores/list',
         label: 'Danh sách cửa hàng',
       },
-
     ],
   },
   {

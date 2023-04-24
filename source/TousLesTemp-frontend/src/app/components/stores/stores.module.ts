@@ -21,8 +21,11 @@ import { UpdateStoreComponent } from './update-store/update-store.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatGridListModule } from '@angular/material/grid-list';
-// import { UploadImageComponent } from '../upload-image/upload-image.component';
 import { MatIconModule } from '@angular/material/icon';
+import { TagModule } from 'primeng/tag';
+import { NgxCurrencyModule } from "ngx-currency";
+import {MatChipsModule} from '@angular/material/chips';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 @NgModule({
@@ -31,6 +34,7 @@ import { MatIconModule } from '@angular/material/icon';
     StoreDetailComponent,
     CreateStoreComponent,
     UpdateStoreComponent,
+
   ],
   imports: [
     CommonModule,
@@ -46,9 +50,13 @@ import { MatIconModule } from '@angular/material/icon';
     MatCardModule,
     MatSelectModule,
     MatDialogModule,
+    MatRadioModule,
     MatSlideToggleModule,
     MatGridListModule,
-    MatIconModule
+    MatIconModule,
+    TagModule,
+    NgxCurrencyModule,
+    MatChipsModule
 
   ],
   exports:[],

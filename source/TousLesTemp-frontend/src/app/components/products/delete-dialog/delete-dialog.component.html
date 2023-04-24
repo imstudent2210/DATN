@@ -3,10 +3,8 @@
   <div mat-dialog-content>
    Bạn có chắc muốn xoá sản phẩm này?
   </div>
-  <div mat-dialog-actions>
- <button mat-button mat-dialog-close>Trở lại</button>
-    <button class="btn-1 ms-auto" [mat-dialog-close] cdkFocusInitial (click)="deleteProduct()">
-      <i class="fa-solid fa-trash btn-1-icon"></i><span class="btn-1-text">Xoá</span>
-    </button>
+  <div mat-dialog-actions class="button">
+    <button mat-raised-button mat-dialog-close>Trở lại</button>
+    <button mat-raised-button class="button-submit mx-2" (click)="deleteProduct()"><mat-icon>delete</mat-icon>Xoá</button>
   </div>
 </div>

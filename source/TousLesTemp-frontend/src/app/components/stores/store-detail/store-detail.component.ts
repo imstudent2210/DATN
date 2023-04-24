@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from 'src/app/services/products.service';
 import { StoresService } from 'src/app/services/stores.service';
 import { Product } from 'src/app/model/product.model';
@@ -14,12 +14,14 @@ import { Store } from 'src/app/model/store.model';
 })
 export class StoreDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute, private service: StoresService,
-    private productService: ProductsService, public imageDialog: MatDialog) { }
+    private productService: ProductsService, public imageDialog: MatDialog, private route1: Router) { }
 
   sId = 0;
   currentStore?: Store;
   inventory = 0;
   update = false;
+  sizeProduct?:any;
+  sizeProductList: string[] = ['S', 'M', 'L'];
   columns: string[] = ['name', 'category', 'image', 'size', 'inventory']
   pageSizeOptions = [5, 10, 25, 50];
   showPageSizeOptions = true;
@@ -41,6 +43,13 @@ export class StoreDetailComponent implements OnInit {
       }
     )
   }
+  editProduct(pId: any) {
+    this.route1.navigate(["/home/products/update", pId]);
+  }
+  editStore(sId:any){
+    this.route1.navigate(["/home/stores/update", sId]);
+  }
+
   listProductByStoreId: any;
   getProductByStoreId(sId: number) {
     this.productService.getProductsByStoreId(this.sId)
@@ -64,6 +73,7 @@ export class StoreDetailComponent implements OnInit {
     })
 
   }
+  layout: string = 'grid';
 
   ngOnInit(): void {
     this.sId = this.route.snapshot.params['sid'];

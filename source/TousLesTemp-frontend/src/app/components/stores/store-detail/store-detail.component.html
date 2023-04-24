@@ -5,51 +5,45 @@
         <mat-card-header>
           <mat-card-title>{{currentStore?.name}}</mat-card-title>
           <mat-card-subtitle>{{currentStore?.email}}</mat-card-subtitle>
-          <img src="{{currentStore?.image}}">
+
         </mat-card-header>
+        <img class="image" src="{{currentStore?.image}}">
         <mat-card-actions>
-          <button mat-button>Cập nhật</button>
+          <button mat-raised-button class="mx-2" (click)="editStore(currentStore?.id)"><mat-icon>edit</mat-icon>Cập nhập</button>
         </mat-card-actions>
       </mat-card>
     </div>
   </div>
+
   <div class="row">
-    <div class="col-md-12">
-      <table mat-table matSort [dataSource]="listProductByStoreId" class="mat-elevation-z8 table-tlt">
+    <div class="col-md-3" *ngFor="let product of listProductByStoreId">
+      <mat-card class="my-2 px-2">
+        <mat-card-header>
+          <div mat-card-avatar><img class="a" src="../../../../assets/logo.jpg" alt=""></div>
+          <mat-card-title class="title">{{product.name}}</mat-card-title>
+          <mat-card-subtitle>{{product.category.name}}</mat-card-subtitle>
+        </mat-card-header>
+        <img class="image" mat-card-image src="{{product.image}}" alt="...">
+        <mat-card-content>
+          <p>
+            <mat-chip-listbox aria-label="Size">
+              <mat-chip-option selected>{{product.size.size}}
+              </mat-chip-option>
+            </mat-chip-listbox>
+          </p>
+          <p>
+            <strong>Số lượng: </strong> {{product.inventory}}
+          </p>
+          <p>
+            <strong>Đơn giá: </strong> {{ product.price | currency: " VND " | uppercase }}
+          </p>
 
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef>Tên sản phẩm</th>
-          <td mat-cell *matCellDef="let element" class="col-name-tlt">{{ element.name }}</td>
-        </ng-container>
-        <ng-container matColumnDef="inventory">
-          <th mat-header-cell *matHeaderCellDef>Số lượng</th>
-          <td mat-cell *matCellDef="let element">{{ element.inventory }}</td>
-        </ng-container>
-        <ng-container matColumnDef="image">
-          <th mat-header-cell *matHeaderCellDef>Ảnh</th>
-          <td mat-cell *matCellDef="let element">
-            <button mat-mini-fab color="basic" (click)="showImages(element)">
-              <i class="fa-solid fa-image"></i>
-            </button>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="category">
-          <th mat-header-cell *matHeaderCellDef>Loại sản phẩm</th>
-          <td mat-cell *matCellDef="let element">{{ element.category.name}}</td>
-        </ng-container>
-        <ng-container matColumnDef="size">
-          <th mat-header-cell *matHeaderCellDef>Size</th>
-          <td mat-cell *matCellDef="let element">{{ element.size.size}}</td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="columns"></tr>
-        <tr mat-row *matRowDef="let row; columns: columns"></tr>
-      </table>
-      <mat-paginator [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
-        [showFirstLastButtons]="showFirstLastButtons">
-      </mat-paginator>
-    </div>
-    <div class="col-md-2">
+        </mat-card-content>
+        <mat-card-actions class="group-button-detail">
+          <button mat-raised-button class="button-submit me-auto" (click)="editProduct(product.id)"><mat-icon>edit</mat-icon>Cập nhập</button>
+          <button mat-raised-button class="ms-auto"><mat-icon>open_in_new</mat-icon>Chi tiết</button>
+        </mat-card-actions>
+      </mat-card>
     </div>
   </div>
 </div>

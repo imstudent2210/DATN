@@ -1,18 +1,17 @@
   import { Component, OnInit } from '@angular/core';
   import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-  import { ErrorStateMatcher, ThemePalette } from '@angular/material/core';
+  import { ErrorStateMatcher } from '@angular/material/core';
   import { Observable } from 'rxjs';
   import { CategoriesService } from 'src/app/services/categories.service';
   import { StoresService } from 'src/app/services/stores.service';
-  import { finalize, map, startWith } from 'rxjs/operators';
-  import { Store } from 'src/app/model/store.model';
+  import { finalize } from 'rxjs/operators';
+
   import { ProductsService } from 'src/app/services/products.service';
   import { NgToastService } from 'ng-angular-popup';
-  import { FileHandle } from 'src/app/model/file-handle.model';
   import { DomSanitizer } from '@angular/platform-browser';
   import { Product } from 'src/app/model/product.model';
   import { SizeService } from 'src/app/services/size.service';
-  import { ActivatedRoute, Router } from '@angular/router';
+  import { Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 

@@ -17,7 +17,6 @@ export class DeleteDialogComponent {
   pId: any;
 
   reciveData() {
-    console.log(this.data);
     this.pId = this.data.productId;
   }
 

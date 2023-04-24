@@ -9,9 +9,9 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  constructor(private login:AuthService, private route:Router){
+  constructor(private login:AuthService, private route:Router){}
 
-  }
+  totalProduct?:any;
 
   isLogin = false;
   user = null;

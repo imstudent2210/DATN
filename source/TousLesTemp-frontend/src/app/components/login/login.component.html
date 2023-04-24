@@ -23,11 +23,12 @@
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>
             </mat-form-field>
-            <div class="text-center mx-3 my-2">
+            <div class="group-button">
               <!-- <div class="linetext my-2"><span>Tous les temp</span></div> -->
-              <button mat-raised-button class="button-submit mx-2"><mat-icon>login</mat-icon>Đăng nhập</button>
               <button type="button" class="mx-2" mat-raised-button
                 [routerLink]="'/register'"><mat-icon>assignment_ind</mat-icon>Đăng ký</button>
+              <button mat-raised-button class="button-submit mx-2"><mat-icon>login</mat-icon>Đăng nhập</button>
+
             </div>
           </form>
         </div>
@@ -35,4 +36,3 @@
     </div>
   </div>
 </div>
-

@@ -18,14 +18,10 @@
         </div>
       </div>
       <div class="col-md-6" >
-        <!-- <button class="btn-1 ms-auto my-2" [routerLink]="'../create'">
-          <i class="fa fa-plus btn-1-icon"></i><span class="btn-1-text" >Thêm mới</span>
-        </button> -->
-        <button mat-raised-button class="button-submit mt-2 ms-auto" [routerLink]="'../create'"><mat-icon>library_add</mat-icon>Thêm mới</button>
-
+        <button mat-raised-button class="button-submit mt-2" [routerLink]="'../create'"><mat-icon>library_add</mat-icon>Thêm mới</button>
       </div>
     </div>
-    <div class="row ">
+    <div class="row">
       <div class="col-md-12">
         <table mat-table matSort [dataSource]="stores" class="mat-elevation-z8 table-tlt">
           <ng-container matColumnDef="name">
@@ -65,7 +61,6 @@
         </table>
         <mat-paginator [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
           [showFirstLastButtons]="showFirstLastButtons">
-
         </mat-paginator>
       </div>
     </div>

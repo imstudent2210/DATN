@@ -19,7 +19,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
-import { SocialLoginModule } from '@abacritt/angularx-social-login';
 import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
 import { environment } from '../environment/environment.prod';
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -30,6 +29,9 @@ import { RegisterComponent } from './components/register/register.component';
 import { AuthInterceptorProviders } from './guard/auth.interceptor';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { UserComponent } from './components/user/user.component';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatMenuModule} from '@angular/material/menu';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { UserComponent } from './components/user/user.component';
     SublevelMenuComponent,
     TotpComponent,
     RegisterComponent,
-    UserComponent
+    UserComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -50,15 +53,16 @@ import { UserComponent } from './components/user/user.component';
     CommonModule,
     RouterModule,
     BrowserAnimationsModule,
-    SocialLoginModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
     NgToastModule,
+    MatMenuModule,
     MatIconModule,
     MatButtonModule,
     MatCardModule,
     MatInputModule,
+    MatBadgeModule,
     MatCheckboxModule,
     NgxUiLoaderModule,
     InputNumberModule,

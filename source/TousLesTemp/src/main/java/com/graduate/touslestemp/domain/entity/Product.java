@@ -27,16 +27,6 @@ public class Product {
     private int inventory;
     private double price;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "product-images",
-            joinColumns = {
-                    @JoinColumn(name = "product_id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "img_id")
-            })
-    private Set<Image> images;
-
     @ManyToOne
     @JoinColumn(name = "category", referencedColumnName = "category_id")
     private Category category;
@@ -49,4 +39,5 @@ public class Product {
     @JoinColumn(name = "store", referencedColumnName = "store_id")
     private Store store;
 
+    private String image;
 }

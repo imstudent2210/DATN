@@ -10,7 +10,6 @@ import { FileHandle } from 'src/app/model/file-handle.model';
 import { Staff } from 'src/app/model/staff.model';
 import { MyErrorStateMatcher } from '../create-staff/create-staff.component';
 import { Observable, finalize, map } from 'rxjs';
-import { ImageProcessingService } from 'src/app/services/image-processing.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
@@ -20,9 +19,9 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 })
 export class UpdateStaffComponent implements OnInit {
   constructor(private store: StoresService,
-    private toast: NgToastService, private sanitizer: DomSanitizer,
+    private toast: NgToastService,
     private route: Router, private activatedRoute: ActivatedRoute,
-    private staffGroupService: StaffGroupService, private imageProcessing: ImageProcessingService,
+    private staffGroupService: StaffGroupService,
     private staffService: StaffService, private storage: AngularFireStorage) { }
 
   stId = 0;

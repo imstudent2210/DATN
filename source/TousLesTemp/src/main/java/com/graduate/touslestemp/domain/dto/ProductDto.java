@@ -20,9 +20,9 @@ public class ProductDto {
     private Integer inventory;
     private String name;
     private Double price;
-    Set<Image> image;
     Category category;
     Size size;
     Store store;
+    private String image;
 
 }

@@ -40,14 +40,7 @@ public class ProductServiceImpl implements ProductService {
         return (productMapper.toProductDTO(productRepository.findById(id).get()));
     }
 
-    @Override
-    public Product findProduct(Long id) {
-        Optional<Product> product = productRepository.findById(id);
-        if (product.isEmpty()) {
-            throw new RequestException("Not found product, id: " + id);
-        }
-        return productRepository.findById(id).get();
-    }
+
 
     @Override
     public ProductDto update(ProductDto productDto, Long id) throws Exception {
@@ -106,47 +99,4 @@ public class ProductServiceImpl implements ProductService {
             return this.productRepository.findProductByName(name);
     }
 
-    //======================= Upload file image ==============
-    @Override
-    public Product create2(Product product, MultipartFile[] img) throws Exception {
-        try {
-            Set<Image> images = imageUpload(img);
-            product.setImages(images);
-            return this.productRepository.save(product);
-        } catch (Exception e) {
-            e.getMessage();
-            throw new RequestException("Không thể thêm sản phẩm");
-        }
-    }
-
-    @Override
-    public Product update2(Product product, Long id, MultipartFile[] img) throws Exception {
-        try {
-            Set<Image> images = imageUpload(img);
-            Product local = this.productRepository.findById(id)
-                    .orElseThrow(() -> new RequestException("Không tìm thấy sản phâmr này: " + id));
-
-            local.setImages(images);
-            ProductDto a = productMapper.toProductDTO(product);
-            productMapper.updateEntity(a, local);
-            return this.productRepository.save(local);
-        } catch (Exception e) {
-            e.getMessage();
-            throw new RequestException("Không thể cập nhật");
-        }
-    }
-
-    public Set<Image> imageUpload(MultipartFile[] multipartFiles) throws IOException {
-        Set<Image> images = new HashSet<>();
-
-        for (MultipartFile file : multipartFiles) {
-            Image image = new Image(
-                    file.getOriginalFilename(),
-                    file.getContentType(),
-                    file.getBytes()
-            );
-            images.add(image);
-        }
-        return images;
-    }
 }

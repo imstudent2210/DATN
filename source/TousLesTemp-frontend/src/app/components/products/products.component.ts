@@ -8,10 +8,11 @@ import { ProductsService } from 'src/app/services/products.service';
 import { Product } from 'src/app/model/product.model';
 import { Store } from 'src/app/model/store.model';
 import { ImageDialogComponent } from './image-dialog/image-dialog.component';
-import { ImageProcessingService } from 'src/app/services/image-processing.service';
-import { map } from 'rxjs';
+// import { ImageProcessingService } from 'src/app/services/image-processing.service';
+import { Observable, map } from 'rxjs';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import * as XLSX from 'xlsx';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -22,8 +23,8 @@ export class ProductsComponent {
     private service: ProductsService,
     private route: Router,
     public imageDialog: MatDialog,
-    private imageProcessing: ImageProcessingService,
-    public deleteDialog: MatDialog) { }
+    public deleteDialog: MatDialog,
+    private storage: AngularFireStorage) { }
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
@@ -35,6 +36,9 @@ export class ProductsComponent {
   item?: any;
   products?: any;
   columns: string[] = ['name', 'description', 'price', 'inventory', 'category', 'size', 'store', 'image', 'edit', 'delete']
+
+
+
 
   pageSizeOptions = [5, 10, 25, 50];
   showPageSizeOptions = true;
@@ -56,7 +60,7 @@ export class ProductsComponent {
     console.log(product);
     this.imageDialog.open(ImageDialogComponent, {
       data: {
-        images: product.images
+        images: product.image
       },
       height: '400px',
       width: '600px'
@@ -69,9 +73,9 @@ export class ProductsComponent {
   // ================== Call Api BackEnd====================
   getProducts(): void {
     this.service.getProducts()
-      .pipe(
-        map((x: Product[], i) => x.map((product: Product) => this.imageProcessing.createImages(product)))
-      )
+      // .pipe(
+      //   map((x: Product[], i) => x.map((product: Product) => this.imageProcessing.createImages(product)))
+      // )
       .subscribe(
         data => {
           this.listProduct = data;
@@ -129,19 +133,7 @@ export class ProductsComponent {
           }
       };
 
-      // if (cell.c == 0) { // first column
-      //     ws[i].s.numFmt = "DD/MM/YYYY HH:MM"; // for dates
-      //     ws[i].z = "DD/MM/YYYY HH:MM";
-      // } else {
-      //     ws[i].s.numFmt = "00.00"; // other numbers
-      // }
 
-      // if (cell.r == 0 ) { // first row
-      //     ws[i].s.border.bottom = { // bottom border
-      //         style: "thin",
-      //         color: "000000"
-      //     };
-      // }
 
       if (cell.r % 2) { // every other row
           ws[i].style.fill = { // background color

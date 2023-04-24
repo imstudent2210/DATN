@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
-import { ImageProcessingService } from 'src/app/services/image-processing.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { StaffService } from 'src/app/services/staff.service';
 import { Staff } from 'src/app/model/staff.model';
@@ -24,8 +23,7 @@ export class StaffComponent implements OnInit {
   constructor( private staffService: StaffService,
     private route: Router,
     public imageDialog: MatDialog,
-    public deleteDialog: MatDialog,
-    private imageProcessing: ImageProcessingService,){}
+    public deleteDialog: MatDialog){}
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;

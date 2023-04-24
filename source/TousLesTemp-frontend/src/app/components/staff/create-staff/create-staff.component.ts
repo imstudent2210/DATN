@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { StoresService } from 'src/app/services/stores.service';
 import { Staff } from 'src/app/model/staff.model';
 import { StaffGroupService } from 'src/app/services/staffgroup.service';
 import { StaffService } from 'src/app/services/staff.service';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { Mail } from 'src/app/model/mail.model';
 import { Observable, finalize } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 
@@ -26,12 +24,12 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./create-staff.component.scss']
 })
 export class CreateStaffComponent implements OnInit {
-  constructor( private store: StoresService,
-    private toast: NgToastService, private sanitizer: DomSanitizer,
-    private route: Router, private activatedRoute: ActivatedRoute,
+  constructor(private store: StoresService,
     private staffGroupService: StaffGroupService,
     private staffService: StaffService,
-    private storage: AngularFireStorage) { }
+    private toast: NgToastService,
+    private storage: AngularFireStorage,
+    private route: Router) { }
 
   matcher = new MyErrorStateMatcher();
   phonef = new FormControl('', [Validators.required]);
@@ -42,7 +40,7 @@ export class CreateStaffComponent implements OnInit {
 
   fileUpload?: any[];
   imageUrl?: string;
-  fireBaseUrl?:string;
+  fireBaseUrl?: string;
   downloadURL?: Observable<string>;
 
 
@@ -53,7 +51,7 @@ export class CreateStaffComponent implements OnInit {
     phone: "",
     store: { id: 1, address: {} },
     staffGroup: { id: 1 },
-    image:""
+    image: ""
   }
 
   stores?: any;
@@ -95,7 +93,7 @@ export class CreateStaffComponent implements OnInit {
     )
 
   }
-  onFileSelected(event:any) {
+  onFileSelected(event: any) {
     const file = event.target.files[0];
     const filePath = `${this.firebasePath}/${file.name}`;
     const fileRef = this.storage.ref(filePath);
@@ -109,7 +107,7 @@ export class CreateStaffComponent implements OnInit {
           this.downloadURL.subscribe(url => {
             if (url) {
               this.fireBaseUrl = url;
-              this.toast.success({detail:"Thành công", summary:"Tải ảnh thành công!", duration:3000})
+              this.toast.success({ detail: "Thành công", summary: "Tải ảnh thành công!", duration: 3000 })
 
             }
             // console.log(this.fireBaseUrl);
@@ -125,10 +123,7 @@ export class CreateStaffComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.newStaff = this.activatedRoute.snapshot.data['staff'];
     this.getStaffGroup();
     this.getStores();
-
   }
-
 }

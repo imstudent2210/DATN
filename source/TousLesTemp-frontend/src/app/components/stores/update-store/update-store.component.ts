@@ -80,6 +80,7 @@ export class UpdateStoreComponent {
           this.downloadURL.subscribe(url => {
             if (url) {
               this.fireBaseUrl = url;
+              this.toast.success({detail:"Thành công", summary:"Tải ảnh thành công!", duration:3000})
             }
             console.log(this.fireBaseUrl);
             this.currentStore.image = this.fireBaseUrl;
@@ -93,7 +94,7 @@ export class UpdateStoreComponent {
       });
   }
 
-  //================== Call Api=======================
+
   updateStore() {
     this.storeService.updateStore(this.currentStore, this.sId).subscribe(
       (data) => {

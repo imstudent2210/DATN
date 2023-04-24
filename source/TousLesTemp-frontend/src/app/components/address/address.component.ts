@@ -171,7 +171,7 @@ export class AddressComponent implements OnInit {
       });
   }
 
-  findAddres2(addressDetail:any) {
+  findStores(addressDetail:any) {
     this.geocoderWorking = true;
     this.geocodingService.getLocation(addressDetail)
       .subscribe(
@@ -196,7 +196,7 @@ export class AddressComponent implements OnInit {
               animation: google.maps.Animation.DROP,
             };
           } else {
-            this.toast.error({ detail: "Thông báo lỗi", summary: " Lỗi!", duration: 3000 })
+            this.toast.error({ detail: "Thông báo lỗi", summary: " Không tìm thấy vị trí này!", duration: 3000 })
 
           }
         },

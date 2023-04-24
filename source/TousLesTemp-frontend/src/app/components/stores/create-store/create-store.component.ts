@@ -99,6 +99,7 @@ export class CreateStoreComponent implements OnInit {
           this.downloadURL.subscribe(url => {
             if (url) {
               this.fireBaseUrl = url;
+              this.toast.success({detail:"Thành công", summary:"Tải ảnh thành công!", duration:3000})
             }
             console.log(this.fireBaseUrl);
             this.newStore.image = this.fireBaseUrl;

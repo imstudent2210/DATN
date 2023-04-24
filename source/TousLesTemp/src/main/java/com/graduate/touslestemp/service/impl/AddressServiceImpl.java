@@ -1,5 +1,7 @@
 package com.graduate.touslestemp.service.impl;
 
+import com.graduate.touslestemp.domain.entity.Category;
+import com.graduate.touslestemp.domain.entity.Staff;
 import com.graduate.touslestemp.exception.RequestException;
 import com.graduate.touslestemp.exception.RequestSuccess;
 import com.graduate.touslestemp.domain.entity.Address;
@@ -75,5 +77,28 @@ public class AddressServiceImpl implements AddressService {
             this.addressRepository.delete(address);
             throw new RequestSuccess("Delete address id " + id + " completed! ");
         }
+    }
+
+    @Override
+    public Address update(Address address, Long id) throws Exception {
+        Address local = this.addressRepository.findById(id)
+                .orElseThrow(() -> new RequestException("Không tồn tại chi nhánh: " + id));
+
+        if (isExisAddress(address.getName())) {
+            System.out.println("This address has already");
+            throw new RequestException("This address has already!");
+        } else {
+            local.setName(address.getName());
+            return this.addressRepository.save(local);
+        }
+    }
+
+
+    public boolean isExisAddress(String name) {
+        Address checkAddress = addressRepository.findAddressByName(name);
+        if (checkAddress != null) {
+            return true;
+        }
+        return false;
     }
 }

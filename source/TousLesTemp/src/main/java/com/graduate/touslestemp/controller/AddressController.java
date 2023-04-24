@@ -35,9 +35,13 @@ public class AddressController {
 
     }
 
-    @PutMapping("/update/{addressname}")
+    @PutMapping("/update2/{addressname}")
     public Address updateAddres(@RequestBody @Valid Address address, @PathVariable("addressname") String addressname) throws Exception {
         return this.addressService.update(address, addressname);
+    }
+    @PutMapping("/update/{id}")
+    public Address updateAddress(@RequestBody @Valid Address address, @PathVariable("id") Long id) throws Exception {
+        return this.addressService.update(address, id);
     }
 
     @DeleteMapping("/delete/{id}")

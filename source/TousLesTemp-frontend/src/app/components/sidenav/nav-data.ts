@@ -94,6 +94,21 @@ export const navbarData: INavbarData[] = [
       },
     ],
   },
+  {
+    routeLink: 'salary',
+    icon: 'fa-solid fa-sack-dollar', //fal fa-box-open
+    label: 'Quỹ lương',
+    items: [
+      {
+        routeLink: 'salary/create',
+        label: 'Thêm mức lương',
+      },
+      {
+        routeLink: 'salary/list',
+        label: 'Danh sách mức lương',
+      },
+    ],
+  },
 ];
 
 // {

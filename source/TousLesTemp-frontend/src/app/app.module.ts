@@ -32,6 +32,7 @@ import { UserComponent } from './components/user/user.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatMenuModule} from '@angular/material/menu';
 import { ProfileComponent } from './components/profile/profile.component';
+import { SalaryComponent } from './components/salary/salary.component';
 
 @NgModule({
   declarations: [

@@ -13,5 +13,6 @@ public class SecurityConstant {
             "/store/**", "/category/**", "/product/**",
             "/staff/**","/sendmail","/staffgroup/**","/size/**",
             "/", "/error", "/api/all", "/api/auth/**", "/oauth2/**",
+            "/staff-timekeeping/**","/staff-salary/**"
     };
 }

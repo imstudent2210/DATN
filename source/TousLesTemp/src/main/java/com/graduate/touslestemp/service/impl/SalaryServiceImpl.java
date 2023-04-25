@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+import org.springframework.dao.DataIntegrityViolationException;
+import com.graduate.touslestemp.exception.ForeignKeyConstraintException;
 @Service
 public class SalaryServiceImpl implements SalaryService {
     @Autowired
@@ -30,8 +31,20 @@ public class SalaryServiceImpl implements SalaryService {
 
     @Override
     public void delete(Long id) {
-        salaryRepository.delete(salaryRepository.findById(id)
+        try {
+            // Attempt to delete or update the parent record
+            salaryRepository.delete(salaryRepository.findById(id)
                 .orElseThrow(() -> new RequestException("Not found this salary: " + id)));
+        } catch (DataIntegrityViolationException e) {
+            // Check if the exception is caused by a foreign key constraint violation
+            if (e.getCause() != null) {
+                // Throw a custom exception with a meaningful error message
+                throw new ForeignKeyConstraintException("Cannot delete or update a parent row: a foreign key constraint fails");
+            } else {
+                // If it's not a foreign key constraint violation, re-throw the original exception
+                throw e;
+            }
+        }
     }
 
     @Override
@@ -45,17 +58,6 @@ public class SalaryServiceImpl implements SalaryService {
 
     @Override
     public Salary update(Salary salary, Long id) throws Exception {
-//        Salary local = this.salaryRepository.findById(id)
-//                .orElseThrow(() -> new RequestException("Not found this salary: " + id));
-//
-//        if (isExisSalary(salary.getName())) {
-//            System.out.println("This address has already");
-//            throw new RequestException("This address has already!");
-//        } else {
-//            local.setName(salary.getName());
-//            local.setBasicSalary(salary.getBasicSalary());
-//            return this.salaryRepository.save(local);
-//        }
         Optional<Salary> local = salaryRepository.findById(id);
         if (local.isEmpty()) {
             throw new RequestException("Not found salary, id: " + id);
@@ -69,7 +71,7 @@ public class SalaryServiceImpl implements SalaryService {
                 throw new RequestException("Not found this salary: " + id);
             } else {
                 if (local1 == null | (local1 != null && (local1.getBasicSalary() != salary.getBasicSalary()))) {
-                    updateSalary.setName(updateSalary.getName());
+                    updateSalary.setName(salary.getName());
                     updateSalary.setBasicSalary(salary.getBasicSalary());
                 } else throw new RequestException("This salary has already: " + updateName);
             }

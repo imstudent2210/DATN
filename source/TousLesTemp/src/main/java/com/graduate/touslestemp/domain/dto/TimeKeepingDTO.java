@@ -20,5 +20,5 @@ public class TimeKeepingDTO {
 
     private Salary salary;
 
-    private Set<Staff> staff;
+    private Staff staff;
 }

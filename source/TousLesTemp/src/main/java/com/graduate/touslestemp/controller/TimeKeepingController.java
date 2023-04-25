@@ -71,4 +71,9 @@ public class TimeKeepingController {
         return timeKeepingRepository.allTimeKeepingPerMonth(id);
     }
 
+    @GetMapping("/get-timekeeping-perstaff/{id}")
+    public List<TimeKeeping> getallTimeKeepingPerStaff(@PathVariable(name = "id") Long id) {
+        return timeKeepingRepository.allTimeKeepingPerStaff(id);
+    }
+
 }

@@ -26,13 +26,7 @@ public class TimeKeeping {
     @ManyToOne
     @JoinColumn(name = "Salary", referencedColumnName = "salary_id")
     private Salary salary;
-    @ManyToMany
-    @JoinTable(name = "staff_timekeeping",
-            joinColumns = {
-                    @JoinColumn(name = "id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "staff-id")
-            })
-    private Set<Staff> staff;
+    @ManyToOne
+    @JoinColumn(name = "Staff", referencedColumnName = "id")
+    private Staff Staff;
 }

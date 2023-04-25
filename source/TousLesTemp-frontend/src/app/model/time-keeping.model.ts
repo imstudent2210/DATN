@@ -6,5 +6,5 @@ export interface TimeKeeping{
   month?:number;
   numOfShift?:number;
   salary:Salary;
-  staff:Staff[];
+  staff:Staff;
 }

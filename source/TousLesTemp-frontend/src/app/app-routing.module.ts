@@ -18,6 +18,7 @@ const routes: Routes = [
       { path: 'categories', loadChildren: () => import('./components/categories/categories.module').then(m => m.CategoriesModule)},
       { path: 'staff', loadChildren: () => import('./components/staff/staff.module').then(m => m.StaffModule)},
       { path: 'salary', loadChildren: () => import('./components/salary/salary.module').then(m => m.SalaryModule)},
+      { path: 'timekeeping', loadChildren: () => import('./components/time-keeping/time-keeping.module').then(m => m.TimeKeepingModule)},
 
 
 

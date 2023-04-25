@@ -2,22 +2,19 @@
   <div class="row">
     <div class="col-md-12">
       <div class="row">
-        <div class="effect my-2">
-          <!-- <input class="effect-3" [disabled]="isWorking" #inputField [(ngModel)]="address"
-            (keydown.enter)="findAddress()" type="text" placeholder="Địa chỉ cửa hàng">
-          <i class="fa-solid fa-close icon-search" (click)="reset()"></i> -->
-          <!-- <span class="focus-border"></span> -->
-
+        <!-- <div class="effect my-2">
+          <input class="effect-3" [disabled]="isWorking" #inputField [(ngModel)]="address"
+            (keydown.enter)="findAddress()" type="text" placeholder="Địa chỉ cử/a hàng">
+          <i class="fa-solid fa-close icon-search" (click)="reset()"></i>
+          <span class="focus-border"></span>
           <button mat-raised-button class="button-submit mt-2" style="float:left" (click)="getCurrentLocation()" [disabled]="isWorking"><mat-icon>place</mat-icon>Vị trí của tôi</button>
         </div>
-
-        <!-- <button mat-raised-button class="button-submit mt-2 ms-auto" (click)="findAddress()" [disabled]="isWorking || !address?.length"><mat-icon>location_searching</mat-icon>Tìm kiếm</button> -->
-
+        <button mat-raised-button class="button-submit mt-2 ms-auto" (click)="findAddress()" [disabled]="isWorking || !address?.length"><mat-icon>location_searching</mat-icon>Tìm kiếm</button> -->
       </div>
-      <hr>
+
       <div class="row">
         <div class="col-12 col-md-4 pr-md-0">
-
+          <!-- <button mat-raised-button class="button-submit my-2" style="float:left" (click)="getCurrentLocation()" [disabled]="isWorking"><mat-icon>place</mat-icon>Vị trí của tôi</button> -->
           <div class="scrollbar" #scrollbar>
             <mat-list>
               <mat-list-item class="store" *ngFor="let store of listStore" (click)="findStores(store.addressDetail)">

@@ -33,6 +33,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatMenuModule} from '@angular/material/menu';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SalaryComponent } from './components/salary/salary.component';
+import { TimeKeepingComponent } from './components/time-keeping/time-keeping.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { SalaryComponent } from './components/salary/salary.component';
     TotpComponent,
     RegisterComponent,
     UserComponent,
-    ProfileComponent
+    ProfileComponent,
+
   ],
   imports: [
     BrowserModule,

@@ -49,9 +49,12 @@ export class SalaryComponent implements OnInit {
     this.service.deleteSalary(saId).subscribe((data) => {
       this.toast.success({ detail: "Thông báo thành công", summary: " Đã xoá mức lương thành công!", duration: 3000 })
       this.getSalary();
-    });
+    },
+    (error) => {
+      console.log(error);
+      this.toast.error({ detail: "Thông báo lỗi", summary: " Không thế xoá mức lương này!", duration: 3000 })
+    })};
 
-  }
   getCurrentItem(item: any) {
     console.log(item);
   }

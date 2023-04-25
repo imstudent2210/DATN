@@ -1,0 +1,62 @@
+<div class="container ">
+  <mat-card>
+    <mat-card-header>
+      <p class="title-page">Thêm bảng chấm công </p> {{newTimeKeeping|json}}
+    </mat-card-header>
+    <form class="example-form my-3 mx-3" (ngSubmit)="createTimeKeeping()">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6 mx-auto">
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Tháng chấm công</mat-label>
+                <input type="number" matInput [formControl]="monthf" [errorStateMatcher]="matcher"
+                  [(ngModel)]="newTimeKeeping.month" name="name">
+                <mat-error *ngIf="monthf.hasError('required')">
+                  Vui lòng nhập tháng chấm công
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Nhân viên</mat-label>
+                <mat-select required [(ngModel)]="newTimeKeeping.staff.id" name="staff">
+                  <mat-option *ngFor="let item of staff" [value]="item.id"> {{item.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Vị trí</mat-label>
+                <mat-select required [(ngModel)]="newTimeKeeping.salary.id" name="salary">
+                  <mat-option *ngFor="let item of salaryList" [value]="item.id"> {{item.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Lương cơ bản</mat-label>
+                <mat-select required [(ngModel)]="newTimeKeeping.salary.id" name="basicSalary">
+                  <mat-option *ngFor="let item of salaryList" [value]="item.id"> {{item.basicSalary}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Số ca làm</mat-label>
+                <input type="number" matInput [formControl]="numOfShift" [errorStateMatcher]="matcher"
+                  [(ngModel)]="newTimeKeeping.numOfShift" name="numOfShift">
+                <mat-error *ngIf="numOfShift.hasError('required')">
+                 Nhập số ca làm
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+            </div>
+            <div class="group-button">
+              <button mat-raised-button class="mt-2 mx-2" [routerLink]="'../../timekeeping/list'"
+                type="button"><mat-icon>keyboard_backspace</mat-icon>Trở về</button>
+              <button mat-raised-button class="button-submit mt-2 mx-2"><mat-icon>save</mat-icon>Lưu</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+</div>

@@ -5,9 +5,9 @@
     </mat-card-header>
     <form class="example-form my-3 mx-3" (ngSubmit)="createCategory()">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4 mx-auto">
               <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Tên mức lương</mat-label>
                 <input type="text" matInput [formControl]="namef" [errorStateMatcher]="matcher"
@@ -17,7 +17,7 @@
                 </mat-error>
               </mat-form-field>
               <mat-form-field class="full-width" appearance="outline">
-                <mat-label>Đơn giá lương trên giờ</mat-label>s
+                <mat-label>Đơn giá lương trên giờ</mat-label>
                 <input type="number" matInput [formControl]="salaryf" [errorStateMatcher]="matcher"
                   [(ngModel)]="newSalary.basicSalary" name="basicSalary">
                 <mat-error *ngIf="namef.hasError('required')">
@@ -34,7 +34,7 @@
             <div class="col-md-6">
             </div>
             <div class="group-button">
-                <button mat-raised-button class="mt-2 mx-2" [routerLink]="'../../salarylist'" type="button"><mat-icon>keyboard_backspace</mat-icon>Trở về</button>
+                <button mat-raised-button class="mt-2 mx-2" [routerLink]="'../../salary/list'" type="button"><mat-icon>keyboard_backspace</mat-icon>Trở về</button>
                 <button mat-raised-button class="button-submit mt-2 mx-2"><mat-icon>save</mat-icon>Lưu</button>
 
             </div>

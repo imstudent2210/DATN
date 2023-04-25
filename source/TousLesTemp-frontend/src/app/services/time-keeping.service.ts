@@ -13,8 +13,8 @@ export class TimeKeepingService {
   getTimeKeeping(): Observable<any> {
     return this.http.get(`${environment.API_BASE_URL}/staff-timekeeping/get`);
   }
-  deleteTimeKeeping(): Observable<any> {
-    return this.http.delete(`${environment.API_BASE_URL}/staff-timekeeping/delete`);
+  deleteTimeKeeping(id:any): Observable<any> {
+    return this.http.delete(`${environment.API_BASE_URL}/staff-timekeeping/delete/${id}`);
   }
   updateTimeKeeping(timekeeping: any, id: number): Observable<any> {
     return this.http.put(`${environment.API_BASE_URL}/staff-timekeeping/update/${id}`,timekeeping );

@@ -34,4 +34,5 @@ public class Staff {
     private Store store;
 
     private String image;
+
 }

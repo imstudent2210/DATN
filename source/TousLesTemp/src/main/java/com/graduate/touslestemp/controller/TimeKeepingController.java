@@ -61,9 +61,14 @@ public class TimeKeepingController {
         this.timeKeepingService.delete(id);
     }
 
-    @GetMapping("/get-salary/{id}")
-    public int getSalary(@PathVariable(name = "id") Long id) {
-        return timeKeepingRepository.staffSalary(id);
+    @GetMapping("/get-shiftsalary/{id}")
+    public int getshiftSalary(@PathVariable(name = "id") Long id) {
+        return timeKeepingRepository.shiftSalary(id);
+    }
+
+    @GetMapping("/get-timekeeping-permonth/{id}")
+    public List<TimeKeeping> getallTimeKeepingPerMonth(@PathVariable(name = "id") Long id) {
+        return timeKeepingRepository.allTimeKeepingPerMonth(id);
     }
 
 }

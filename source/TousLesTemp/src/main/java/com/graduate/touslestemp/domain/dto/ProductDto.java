@@ -2,14 +2,11 @@ package com.graduate.touslestemp.domain.dto;
 
 
 import com.graduate.touslestemp.domain.entity.Category;
-import com.graduate.touslestemp.domain.entity.Image;
 import com.graduate.touslestemp.domain.entity.Size;
 import com.graduate.touslestemp.domain.entity.Store;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.Set;
 
 @Getter
 @Setter

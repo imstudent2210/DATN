@@ -1,4 +1,5 @@
 package com.graduate.touslestemp.service.impl;
+import com.graduate.touslestemp.domain.entity.Category;
 import com.graduate.touslestemp.domain.entity.Salary;
 import com.graduate.touslestemp.domain.repository.SalaryRepository;
 import com.graduate.touslestemp.exception.RequestException;
@@ -44,16 +45,35 @@ public class SalaryServiceImpl implements SalaryService {
 
     @Override
     public Salary update(Salary salary, Long id) throws Exception {
-        Salary local = this.salaryRepository.findById(id)
-                .orElseThrow(() -> new RequestException("Not found this salary: " + id));
-
-        if (isExisSalary(salary.getName())) {
-            System.out.println("This address has already");
-            throw new RequestException("This address has already!");
+//        Salary local = this.salaryRepository.findById(id)
+//                .orElseThrow(() -> new RequestException("Not found this salary: " + id));
+//
+//        if (isExisSalary(salary.getName())) {
+//            System.out.println("This address has already");
+//            throw new RequestException("This address has already!");
+//        } else {
+//            local.setName(salary.getName());
+//            local.setBasicSalary(salary.getBasicSalary());
+//            return this.salaryRepository.save(local);
+//        }
+        Optional<Salary> local = salaryRepository.findById(id);
+        if (local.isEmpty()) {
+            throw new RequestException("Not found salary, id: " + id);
         } else {
-            local.setName(salary.getName());
-            local.setBasicSalary(salary.getBasicSalary());
-            return this.salaryRepository.save(local);
+            Salary updateSalary = this.salaryRepository.findSalaryByName(local.get().getName());
+            String updateName = salary.getName();
+            Salary local1 = this.salaryRepository.findSalaryByName(updateName);
+
+            if (updateSalary == null) {
+                System.out.println("Not found this salary: " + id);
+                throw new RequestException("Not found this salary: " + id);
+            } else {
+                if (local1 == null | (local1 != null && (local1.getBasicSalary() != salary.getBasicSalary()))) {
+                    updateSalary.setName(updateSalary.getName());
+                    updateSalary.setBasicSalary(salary.getBasicSalary());
+                } else throw new RequestException("This salary has already: " + updateName);
+            }
+            return this.salaryRepository.save(updateSalary);
         }
     }
     public boolean isExisSalary(String name) {

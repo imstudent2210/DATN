@@ -79,6 +79,37 @@ export const navbarData: INavbarData[] = [
   //   label: 'Tài khoản',
   // },
 
+
+  {
+    routeLink: 'salary',
+    icon: 'fa-solid fa-sack-dollar', //fal fa-box-open
+    label: 'Quỹ lương',
+    items: [
+      {
+        routeLink: 'salary/create',
+        label: 'Thêm mức lương',
+      },
+      {
+        routeLink: 'salary/list',
+        label: 'Danh sách mức lương',
+      },
+    ],
+  },
+  {
+    routeLink: 'timekeeping',
+    icon: 'fa-solid fa-share-from-square',
+    label: 'Chấm công   ',
+    items: [
+      {
+        routeLink: 'timekeeping/list',
+        label: 'Danh sách chấm công',
+      },
+      {
+        routeLink: 'timekeeping/create',
+        label: 'Thêm bảng chấm công',
+      },
+    ],
+  },
   {
     routeLink: 'address',
     icon: 'fad fa-map-marker-alt',

@@ -17,4 +17,6 @@ public interface StaffRepository extends JpaRepository<Staff, Long> {
 
     @Query("select s from Staff s join Store a where s.store.id = a.id and a.id = :id" )
     List<Staff> filterStaffByStoreId(@Param("id") Long id);
+//    @Query("select t from t join Salary s where t.salary.id = s.id and t.id = :id" )
+//    List<Staff> staffSalary(@Param("id") Long id);
 }

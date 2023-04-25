@@ -2,7 +2,6 @@ package com.graduate.touslestemp.service.impl;
 
 import com.graduate.touslestemp.domain.dto.PageResponseDTO;
 import com.graduate.touslestemp.domain.dto.ProductDto;
-import com.graduate.touslestemp.domain.entity.Image;
 import com.graduate.touslestemp.domain.entity.Product;
 import com.graduate.touslestemp.domain.mapper.ProductMapper;
 import com.graduate.touslestemp.domain.repository.ProductRepository;
@@ -12,9 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.*;
 
 @Service

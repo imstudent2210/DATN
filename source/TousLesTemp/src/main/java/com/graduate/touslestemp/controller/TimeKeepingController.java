@@ -1,16 +1,9 @@
 package com.graduate.touslestemp.controller;
 
-import com.graduate.touslestemp.domain.dto.StoreDto;
 import com.graduate.touslestemp.domain.dto.TimeKeepingDTO;
-import com.graduate.touslestemp.domain.entity.Salary;
-import com.graduate.touslestemp.domain.entity.Staff;
 import com.graduate.touslestemp.domain.entity.TimeKeeping;
-import com.graduate.touslestemp.domain.mapper.StoreMapper;
 import com.graduate.touslestemp.domain.mapper.TimeKeepingMapper;
-import com.graduate.touslestemp.domain.repository.SalaryRepository;
-import com.graduate.touslestemp.domain.repository.StaffRepository;
 import com.graduate.touslestemp.domain.repository.TimeKeepingRepository;
-import com.graduate.touslestemp.service.SalaryService;
 import com.graduate.touslestemp.service.TimeKeepingService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +50,7 @@ public class TimeKeepingController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteTimeKeepingDTO(@PathVariable("id") Long id) throws Exception {
+    public void deleteTimeKeepingDTO(@PathVariable("id") Long id) {
         this.timeKeepingService.delete(id);
     }
 

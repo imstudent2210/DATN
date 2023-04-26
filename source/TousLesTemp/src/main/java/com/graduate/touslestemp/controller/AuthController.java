@@ -7,7 +7,6 @@ import com.graduate.touslestemp.exception.UserAlreadyExistAuthenticationExceptio
 import com.graduate.touslestemp.service.ClientService;
 import com.graduate.touslestemp.domain.dto.ClientSdi;
 import com.graduate.touslestemp.security.jwt.TokenProvider;
-//import com.graduate.touslestemp.service.EmailSendersService;
 import com.graduate.touslestemp.service.UserService;
 import com.graduate.touslestemp.util.GeneralUtils;
 import dev.samstevens.totp.code.CodeGenerator;
@@ -53,15 +52,15 @@ public class AuthController {
     @Autowired
     private TokenProvider tokenProvider;
 
-    private QrDataFactory qrDataFactory = new QrDataFactory(SHA256, 6, 30);
+    private final QrDataFactory qrDataFactory = new QrDataFactory(SHA256, 6, 30);
 
-    private QrGenerator qrGenerator = new ZxingPngQrGenerator();
+    private final QrGenerator qrGenerator = new ZxingPngQrGenerator();
 
-    private TimeProvider timeProvider = new SystemTimeProvider();
+    private final TimeProvider timeProvider = new SystemTimeProvider();
 
-    private CodeGenerator codeGenerator = new DefaultCodeGenerator();
+    private final CodeGenerator codeGenerator = new DefaultCodeGenerator();
 
-    private CodeVerifier verifier = new DefaultCodeVerifier(codeGenerator, timeProvider);
+    private final CodeVerifier verifier = new DefaultCodeVerifier(codeGenerator, timeProvider);
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -92,7 +91,7 @@ public class AuthController {
             log.error("Exception Ocurred", e);
             return new ResponseEntity<>(new ApiResponse(false, "Email Address already in use!"), HttpStatus.BAD_REQUEST);
         } catch (QrGenerationException e) {
-            log.error("QR Generation Exception Ocurred", e);
+            log.error("QR Generation Exception ocurred", e);
             return new ResponseEntity<>(new ApiResponse(false, "Unable to generate QR code!"), HttpStatus.BAD_REQUEST);
         }
         return ResponseEntity.ok().body(new ApiResponse(true, "User registered successfully"));

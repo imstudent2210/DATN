@@ -12,7 +12,7 @@
               <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Tên cửa hàng</mat-label>
                 <input type="email" matInput [formControl]="namef" [errorStateMatcher]="matcher"
-                  [(ngModel)]="currentStore.name" name="name" readonly="true">
+                  [(ngModel)]="currentStore.name" name="name" >
                 <mat-error *ngIf="namef.hasError('required')">
                   Vui lòng nhập tên cửa hàng
                 </mat-error>

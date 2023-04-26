@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { StoresService } from 'src/app/services/stores.service';
 import { CustomPaginator } from 'src/app/model/paginator-config';
 import { Store } from 'src/app/model/store.model';
+import { NgToastService } from 'ng-angular-popup';
 // import { MatPaginatorIntl } from '@angular/material';
 @Component({
   selector: 'app-stores',
@@ -13,7 +14,7 @@ import { Store } from 'src/app/model/store.model';
   styleUrls: ['./stores.component.scss']
 })
 export class StoresComponent implements OnInit {
-  constructor(private service: StoresService, private route: Router) { }
+  constructor(private storeService: StoresService, private route: Router, private toast: NgToastService) { }
 
   @ViewChild(MatPaginator) paginator?:MatPaginator;
   @ViewChild(MatSort) sort?:MatSort;
@@ -22,7 +23,7 @@ export class StoresComponent implements OnInit {
   sId=0;
   listStore?:any;
   stores?:any;
-  columns: string[] = ['name', 'phone', 'email', 'addressDetail','address','action']
+  columns: string[] = ['name', 'phone', 'email', 'addressDetail','address','edit','delete']
 
   pageSizeOptions = [5, 10, 25];
   showPageSizeOptions = true;
@@ -34,7 +35,7 @@ export class StoresComponent implements OnInit {
   }
 // ================== Call Api BackEnd====================
   getStores(): void {
-    this.service.getStores().subscribe(
+    this.storeService.getStores().subscribe(
       data => {
         this.listStore = data
         console.log(this.listStore);
@@ -46,7 +47,7 @@ export class StoresComponent implements OnInit {
   }
 
   getStoresByName(name:string):void{
-    this.service.getStoresByName(name).subscribe(
+    this.storeService.getStoresByName(name).subscribe(
       data=>{
         this.listStore = data;
         console.log(this.listStore);
@@ -55,7 +56,7 @@ export class StoresComponent implements OnInit {
   }
 
   getStoresByAddress(name:string):void{
-    this.service.getStoresByAddress(name).subscribe(
+    this.storeService.getStoresByAddress(name).subscribe(
       data=>{
         this.listStore = data;
         console.log(this.listStore);
@@ -78,6 +79,16 @@ export class StoresComponent implements OnInit {
   editStore(sId:any){
     this.route.navigate(["/home/stores/update", sId]);
   }
+  deleteStore(tId: number) {
+    this.storeService.deleteStore(tId).subscribe((data) => {
+      this.toast.success({ detail: "Thông báo thành công", summary: " Đã xoá cửa hàng thành công!", duration: 3000 })
+      this.getStores();
+    },
+      (error) => {
+        console.log(error);
+        this.toast.error({ detail: "Thông báo lỗi", summary: " Không thế xoá cửa hàng này!", duration: 3000 })
+      })
+  };
 
   ngOnInit(): void {
     this.getStores();

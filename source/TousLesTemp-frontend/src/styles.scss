@@ -25,6 +25,20 @@ body {
   --black2: #313335;
 }
 
+table {
+  width: 100%;
+}
+.mat-header-sticky{
+  height: 500px;
+  max-width: 100%;
+  overflow: auto;
+}
+.mat-paginator-sticky {
+  bottom: 0px;
+  position: sticky;
+  z-index: 10;
+}
+
 .card {
   display: flex;
   flex-direction: column;

@@ -1,15 +1,8 @@
 package com.graduate.touslestemp.controller;
 
-import com.graduate.touslestemp.domain.dto.StaffDto;
-import com.graduate.touslestemp.domain.dto.TimeKeepingDTO;
-import com.graduate.touslestemp.domain.entity.Category;
 import com.graduate.touslestemp.domain.entity.Salary;
-import com.graduate.touslestemp.domain.entity.Staff;
-import com.graduate.touslestemp.domain.entity.TimeKeeping;
 import com.graduate.touslestemp.domain.repository.SalaryRepository;
-import com.graduate.touslestemp.domain.repository.TimeKeepingRepository;
 import com.graduate.touslestemp.service.SalaryService;
-import com.graduate.touslestemp.service.TimeKeepingService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,7 +38,7 @@ public class SalaryController {
         return this.salaryService.update(salary , id);
     }
     @DeleteMapping("/delete/{id}")
-    public void deleteSalary(@PathVariable("id") Long id) throws Exception{
+    public void deleteSalary(@PathVariable("id") Long id) {
         this.salaryService.delete(id);
     }
 

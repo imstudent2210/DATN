@@ -33,4 +33,7 @@ export class StoresService {
   updateStore(store: Store, id:number): Observable<any> {
     return this.http.put(`${environment.API_BASE_URL}/store/update/${id}`, store);
   }
+  deleteStore(id:any): Observable<any> {
+    return this.http.delete(`${environment.API_BASE_URL}/store/delete/${id}`);
+  }
 }

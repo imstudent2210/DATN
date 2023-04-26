@@ -39,3 +39,7 @@ a {
 .mat-mdc-menu-item .mat-icon {
   color: #ff9900;
 }
+.mat-mdc-menu-content
+{
+  min-width: 170px !important;
+}

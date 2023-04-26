@@ -23,7 +23,7 @@
   </div>
 
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 mat-header-sticky ">
       <table mat-table matSort [dataSource]="staff" class="mat-elevation-z8 table-tlt">
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Tên nhân viên</th>
@@ -73,11 +73,11 @@
             </button>
           </td>
         </ng-container>
-        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-header-row *matHeaderRowDef="columns;sticky:true"></tr>
         <tr mat-row *matRowDef="let row; columns: columns"></tr>
       </table>
       <mat-divider></mat-divider>
-      <mat-paginator [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+      <mat-paginator class="mat-paginator-sticky " [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
         [showFirstLastButtons]="showFirstLastButtons">
       </mat-paginator>
       <mat-divider></mat-divider>

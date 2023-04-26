@@ -30,14 +30,14 @@ public class AddressController {
     }
 
     @GetMapping("/get/{address}")
-    Address getAddressByName(@PathVariable("address") String address) throws Exception {
+    Address getAddressByName(@PathVariable("address") String address) {
         return this.addressService.findAddress(address);
 
     }
 
-    @PutMapping("/update2/{addressname}")
-    public Address updateAddres(@RequestBody @Valid Address address, @PathVariable("addressname") String addressname) throws Exception {
-        return this.addressService.update(address, addressname);
+    @PutMapping("/update2/{addressName}")
+    public Address updateAddress(@RequestBody @Valid Address address, @PathVariable("addressName") String addressName) throws Exception {
+        return this.addressService.update(address, addressName);
     }
     @PutMapping("/update/{id}")
     public Address updateAddress(@RequestBody @Valid Address address, @PathVariable("id") Long id) throws Exception {
@@ -45,7 +45,7 @@ public class AddressController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteAddress(@PathVariable("id") Long id) throws Exception{
+    public void deleteAddress(@PathVariable("id") Long id) {
        this.addressService.deleteAddress(id);
     }
 

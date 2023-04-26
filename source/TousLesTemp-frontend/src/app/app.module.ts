@@ -32,8 +32,7 @@ import { UserComponent } from './components/user/user.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatMenuModule} from '@angular/material/menu';
 import { ProfileComponent } from './components/profile/profile.component';
-import { SalaryComponent } from './components/salary/salary.component';
-import { TimeKeepingComponent } from './components/time-keeping/time-keeping.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -41,6 +40,7 @@ import { TimeKeepingComponent } from './components/time-keeping/time-keeping.com
     BodyComponent,
     SidenavComponent,
     HomeComponent,
+
     NavbarComponent,
     LoginComponent,
     SublevelMenuComponent,
@@ -56,6 +56,7 @@ import { TimeKeepingComponent } from './components/time-keeping/time-keeping.com
     CommonModule,
     RouterModule,
     BrowserAnimationsModule,
+    MatDatepickerModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,

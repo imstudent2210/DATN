@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <mat-card >
+        <mat-card-header class="mat-header">
+          <div mat-card-avatar><img class="a" src="../../../../assets/logo.jpg" alt=""></div>
+          <mat-card-title class="title">{{currentStaff.name}}</mat-card-title>
+          <mat-card-subtitle>{{currentStaff.email}}</mat-card-subtitle>
+        </mat-card-header>
+        <img class="image" mat-card-image src="{{currentStaff.image}}" alt="...">
+        <mat-card-content>
+          <p>
+            <strong>Lương: </strong> {{totalSalary}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions class="group-button-detail mx-auto">
+          <button mat-raised-button class="me-1" [routerLink]="'../../../timekeeping/list'" type="button"><mat-icon>keyboard_backspace</mat-icon>Trở về</button>
+          <button mat-raised-button class="button-submit ms-1"><mat-icon>open_in_new</mat-icon>Chi tiết</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-12 mat-header-sticky ">
+          <!-- <h3>Thông tin ca làm việc</h3> -->
+          <table mat-table matSort [dataSource]="list" class="mat-elevation-z8 table-tlt">
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef disableClear>Mã</th>
+              <td mat-cell *matCellDef="let element"  class="col-name-tlt"
+                [routerLink]="'../detail/' + element.id">
+                {{ element.id }}
+              </td>
+    
+            </ng-container>
+            <ng-container matColumnDef="createdDate">
+              <th mat-header-cell *matHeaderCellDef>Ngày tạo</th>
+              <td mat-cell *matCellDef="let element">{{ element.createdDate|date }}</td>
+            </ng-container>
+            <ng-container matColumnDef="month">
+              <th mat-header-cell *matHeaderCellDef>Tháng</th>
+              <td mat-cell *matCellDef="let element">{{ element.month }}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="numOfShift">
+              <th mat-header-cell *matHeaderCellDef>Số giờ làm</th>
+              <td mat-cell *matCellDef="let element">{{ element.numOfShift * 4}}</td>
+            </ng-container>
+            <ng-container matColumnDef="salaryname">
+              <th mat-header-cell *matHeaderCellDef>Vị trí</th>
+              <td mat-cell *matCellDef="let element">{{ element.salary.name }}</td>
+            </ng-container>
+            <ng-container matColumnDef="salaryprice">
+              <th mat-header-cell *matHeaderCellDef>Đơn giá /giờ</th>
+              <td mat-cell *matCellDef="let element">{{ element.salary.basicSalary }}</td>
+            </ng-container>
+            <ng-container matColumnDef="staff">
+              <th mat-header-cell *matHeaderCellDef>Nhân viên</th>
+              <td mat-cell *matCellDef="let element">{{ element.staff.name }}</td>
+            </ng-container>
+           
+            <tr mat-header-row *matHeaderRowDef="columns;sticky:true"></tr>
+            <tr mat-row *matRowDef="let row; columns: columns"></tr>
+          </table>
+          <mat-paginator class="mat-paginator-sticky"[pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+            [showFirstLastButtons]="showFirstLastButtons">
+          </mat-paginator>
+          <!-- <button type="button" (click)="getMonthSalary(23,1)"><mat-icon>keyboard_backspace</mat-icon>Trở về</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

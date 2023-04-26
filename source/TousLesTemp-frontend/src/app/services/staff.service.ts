@@ -13,6 +13,9 @@ export class StaffService {
   getStaff(): Observable<any> {
     return this.http.get(`${environment.API_BASE_URL}/staff/get`);
   }
+  getStaffByStoreId(id:any): Observable<any> {
+    return this.http.get(`${environment.API_BASE_URL}/staff/filter/${id}`);
+  }
   getStaffById(id: any) {
     return this.http.get<Staff>(`${environment.API_BASE_URL}/staff/get/${id}`);
   }

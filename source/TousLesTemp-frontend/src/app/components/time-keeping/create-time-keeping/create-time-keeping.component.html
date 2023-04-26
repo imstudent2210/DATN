@@ -3,19 +3,26 @@
     <mat-card-header>
       <p class="title-page">Thêm bảng chấm công </p> {{newTimeKeeping|json}}
     </mat-card-header>
+   
+   
     <form class="example-form my-3 mx-3" (ngSubmit)="createTimeKeeping()">
       <div class="row">
         <div class="col-md-12">
           <div class="row">
             <div class="col-md-6 mx-auto">
-              <mat-form-field class="full-width" appearance="outline">
-                <mat-label>Tháng chấm công</mat-label>
-                <input type="number" matInput [formControl]="monthf" [errorStateMatcher]="matcher"
-                  [(ngModel)]="newTimeKeeping.month" name="name">
-                <mat-error *ngIf="monthf.hasError('required')">
-                  Vui lòng nhập tháng chấm công
-                </mat-error>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Cửa hàng cần thực hiện chấm công</mat-label>
+                <mat-select  [(ngModel)]="storesId" name="storesId" (selectionChange)="getStaffByStore(storesId)">
+                  <mat-option *ngFor="let item of stores" [value]="item.id"> {{item.name}}</mat-option>
+                </mat-select>
               </mat-form-field>
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Tháng chấm công</mat-label>
+                <mat-select  [(ngModel)]="newTimeKeeping.month" name="name" >
+                  <mat-option *ngFor="let item of month" [value]="item"> {{item}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
               <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Nhân viên</mat-label>
                 <mat-select required [(ngModel)]="newTimeKeeping.staff.id" name="staff">

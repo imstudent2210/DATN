@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,6 +41,8 @@ public class TimeKeepingServiceImpl implements TimeKeepingService {
 
     @Override
     public TimeKeepingDTO create(TimeKeeping timeKeeping) throws Exception {
+        Date now = Calendar.getInstance().getTime();
+        timeKeeping.setCreatedDate(now);
         return (timeKeepingMapper.toTimeKeepingDTO(timeKeepingRepository.save(timeKeeping)));
     }
 

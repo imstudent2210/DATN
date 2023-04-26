@@ -1,14 +1,10 @@
 <div class="linetext mt-3" ><span>Ảnh</span></div>
-<mat-grid-list cols="2" rowHeight="1:1">
-
-  <mat-grid-tile *ngFor="let item of data.images">
-    <img [src]="item.url" alt="" style="width: 200px;height: 200px; background-color: white;
+<mat-grid-list cols="1" rowHeight="200px">
+  <mat-grid-tile >
+    <img src="{{data.image}}" alt="" style="width: 200px;height: 200px; background-color: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); ">
-
   </mat-grid-tile>
 </mat-grid-list>
 <div mat-dialog-actions>
-  <button class="btn-1 mx-auto" [mat-dialog-close] cdkFocusInitial>
-    <i class="fa-solid fa-arrow-left btn-1-icon"></i><span class="btn-1-text">Trở lại</span>
-  </button>
+  <button mat-raised-button class=" button-submit mt-2 mx-auto" [mat-dialog-close] cdkFocusInitial><mat-icon>keyboard_backspace</mat-icon>Trở về</button>
 </div>

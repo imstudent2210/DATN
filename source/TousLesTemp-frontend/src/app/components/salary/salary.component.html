@@ -10,7 +10,7 @@
   </div>
 
   <div class="row">
-    <div class="col-md-8 mx-auto">
+    <div class="col-md-8 mx-auto mat-header-sticky">
       <div class="effect my-2" >
         <input class="effect-2" (keyup)="doFilter($event)" type="text" [(ngModel)]="name" placeholder="Tìm kiếm">
         <i class="fa-solid fa-magnifying-glass icon-search"></i>
@@ -60,10 +60,10 @@
           </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-header-row *matHeaderRowDef="columns;sticky:true"></tr>
         <tr  mat-row *matRowDef="let row; columns: columns"></tr>
       </table>
-      <mat-paginator
+      <mat-paginator class="mat-paginator-sticky"
         [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
         [showFirstLastButtons]="showFirstLastButtons">
       </mat-paginator>

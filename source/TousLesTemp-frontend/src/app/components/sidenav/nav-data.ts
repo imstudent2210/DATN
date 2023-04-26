@@ -101,13 +101,14 @@ export const navbarData: INavbarData[] = [
     label: 'Chấm công   ',
     items: [
       {
-        routeLink: 'timekeeping/list',
-        label: 'Danh sách chấm công',
-      },
-      {
         routeLink: 'timekeeping/create',
         label: 'Thêm bảng chấm công',
       },
+      {
+        routeLink: 'timekeeping/list',
+        label: 'Danh sách chấm công',
+      },
+
     ],
   },
   {

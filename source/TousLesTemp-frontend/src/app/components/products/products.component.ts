@@ -35,10 +35,7 @@ export class ProductsComponent {
   listProduct?: any;
   item?: any;
   products?: any;
-  columns: string[] = ['name', 'description', 'price', 'inventory', 'category', 'size', 'store', 'image', 'edit', 'delete']
-
-
-
+  columns: string[] = ['name', 'price', 'inventory', 'category', 'size', 'store', 'image', 'edit', 'delete']
 
   pageSizeOptions = [5, 10, 25, 50];
   showPageSizeOptions = true;
@@ -60,10 +57,10 @@ export class ProductsComponent {
     console.log(product);
     this.imageDialog.open(ImageDialogComponent, {
       data: {
-        images: product.image
+        image: product.image
       },
-      height: '400px',
-      width: '600px'
+      height: '310px',
+      width: '500px'
     })
   }
   editProduct(pId: any) {
@@ -73,13 +70,9 @@ export class ProductsComponent {
   // ================== Call Api BackEnd====================
   getProducts(): void {
     this.service.getProducts()
-      // .pipe(
-      //   map((x: Product[], i) => x.map((product: Product) => this.imageProcessing.createImages(product)))
-      // )
       .subscribe(
         data => {
           this.listProduct = data;
-          console.log(this.listProduct.length);
           this.products = new MatTableDataSource<Store>(this.listProduct);
           this.products.sort = this.sort;
           this.products.paginator = this.paginator;
@@ -90,13 +83,14 @@ export class ProductsComponent {
 
 
   deleteProduct(pId: number) {
-    this.deleteDialog.open(DeleteDialogComponent, {
+    const dialogRef = this.deleteDialog.open(DeleteDialogComponent, {
       data: {
-        productId: pId
-      }
-    }).afterClosed().subscribe(result => {
+            productId: pId
+          }
+    });
+    dialogRef.afterClosed().subscribe(() => {
       this.getProducts();
-    })
+    });
   }
 
   fileName ="Export.xlsx";

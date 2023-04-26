@@ -1,11 +1,12 @@
 package com.graduate.touslestemp.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import java.util.Set;
+import java.util.Date;
+
 
 @Getter
 @Setter
@@ -29,4 +30,7 @@ public class TimeKeeping {
     @ManyToOne
     @JoinColumn(name = "Staff", referencedColumnName = "id")
     private Staff Staff;
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "UTC")
+    protected Date createdDate;
 }

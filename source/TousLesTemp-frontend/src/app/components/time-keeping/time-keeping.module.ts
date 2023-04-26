@@ -25,13 +25,18 @@ import { MatRadioModule } from '@angular/material/radio';
 import { NgxCurrencyModule } from 'ngx-currency';
 import { TagModule } from 'primeng/tag';
 import { TimeKeepingComponent } from './time-keeping.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
+import { SalaryDetailComponent } from './salary-detail/salary-detail.component';
+
 
 
 @NgModule({
   declarations: [
     UpdateTimeKeepingComponent,
     CreateTimeKeepingComponent,
-    TimeKeepingComponent
+    TimeKeepingComponent,
+    SalaryDetailComponent
   ],
   imports: [
     CommonModule,
@@ -47,19 +52,23 @@ import { TimeKeepingComponent } from './time-keeping.component';
     MatCardModule,
     MatSelectModule,
     MatDialogModule,
+    MatDatepickerModule,
     MatRadioModule,
     MatSlideToggleModule,
     MatGridListModule,
     MatIconModule,
     TagModule,
     NgxCurrencyModule,
-    MatChipsModule
+    MatChipsModule,
+    
 
 
   ],
   exports:[],
   providers:[
-    { provide: MatPaginatorIntl, useValue: CustomPaginator() }
+    { provide: MatPaginatorIntl, useValue: CustomPaginator() },
+    // {provide: MAT_DATE_FORMATS, useValue: _dateFormats},
+
   ],
 })
 export class TimeKeepingModule { }

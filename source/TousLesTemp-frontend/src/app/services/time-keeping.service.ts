@@ -26,9 +26,12 @@ export class TimeKeepingService {
     return this.http.post<any>(`${environment.API_BASE_URL}/staff-timekeeping/create`,timekeeping );
   }
   getAllTimeKeepingPerMonth(id: number): Observable<any> {
-    return this.http.get(`${environment.API_BASE_URL}/get-timekeeping-permonth/${id}`);
+    return this.http.get(`${environment.API_BASE_URL}/staff-timekeeping/get-timekeeping-permonth/${id}`);
   }
   getShiftSalary(id: number): Observable<any> {
-    return this.http.get(`${environment.API_BASE_URL}/get-shiftsalary/${id}`);
+    return this.http.get(`${environment.API_BASE_URL}/staff-timekeeping/get-shiftsalary/${id}`);
+  }
+  getAllTimeKeepingPerStaff(id: number): Observable<any> {
+    return this.http.get(`${environment.API_BASE_URL}/staff-timekeeping/get-timekeeping-perstaff/${id}`);
   }
 }

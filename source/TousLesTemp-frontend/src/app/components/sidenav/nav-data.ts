@@ -111,21 +111,21 @@ export const navbarData: INavbarData[] = [
 
     ],
   },
-  {
-    routeLink: 'address',
-    icon: 'fad fa-map-marker-alt',
-    label: 'Địa chỉ',
-    items: [
-      {
-        routeLink: 'address/map',
-        label: 'Tấc cả chi nhánh',
-      },
-      {
-        routeLink: 'address/create',
-        label: 'Thêm chi nhánh mới',
-      },
-    ],
-  },
+  // {
+  //   routeLink: 'address',
+  //   icon: 'fad fa-map-marker-alt',
+  //   label: 'Địa chỉ',
+  //   items: [
+  //     {
+  //       routeLink: 'address/map',
+  //       label: 'Tấc cả chi nhánh',
+  //     },
+  //     {
+  //       routeLink: 'address/create',
+  //       label: 'Thêm chi nhánh mới',
+  //     },
+  //   ],
+  // },
 ];
 
 // {

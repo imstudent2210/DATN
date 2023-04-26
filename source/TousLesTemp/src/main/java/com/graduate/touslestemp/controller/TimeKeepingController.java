@@ -58,6 +58,10 @@ public class TimeKeepingController {
     public int getshiftSalary(@PathVariable(name = "id") Long id) {
         return timeKeepingRepository.shiftSalary(id);
     }
+    @GetMapping("/get-monthsalary")
+    public int getmonthSalary(@RequestParam("id") Long id, @RequestParam("month") Long month) {
+        return timeKeepingRepository.monthSalary(id,month);
+    }
 
     @GetMapping("/get-timekeeping-permonth/{id}")
     public List<TimeKeeping> getallTimeKeepingPerMonth(@PathVariable(name = "id") Long id) {

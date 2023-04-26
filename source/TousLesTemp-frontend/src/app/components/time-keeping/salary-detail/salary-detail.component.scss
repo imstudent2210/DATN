@@ -1,0 +1,54 @@
+.mdc-data-table__cell {
+  width: 160px;
+}
+.mat-grid-tile {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+.images-container { 
+  position: relative;
+  height: 500px;
+}
+.product-images {
+  max-width: 80%;
+  max-height: 80%;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: auto;
+  display: block;
+}
+.title{
+  color: #FF9900;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Roboto', sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.image{
+  margin: 5px auto;
+  width: 250px;
+  height: 300px;
+  display: block;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.button{
+  justify-content: center;
+  margin: 0;
+}
+.mat-header{
+  background: #ff9900;
+}
+.title{
+  color: #000;
+}

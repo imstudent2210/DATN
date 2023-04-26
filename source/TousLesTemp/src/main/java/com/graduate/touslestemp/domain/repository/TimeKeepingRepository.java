@@ -23,5 +23,8 @@ public interface TimeKeepingRepository extends JpaRepository<TimeKeeping, Long> 
     @Query("select t from TimeKeeping t join Salary s where t.salary.id = s.id and t.Staff.id = :id" )
     List<TimeKeeping> allTimeKeepingPerStaff(@Param("id") Long id);
     @Query("select t from TimeKeeping t where MONTH(t.createdDate) = :month")
-    List<TimeKeeping> findTimeKeepingByMonth(@Param("month") int month);
+    List<TimeKeeping> findTimeKeepingByMonth(@Param("month") Long month);
+
+    @Query("select s from TimeKeeping t join Staff s where t.Staff.id = s.id and t.month = :month" )
+    List<Staff> allStaffHaveTimeKeepingPerMonth(@Param("month") Long month);
 }

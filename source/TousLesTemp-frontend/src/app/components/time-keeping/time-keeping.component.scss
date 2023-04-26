@@ -27,33 +27,34 @@
   margin: auto;
   display: block;
 }
-.title{
-  color: #FF9900;
+.title {
+  color: #ff9900;
   font-size: 14px;
   font-weight: 700;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   cursor: pointer;
 }
-.image{
+.image {
   margin: 5px auto;
   width: 250px;
   height: 250px;
   display: block;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.button{
+.button {
   justify-content: center;
   margin: 0;
 }
-.head{
+.head {
   display: flex;
   list-style: none;
   margin-left: 600px;
 }
-.mdc-data-table__header-cell{
+.mdc-data-table__header-cell {
   text-align: center;
 }
 .mdc-data-table__cell {
   text-align: center;
 }
+

@@ -50,8 +50,9 @@
         <span class="focus-border"></span>
       </div>
     </div>
-    <div class="col-md-6" >
-      <button mat-raised-button class="button-submit mt-2" [routerLink]="'../create'"><mat-icon>library_add</mat-icon>Thêm mới</button>
+    <div class="col-md-6">
+      <button mat-raised-button class="button-submit mt-2"
+        [routerLink]="'../create'"><mat-icon>library_add</mat-icon>Thêm mới</button>
     </div>
   </div>
   <div class="row">
@@ -59,11 +60,9 @@
       <table mat-table matSort [dataSource]="list" class="mat-elevation-z8 table-tlt">
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef disableClear>Mã</th>
-          <td mat-cell *matCellDef="let element"  class="col-name-tlt"
-            [routerLink]="'../detail/' + element.id">
+          <td mat-cell *matCellDef="let element" class="col-name-tlt" [routerLink]="'../detail/' + element.id">
             {{ element.id }}
           </td>
-
         </ng-container>
         <ng-container matColumnDef="createdDate">
           <th mat-header-cell *matHeaderCellDef>Ngày tạo</th>
@@ -100,7 +99,7 @@
         </ng-container>
         <ng-container matColumnDef="delete">
           <th mat-header-cell *matHeaderCellDef class="col-action-tlt"></th>
-          <td mat-cell *matCellDef="let element" >
+          <td mat-cell *matCellDef="let element">
             <button mat-mini-fab color="basic" (click)="deleteTimeKeeping(element.id)">
               <i class="fa-solid fa-trash" style="color:red"></i>
             </button>
@@ -109,10 +108,20 @@
         <tr mat-header-row *matHeaderRowDef="columns;sticky:true"></tr>
         <tr mat-row *matRowDef="let row; columns: columns"></tr>
       </table>
-      <mat-paginator class="mat-paginator-sticky"[pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+      <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
         [showFirstLastButtons]="showFirstLastButtons">
       </mat-paginator>
-      <!-- <button type="button" (click)="getMonthSalary(23,1)"><mat-icon>keyboard_backspace</mat-icon>Trở về</button> -->
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-md-8 mx-auto">
+      <button mat-raised-button type="button" class="mx-auto"
+        (click)="getAllStaffSalaryPerMonth(1)"><mat-icon>bar_chart</mat-icon>Thống kê</button>
+
+      <button mat-raised-button type="button" class="mx-auto"
+        (click)="getAllStaffSalaryPerMonth(2)"><mat-icon>bar_chart</mat-icon>Thống kê</button>
+      <canvas #myCanvas id="myCanvas"></canvas>
+
     </div>
   </div>
 </div>

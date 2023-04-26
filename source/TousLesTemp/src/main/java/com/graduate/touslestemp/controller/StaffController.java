@@ -48,16 +48,16 @@ public class StaffController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteStaffDTO(@PathVariable("id") Long id) throws Exception {
+    public void deleteStaffDTO(@PathVariable("id") Long id) {
         this.staffService.delete(id);
     }
 
-    @GetMapping("/search/{store}")
-    List<StaffDto> searchStaffDTO(@PathVariable("name") String name) throws Exception {
+    @GetMapping("/search/{name}")
+    List<StaffDto> searchStaffDTO(@PathVariable("name") String name) {
         return this.staffService.search(name);
     }
-    @GetMapping("/filter/{addressId}")
-    List<StaffDto> filterStaffDTO(@PathVariable("storeid") Long storeid) throws Exception {
-        return this.staffService.filter(storeid);
+    @GetMapping("/filter/{storeId}")
+    List<StaffDto> filterStaffDTO(@PathVariable("storeId") Long storeId) {
+        return this.staffService.filter(storeId);
     }
 }

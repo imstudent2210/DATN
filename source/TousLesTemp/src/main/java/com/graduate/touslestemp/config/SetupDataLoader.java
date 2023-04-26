@@ -2,14 +2,10 @@ package com.graduate.touslestemp.config;
 
 import com.graduate.touslestemp.domain.dto.SocialProvider;
 import com.graduate.touslestemp.domain.entity.Role;
-import com.graduate.touslestemp.domain.entity.Salary;
 import com.graduate.touslestemp.domain.entity.User;
 import com.graduate.touslestemp.domain.repository.RoleRepository;
-import com.graduate.touslestemp.domain.repository.SalaryRepository;
 import com.graduate.touslestemp.domain.repository.UserRepository;
-import com.graduate.touslestemp.service.SalaryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,10 +26,6 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
     @Autowired
     private RoleRepository roleRepository;
-    @Autowired
-    private SalaryService salaryService;
-    @Autowired
-    private SalaryRepository salaryRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;

@@ -22,7 +22,7 @@ public class RsqlController {
     @GetMapping("/store")
     public List<Store> findAllByRsql(@RequestParam(value = "search") String search) {
         Node rootNode = new RSQLParser().parse(search);
-        Specification<Store> spec = rootNode.accept(new CustomRsqlVisitor<Store>());
+        Specification<Store> spec = rootNode.accept(new CustomRsqlVisitor<>());
         return storeRepository.findAll(spec);
     }
 }

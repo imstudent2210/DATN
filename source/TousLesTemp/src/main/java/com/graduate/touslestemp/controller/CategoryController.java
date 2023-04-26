@@ -36,7 +36,7 @@ public class CategoryController {
     }
 
     @GetMapping("/getByName/{category}")
-    Category getCategoryByName(@PathVariable("category") String category) throws Exception {
+    Category getCategoryByName(@PathVariable("category") String category) {
         return this.categoryService.findCategory(category);
 
     }
@@ -56,7 +56,7 @@ public class CategoryController {
 
 
     @DeleteMapping("/delete/{id}")
-    public void deleteAddress(@PathVariable("id") Long id) throws Exception{
+    public void deleteAddress(@PathVariable("id") Long id) {
        this.categoryService.deleteCategory(id);
     }
 }

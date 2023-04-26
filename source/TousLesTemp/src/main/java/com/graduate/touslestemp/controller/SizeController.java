@@ -45,7 +45,7 @@ public class SizeController {
                     .contentType(MediaType.parseMediaType("application/vnd.ms-excel;charset=UTF-8"))
                     .body(inputStreamResource);
         }else{
-            throw new RequestException("Không thể xuất file");
+            throw new RequestException("Can not export");
         }
     }
 }

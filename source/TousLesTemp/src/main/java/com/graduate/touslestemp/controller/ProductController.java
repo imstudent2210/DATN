@@ -59,29 +59,22 @@ public class ProductController {
     }
 
     @GetMapping("/search/{name}")
-    List<ProductDto> searchStoreDTO(@PathVariable("name") String name) throws Exception {
+    List<ProductDto> searchStoreDTO(@PathVariable("name") String name) {
         return this.productService.search(name);
     }
 
     @GetMapping("/filter/{categoryId}")
-    List<ProductDto> filterStoreDTO(@PathVariable("categoryId") Long categoryId) throws Exception {
+    List<ProductDto> filterStoreDTO(@PathVariable("categoryId") Long categoryId) {
         return this.productService.filter(categoryId);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteProduct(@PathVariable("id") Long id) throws Exception {
+    public void deleteProduct(@PathVariable("id") Long id) {
         this.productService.delete(id);
     }
 
     @GetMapping("/getByStoreId/{id}")
-    List<Product> getByStoreId(@PathVariable("id") Long id) throws Exception {
+    List<Product> getByStoreId(@PathVariable("id") Long id) {
         return this.productRepository.getProductByStoreId(id);
     }
-
-
-
-    //    @GetMapping("/get2")
-//    public ResponseEntity<List<Product>> allProduct() {
-//        return new ResponseEntity<>(productRepository.findAll(), HttpStatus.OK);
-//    }
 }

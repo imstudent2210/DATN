@@ -48,17 +48,17 @@ public class StoreController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteStoreDTO(@PathVariable("id") Long id) throws Exception {
+    public void deleteStoreDTO(@PathVariable("id") Long id) {
         this.storeService.delete(id);
     }
 
     @GetMapping("/search/{store}")
-    List<StoreDto> searchStoreDTO(@PathVariable("store") String store) throws Exception {
+    List<StoreDto> searchStoreDTO(@PathVariable("store") String store) {
         return this.storeService.search(store);
     }
 
     @GetMapping("/filter/{addressId}")
-    List<StoreDto> filterStoreDTO(@PathVariable("addressId") Long addressId) throws Exception {
+    List<StoreDto> filterStoreDTO(@PathVariable("addressId") Long addressId) {
         return this.storeService.filter(addressId);
     }
 

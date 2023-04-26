@@ -1,6 +1,7 @@
 package com.graduate.touslestemp.service.impl;
 
 import com.graduate.touslestemp.domain.dto.PageResponseDTO;
+import com.graduate.touslestemp.domain.dto.StaffSalaryDTO;
 import com.graduate.touslestemp.domain.dto.TimeKeepingDTO;
 import com.graduate.touslestemp.domain.entity.Staff;
 import com.graduate.touslestemp.domain.entity.Store;
@@ -13,10 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class TimeKeepingServiceImpl implements TimeKeepingService {
@@ -62,6 +60,26 @@ public class TimeKeepingServiceImpl implements TimeKeepingService {
     }
 
     @Override
+    public List<Staff> allStaffHaveTimeKeepingPerMonth(Long month) throws Exception {
+        if(!timeKeepingRepository.allTimeKeepingPerMonth(month).isEmpty()){
+            return this.timeKeepingRepository.allStaffHaveTimeKeepingPerMonth(month);
+        }
+        else throw new RequestException("No data!") ;
+    }
+
+    @Override
+    public List<StaffSalaryDTO> calculateAllStaffSalaryPerMonth(Long month) throws Exception {
+        List<StaffSalaryDTO> staffSalaryList = new ArrayList<>();
+        List<Staff> staffList = timeKeepingRepository.allStaffHaveTimeKeepingPerMonth(month);
+        for (Staff staff : staffList) {
+            double salary = timeKeepingRepository.monthSalary(staff.getId(), month);
+            StaffSalaryDTO staffSalaryDTO = new StaffSalaryDTO(staff.getName(), salary);
+            staffSalaryList.add(staffSalaryDTO);
+        }
+        return staffSalaryList;
+    }
+
+    @Override
     public List<TimeKeepingDTO> search(String keyword) {
         return null;
     }
@@ -70,4 +88,5 @@ public class TimeKeepingServiceImpl implements TimeKeepingService {
     public List<TimeKeepingDTO> filter(Long id) {
         return null;
     }
+
 }

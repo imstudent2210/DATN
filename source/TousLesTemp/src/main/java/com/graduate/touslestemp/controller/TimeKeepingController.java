@@ -1,8 +1,11 @@
 package com.graduate.touslestemp.controller;
 
+import com.graduate.touslestemp.domain.dto.StaffSalaryDTO;
 import com.graduate.touslestemp.domain.dto.TimeKeepingDTO;
+import com.graduate.touslestemp.domain.entity.Staff;
 import com.graduate.touslestemp.domain.entity.TimeKeeping;
 import com.graduate.touslestemp.domain.mapper.TimeKeepingMapper;
+import com.graduate.touslestemp.domain.repository.StaffRepository;
 import com.graduate.touslestemp.domain.repository.TimeKeepingRepository;
 import com.graduate.touslestemp.service.TimeKeepingService;
 import jakarta.validation.Valid;
@@ -11,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -23,6 +27,8 @@ public class TimeKeepingController {
     private TimeKeepingService timeKeepingService;
     @Autowired
     private TimeKeepingMapper timeKeepingMapper;
+    @Autowired
+    private StaffRepository staffRepository;
 
     @GetMapping("/gets")
     public ResponseEntity<List<TimeKeeping>> allTimeKeeping() {
@@ -73,4 +79,12 @@ public class TimeKeepingController {
         return timeKeepingRepository.allTimeKeepingPerStaff(id);
     }
 
+    @GetMapping("/get-all-shiftsalary")
+    public List<StaffSalaryDTO> calculateAllStaffSalary(@RequestParam("month") long month) throws Exception {
+        return this.timeKeepingService.calculateAllStaffSalaryPerMonth(month);
+    }
+    @GetMapping("/get-allstaff-timekeeping-permonth")
+    public List<Staff> allStaffHaveTimeKeepingPerMonth(@RequestParam("month") long month) throws Exception {
+        return this.timeKeepingService.allStaffHaveTimeKeepingPerMonth(month);
+    }
 }

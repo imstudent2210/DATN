@@ -11,7 +11,7 @@ export class StaffService {
 
   constructor(private http: HttpClient) { }
   getStaff(): Observable<any> {
-    return this.http.get(`${environment.API_BASE_URL}/staff/get`);
+    return this.http.get(`${environment.API_BASE_URL}/staff/get-all`);
   }
   getStaffByStoreId(id:any): Observable<any> {
     return this.http.get(`${environment.API_BASE_URL}/staff/filter/${id}`);

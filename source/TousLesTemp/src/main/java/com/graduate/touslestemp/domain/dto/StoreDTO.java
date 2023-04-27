@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class StoreDto {
+public class StoreDTO {
     @Id
     private String id;
     private String name;

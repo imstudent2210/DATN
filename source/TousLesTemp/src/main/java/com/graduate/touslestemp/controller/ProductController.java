@@ -1,7 +1,7 @@
 package com.graduate.touslestemp.controller;
 
 import com.graduate.touslestemp.domain.dto.PageResponseDTO;
-import com.graduate.touslestemp.domain.dto.ProductDto;
+import com.graduate.touslestemp.domain.dto.ProductDTO;
 import com.graduate.touslestemp.domain.entity.Product;
 import com.graduate.touslestemp.domain.mapper.ProductMapper;
 import com.graduate.touslestemp.domain.repository.ProductRepository;
@@ -32,39 +32,39 @@ public class ProductController {
     }
 
     @GetMapping("/get-all")
-    public ResponseEntity<List<ProductDto>> allProductDTO() {
+    public ResponseEntity<List<ProductDTO>> allProductDTO() {
         return new ResponseEntity<>(productMapper.toProductDTOs(productRepository.findAll()), HttpStatus.OK);
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<ProductDto> getProductDTOById(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<ProductDTO> getProductDTOById(@PathVariable(name = "id") Long id) {
         return new ResponseEntity<>(productService.find(id), HttpStatus.OK);
     }
 
 
 
     @PostMapping("/create")
-    public ResponseEntity<ProductDto> createProductDTO(@RequestBody @Valid Product product) throws Exception {
+    public ResponseEntity<ProductDTO> createProductDTO(@RequestBody @Valid Product product) throws Exception {
         return new ResponseEntity<>(productService.create(product), HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<ProductDto> updateProductDTO(@RequestBody @Valid ProductDto productDto, @PathVariable(name = "id") Long id) throws Exception {
+    public ResponseEntity<ProductDTO> updateProductDTO(@RequestBody @Valid ProductDTO productDto, @PathVariable(name = "id") Long id) throws Exception {
         return new ResponseEntity<>(productService.update(productDto, id), HttpStatus.OK);
     }
 
     @GetMapping("/filter/desc-price")
-    public ResponseEntity<List<ProductDto>> filterProductDTO() {
+    public ResponseEntity<List<ProductDTO>> filterProductDTO() {
         return new ResponseEntity<>(productMapper.toProductDTOs(productRepository.filterHighPrice()), HttpStatus.OK);
     }
 
     @GetMapping("/search/{name}")
-    List<ProductDto> searchStoreDTO(@PathVariable("name") String name) {
+    List<ProductDTO> searchStoreDTO(@PathVariable("name") String name) {
         return this.productService.search(name);
     }
 
     @GetMapping("/filter/{categoryId}")
-    List<ProductDto> filterStoreDTO(@PathVariable("categoryId") Long categoryId) {
+    List<ProductDTO> filterStoreDTO(@PathVariable("categoryId") Long categoryId) {
         return this.productService.filter(categoryId);
     }
 
@@ -74,7 +74,8 @@ public class ProductController {
     }
 
     @GetMapping("/getByStoreId/{id}")
-    List<Product> getByStoreId(@PathVariable("id") Long id) {
-        return this.productRepository.getProductByStoreId(id);
+    List<ProductDTO> getByStoreId(@PathVariable("id") Long id) {
+//        return this.productRepository.getProductByStoreId(id);
+        return this.productMapper.toProductDTOs(productRepository.getProductByStoreId(id));
     }
 }

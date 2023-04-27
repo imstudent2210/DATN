@@ -41,8 +41,8 @@ public class TimeKeepingController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<TimeKeeping> getTimeKeepingDTO(@PathVariable(name = "id") Long id) {
-        return new ResponseEntity<>(timeKeepingService.find(id), HttpStatus.OK);
+    public ResponseEntity<TimeKeepingDTO> getTimeKeepingDTO(@PathVariable(name = "id") Long id) {
+        return new ResponseEntity<>(timeKeepingMapper.toTimeKeepingDTO(timeKeepingService.find(id)), HttpStatus.OK);
     }
 
     @PostMapping("/create")

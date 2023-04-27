@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -26,4 +28,8 @@ public class Store {
     @JoinColumn(name = "Address", referencedColumnName = "address_id")
     private Address address;
     private String image;
+    @OneToMany(mappedBy = "store", cascade = CascadeType.REMOVE)
+    private List<Product> productList;
+    @OneToMany(mappedBy = "store", cascade = CascadeType.REMOVE)
+    private List<Staff> staff;
 }

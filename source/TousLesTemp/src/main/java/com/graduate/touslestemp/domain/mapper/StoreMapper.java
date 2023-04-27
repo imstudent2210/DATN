@@ -1,6 +1,6 @@
 package com.graduate.touslestemp.domain.mapper;
 
-import com.graduate.touslestemp.domain.dto.StoreDto;
+import com.graduate.touslestemp.domain.dto.StoreDTO;
 import com.graduate.touslestemp.domain.entity.Store;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -13,14 +13,14 @@ import java.util.List;
 public interface StoreMapper {
     StoreMapper INSTANCE = Mappers.getMapper(StoreMapper.class);
 
-    StoreDto toStoreDTO(Store store);
+    StoreDTO toStoreDTO(Store store);
 
-    Store toStoreEntity(StoreDto storeDTO);
+    Store toStoreEntity(StoreDTO storeDTO);
 
     @Mapping(target = "id", ignore = true)
-    void updateEntity(StoreDto storeDto, @MappingTarget Store store);
+    void updateEntity(StoreDTO storeDto, @MappingTarget Store store);
 
-    List<StoreDto> toStoreDTOs(List<Store> stores);
+    List<StoreDTO> toStoreDTOs(List<Store> stores);
 
 
 }

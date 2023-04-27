@@ -1,7 +1,7 @@
 <div class="container ">
   <mat-card>
     <mat-card-header>
-      <p class="title-page">Thêm bảng chấm công </p>
+      <p class="title-page">Cập nhật bảng chấm công </p>
     </mat-card-header>
     <form class="example-form my-3 mx-3" (ngSubmit)="updateTimpKeeping()">
       <div class="row">
@@ -9,7 +9,7 @@
           <div class="row">
             <div class="col-md-6">
               <mat-form-field class="full-width" appearance="outline">
-                <mat-label>Tên mức lương</mat-label>
+                <mat-label>Tháng chấm công</mat-label>
                 <input type="text" matInput [formControl]="monthf" [errorStateMatcher]="matcher"
                   [(ngModel)]="currentTimeKeeping.month" name="name">
                 <mat-error *ngIf="monthf.hasError('required')">
@@ -35,6 +35,14 @@
                 <mat-select required [(ngModel)]="currentTimeKeeping.salary.id" name="salary">
                   <mat-option *ngFor="let item of salaryList" [value]="item.id"> {{item.name}}</mat-option>
                 </mat-select>
+              </mat-form-field>
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Số ca làm</mat-label>
+                <input type="number" matInput [formControl]="numOfShift" [errorStateMatcher]="matcher"
+                  [(ngModel)]="currentTimeKeeping.numOfShift" name="numOfshift">
+                <mat-error *ngIf="salaryf.hasError('required')">
+                  Vui lòng nhập số ca làm
+                </mat-error>
               </mat-form-field>
             </div>
           </div>

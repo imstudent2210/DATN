@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit {
   namef = new FormControl('', [Validators.required]);
   addressDetailf = new FormControl('', [Validators.required]);
   matcher = new MyErrorStateMatcher();
-  password = new FormControl('', [Validators.required]);
+  passwordf = new FormControl('', [Validators.required]);
   email = new FormControl('', [Validators.required,Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]);
   sendmail =  this.form.email;
 
@@ -46,16 +46,16 @@ export class RegisterComponent implements OnInit {
 
   }
   errror() {
-    if (this.password.hasError('required')) {
-      return 'Mật khẩu không được để trống';
+    if (this.passwordf.hasError('required')) {
+      return 'Mật khẩu ít nhất 6 ký tự';
     }
-    return this.password.hasError('password') ? 'Không hợp lệ' : '';
+    return this.passwordf.hasError('password') ? 'Không hợp lệ' : '';
   }
   errrorPassword() {
-    if (this.password.hasError('required')) {
-      return 'Mật khẩu không được để trống';
+    if (this.passwordf.hasError('required')) {
+      return 'Mật khẩu ít nhất 6 ký tự';
     }
-    return this.password.hasError('password') ? 'Không hợp lệ' : '';
+    return this.passwordf.hasError('password') ? 'Không hợp lệ' : '';
   }
   getErrorMessage() {
     if (this.email.hasError('required')) {

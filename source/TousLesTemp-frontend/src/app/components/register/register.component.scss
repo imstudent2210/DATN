@@ -79,3 +79,8 @@ label {
   display: block;
   margin: 0 auto;
 }
+.button-register{
+  background-color: var(--yellow, transparent) !important;
+  align-items: center;
+  margin: 8px auto;
+}

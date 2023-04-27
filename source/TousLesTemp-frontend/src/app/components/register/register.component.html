@@ -47,13 +47,13 @@
           <div class="alert alert-success" *ngIf="isSuccessful">
             <div *ngIf="!isUsing2FA">
               <p class="content">Đăng ký thành công</p>
-            <button mat-raised-button class="button-submit my-2" [routerLink]="'/login'"><mat-icon>login</mat-icon>Đăng nhập</button>
+            <button mat-raised-button class="button-register" [routerLink]="'/login'"><mat-icon>login</mat-icon>Đăng nhập</button>
             </div>
             <div *ngIf="isUsing2FA" class="text-center">
               <p class="content">
                 Quét mã QR này bằng ứng dụng Authenticator trên điện thoại của bạn để đăng nhập sau này</p>
               <img src="{{qrCodeImage}}" class="img-fluid" />
-              <button mat-raised-button class="button-submit my-2" [routerLink]="'/login'"><mat-icon>login</mat-icon>Đăng nhập</button>
+              <button mat-raised-button class="button-register" [routerLink]="'/login'"><mat-icon>login</mat-icon>Đăng nhập</button>
             </div>
           </div>
         </div>

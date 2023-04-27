@@ -33,6 +33,18 @@ table {
   max-width: 100%;
   overflow: auto;
 }
+.mat-header-sticky::-webkit-scrollbar {
+  width: 8px;
+}
+
+.mat-header-sticky::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+
+.mat-header-sticky::-webkit-scrollbar-thumb {
+  background-color: #ff9900;
+  border-radius: 5px;
+}
 .mat-paginator-sticky {
   bottom: 0px;
   position: sticky;

@@ -24,6 +24,6 @@ public class Salary {
     private String name;
     @NotNull(message = "Enter salary !")
     private int basicSalary;
-//    @OneToMany(mappedBy = "salary", cascade = CascadeType.REMOVE)
-//    private List<TimeKeeping> timeKeepings;
+    @OneToMany(mappedBy = "salary", cascade = CascadeType.REMOVE)
+    private List<TimeKeeping> timeKeepingList;
 }

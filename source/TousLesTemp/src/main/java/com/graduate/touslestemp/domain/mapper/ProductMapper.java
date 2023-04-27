@@ -24,6 +24,5 @@ public interface ProductMapper {
     void updateEntity(ProductDto productDto, @MappingTarget Product product);
 
     List<ProductDto> toProductDTOs(List<Product> products);
-//    void toPageResponeDto(Pageable productDtos, @MappingTarget PageResponseDTO <ProductDto> pageResponseDTO);
 
 }

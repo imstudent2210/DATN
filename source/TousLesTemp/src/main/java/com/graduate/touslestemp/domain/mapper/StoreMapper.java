@@ -13,10 +13,8 @@ import java.util.List;
 public interface StoreMapper {
     StoreMapper INSTANCE = Mappers.getMapper(StoreMapper.class);
 
-    //    @Mapping(source = "store.id", ignore = true, target = "id")
     StoreDto toStoreDTO(Store store);
 
-    //    @Mapping(source = "storeDto.address", target = "address")
     Store toStoreEntity(StoreDto storeDTO);
 
     @Mapping(target = "id", ignore = true)

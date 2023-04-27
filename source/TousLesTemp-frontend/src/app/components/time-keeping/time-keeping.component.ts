@@ -32,7 +32,21 @@ export class TimeKeepingComponent implements OnInit {
   item?: any;
   timekeeping?: any;
   columns: string[] = ['id', 'staff', 'month', 'createdDate', 'salaryname', 'salaryprice', 'numOfShift', 'edit', 'delete'];
-
+  months = [
+    { id: 1, name: 'Tháng Một' },
+    { id: 2, name: 'Tháng Hai' },
+    { id: 3, name: 'Tháng Ba' },
+    { id: 4, name: 'Tháng Tư' },
+    { id: 5, name: 'Tháng Năm' },
+    { id: 6, name: 'Tháng Sáu' },
+    { id: 7, name: 'Tháng Bảy' },
+    { id: 8, name: 'Tháng Tám' },
+    { id: 9, name: 'Tháng Chín' },
+    { id: 10, name: 'Tháng Mười' },
+    { id: 11, name: 'Tháng Mười Một' },
+    { id: 12, name: 'Tháng Mười Hai' },
+  ];
+  month=1;
   pageSizeOptions = [5, 10, 20];
   showPageSizeOptions = true;
   showFirstLastButtons = true;
@@ -160,6 +174,6 @@ export class TimeKeepingComponent implements OnInit {
   ngOnInit(): void {
     this.getTimeKeeping();
     Chart.register(...registerables);
-
+    this.getAllStaffSalaryPerMonth(1);
   }
 }

@@ -28,6 +28,7 @@ import { TimeKeepingComponent } from './time-keeping.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
 import { SalaryDetailComponent } from './salary-detail/salary-detail.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 
@@ -60,7 +61,8 @@ import { SalaryDetailComponent } from './salary-detail/salary-detail.component';
     TagModule,
     NgxCurrencyModule,
     MatChipsModule,
-    
+    MatTabsModule
+
 
 
   ],

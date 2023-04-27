@@ -69,22 +69,21 @@ public class TimeKeepingController {
         return timeKeepingRepository.monthSalary(id,month);
     }
 
-    @GetMapping("/get-timekeeping-permonth/{id}")
-    public List<TimeKeeping> getallTimeKeepingPerMonth(@PathVariable(name = "id") Long id) {
-        return timeKeepingRepository.allTimeKeepingPerMonth(id);
-    }
-
-    @GetMapping("/get-timekeeping-perstaff/{id}")
-    public List<TimeKeeping> getallTimeKeepingPerStaff(@PathVariable(name = "id") Long id) {
-        return timeKeepingRepository.allTimeKeepingPerStaff(id);
-    }
-
-    @GetMapping("/get-all-shiftsalary")
-    public List<StaffSalaryDTO> calculateAllStaffSalary(@RequestParam("month") long month) throws Exception {
-        return this.timeKeepingService.calculateAllStaffSalaryPerMonth(month);
-    }
     @GetMapping("/get-allstaff-timekeeping-permonth")
     public List<Staff> allStaffHaveTimeKeepingPerMonth(@RequestParam("month") long month) throws Exception {
         return this.timeKeepingService.allStaffHaveTimeKeepingPerMonth(month);
     }
+    @GetMapping("/get-all-shiftsalary")
+    public List<StaffSalaryDTO> calculateAllStaffSalary(@RequestParam("month") long month) throws Exception {
+        return this.timeKeepingService.calculateAllStaffSalaryPerMonth(month);
+    }
+    @GetMapping("/get-timekeeping-perstaff/{id}")
+    public List<TimeKeepingDTO> getallTimeKeepingPerStaff(@PathVariable(name = "id") Long id) {
+        return timeKeepingMapper.toTimeKeepingDTOs(timeKeepingRepository.allTimeKeepingPerStaff(id));
+    }
+    @GetMapping("/get-timekeeping-permonth/{id}")
+    public List<TimeKeepingDTO> getallTimeKeepingPerMonth(@PathVariable(name = "id") Long id) {
+        return timeKeepingMapper.toTimeKeepingDTOs(timeKeepingRepository.allTimeKeepingPerMonth(id));
+    }
+
 }

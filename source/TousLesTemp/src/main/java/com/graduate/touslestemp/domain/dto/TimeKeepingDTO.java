@@ -19,8 +19,8 @@ public class TimeKeepingDTO {
 
     private int numOfShift;
 
-    private Salary salary;
+    private SalaryDTO salary;
 
-    private Staff staff;
+    private StaffDto staff;
     private Date createdDate;
 }

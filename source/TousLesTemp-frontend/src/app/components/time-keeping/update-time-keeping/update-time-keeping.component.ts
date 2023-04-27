@@ -22,6 +22,7 @@ export class UpdateTimeKeepingComponent implements OnInit {
   tId = 0;
   monthf = new FormControl('', [Validators.required]);
   salaryf = new FormControl('', [Validators.required]);
+  numOfShift = new FormControl('', [Validators.required]);
   matcher = new MyErrorStateMatcher();
   isChecked = true;
 

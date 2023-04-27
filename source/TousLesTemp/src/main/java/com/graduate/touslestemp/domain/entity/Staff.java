@@ -4,8 +4,10 @@ package com.graduate.touslestemp.domain.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
+import org.apache.poi.poifs.property.Child;
 
 
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -32,7 +34,8 @@ public class Staff {
     @ManyToOne
     @JoinColumn(name = "Store", referencedColumnName = "store_id")
     private Store store;
-
     private String image;
+    @OneToMany(mappedBy = "Staff", cascade = CascadeType.REMOVE)
+    private List<TimeKeeping> timeKeepingList;
 
 }

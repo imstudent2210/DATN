@@ -58,3 +58,96 @@
   text-align: center;
 }
 
+.example-small-box, .example-large-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.example-small-box {
+  height: 100px;
+  width: 100px;
+}
+
+.example-large-box {
+  height: 300px;
+  width: 300px;
+}
+
+.mat-tab-label {
+  display: inline-flex;
+  align-items: center;
+  font-size: 16x;
+  color: #ff9900 !important;
+  font-weight: 700 !important;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+#myCanvas{
+  margin-top: 8px;
+  background: #fff;
+}
+
+.mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+
+/* Set the appearance of the select element */
+.custom-select {
+  width: 100%;
+  height: 37px;
+  text-align: center;
+  position: relative;
+  font-size: 14.5px;
+  font-weight: 500 !important;
+  font-family: "Roboto", sans-serif;
+  line-height: 1.5;
+  color: #000;
+  background-color: #fff;
+  border-radius: 0.25rem;
+  padding: 0.375rem 1.75rem 0.375rem 0.75rem;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+}
+
+/* Set styles for the select element when it's focused */
+.custom-select:focus {
+  border-color: #ff9900;
+  outline: 0;
+}
+
+/* Set styles for the select element when an option is hovered */
+.custom-select:hover {
+  border-color: #ff9900;
+}
+.custom-select option:hover {
+  background-color: #ff9900;
+}
+
+/* Set styles for the selected option */
+.custom-select option[selected] {
+  background-color: #fff;
+  color: #000;
+}
+.custom-select option {
+  font-size: 14.5px;
+  font-weight: 400 !important;
+  font-family: "Roboto", sans-serif;
+  color: #000;
+  background-color: #fff;
+height: 40px;
+}
+
+/* Add a custom background color to the hovered option */
+.custom-select option:hover {
+  background: #ff9900 !important;
+}

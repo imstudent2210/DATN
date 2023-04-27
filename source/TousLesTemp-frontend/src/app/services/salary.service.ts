@@ -11,7 +11,7 @@ export class SalaryService {
   constructor(private http: HttpClient) { }
 
   getSalary(): Observable<any> {
-    return this.http.get(`${environment.API_BASE_URL}/staff-salary/get`);
+    return this.http.get(`${environment.API_BASE_URL}/staff-salary/get-all`);
   }
   deleteSalary(id :any): Observable<any> {
     return this.http.delete(`${environment.API_BASE_URL}/staff-salary/delete/${id}`);

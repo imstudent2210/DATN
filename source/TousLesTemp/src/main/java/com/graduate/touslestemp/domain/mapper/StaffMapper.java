@@ -8,6 +8,7 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface StaffMapper {
     StaffMapper INSTANCE = Mappers.getMapper(StaffMapper.class);

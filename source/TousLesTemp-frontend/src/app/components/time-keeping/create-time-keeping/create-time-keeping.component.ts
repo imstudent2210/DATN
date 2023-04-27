@@ -18,7 +18,7 @@ import { StoresService } from 'src/app/services/stores.service';
 export class CreateTimeKeepingComponent implements OnInit {
   constructor(private timeKeepingService: TimeKeepingService, private route: Router,
     private toast: NgToastService, private staffService: StaffService,
-     private salaryService:SalaryService, private storeService: StoresService) { }
+    private salaryService: SalaryService, private storeService: StoresService) { }
 
   tId = 0;
   monthf = new FormControl('', [Validators.required]);
@@ -33,7 +33,7 @@ export class CreateTimeKeepingComponent implements OnInit {
     month: 1,
     numOfShift: 0,
     salary: { id: 1 },
-    staff: { id: 17, staffGroup: {} , phone:'', image:'', email:'', store:{address:{}} }
+    staff: { id: 17, staffGroup: {}, phone: '', image: '', email: '', store: { address: {} } }
   }
 
   createTimeKeeping() {
@@ -51,7 +51,7 @@ export class CreateTimeKeepingComponent implements OnInit {
       )
   }
 
-  month=['1','2','3','4','5','6','7','8','9','10','11','12']
+  month = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
   staff?: any;
   getStaff(): void {
     this.staffService.getStaff().subscribe(
@@ -61,7 +61,7 @@ export class CreateTimeKeepingComponent implements OnInit {
     )
   }
   // stores-id?:number;
-  storesId?:any;
+  storesId?: any;
   salaryList?: any;
   getSalary(): void {
     this.salaryService.getSalary().subscribe(
@@ -71,21 +71,21 @@ export class CreateTimeKeepingComponent implements OnInit {
     )
   }
   stores?: any;
-    getStores(): void {
-      this.storeService.getStores().subscribe(
-        data => {
-          this.stores = data;
-        }
-      )
-    } 
+  getStores(): void {
+    this.storeService.getStores().subscribe(
+      data => {
+        this.stores = data;
+      }
+    )
+  }
 
-    getStaffByStore(storesId:any): void {
-      this.staffService.getStaffByStoreId(this.storesId).subscribe(
-        data => {
-          this.staff = data
-        }
-      )
-    }
+  getStaffByStore(storesId: any): void {
+    this.staffService.getStaffByStoreId(this.storesId).subscribe(
+      data => {
+        this.staff = data
+      }
+    )
+  }
   ngOnInit(): void {
     this.getSalary();
     this.getStaff();

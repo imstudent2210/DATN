@@ -33,8 +33,8 @@ public class StaffController {
         return new ResponseEntity<>(staffRepository.findAll(), HttpStatus.OK);
     }
     @GetMapping("/get/{id}")
-    public ResponseEntity<Staff> getStaffDTO(@PathVariable(name = "id") Long id) {
-        return new ResponseEntity<>(staffService.find(id), HttpStatus.OK);
+    public ResponseEntity<StaffDto> getStaffDTO(@PathVariable(name = "id") Long id) {
+        return new ResponseEntity<>(staffMapper.toStaffDTO(staffService.find(id)), HttpStatus.OK);
     }
 
     @PostMapping("/create")

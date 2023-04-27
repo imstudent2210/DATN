@@ -67,4 +67,9 @@ public class StoreController {
         return storeService.getAllStore(request);
     }
 
+    @DeleteMapping("/delete-storeandproduct/{id}")
+    public void deleteStoreAndProduct(@PathVariable("id") Long id) {
+        this.storeService.deleteStoreAndProduct(id);
+    }
+
 }

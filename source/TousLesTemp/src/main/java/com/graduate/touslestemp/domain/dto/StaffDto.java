@@ -15,7 +15,7 @@ public class StaffDto {
     private String name;
     private String phone;
     private StaffGroup staffGroup;
-    private Store store;
+    private StoreDto store;
     private String image;
 
 

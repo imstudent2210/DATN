@@ -19,7 +19,7 @@ public class ProductDto {
     private Double price;
     Category category;
     Size size;
-    Store store;
+    StoreDto store;
     private String image;
 
 }

@@ -21,6 +21,6 @@ public class TimeKeepingDTO {
 
     private SalaryDTO salary;
 
-    private StaffDto staff;
+    private StaffDto Staff;
     private Date createdDate;
 }

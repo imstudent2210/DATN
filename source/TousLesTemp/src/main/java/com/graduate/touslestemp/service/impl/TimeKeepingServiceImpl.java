@@ -4,9 +4,11 @@ import com.graduate.touslestemp.domain.dto.PageResponseDTO;
 import com.graduate.touslestemp.domain.dto.StaffSalaryDTO;
 import com.graduate.touslestemp.domain.dto.TimeKeepingDTO;
 import com.graduate.touslestemp.domain.entity.Staff;
-import com.graduate.touslestemp.domain.entity.Store;
 import com.graduate.touslestemp.domain.entity.TimeKeeping;
+import com.graduate.touslestemp.domain.mapper.SalaryMapper;
+import com.graduate.touslestemp.domain.mapper.StaffMapper;
 import com.graduate.touslestemp.domain.mapper.TimeKeepingMapper;
+import com.graduate.touslestemp.domain.repository.StaffRepository;
 import com.graduate.touslestemp.domain.repository.TimeKeepingRepository;
 import com.graduate.touslestemp.exception.RequestException;
 import com.graduate.touslestemp.service.TimeKeepingService;
@@ -22,6 +24,12 @@ public class TimeKeepingServiceImpl implements TimeKeepingService {
     TimeKeepingRepository timeKeepingRepository;
     @Autowired
     TimeKeepingMapper timeKeepingMapper;
+    @Autowired
+    SalaryMapper salaryMapper;
+    @Autowired
+    StaffMapper staffMapper;
+    @Autowired
+    private StaffRepository staffRepository;
 
     @Override
     public PageResponseDTO<?> getAllTimeKeeping(Pageable request) {
@@ -55,9 +63,12 @@ public class TimeKeepingServiceImpl implements TimeKeepingService {
     public TimeKeepingDTO update(TimeKeepingDTO timeKeepingDTO, Long id) throws Exception {
         TimeKeeping local = this.timeKeepingRepository.findById(id)
                 .orElseThrow(() -> new RequestException("Can't found this time keeping id: " + id));
+
         timeKeepingMapper.updateEntity(timeKeepingDTO, local);
 
-        return (timeKeepingMapper.toTimeKeepingDTO(timeKeepingRepository.save(local)));
+        TimeKeeping updatedTimeKeeping = timeKeepingRepository.save(local);
+
+        return (timeKeepingMapper.toTimeKeepingDTO(updatedTimeKeeping));
     }
 
     @Override

@@ -74,7 +74,8 @@ public class ProductController {
     }
 
     @GetMapping("/getByStoreId/{id}")
-    List<Product> getByStoreId(@PathVariable("id") Long id) {
-        return this.productRepository.getProductByStoreId(id);
+    List<ProductDto> getByStoreId(@PathVariable("id") Long id) {
+//        return this.productRepository.getProductByStoreId(id);
+        return this.productMapper.toProductDTOs(productRepository.getProductByStoreId(id));
     }
 }

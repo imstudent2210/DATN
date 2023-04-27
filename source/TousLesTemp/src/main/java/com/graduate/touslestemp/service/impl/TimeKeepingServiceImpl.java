@@ -40,6 +40,7 @@ public class TimeKeepingServiceImpl implements TimeKeepingService {
     @Override
     public TimeKeepingDTO create(TimeKeeping timeKeeping) throws Exception {
         Date now = Calendar.getInstance().getTime();
+
         timeKeeping.setCreatedDate(now);
         return (timeKeepingMapper.toTimeKeepingDTO(timeKeepingRepository.save(timeKeeping)));
     }

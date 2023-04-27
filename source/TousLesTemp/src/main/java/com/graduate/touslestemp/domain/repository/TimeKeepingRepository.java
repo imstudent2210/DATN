@@ -1,5 +1,6 @@
 package com.graduate.touslestemp.domain.repository;
 
+import com.graduate.touslestemp.domain.dto.TimeKeepingDTO;
 import com.graduate.touslestemp.domain.entity.Staff;
 import com.graduate.touslestemp.domain.entity.TimeKeeping;
 import org.springframework.data.jpa.repository.JpaRepository;

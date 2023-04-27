@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,4 +24,6 @@ public class Salary {
     private String name;
     @NotNull(message = "Enter salary !")
     private int basicSalary;
+//    @OneToMany(mappedBy = "salary", cascade = CascadeType.REMOVE)
+//    private List<TimeKeeping> timeKeepings;
 }

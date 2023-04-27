@@ -1,7 +1,7 @@
 package com.graduate.touslestemp.service.impl;
 
 import com.graduate.touslestemp.domain.dto.PageResponseDTO;
-import com.graduate.touslestemp.domain.dto.StaffDto;
+import com.graduate.touslestemp.domain.dto.StaffDTO;
 import com.graduate.touslestemp.domain.entity.Staff;
 import com.graduate.touslestemp.domain.mapper.StaffMapper;
 import com.graduate.touslestemp.domain.repository.StaffRepository;
@@ -35,7 +35,7 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public StaffDto create(Staff staff) throws Exception {
+    public StaffDTO create(Staff staff) throws Exception {
         if (isExisStaff(staff.getName())) {
             System.out.println("This staff has already");
             throw new RequestException("This staff has already!");
@@ -51,7 +51,7 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public StaffDto update(StaffDto staffDto, Long id) throws Exception {
+    public StaffDTO update(StaffDTO staffDto, Long id) throws Exception {
         Staff local = this.staffRepository.findById(id)
                 .orElseThrow(() -> new RequestException("Không tồn tại nhân viên: " + id));
         staffMapper.updateEntity(staffDto, local);
@@ -59,26 +59,26 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public List<StaffDto> search(String name) {
+    public List<StaffDTO> search(String name) {
 
         List<Staff> staffs = this.staffRepository.searchStaffByName("%" + name + "%");
         if (staffs.isEmpty()) {
             throw new RequestException("No data!");
         } else {
-            List<StaffDto> staffDtos = this.staffMapper.toStaffDTOs(staffs);
-            return staffDtos;
+            List<StaffDTO> staffDTOS = this.staffMapper.toStaffDTOs(staffs);
+            return staffDTOS;
         }
     }
 
     @Override
-    public List<StaffDto> filter(Long id) {
+    public List<StaffDTO> filter(Long id) {
 
         List<Staff> staffs = this.staffRepository.filterStaffByStoreId(id);
         if (staffs.isEmpty()) {
             throw new RequestException("No data!");
         } else {
-            List<StaffDto> staffDtos = this.staffMapper.toStaffDTOs(staffs);
-            return staffDtos;
+            List<StaffDTO> staffDTOS = this.staffMapper.toStaffDTOs(staffs);
+            return staffDTOS;
         }
     }
     public boolean isExisStaff(String name) {

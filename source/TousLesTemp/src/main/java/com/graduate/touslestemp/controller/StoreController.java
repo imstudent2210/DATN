@@ -1,7 +1,7 @@
 package com.graduate.touslestemp.controller;
 
 import com.graduate.touslestemp.domain.dto.PageResponseDTO;
-import com.graduate.touslestemp.domain.dto.StoreDto;
+import com.graduate.touslestemp.domain.dto.StoreDTO;
 import com.graduate.touslestemp.domain.entity.Store;
 import com.graduate.touslestemp.domain.mapper.StoreMapper;
 import com.graduate.touslestemp.domain.repository.StoreRepository;
@@ -28,22 +28,22 @@ public class StoreController {
     private StoreMapper storeMapper;
 
     @GetMapping("/get")
-    public ResponseEntity<List<StoreDto>> getAllStoreDTO() {
+    public ResponseEntity<List<StoreDTO>> getAllStoreDTO() {
         return new ResponseEntity<>(storeMapper.toStoreDTOs(storeRepository.findAll()), HttpStatus.OK);
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<StoreDto> getStoreDTO(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<StoreDTO> getStoreDTO(@PathVariable(name = "id") Long id) {
         return new ResponseEntity<>(storeService.find(id), HttpStatus.OK);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<StoreDto> createStoreDTO(@RequestBody @Valid Store store) throws Exception {
+    public ResponseEntity<StoreDTO> createStoreDTO(@RequestBody @Valid Store store) throws Exception {
         return new ResponseEntity<>(storeService.create(store), HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<StoreDto> updateStoreDTO(@RequestBody @Valid StoreDto storeDto, @PathVariable(name = "id") Long id) throws Exception {
+    public ResponseEntity<StoreDTO> updateStoreDTO(@RequestBody @Valid StoreDTO storeDto, @PathVariable(name = "id") Long id) throws Exception {
         return new ResponseEntity<>(storeService.update(storeDto, id), HttpStatus.OK);
     }
 
@@ -53,12 +53,12 @@ public class StoreController {
     }
 
     @GetMapping("/search/{store}")
-    List<StoreDto> searchStoreDTO(@PathVariable("store") String store) {
+    List<StoreDTO> searchStoreDTO(@PathVariable("store") String store) {
         return this.storeService.search(store);
     }
 
     @GetMapping("/filter/{addressId}")
-    List<StoreDto> filterStoreDTO(@PathVariable("addressId") Long addressId) {
+    List<StoreDTO> filterStoreDTO(@PathVariable("addressId") Long addressId) {
         return this.storeService.filter(addressId);
     }
 

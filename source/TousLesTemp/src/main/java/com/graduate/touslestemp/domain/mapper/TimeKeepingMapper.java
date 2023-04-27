@@ -1,12 +1,10 @@
 package com.graduate.touslestemp.domain.mapper;
 
 import com.graduate.touslestemp.domain.dto.SalaryDTO;
-import com.graduate.touslestemp.domain.dto.StaffDto;
-import com.graduate.touslestemp.domain.dto.StoreDto;
+import com.graduate.touslestemp.domain.dto.StaffDTO;
 import com.graduate.touslestemp.domain.dto.TimeKeepingDTO;
 import com.graduate.touslestemp.domain.entity.Salary;
 import com.graduate.touslestemp.domain.entity.Staff;
-import com.graduate.touslestemp.domain.entity.Store;
 import com.graduate.touslestemp.domain.entity.TimeKeeping;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
@@ -24,7 +22,7 @@ public interface TimeKeepingMapper {
 
     @Mapping(target = "id", ignore = true)
     void updateEntity(TimeKeepingDTO timeKeepingDTO, @MappingTarget TimeKeeping timeKeeping);
-    Staff toStaffEntity(StaffDto staffDTO);
+    Staff toStaffEntity(StaffDTO staffDTO);
 
     Salary toSalaryEntity(SalaryDTO salaryDTO);
 

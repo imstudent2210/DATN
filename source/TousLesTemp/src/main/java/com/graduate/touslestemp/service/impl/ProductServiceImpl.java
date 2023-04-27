@@ -1,7 +1,7 @@
 package com.graduate.touslestemp.service.impl;
 
 import com.graduate.touslestemp.domain.dto.PageResponseDTO;
-import com.graduate.touslestemp.domain.dto.ProductDto;
+import com.graduate.touslestemp.domain.dto.ProductDTO;
 import com.graduate.touslestemp.domain.entity.Product;
 import com.graduate.touslestemp.domain.mapper.ProductMapper;
 import com.graduate.touslestemp.domain.repository.ProductRepository;
@@ -24,12 +24,12 @@ public class ProductServiceImpl implements ProductService {
     final ModelMapper modelMapper = new ModelMapper();
 
     @Override
-    public ProductDto create(Product product) throws Exception {
+    public ProductDTO create(Product product) throws Exception {
         return (productMapper.toProductDTO(productRepository.save(product)));
     }
 
     @Override
-    public ProductDto find(Long id) {
+    public ProductDTO find(Long id) {
         Optional<Product> product = productRepository.findById(id);
         if (product.isEmpty()) {
             throw new RequestException("Not found product, id: " + id);
@@ -40,7 +40,7 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public ProductDto update(ProductDto productDto, Long id) throws Exception {
+    public ProductDTO update(ProductDTO productDto, Long id) throws Exception {
         Product local = this.productRepository.findById(id)
                 .orElseThrow(() -> new RequestException("Can't found this product id: " + id));
         productMapper.updateEntity(productDto, local);
@@ -65,24 +65,24 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDto> filter(Long id) {
+    public List<ProductDTO> filter(Long id) {
         List<Product> products = this.productRepository.filterStoreByCategoryId(id);
         if (products.isEmpty()) {
             throw new RequestException("Không có dữ liệu!");
         } else {
-            List<ProductDto> productDtos = this.productMapper.toProductDTOs(products);
-            return productDtos;
+            List<ProductDTO> productDTOS = this.productMapper.toProductDTOs(products);
+            return productDTOS;
         }
     }
 
     @Override
-    public List<ProductDto> search(String name) {
+    public List<ProductDTO> search(String name) {
         List<Product> products = this.productRepository.searchProductByName("%" + name + "%");
         if (products.isEmpty()) {
             throw new RequestException("No data!");
         } else {
-            List<ProductDto> productDtos = this.productMapper.toProductDTOs(products);
-            return productDtos;
+            List<ProductDTO> productDTOS = this.productMapper.toProductDTOs(products);
+            return productDTOS;
         }
     }
 

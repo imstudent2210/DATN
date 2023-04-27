@@ -1,9 +1,6 @@
 package com.graduate.touslestemp.domain.repository;
 
-import com.graduate.touslestemp.domain.dto.ProductDto;
-import com.graduate.touslestemp.domain.entity.Address;
 import com.graduate.touslestemp.domain.entity.Product;
-import com.graduate.touslestemp.domain.entity.Store;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

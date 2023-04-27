@@ -1,7 +1,6 @@
 package com.graduate.touslestemp.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.graduate.touslestemp.domain.dto.StaffDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;

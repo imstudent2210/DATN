@@ -1,13 +1,10 @@
 package com.graduate.touslestemp.domain.dto;
 
-import com.graduate.touslestemp.domain.entity.Salary;
-import com.graduate.touslestemp.domain.entity.Staff;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -21,6 +18,6 @@ public class TimeKeepingDTO {
 
     private SalaryDTO salary;
 
-    private StaffDto Staff;
+    private StaffDTO Staff;
     private Date createdDate;
 }

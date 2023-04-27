@@ -1,14 +1,14 @@
 package com.graduate.touslestemp.domain.mapper;
 
-import com.graduate.touslestemp.domain.dto.PageResponseDTO;
-import com.graduate.touslestemp.domain.dto.ProductDto;
+import com.graduate.touslestemp.domain.dto.ProductDTO;
+import com.graduate.touslestemp.domain.dto.StoreDTO;
 import com.graduate.touslestemp.domain.entity.Product;
+import com.graduate.touslestemp.domain.entity.Store;
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -16,13 +16,21 @@ import java.util.List;
 public interface ProductMapper {
     ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
 
-    ProductDto toProductDTO(Product product);
+    ProductDTO toProductDTO(Product product);
 
-    Product toProductEntity(ProductDto productDto);
+    Product toProductEntity(ProductDTO productDto);
 
     @Mapping(target = "id", ignore = true)
-    void updateEntity(ProductDto productDto, @MappingTarget Product product);
+    void updateEntity(ProductDTO productDto, @MappingTarget Product product);
+    Store toStoreEntity(StoreDTO storeDto);
 
-    List<ProductDto> toProductDTOs(List<Product> products);
+    @AfterMapping
+    default void updateStore(@MappingTarget Product product, ProductDTO productDto) {
+        Store store = toStoreEntity(productDto.getStore());
+        product.setStore(store);
+
+    }
+
+    List<ProductDTO> toProductDTOs(List<Product> products);
 
 }

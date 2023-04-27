@@ -1,12 +1,9 @@
 package com.graduate.touslestemp.service.impl;
 
 import com.graduate.touslestemp.domain.dto.PageResponseDTO;
-import com.graduate.touslestemp.domain.dto.StoreDto;
-import com.graduate.touslestemp.domain.entity.Address;
+import com.graduate.touslestemp.domain.dto.StoreDTO;
 import com.graduate.touslestemp.domain.entity.Store;
 import com.graduate.touslestemp.domain.mapper.StoreMapper;
-import com.graduate.touslestemp.domain.repository.AddressRepository;
-import com.graduate.touslestemp.domain.repository.ProductRepository;
 import com.graduate.touslestemp.domain.repository.StoreRepository;
 import com.graduate.touslestemp.exception.RequestException;
 import com.graduate.touslestemp.service.StoreService;
@@ -29,7 +26,7 @@ public class StoreServiceImpl implements StoreService {
     final ModelMapper modelMapper = new ModelMapper();
 
     @Override
-    public StoreDto create(Store store) throws Exception {
+    public StoreDTO create(Store store) throws Exception {
         if (isExisStore(store.getName())) {
             System.out.println("This store has already");
             throw new RequestException("This store has already!");
@@ -38,7 +35,7 @@ public class StoreServiceImpl implements StoreService {
         }
     }
     @Override
-    public StoreDto find(Long id) {
+    public StoreDTO find(Long id) {
         Optional<Store> store = storeRepository.findById(id);
         if (store.isEmpty()) {
             throw new RequestException("Not found store, id: " + id);
@@ -47,7 +44,7 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public StoreDto update(StoreDto storeDto, Long id) throws Exception {
+    public StoreDTO update(StoreDTO storeDto, Long id) throws Exception {
         Store local = this.storeRepository.findById(id)
                 .orElseThrow(() -> new RequestException("Can't found this store id: " + id));
         storeMapper.updateEntity(storeDto, local);
@@ -61,24 +58,24 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public List<StoreDto> search(String name) {
+    public List<StoreDTO> search(String name) {
         List<Store> stores = this.storeRepository.searchStoreByName("%" + name + "%");
         if (stores.isEmpty()) {
             throw new RequestException("No data!");
         } else {
-            List<StoreDto> storeDtos = this.storeMapper.toStoreDTOs(stores);
-            return storeDtos;
+            List<StoreDTO> storeDTOS = this.storeMapper.toStoreDTOs(stores);
+            return storeDTOS;
         }
     }
 
     @Override
-    public List<StoreDto> filter(Long id) {
+    public List<StoreDTO> filter(Long id) {
         List<Store> stores = this.storeRepository.filterStoreByAddressId(id);
         if (stores.isEmpty()) {
             throw new RequestException("No data!");
         } else {
-            List<StoreDto> storeDtos = this.storeMapper.toStoreDTOs(stores);
-            return storeDtos;
+            List<StoreDTO> storeDTOS = this.storeMapper.toStoreDTOs(stores);
+            return storeDTOS;
         }
     }
 

@@ -24,6 +24,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./create-staff.component.scss']
 })
 export class CreateStaffComponent implements OnInit {
+  progress?: number;
+  cdRef: any;
   constructor(private store: StoresService,
     private staffGroupService: StaffGroupService,
     private staffService: StaffService,
@@ -115,10 +117,11 @@ export class CreateStaffComponent implements OnInit {
           });
         })
       )
-      .subscribe(url => {
-        if (url) {
-          console.log(url);
-        }
+      .subscribe((snapshot) => {
+        const progress = (snapshot!.bytesTransferred / snapshot!.totalBytes) * 100;
+        console.log(`Upload is ${progress}% done`);
+        this.progress = Math.round(progress);
+        this.cdRef.detectChanges();
       });
   }
 

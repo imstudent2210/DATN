@@ -1,0 +1,41 @@
+<div class="container ">
+  <mat-card>
+    <mat-card-header>
+      <p class="title-page">Thêm nhóm nhân viên</p>
+    </mat-card-header>
+    <form class="example-form my-3 mx-3" (ngSubmit)="createCategory()">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6 mx-auto">
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Tên nhóm</mat-label>
+                <input type="text" matInput [formControl]="namef" [errorStateMatcher]="matcher"
+                  [(ngModel)]="newStaffGroup.name" name="name">
+                <mat-error *ngIf="namef.hasError('required')">
+                  Vui lòng nhập tên nhóm nhân viên
+                </mat-error>
+              </mat-form-field>
+              <mat-slide-toggle name="activated" [(ngModel)]="newStaffGroup.activated">
+                <span class="slide-toggle">Trạng thái?</span>
+              </mat-slide-toggle>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+            </div>
+            <div class="group-button">
+                <button mat-raised-button class="mt-2 mx-2" [routerLink]="'../../../../group/list'" type="button"><mat-icon>keyboard_backspace</mat-icon>Trở về</button>
+                <button mat-raised-button class="button-submit mt-2 mx-2"><mat-icon>save</mat-icon>Lưu</button>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+</div>
+
+

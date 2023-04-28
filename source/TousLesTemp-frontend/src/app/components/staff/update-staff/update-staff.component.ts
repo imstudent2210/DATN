@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, NgForm, Validators } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
+import { FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { StaffService } from 'src/app/services/staff.service';
 import { StaffGroupService } from 'src/app/services/staffgroup.service';
 import { StoresService } from 'src/app/services/stores.service';
-import { FileHandle } from 'src/app/model/file-handle.model';
 import { Staff } from 'src/app/model/staff.model';
 import { MyErrorStateMatcher } from '../create-staff/create-staff.component';
-import { Observable, finalize, map } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
@@ -18,6 +16,8 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
   styleUrls: ['./update-staff.component.scss']
 })
 export class UpdateStaffComponent implements OnInit {
+  progress?: number;
+  cdRef: any;
   constructor(private store: StoresService,
     private toast: NgToastService,
     private route: Router, private activatedRoute: ActivatedRoute,
@@ -67,10 +67,12 @@ export class UpdateStaffComponent implements OnInit {
           });
         })
       )
-      .subscribe(url => {
-        if (url) {
-          console.log(url);
-        }
+      .subscribe((snapshot) => {
+        // Handle progress here
+        const progress = (snapshot!.bytesTransferred / snapshot!.totalBytes) * 100;
+        console.log(`Upload is ${progress}% done`);
+        this.progress = Math.round(progress);
+        this.cdRef.detectChanges(); // Update the view
       });
   }
 

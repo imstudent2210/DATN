@@ -45,17 +45,8 @@ export class StaffComponent implements OnInit {
       this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
     }
   }
-  // showImages(staff: Staff) {
-  //   console.log(staff);
-  //   this.imageDialog.open(ImageDialogComponent, {
-  //     data: {
-  //       images: staff.images
-  //     },
-  //     height: '400px',
-  //     width: '600px'
-  //   })
-  // }
-  editProduct(stId: any) {
+
+  editStore(stId: any) {
     this.route.navigate(["/home/staff/update", stId]);
   }
   doFilter(event: Event) {
@@ -63,7 +54,7 @@ export class StaffComponent implements OnInit {
     this.staff.filter = filterValue;
     console.log(filterValue);
   }
-  deleteProduct(stId:number){
+  deleteStore(stId:number){
     this.deleteDialog.open(DeleteDialogComponent, {
       data: {
         staffId: stId

@@ -1,11 +1,9 @@
 package com.graduate.touslestemp.service.impl;
 
-import com.graduate.touslestemp.domain.entity.Category;
-import com.graduate.touslestemp.domain.entity.Staff;
-import com.graduate.touslestemp.exception.RequestException;
-import com.graduate.touslestemp.exception.RequestSuccess;
 import com.graduate.touslestemp.domain.entity.Address;
 import com.graduate.touslestemp.domain.repository.AddressRepository;
+import com.graduate.touslestemp.exception.RequestException;
+import com.graduate.touslestemp.exception.RequestSuccess;
 import com.graduate.touslestemp.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,7 +80,7 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public Address update(Address address, Long id) throws Exception {
         Address local = this.addressRepository.findById(id)
-                .orElseThrow(() -> new RequestException("Không tồn tại chi nhánh: " + id));
+                .orElseThrow(() -> new RequestException("Not found this address: " + id));
 
         if (isExisAddress(address.getName())) {
             System.out.println("This address has already");

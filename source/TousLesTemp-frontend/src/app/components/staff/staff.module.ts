@@ -22,6 +22,12 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { CustomPaginator } from 'src/app/model/paginator-config';
 import { UpdateStaffComponent } from './update-staff/update-staff.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { StaffGroupComponent } from './staff-group/staff-group.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { CreateStaffgroupComponent } from './create-staffgroup/create-staffgroup.component';
+import { UpdateGroupComponent } from './update-group/update-group.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 
 @NgModule({
@@ -29,7 +35,11 @@ import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
     StaffComponent,
     CreateStaffComponent,
     UpdateStaffComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    StaffGroupComponent,
+    CreateStaffgroupComponent,
+    UpdateGroupComponent,
+
   ],
   imports: [
     CommonModule,
@@ -49,7 +59,9 @@ import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
     MatGridListModule,
     MatSelectModule,
     MatAutocompleteModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSlideToggleModule,
+    MatProgressBarModule
   ],
   providers: [
     {

@@ -18,7 +18,6 @@ import java.util.Optional;
 @Service
 public class StoreServiceImpl implements StoreService {
 
-    /*================================ DTO v2==========================*/
     @Autowired
     private StoreRepository storeRepository;
     @Autowired
@@ -34,6 +33,7 @@ public class StoreServiceImpl implements StoreService {
             return (storeMapper.toStoreDTO(storeRepository.save(store)));
         }
     }
+
     @Override
     public StoreDTO find(Long id) {
         Optional<Store> store = storeRepository.findById(id);

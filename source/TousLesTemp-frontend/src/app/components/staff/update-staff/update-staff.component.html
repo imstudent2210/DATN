@@ -64,6 +64,8 @@
             style="color:var(--yellow); font-size: 15px;font-weight: 700;font-family: 'Roboto', sans-serif; margin-bottom: 10px;" multiple
             value="select" (change)="onFileSelected($event)">
           <img [src]="currentStaff.image" width="350px" height="280px" name="image">
+          <mat-progress-bar mode="determinate" style="width:350px"  [value]="progress"></mat-progress-bar>
+
         </div>
       </div>
       <div class="group-button">

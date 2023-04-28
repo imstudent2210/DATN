@@ -14,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -64,23 +63,27 @@ public class TimeKeepingController {
     public int getshiftSalary(@PathVariable(name = "id") Long id) {
         return timeKeepingRepository.shiftSalary(id);
     }
+
     @GetMapping("/get-monthsalary")
     public int getmonthSalary(@RequestParam("id") Long id, @RequestParam("month") Long month) {
-        return timeKeepingRepository.monthSalary(id,month);
+        return timeKeepingRepository.monthSalary(id, month);
     }
 
     @GetMapping("/get-allstaff-timekeeping-permonth")
     public List<Staff> allStaffHaveTimeKeepingPerMonth(@RequestParam("month") long month) throws Exception {
         return this.timeKeepingService.allStaffHaveTimeKeepingPerMonth(month);
     }
+
     @GetMapping("/get-all-shiftsalary")
     public List<StaffSalaryDTO> calculateAllStaffSalary(@RequestParam("month") long month) throws Exception {
         return this.timeKeepingService.calculateAllStaffSalaryPerMonth(month);
     }
+
     @GetMapping("/get-timekeeping-perstaff/{id}")
     public List<TimeKeepingDTO> getallTimeKeepingPerStaff(@PathVariable(name = "id") Long id) {
         return timeKeepingMapper.toTimeKeepingDTOs(timeKeepingRepository.allTimeKeepingPerStaff(id));
     }
+
     @GetMapping("/get-timekeeping-permonth/{id}")
     public List<TimeKeepingDTO> getallTimeKeepingPerMonth(@PathVariable(name = "id") Long id) {
         return timeKeepingMapper.toTimeKeepingDTOs(timeKeepingRepository.allTimeKeepingPerMonth(id));

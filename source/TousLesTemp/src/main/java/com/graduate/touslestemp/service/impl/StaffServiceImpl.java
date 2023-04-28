@@ -20,6 +20,7 @@ public class StaffServiceImpl implements StaffService {
     private StaffRepository staffRepository;
     @Autowired
     private StaffMapper staffMapper;
+
     @Override
     public PageResponseDTO<?> getAllStaff(Pageable request) {
         return null;
@@ -29,7 +30,7 @@ public class StaffServiceImpl implements StaffService {
     public Staff find(Long id) {
         Optional<Staff> staff = staffRepository.findById(id);
         if (staff.isEmpty()) {
-            throw new RequestException("Không tồn tại nhân viên, id: " + id);
+            throw new RequestException("Not found this staff, id: " + id);
         }
         return staffRepository.findById(id).get();
     }
@@ -47,13 +48,13 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public void delete(Long id) {
         staffRepository.delete(staffRepository.findById(id)
-                .orElseThrow(()->new RequestException("Không tồn tại nhân viên: "+id)));
+                .orElseThrow(() -> new RequestException("Not found this staff: " + id)));
     }
 
     @Override
     public StaffDTO update(StaffDTO staffDto, Long id) throws Exception {
         Staff local = this.staffRepository.findById(id)
-                .orElseThrow(() -> new RequestException("Không tồn tại nhân viên: " + id));
+                .orElseThrow(() -> new RequestException("Not found this staff: " + id));
         staffMapper.updateEntity(staffDto, local);
         return (staffMapper.toStaffDTO(staffRepository.save(local)));
     }
@@ -81,6 +82,7 @@ public class StaffServiceImpl implements StaffService {
             return staffDTOS;
         }
     }
+
     public boolean isExisStaff(String name) {
         Staff checkStaff = staffRepository.findStaffByName(name);
         if (checkStaff != null) {

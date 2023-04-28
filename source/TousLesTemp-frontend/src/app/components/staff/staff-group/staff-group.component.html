@@ -1,0 +1,53 @@
+<div class="container">
+  <!-- <mat-card> -->
+  <div class="row my-2 d-flex">
+    <div class="col-md-4">
+      <p class="title-page">Danh sách nhóm nhân viên</p>
+    </div>
+    <div class="col-md-8">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 mx-auto my-2">
+      <canvas #myCanvas id="myCanvas"></canvas>
+    </div>
+    <div class="col-md-4 mat-header-sticky">
+
+      <button mat-raised-button class="button-submit my-2 mx-auto"
+        [routerLink]="'../group/create'"><mat-icon>library_add</mat-icon>Thêm mới</button>
+      <table mat-table matSort [dataSource]="listStaffGroup" class="mat-elevation-z8 table-tlt">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Tên nhóm nhân viên</th>
+          <td mat-cell *matCellDef="let element" class="col-name-tlt">{{ element.name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="activated">
+          <th mat-header-cell *matHeaderCellDef>Trạng thái nhóm</th>
+          <td mat-cell *matCellDef="let element"><span *ngIf="element.activated == true;else x">Kích hoạt</span>
+            <ng-template #x>Đã xoá</ng-template>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef class="col-action-tlt"></th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-mini-fab color="basic" (click)="editStaffGroup(element.id)">
+              <i class="fa fa-edit" style="color:var(--yellow)"></i>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns;sticky:true"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns"></tr>
+      </table>
+      <mat-divider></mat-divider>
+      <mat-paginator class="mat-paginator-sticky " [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+        [showFirstLastButtons]="showFirstLastButtons">
+      </mat-paginator>
+      <mat-divider></mat-divider>
+
+    </div>
+
+
+  </div>
+</div>

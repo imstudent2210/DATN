@@ -12,9 +12,13 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface SalaryMapper {
     SalaryMapper INSTANCE = Mappers.getMapper(SalaryMapper.class);
+
     SalaryDTO toSalaryDTO(Salary salary);
+
     Salary toSalaryEntity(SalaryDTO salaryDTO);
+
     @Mapping(target = "id", ignore = true)
     void updateEntity(SalaryDTO salaryDTO, @MappingTarget Salary salary);
+
     List<SalaryDTO> toSalaryDTOs(List<Salary> salaryList);
 }

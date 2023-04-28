@@ -53,8 +53,6 @@ public class CategoryController {
     public Category updateCategory(@RequestBody @Valid Category category, @PathVariable("id") Long id) throws Exception {
         return this.categoryService.update(category, id);
     }
-
-
     @DeleteMapping("/delete/{id}")
     public void deleteAddress(@PathVariable("id") Long id) {
        this.categoryService.deleteCategory(id);

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public class SalaryServiceImpl implements SalaryService {
     @Autowired
@@ -36,14 +37,14 @@ public class SalaryServiceImpl implements SalaryService {
     @Override
     public void delete(Long id) {
         salaryRepository.delete(salaryRepository.findById(id)
-                .orElseThrow(()->new RequestException("Not found: "+id)));
+                .orElseThrow(() -> new RequestException("Not found: " + id)));
     }
 
     @Override
     public SalaryDTO find(Long id) {
         Optional<Salary> salary = salaryRepository.findById(id);
         if (salary.isEmpty()) {
-            throw new RequestException("Không tồn tại nhân viên, id: " + id);
+            throw new RequestException("Not found salary , id: " + id);
         }
         return salaryMapper.toSalaryDTO(salaryRepository.findById(id).get());
     }
@@ -51,10 +52,11 @@ public class SalaryServiceImpl implements SalaryService {
     @Override
     public SalaryDTO update(SalaryDTO salary, Long id) throws Exception {
         Salary local = this.salaryRepository.findById(id)
-                .orElseThrow(() -> new RequestException("Không tồn tại nhân viên: " + id));
+                .orElseThrow(() -> new RequestException("Not found salary : " + id));
         salaryMapper.updateEntity(salary, local);
         return (salaryMapper.toSalaryDTO(salaryRepository.save(local)));
     }
+
     public boolean isExisSalary(String name) {
         Salary checkSalary = salaryRepository.findSalaryByName(name);
         if (checkSalary != null) {

@@ -1,7 +1,6 @@
 package com.graduate.touslestemp.service.impl;
 
 import com.graduate.touslestemp.domain.entity.Category;
-import com.graduate.touslestemp.domain.entity.Product;
 import com.graduate.touslestemp.domain.repository.CategoryRepository;
 import com.graduate.touslestemp.exception.RequestException;
 import com.graduate.touslestemp.exception.RequestSuccess;
@@ -87,7 +86,6 @@ public class CategoryServiceImpl implements CategoryService {
             Category updateCategory = this.categoryRepository.findCategoryByName(local.get().getName());
             String updateName = category.getName();
             Category local1 = this.categoryRepository.findCategoryByName(updateName);
-            local1.isActivated();
             if (updateCategory == null) {
                 System.out.println("Not found this category: " + id);
                 throw new RequestException("Not found this category: " + id);

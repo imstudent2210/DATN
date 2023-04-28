@@ -22,6 +22,7 @@ public interface StaffMapper {
 
     @Mapping(target = "id", ignore = true)
     void updateEntity(StaffDTO staffDto, @MappingTarget Staff staff);
+
     Store toStoreEntity(StoreDTO storeDto);
 
     @AfterMapping

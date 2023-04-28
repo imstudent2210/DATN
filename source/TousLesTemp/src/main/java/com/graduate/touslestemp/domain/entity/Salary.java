@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -14,11 +13,11 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Data
-@Table(name="Salary")
+@Table(name = "Salary")
 public class Salary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="salary_id")
+    @Column(name = "salary_id")
     private Long id;
     @NotEmpty(message = "Enter salary name !")
     private String name;

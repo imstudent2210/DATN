@@ -51,6 +51,9 @@ public class AuthController {
 
     @Autowired
     private TokenProvider tokenProvider;
+    @Autowired
+    private ClientService clientService ;
+
 
     private final QrDataFactory qrDataFactory = new QrDataFactory(SHA256, 6, 30);
 
@@ -106,10 +109,6 @@ public class AuthController {
         String jwt = tokenProvider.createToken(user, true);
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt, true, GeneralUtils.buildUserInfo(user)));
     }
-
-    @Autowired
-    private ClientService clientService ;
-
     @PostMapping(value = "/sendmail")
     public ResponseEntity<Boolean> sendmail(@RequestBody ClientSdi sdi) {
         return ResponseEntity.ok(clientService.create(sdi));

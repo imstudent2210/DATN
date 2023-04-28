@@ -1,6 +1,5 @@
 package com.graduate.touslestemp.service.impl;
 
-import com.graduate.touslestemp.domain.entity.Category;
 import com.graduate.touslestemp.domain.entity.StaffGroup;
 import com.graduate.touslestemp.domain.repository.StaffGroupRepository;
 import com.graduate.touslestemp.exception.RequestException;
@@ -19,7 +18,7 @@ public class StaffGroupServiceImpl implements StaffGroupService {
 
     @Override
     public List<StaffGroup> findAll() {
-       return this.staffGroupRepository.findAll();
+        return this.staffGroupRepository.findAll();
     }
 
     @Override
@@ -60,24 +59,22 @@ public class StaffGroupServiceImpl implements StaffGroupService {
         Optional<StaffGroup> local = staffGroupRepository.findById(id);
         if (local.isEmpty()) {
             throw new RequestException("Not found staff group, id: " + id);
-        }
-        else {
+        } else {
             StaffGroup updateStaffGroup = this.staffGroupRepository.findStaffGroupByName(local.get().getName());
             String updateName = staffGroup.getName();
             StaffGroup local1 = this.staffGroupRepository.findStaffGroupByName(updateName);
-            local1.isActivated();
             if (updateStaffGroup == null) {
                 System.out.println("Not found this staff group: " + id);
             } else {
-                if (local1 == null | (local1 !=null &&  (local1.isActivated()!=staffGroup.isActivated())) ) {
+                if (local1 == null | (local1 != null && (local1.isActivated() != staffGroup.isActivated()))) {
                     updateStaffGroup.setName(staffGroup.getName());
                     updateStaffGroup.setActivated(staffGroup.isActivated());
-                }
-                else throw new RequestException("This category has already: " + updateName);
+                } else throw new RequestException("This category has already: " + updateName);
             }
             return this.staffGroupRepository.save(updateStaffGroup);
         }
     }
+
     public boolean isExisStaffGroup(String name) {
         StaffGroup checkStaffGroup = staffGroupRepository.findStaffGroupByName(name);
         if (checkStaffGroup != null) {

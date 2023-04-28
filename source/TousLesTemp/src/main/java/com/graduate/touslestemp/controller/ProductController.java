@@ -26,11 +26,6 @@ public class ProductController {
     @Autowired
     private ProductMapper productMapper;
 
-    @GetMapping("/paging")
-    public PageResponseDTO<?> getAllProduct(Pageable request) {
-        return productService.getAllProduct(request);
-    }
-
     @GetMapping("/get-all")
     public ResponseEntity<List<ProductDTO>> allProductDTO() {
         return new ResponseEntity<>(productMapper.toProductDTOs(productRepository.findAll()), HttpStatus.OK);
@@ -75,7 +70,6 @@ public class ProductController {
 
     @GetMapping("/getByStoreId/{id}")
     List<ProductDTO> getByStoreId(@PathVariable("id") Long id) {
-//        return this.productRepository.getProductByStoreId(id);
         return this.productMapper.toProductDTOs(productRepository.getProductByStoreId(id));
     }
 }

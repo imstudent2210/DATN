@@ -1,5 +1,7 @@
 package com.graduate.touslestemp.service;
 
+import com.graduate.touslestemp.domain.dto.StaffPerGroupDTO;
+import com.graduate.touslestemp.domain.dto.StaffSalaryDTO;
 import com.graduate.touslestemp.domain.entity.Category;
 import com.graduate.touslestemp.domain.entity.StaffGroup;
 

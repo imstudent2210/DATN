@@ -22,6 +22,7 @@ public interface ProductMapper {
 
     @Mapping(target = "id", ignore = true)
     void updateEntity(ProductDTO productDto, @MappingTarget Product product);
+
     Store toStoreEntity(StoreDTO storeDto);
 
     @AfterMapping

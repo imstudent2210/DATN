@@ -8,7 +8,6 @@ import com.graduate.touslestemp.domain.entity.TimeKeeping;
 import com.graduate.touslestemp.domain.mapper.SalaryMapper;
 import com.graduate.touslestemp.domain.mapper.StaffMapper;
 import com.graduate.touslestemp.domain.mapper.TimeKeepingMapper;
-import com.graduate.touslestemp.domain.repository.StaffRepository;
 import com.graduate.touslestemp.domain.repository.TimeKeepingRepository;
 import com.graduate.touslestemp.exception.RequestException;
 import com.graduate.touslestemp.service.TimeKeepingService;
@@ -28,8 +27,6 @@ public class TimeKeepingServiceImpl implements TimeKeepingService {
     SalaryMapper salaryMapper;
     @Autowired
     StaffMapper staffMapper;
-    @Autowired
-    private StaffRepository staffRepository;
 
     @Override
     public PageResponseDTO<?> getAllTimeKeeping(Pageable request) {

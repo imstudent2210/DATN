@@ -18,6 +18,7 @@ public class ExportConfig {
     private List<CellConfig> cellConfigList;
 
     public static final ExportConfig staffExport;
+
     static {
         staffExport = new ExportConfig();
         staffExport.setSheetIndex(0);

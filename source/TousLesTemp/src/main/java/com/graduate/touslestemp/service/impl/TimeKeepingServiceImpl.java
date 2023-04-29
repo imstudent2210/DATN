@@ -22,7 +22,7 @@ public class TimeKeepingServiceImpl implements TimeKeepingService {
     @Autowired
     TimeKeepingRepository timeKeepingRepository;
     @Autowired
-    TimeKeepingMapper timeKeepingMapper;o
+    TimeKeepingMapper timeKeepingMapper;
     @Autowired
     SalaryMapper salaryMapper;
     @Autowired

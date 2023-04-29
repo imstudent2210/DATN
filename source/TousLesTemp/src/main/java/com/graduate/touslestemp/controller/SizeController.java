@@ -27,24 +27,25 @@ import java.util.List;
 public class SizeController {
     @Autowired
     private SizeRepository sizeRepository;
+
     @GetMapping("/get")
-    List <Size> getSize() {
+    List<Size> getSize() {
         return this.sizeRepository.findAll();
     }
 
     @GetMapping("/export")
     public ResponseEntity<Resource> exportStaffFile() throws Exception {
         List<Size> categories = this.sizeRepository.findAll();
-        if(!CollectionUtils.isEmpty(categories)){
+        if (!CollectionUtils.isEmpty(categories)) {
             String fileName = "Export File.xlsx";
-            ByteArrayInputStream inputStream = ExportUtils.exportStaff(categories,fileName);
+            ByteArrayInputStream inputStream = ExportUtils.exportStaff(categories, fileName);
             InputStreamResource inputStreamResource = new InputStreamResource(inputStream);
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION,
                             "attachment; filename = " + URLEncoder.encode(fileName, StandardCharsets.UTF_8))
                     .contentType(MediaType.parseMediaType("application/vnd.ms-excel;charset=UTF-8"))
                     .body(inputStreamResource);
-        }else{
+        } else {
             throw new RequestException("Can not export");
         }
     }

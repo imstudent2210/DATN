@@ -43,7 +43,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
                         ? userDetails.getAuthorities()
                         : List.of(new SimpleGrantedAuthority(Role.ROLE_PRE_VERIFICATION_USER));
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
-                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails( request));
+                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }

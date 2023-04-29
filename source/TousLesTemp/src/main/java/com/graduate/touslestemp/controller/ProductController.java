@@ -37,7 +37,6 @@ public class ProductController {
     }
 
 
-
     @PostMapping("/create")
     public ResponseEntity<ProductDTO> createProductDTO(@RequestBody @Valid Product product) throws Exception {
         return new ResponseEntity<>(productService.create(product), HttpStatus.OK);

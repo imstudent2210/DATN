@@ -11,11 +11,13 @@ import java.util.List;
 
 public interface StaffRepository extends JpaRepository<Staff, Long> {
     Staff findStaffByName(String name);
+
     Page<Staff> findAll(Pageable pageable);
-    @Query("select s from Staff s where s.name like :name" )
+
+    @Query("select s from Staff s where s.name like :name")
     List<Staff> searchStaffByName(@Param("name") String name);
 
-    @Query("select s from Staff s join Store a where s.store.id = a.id and a.id = :id" )
+    @Query("select s from Staff s join Store a where s.store.id = a.id and a.id = :id")
     List<Staff> filterStaffByStoreId(@Param("id") Long id);
 
 }

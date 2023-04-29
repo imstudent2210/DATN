@@ -28,10 +28,12 @@ public class StaffController {
     public ResponseEntity<List<StaffDTO>> getAllStaffDTO() {
         return new ResponseEntity<>(staffMapper.toStaffDTOs(staffRepository.findAll()), HttpStatus.OK);
     }
+
     @GetMapping("/get")
     public ResponseEntity<List<Staff>> allProduct() {
         return new ResponseEntity<>(staffRepository.findAll(), HttpStatus.OK);
     }
+
     @GetMapping("/get/{id}")
     public ResponseEntity<StaffDTO> getStaffDTO(@PathVariable(name = "id") Long id) {
         return new ResponseEntity<>(staffMapper.toStaffDTO(staffService.find(id)), HttpStatus.OK);
@@ -56,6 +58,7 @@ public class StaffController {
     List<StaffDTO> searchStaffDTO(@PathVariable("name") String name) {
         return this.staffService.search(name);
     }
+
     @GetMapping("/filter/{storeId}")
     List<StaffDTO> filterStaffDTO(@PathVariable("storeId") Long storeId) {
         return this.staffService.filter(storeId);

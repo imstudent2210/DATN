@@ -1,6 +1,5 @@
 package com.graduate.touslestemp.domain.repository;
 
-import com.graduate.touslestemp.domain.entity.Address;
 import com.graduate.touslestemp.domain.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

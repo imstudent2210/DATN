@@ -3,7 +3,6 @@ package com.graduate.touslestemp.domain.dto;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.Date;
 
 @Getter

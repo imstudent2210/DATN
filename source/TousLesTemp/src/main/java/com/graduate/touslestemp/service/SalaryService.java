@@ -7,8 +7,12 @@ import java.util.List;
 
 public interface SalaryService {
     List<SalaryDTO> findAll();
+
     SalaryDTO create(Salary salary) throws Exception;
+
     void delete(Long id);
+
     SalaryDTO find(Long id);
+
     SalaryDTO update(SalaryDTO salary, Long id) throws Exception;
 }

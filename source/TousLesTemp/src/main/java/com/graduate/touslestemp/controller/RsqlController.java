@@ -19,6 +19,7 @@ import java.util.List;
 public class RsqlController {
     @Autowired
     private StoreRepository storeRepository;
+
     @GetMapping("/store")
     public List<Store> findAllByRsql(@RequestParam(value = "search") String search) {
         Node rootNode = new RSQLParser().parse(search);

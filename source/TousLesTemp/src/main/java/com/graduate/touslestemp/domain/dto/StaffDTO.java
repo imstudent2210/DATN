@@ -16,6 +16,4 @@ public class StaffDTO {
     private StaffGroup staffGroup;
     private StoreDTO store;
     private String image;
-
-
 }

@@ -13,7 +13,8 @@ import java.io.OutputStream;
 @Component
 public class FileFactory {
     public static String PATH_TEMPLATE = "D:\\221121\\file";
-    public static File createFile(String fileName, Workbook workbook) throws Exception{
+
+    public static File createFile(String fileName, Workbook workbook) throws Exception {
         workbook = new XSSFWorkbook();
         OutputStream outputStream = new FileOutputStream(PATH_TEMPLATE + fileName);
         workbook.write(outputStream);

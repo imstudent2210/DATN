@@ -11,12 +11,19 @@ import java.util.List;
 
 public interface TimeKeepingService {
     PageResponseDTO<?> getAllTimeKeeping(Pageable request);
+
     TimeKeeping find(Long id);
+
     TimeKeepingDTO create(TimeKeeping timeKeeping) throws Exception;
-    void delete (Long id);
+
+    void delete(Long id);
+
     TimeKeepingDTO update(TimeKeepingDTO timeKeepingDTO, Long id) throws Exception;
+
     List<TimeKeepingDTO> search(String keyword);
+
     List<TimeKeepingDTO> filter(Long id);
+
     List<Staff> allStaffHaveTimeKeepingPerMonth(Long month) throws Exception;
 
     List<StaffSalaryDTO> calculateAllStaffSalaryPerMonth(Long month) throws Exception;

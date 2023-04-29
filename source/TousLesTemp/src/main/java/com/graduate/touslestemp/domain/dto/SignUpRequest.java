@@ -2,7 +2,6 @@ package com.graduate.touslestemp.domain.dto;
 
 import com.graduate.touslestemp.validator.PasswordMatches;
 import lombok.Data;
-
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 

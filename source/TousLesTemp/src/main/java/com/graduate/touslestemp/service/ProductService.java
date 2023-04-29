@@ -9,12 +9,20 @@ import java.util.List;
 
 public interface ProductService {
     List<Product> findAll();
+
     PageResponseDTO<?> getAllProduct(Pageable request);
+
     ProductDTO find(Long id);
+
     ProductDTO create(Product product) throws Exception;
-    void delete (Long id);
+
+    void delete(Long id);
+
     ProductDTO update(ProductDTO productDto, Long id) throws Exception;
+
     List<ProductDTO> filter(Long id);
+
     List<ProductDTO> search(String keyword);
+
     Product findProduct(String name);
 }

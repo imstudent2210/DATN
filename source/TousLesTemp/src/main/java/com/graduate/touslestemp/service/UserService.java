@@ -14,11 +14,11 @@ import java.util.Optional;
 
 public interface UserService {
 
-	public User registerNewAdmin(SignUpRequest signUpRequest) throws UserAlreadyExistAuthenticationException;
+    public User registerNewAdmin(SignUpRequest signUpRequest) throws UserAlreadyExistAuthenticationException;
 
-	User findUserByEmail(String email);
+    User findUserByEmail(String email);
 
-	Optional<User> findUserById(Long id);
+    Optional<User> findUserById(Long id);
 
-	LocalUser processUserRegistration(String registrationId, Map<String, Object> attributes, OidcIdToken idToken, OidcUserInfo userInfo);
+    LocalUser processUserRegistration(String registrationId, Map<String, Object> attributes, OidcIdToken idToken, OidcUserInfo userInfo);
 }

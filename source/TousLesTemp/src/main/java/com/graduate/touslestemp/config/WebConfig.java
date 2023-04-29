@@ -13,6 +13,11 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 
 import java.util.Locale;
 
+/**
+ *
+ * @author imstudent2210
+ *
+ */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 

@@ -9,11 +9,17 @@ import java.util.List;
 
 public interface StaffService {
     PageResponseDTO<?> getAllStaff(Pageable request);
+
     Staff find(Long id);
+
     StaffDTO create(Staff staff) throws Exception;
-    void delete (Long id);
+
+    void delete(Long id);
+
     StaffDTO update(StaffDTO staffDto, Long id) throws Exception;
+
     List<StaffDTO> search(String keyword);
+
     List<StaffDTO> filter(Long id);
 
 }

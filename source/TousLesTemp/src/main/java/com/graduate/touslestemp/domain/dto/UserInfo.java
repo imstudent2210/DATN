@@ -1,7 +1,6 @@
 package com.graduate.touslestemp.domain.dto;
 
 import lombok.Value;
-
 import java.util.List;
 
 @Value

@@ -1,6 +1,4 @@
 package com.graduate.touslestemp.domain.dto;
-
-
 public enum SocialProvider {
 
 	FACEBOOK("facebook"), GITHUB("github"), LOCAL("local");

@@ -1,6 +1,5 @@
 package com.graduate.touslestemp.domain.dto;
 
-
 import com.graduate.touslestemp.domain.entity.Category;
 import com.graduate.touslestemp.domain.entity.Size;
 import jakarta.persistence.Id;

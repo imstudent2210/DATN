@@ -36,11 +36,11 @@ public class UserController {
         return ResponseEntity.ok("Admin content goes here");
     }
 
-	@GetMapping("/admin/me")
-	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<?> getCurrentAdmin(@CurrentUser LocalUser user) {
-		return ResponseEntity.ok(GeneralUtils.buildUserInfo(user));
-	}
+    @GetMapping("/admin/me")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> getCurrentAdmin(@CurrentUser LocalUser user) {
+        return ResponseEntity.ok(GeneralUtils.buildUserInfo(user));
+    }
 
 
 }

@@ -22,7 +22,7 @@ public class TimeKeepingServiceImpl implements TimeKeepingService {
     @Autowired
     TimeKeepingRepository timeKeepingRepository;
     @Autowired
-    TimeKeepingMapper timeKeepingMapper;
+    TimeKeepingMapper timeKeepingMapper;o
     @Autowired
     SalaryMapper salaryMapper;
     @Autowired
@@ -53,7 +53,7 @@ public class TimeKeepingServiceImpl implements TimeKeepingService {
     @Override
     public void delete(Long id) {
         timeKeepingRepository.delete(timeKeepingRepository.findById(id)
-                .orElseThrow(()->new RequestException("Not found this time keeping: "+id)));
+                .orElseThrow(() -> new RequestException("Not found this time keeping: " + id)));
     }
 
     @Override
@@ -70,10 +70,9 @@ public class TimeKeepingServiceImpl implements TimeKeepingService {
 
     @Override
     public List<Staff> allStaffHaveTimeKeepingPerMonth(Long month) throws Exception {
-        if(!timeKeepingRepository.allTimeKeepingPerMonth(month).isEmpty()){
+        if (!timeKeepingRepository.allTimeKeepingPerMonth(month).isEmpty()) {
             return this.timeKeepingRepository.allStaffHaveTimeKeepingPerMonth(month);
-        }
-        else throw new RequestException("No data!") ;
+        } else throw new RequestException("No data!");
     }
 
     @Override

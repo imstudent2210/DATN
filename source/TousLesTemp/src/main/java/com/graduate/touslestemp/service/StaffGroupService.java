@@ -9,8 +9,12 @@ import java.util.List;
 
 public interface StaffGroupService {
     List<StaffGroup> findAll();
+
     StaffGroup save(StaffGroup category) throws Exception;
+
     void deleteStaffGroup(Long id);
+
     StaffGroup findStaffGroup(Long id);
+
     StaffGroup update(StaffGroup category, Long id) throws Exception;
 }

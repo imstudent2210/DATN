@@ -19,7 +19,6 @@ import java.util.List;
 @CrossOrigin("*")
 @RequestMapping("/store")
 public class StoreController {
-
     @Autowired
     private StoreRepository storeRepository;
     @Autowired

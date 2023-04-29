@@ -31,6 +31,11 @@ import java.util.Arrays;
 import static com.graduate.touslestemp.constant.SecurityConstant.AUTH_WHITELIST;
 
 
+/**
+ *
+ * @author imstudent2210
+ *
+ */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)

@@ -1,11 +1,8 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
-import { Observable, finalize } from 'rxjs';
 import { Staff } from 'src/app/model/staff.model';
 import { StaffService } from 'src/app/services/staff.service';
-import { MyErrorStateMatcher } from '../../register/register.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { TimeKeepingService } from 'src/app/services/time-keeping.service';
@@ -23,7 +20,7 @@ export class SalaryDetailComponent implements OnInit {
   constructor(
     private toast: NgToastService, private timeKeepingService: TimeKeepingService,
     private route: Router, private activatedRoute: ActivatedRoute,
-    private staffService: StaffService, private http:HttpClient) { }
+    private staffService: StaffService, private http: HttpClient) { }
   sdId = 0;
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
@@ -35,7 +32,7 @@ export class SalaryDetailComponent implements OnInit {
   timekeeping?: any;
   columns: string[] = ['id', 'staff', 'month', 'createdDate', 'salaryname', 'salaryprice', 'numOfShift'];
 
-  pageSizeOptions = [ 5, 10, 20];
+  pageSizeOptions = [5, 10, 20];
   showPageSizeOptions = true;
   showFirstLastButtons = true;
   setPageSizeOptions(setPageSizeOptionsInput: string) {
@@ -73,8 +70,8 @@ export class SalaryDetailComponent implements OnInit {
         }
       )
   }
-  totalSalary:any;
-  getShiftSalary(){
+  totalSalary: any;
+  getShiftSalary() {
     this.timeKeepingService.getShiftSalary(this.sdId).subscribe((data) => {
       this.totalSalary = data
     });

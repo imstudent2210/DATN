@@ -11,10 +11,12 @@ import { MyErrorStateMatcher } from '../../products/create-product/create-produc
   templateUrl: './update-category.component.html',
   styleUrls: ['./update-category.component.scss']
 })
-export class UpdateCategoryComponent  implements OnInit{
+export class UpdateCategoryComponent implements OnInit {
 
-  constructor( private categoriesService:CategoriesService, private route: Router,
-               private activatedRoute: ActivatedRoute,private toast: NgToastService){}
+  constructor(private categoriesService: CategoriesService,
+    private route: Router,
+    private activatedRoute: ActivatedRoute,
+    private toast: NgToastService) { }
 
   cId = 0;
   namef = new FormControl('', [Validators.required]);
@@ -23,9 +25,9 @@ export class UpdateCategoryComponent  implements OnInit{
   isChecked = true;
 
   currentCategory: Category = {
-    id:0,
+    id: 0,
     name: "",
-    activated:""
+    activated: ""
   }
 
   getCurrentCategory(id: number): void {
@@ -37,22 +39,22 @@ export class UpdateCategoryComponent  implements OnInit{
       )
   }
 
-  updateCategory(){
+  updateCategory() {
     this.categoriesService.updateCategory(this.currentCategory, this.cId)
-    .subscribe(
-      (data) => {
-        console.log(data);
-        this.toast.success({ detail: "Thông báo thành công", summary: " Đã cập nhật!", duration: 3000 })
-        this.route.navigate(['home/categories/list']);
-      },
-      (error) => {
-        console.log(error);
-        this.toast.error({ detail: "Thông báo lỗi", summary: " Cập nhật không thành công!", duration: 3000 })
-      }
-    )
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.toast.success({ detail: "Thông báo thành công", summary: " Đã cập nhật!", duration: 3000 })
+          this.route.navigate(['home/categories/list']);
+        },
+        (error) => {
+          console.log(error);
+          this.toast.error({ detail: "Thông báo lỗi", summary: " Cập nhật không thành công!", duration: 3000 })
+        }
+      )
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.cId = this.activatedRoute.snapshot.params['cid'];
     this.getCurrentCategory(this.cId);
   }

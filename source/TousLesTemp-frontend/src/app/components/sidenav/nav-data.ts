@@ -18,7 +18,7 @@ export const navbarData: INavbarData[] = [
   },
   {
     routeLink: 'products',
-    icon: 'fad fa-coffee-togo', //fal fa-box-open
+    icon: 'fad fa-coffee-togo',
     label: 'Sản phẩm',
     items: [
       {
@@ -33,7 +33,6 @@ export const navbarData: INavbarData[] = [
   },
   {
     routeLink: 'categories',
-
     icon: 'fa fa-layer-group',
     label: 'Danh mục ',
     items: [
@@ -67,22 +66,14 @@ export const navbarData: INavbarData[] = [
 
     ],
   },
-
-  // {
-  //   routeLink: 'report',
-  //   icon: 'fal fa-file-export',
-  //   label: 'Thống kê',
-  // },
-  // {
-  //   routeLink: 'account',
-  //   icon: 'fad fa-address-card',
-  //   label: 'Tài khoản',
-  // },
-
-
+  {
+    routeLink: 'profile',
+    icon: 'fad fa-address-card',
+    label: 'Tài khoản',
+  },
   {
     routeLink: 'salary',
-    icon: 'fa-solid fa-sack-dollar', //fal fa-box-open
+    icon: 'fa-solid fa-sack-dollar',
     label: 'Quỹ lương',
     items: [
       {
@@ -128,8 +119,3 @@ export const navbarData: INavbarData[] = [
   // },
 ];
 
-// {
-//   routeLink: 'account',
-//   icon: 'fad fa-clipboard-list-check',
-//   label: 'Tài khoản'
-// },  // icon: 'fal fa-chart-bar',fad.fa-mug-tea,fa-coffee-togo, fa fa-mug-tea

@@ -18,10 +18,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  constructor(private authService: AuthService,  private toast: NgToastService) { }
-
-  ngOnInit(): void {
-  }
+  constructor(private authService: AuthService, private toast: NgToastService) { }
 
   form: any = {};
   isSuccessful = false;
@@ -35,14 +32,14 @@ export class RegisterComponent implements OnInit {
   addressDetailf = new FormControl('', [Validators.required]);
   matcher = new MyErrorStateMatcher();
   passwordf = new FormControl('', [Validators.required]);
-  email = new FormControl('', [Validators.required,Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]);
-  sendmail =  this.form.email;
+  email = new FormControl('', [Validators.required, Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]);
+  sendmail = this.form.email;
 
   clientMail: Mail = {
-    displayName:"",
-    email:"",
-    username:"",
-    password:""
+    displayName: "",
+    email: "",
+    username: "",
+    password: ""
 
   }
   errror() {
@@ -64,29 +61,27 @@ export class RegisterComponent implements OnInit {
 
     return this.email.hasError('email') ? 'Email không hợp lệ' : '';
   }
-
-
   onSubmit(): void {
     this.authService.register(this.form).subscribe(
       data => {
         console.log(data);
-        if(data.using2FA){
-        	this.isUsing2FA = true;
-        	this.qrCodeImage = data.qrCodeImage;
-          this.toast.success({detail:"Thành công", summary:"Đăng ký thành công!", duration:3000})
+        if (data.using2FA) {
+          this.isUsing2FA = true;
+          this.qrCodeImage = data.qrCodeImage;
+          this.toast.success({ detail: "Thành công", summary: "Đăng ký thành công!", duration: 3000 })
 
         }
-	      this.isSuccessful = true;
+        this.isSuccessful = true;
         this.isSignUpFailed = false;
         console.log(this.form.email);
 
         this.clientMail.email = this.form.email;
-        this.clientMail.password =this.form.password;
+        this.clientMail.password = this.form.password;
         this.clientMail.displayName = this.form.displayName
         this.clientMail.username = this.form.email;
 
         this.authService.sendmail(this.clientMail).subscribe(
-          (data)=>{
+          (data) => {
             console.log("Gửi mail thành công");
           }
         )
@@ -94,10 +89,12 @@ export class RegisterComponent implements OnInit {
       err => {
         this.errorMessage = err.error.message;
         this.isSignUpFailed = true;
-        this.toast.error({detail:"Lỗi", summary:"Vui lòng kiểm tra thông tin!", duration:3000})
+        this.toast.error({ detail: "Lỗi", summary: "Vui lòng kiểm tra thông tin!", duration: 3000 })
 
       }
     );
   }
+
+  ngOnInit(): void { }
 
 }

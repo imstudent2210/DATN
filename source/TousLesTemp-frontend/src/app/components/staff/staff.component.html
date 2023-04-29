@@ -4,36 +4,51 @@
     <div class="col-md-4">
       <p class="title-page">Danh sách nhân viên</p>
     </div>
-    <div class="col-md-8">
-    </div>
+    <div class="col-md-8"></div>
   </div>
 
   <div class="row">
     <div class="col-md-6">
       <div class="effect my-2">
-        <input class="effect-2" (keyup)="doFilter($event)" type="text" [(ngModel)]="name" placeholder="Tìm kiếm">
+        <input
+          class="effect-2"
+          (keyup)="doFilter($event)"
+          type="text"
+          [(ngModel)]="name"
+          placeholder="Tìm kiếm"
+        />
         <i class="fa-solid fa-magnifying-glass icon-search"></i>
         <span class="focus-border"></span>
       </div>
     </div>
     <div class="col-md-6">
-      <button mat-raised-button class="button-submit mt-2 ms-auto" [routerLink]="'../create'"><mat-icon>library_add</mat-icon>Thêm mới</button>
-
+      <button
+        mat-raised-button
+        class="button-submit mt-2 ms-auto"
+        [routerLink]="'../create'"
+      >
+        <mat-icon>library_add</mat-icon>Thêm mới
+      </button>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-12 mat-header-sticky ">
-      <table mat-table matSort [dataSource]="staff" class="mat-elevation-z8 table-tlt">
+    <div class="col-md-12 mat-header-sticky">
+      <table
+        mat-table
+        matSort
+        [dataSource]="staff"
+        class="mat-elevation-z8 table-tlt"
+      >
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Tên nhân viên</th>
-          <td mat-cell *matCellDef="let element" class="col-name-tlt">{{ element.name }}</td>
+          <td mat-cell *matCellDef="let element" class="col-name-tlt">
+            {{ element.name }}
+          </td>
         </ng-container>
         <ng-container matColumnDef="phone">
           <th mat-header-cell *matHeaderCellDef>Điện thoại</th>
-          <td mat-cell *matCellDef="let element">{{ element.phone }}
-
-          </td>
+          <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
         </ng-container>
         <ng-container matColumnDef="email">
           <th mat-header-cell *matHeaderCellDef>Email</th>
@@ -43,45 +58,53 @@
         <ng-container matColumnDef="image">
           <th mat-header-cell *matHeaderCellDef>Ảnh</th>
           <td mat-cell *matCellDef="let element">
-            <!-- <button mat-mini-fab color="basic" (click)="showImages(element)">
+            <button mat-mini-fab color="basic" (click)="showImages(element)">
               <i class="fa-solid fa-image"></i>
-            </button> -->
+            </button>
           </td>
         </ng-container>
         <ng-container matColumnDef="staffGroup">
           <th mat-header-cell *matHeaderCellDef>Nhóm nhân viên</th>
-          <td mat-cell *matCellDef="let element">{{ element.staffGroup.name}}</td>
+          <td mat-cell *matCellDef="let element">
+            {{ element.staffGroup.name }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="store">
           <th mat-header-cell *matHeaderCellDef>Cửa hàng</th>
-          <td mat-cell *matCellDef="let element">{{ element.store.name}}</td>
+          <td mat-cell *matCellDef="let element">{{ element.store.name }}</td>
         </ng-container>
         <ng-container matColumnDef="edit">
           <th mat-header-cell *matHeaderCellDef class="col-action-tlt"></th>
           <td mat-cell *matCellDef="let element">
             <button mat-mini-fab color="basic" (click)="editStore(element.id)">
-              <i class="fa fa-edit" style="color:var(--yellow)"></i>
+              <i class="fa fa-edit" style="color: var(--yellow)"></i>
             </button>
           </td>
         </ng-container>
         <ng-container matColumnDef="delete">
           <th mat-header-cell *matHeaderCellDef class="col-action-tlt"></th>
           <td mat-cell *matCellDef="let element">
-            <button mat-mini-fab color="basic" (click)="deleteStore(element.id)">
-              <i class="fa-solid fa-trash" style="color:red"></i>
+            <button
+              mat-mini-fab
+              color="basic"
+              (click)="deleteStore(element.id)"
+            >
+              <i class="fa-solid fa-trash" style="color: red"></i>
             </button>
           </td>
         </ng-container>
-        <tr mat-header-row *matHeaderRowDef="columns;sticky:true"></tr>
+        <tr mat-header-row *matHeaderRowDef="columns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: columns"></tr>
       </table>
       <mat-divider></mat-divider>
-      <mat-paginator class="mat-paginator-sticky " [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
-        [showFirstLastButtons]="showFirstLastButtons">
+      <mat-paginator
+        class="mat-paginator-sticky"
+        [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+        [showFirstLastButtons]="showFirstLastButtons"
+      >
       </mat-paginator>
       <mat-divider></mat-divider>
     </div>
-
   </div>
 </div>

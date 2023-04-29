@@ -1,59 +1,147 @@
-<div class="backgound-image" style="background-image: url('../../../assets/touslestemp.jpg');">
+<div
+  class="backgound-image"
+  style="background-image: url('../../../assets/touslestemp.jpg')"
+>
   <div class="row">
     <div class="col-md-12">
       <mat-card>
         <div class="register-form">
-          <mat-card-title class="text-center my-2 linetext"><span>Đăng ký tài khoản</span></mat-card-title>
-          <img id="profile-img" src="../../../assets/register1.png" class="register-img-card" />
-          <form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+          <mat-card-title class="text-center my-2 linetext"
+            ><span>Đăng ký tài khoản</span></mat-card-title
+          >
+          <img
+            id="profile-img"
+            src="../../../assets/register1.png"
+            class="register-img-card"
+          />
+          <form
+            *ngIf="!isSuccessful"
+            name="form"
+            (ngSubmit)="f.form.valid && onSubmit()"
+            #f="ngForm"
+            novalidate
+          >
             <mat-form-field class="full-width" appearance="outline">
               <mat-label>Tên</mat-label>
-              <input matInput type="text" class="form-control" name="displayName" [(ngModel)]="form.displayName"
-                required minlength="3" maxlength="20" #displayName="ngModel" [errorStateMatcher]="matcher">
-                <mat-error *ngIf="namef.hasError('required')">
-                  Vui lòng nhập tên người dùng
-                </mat-error>
+              <input
+                matInput
+                type="text"
+                class="form-control"
+                name="displayName"
+                [(ngModel)]="form.displayName"
+                required
+                minlength="3"
+                maxlength="20"
+                #displayName="ngModel"
+                [errorStateMatcher]="matcher"
+              />
+              <mat-error *ngIf="namef.hasError('required')">
+                Vui lòng nhập tên người dùng
+              </mat-error>
             </mat-form-field>
             <mat-form-field class="full-width" appearance="outline">
               <mat-label>Địa chỉ email</mat-label>
-              <input matInput type="email" class="form-control" name="email" [(ngModel)]="form.email" required email
-                #email="ngModel" >
-                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+              <input
+                matInput
+                type="email"
+                class="form-control"
+                name="email"
+                [(ngModel)]="form.email"
+                required
+                email
+                #email="ngModel"
+              />
+              <mat-error *ngIf="email.invalid">{{
+                getErrorMessage()
+              }}</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>Mật khẩu</mat-label>
-              <input matInput [type]="hide ? 'password' : 'text'" name="password" [(ngModel)]="form.password" required
-                minlength="6" #password="ngModel">
-              <mat-error *ngIf="password.invalid">{{errrorPassword()}}</mat-error>
-              <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              <input
+                matInput
+                [type]="hide ? 'password' : 'text'"
+                name="password"
+                [(ngModel)]="form.password"
+                required
+                minlength="6"
+                #password="ngModel"
+              />
+              <mat-error *ngIf="password.invalid">{{
+                errrorPassword()
+              }}</mat-error>
+              <button
+                type="button"
+                mat-icon-button
+                matSuffix
+                (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide"
+              >
+                <mat-icon>{{
+                  hide ? "visibility_off" : "visibility"
+                }}</mat-icon>
               </button>
             </mat-form-field>
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>Nhập lại mật khẩu</mat-label>
-              <input matInput [type]="hide ? 'password' : 'text'" name="matchingPassword"
-                [(ngModel)]="form.matchingPassword" required minlength="6" #matchingPassword="ngModel">
-              <mat-error *ngIf="password.invalid">{{errrorPassword()}}</mat-error>
+              <input
+                matInput
+                [type]="hide ? 'password' : 'text'"
+                name="matchingPassword"
+                [(ngModel)]="form.matchingPassword"
+                required
+                minlength="6"
+                #matchingPassword="ngModel"
+              />
+              <mat-error *ngIf="password.invalid">{{
+                errrorPassword()
+              }}</mat-error>
             </mat-form-field>
-            <mat-checkbox name="using2FA" [(ngModel)]="form.using2FA" #using2FA="ngModel">Xác thực hai yếu tố </mat-checkbox>
+            <mat-checkbox
+              name="using2FA"
+              [(ngModel)]="form.using2FA"
+              #using2FA="ngModel"
+              >Xác thực hai yếu tố
+            </mat-checkbox>
             <div class="group-button">
-              <button type="button" class="mx-2 mb-2" mat-raised-button
-                [routerLink]="'/login'"><mat-icon>keyboard_backspace</mat-icon>Trở về</button>
-                <button mat-raised-button class="button-submit mx-2 mb-2"><mat-icon>login</mat-icon>Đăng ký</button>
+              <button
+                type="button"
+                class="mx-2 mb-2"
+                mat-raised-button
+                [routerLink]="'/login'"
+              >
+                <mat-icon>keyboard_backspace</mat-icon>Trở về
+              </button>
+              <button mat-raised-button class="button-submit mx-2 mb-2">
+                <mat-icon>login</mat-icon>Đăng ký
+              </button>
             </div>
           </form>
 
           <div class="alert alert-success" *ngIf="isSuccessful">
             <div *ngIf="!isUsing2FA">
               <p class="content">Đăng ký thành công</p>
-            <button mat-raised-button class="button-register" [routerLink]="'/login'"><mat-icon>login</mat-icon>Đăng nhập</button>
+              <button
+                mat-raised-button
+                class="button-register"
+                [routerLink]="'/login'"
+              >
+                <mat-icon>login</mat-icon>Đăng nhập
+              </button>
             </div>
             <div *ngIf="isUsing2FA" class="text-center">
               <p class="content">
-                Quét mã QR này bằng ứng dụng Authenticator trên điện thoại của bạn để đăng nhập sau này</p>
-              <img src="{{qrCodeImage}}" class="img-fluid" />
-              <button mat-raised-button class="button-register" [routerLink]="'/login'"><mat-icon>login</mat-icon>Đăng nhập</button>
+                Quét mã QR này bằng ứng dụng Authenticator trên điện thoại của
+                bạn để đăng nhập sau này
+              </p>
+              <img src="{{ qrCodeImage }}" class="img-fluid" />
+              <button
+                mat-raised-button
+                class="button-register"
+                [routerLink]="'/login'"
+              >
+                <mat-icon>login</mat-icon>Đăng nhập
+              </button>
             </div>
           </div>
         </div>

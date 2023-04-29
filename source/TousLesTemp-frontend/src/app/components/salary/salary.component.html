@@ -3,25 +3,42 @@
     <div class="col-md-4">
       <p class="title-page">Danh mục lương cơ bản nhân viên</p>
     </div>
-    <div class="col-md-8">
-    </div>
+    <div class="col-md-8"></div>
   </div>
-  <div>
-  </div>
+  <div></div>
 
   <div class="row">
     <div class="col-md-8 mx-auto mat-header-sticky">
-      <div class="effect my-2" >
-        <input class="effect-2" (keyup)="doFilter($event)" type="text" [(ngModel)]="name" placeholder="Tìm kiếm">
+      <div class="effect my-2">
+        <input
+          class="effect-2"
+          (keyup)="doFilter($event)"
+          type="text"
+          [(ngModel)]="name"
+          placeholder="Tìm kiếm"
+        />
         <i class="fa-solid fa-magnifying-glass icon-search"></i>
-          <span class="focus-border"></span>
+        <span class="focus-border"></span>
       </div>
-      <button mat-raised-button class="button-submit mt-2 ms-auto" [routerLink]="'../create'"><mat-icon>library_add</mat-icon>Thêm mới</button>
-      <table mat-table matSort [dataSource]="salary" class="mat-elevation-z8 table-tlt" id="categoryExport">
-
+      <button
+        mat-raised-button
+        class="button-submit mt-2 ms-auto"
+        [routerLink]="'../create'"
+      >
+        <mat-icon>library_add</mat-icon>Thêm mới
+      </button>
+      <table
+        mat-table
+        matSort
+        [dataSource]="salary"
+        class="mat-elevation-z8 table-tlt"
+        id="categoryExport"
+      >
         <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef >Mã lương</th>
-          <td mat-cell *matCellDef="let element"class="col-name-tlt">{{ element.id }}</td>
+          <th mat-header-cell *matHeaderCellDef>Mã lương</th>
+          <td mat-cell *matCellDef="let element" class="col-name-tlt">
+            {{ element.id }}
+          </td>
         </ng-container>
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Vị trí</th>
@@ -29,35 +46,40 @@
         </ng-container>
         <ng-container matColumnDef="salary">
           <th mat-header-cell *matHeaderCellDef>Lương cơ bản</th>
-          <td mat-cell *matCellDef="let element">{{ element.basicSalary | currency:"VND":"symbol"}} đ/giờ</td>
+          <td mat-cell *matCellDef="let element">
+            {{ element.basicSalary | currency : "VND" : "symbol" }} đ/giờ
+          </td>
         </ng-container>
         <ng-container matColumnDef="edit">
           <th mat-header-cell *matHeaderCellDef class="col-action-tlt"></th>
           <td mat-cell *matCellDef="let element">
             <button mat-mini-fab color="basic" (click)="editSalary(element.id)">
-              <i class="fa fa-edit" style="color:var(--yellow)"></i>
+              <i class="fa fa-edit" style="color: var(--yellow)"></i>
             </button>
           </td>
         </ng-container>
         <ng-container matColumnDef="delete">
           <th mat-header-cell *matHeaderCellDef class="col-action-tlt"></th>
-          <td mat-cell *matCellDef="let element" >
-            <button mat-mini-fab color="basic" (click)="deleteSalary(element.id)">
-              <i class="fa-solid fa-trash" style="color:red"></i>
+          <td mat-cell *matCellDef="let element">
+            <button
+              mat-mini-fab
+              color="basic"
+              (click)="deleteSalary(element.id)"
+            >
+              <i class="fa-solid fa-trash" style="color: red"></i>
             </button>
           </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="columns;sticky:true"></tr>
-        <tr  mat-row *matRowDef="let row; columns: columns"></tr>
+        <tr mat-header-row *matHeaderRowDef="columns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns"></tr>
       </table>
-      <mat-paginator class="mat-paginator-sticky"
+      <mat-paginator
+        class="mat-paginator-sticky"
         [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
-        [showFirstLastButtons]="showFirstLastButtons">
+        [showFirstLastButtons]="showFirstLastButtons"
+      >
       </mat-paginator>
     </div>
-    </div>
+  </div>
 </div>
-
-
-

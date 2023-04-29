@@ -19,6 +19,7 @@ const routes: Routes = [
       { path: 'staff', loadChildren: () => import('./components/staff/staff.module').then(m => m.StaffModule)},
       { path: 'salary', loadChildren: () => import('./components/salary/salary.module').then(m => m.SalaryModule)},
       { path: 'timekeeping', loadChildren: () => import('./components/time-keeping/time-keeping.module').then(m => m.TimeKeepingModule)},
+      { path: 'profile', component: ProfileComponent },
 
 
 
@@ -29,7 +30,6 @@ const routes: Routes = [
   { path: 'otp', component: TotpComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'user', component: UserComponent },
-  { path: 'profile', component: ProfileComponent },
 
 ];
 

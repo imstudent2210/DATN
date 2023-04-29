@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { environment } from 'src/environment/environment.prod';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-totp',
@@ -13,8 +12,6 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./totp.component.scss']
 })
 export class TotpComponent implements OnInit {
-
-
   form: any = {};
   isLoggedIn = false;
   isLoginFailed = false;
@@ -24,7 +21,7 @@ export class TotpComponent implements OnInit {
 
 
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService,
-   private route: Router, private toast: NgToastService) { }
+    private route: Router, private toast: NgToastService) { }
 
   otp = new FormControl('', [Validators.required]);
   errror() {
@@ -63,7 +60,6 @@ export class TotpComponent implements OnInit {
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
         this.toast.error({ detail: "Lỗi", summary: "Vui lòng nhập lại mã xác thực !", duration: 3000 })
-
       }
     );
   }
@@ -73,7 +69,5 @@ export class TotpComponent implements OnInit {
       this.isLoggedIn = true;
       this.currentUser = this.tokenStorage.getUser();
     }
-
   }
-
 }

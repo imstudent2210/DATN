@@ -20,9 +20,11 @@ export class UpdateStaffComponent implements OnInit {
   cdRef: any;
   constructor(private store: StoresService,
     private toast: NgToastService,
-    private route: Router, private activatedRoute: ActivatedRoute,
+    private route: Router, 
+    private activatedRoute: ActivatedRoute,
     private staffGroupService: StaffGroupService,
-    private staffService: StaffService, private storage: AngularFireStorage) { }
+    private staffService: StaffService, 
+    private storage: AngularFireStorage) { }
 
   stId = 0;
 
@@ -68,11 +70,10 @@ export class UpdateStaffComponent implements OnInit {
         })
       )
       .subscribe((snapshot) => {
-        // Handle progress here
         const progress = (snapshot!.bytesTransferred / snapshot!.totalBytes) * 100;
         console.log(`Upload is ${progress}% done`);
         this.progress = Math.round(progress);
-        this.cdRef.detectChanges(); // Update the view
+        this.cdRef.detectChanges(); 
       });
   }
 
@@ -82,7 +83,6 @@ export class UpdateStaffComponent implements OnInit {
       data => {
         this.stores = data;
         console.log(this.stores);
-
       }
     )
   }
@@ -127,7 +127,6 @@ export class UpdateStaffComponent implements OnInit {
   ngOnInit(): void {
     this.getStaffGroup();
     this.getStores();
-
     this.stId = this.activatedRoute.snapshot.params['stid'];
     this.getCurrentStaff(this.stId);
   }

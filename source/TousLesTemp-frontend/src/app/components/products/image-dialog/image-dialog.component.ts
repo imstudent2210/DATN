@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FileHandle } from 'src/app/model/file-handle.model';
 
 @Component({
   selector: 'app-image-dialog',

@@ -30,6 +30,12 @@ export class AddressComponent implements OnInit {
   @ViewChild(GoogleMap, { static: false }) map!: GoogleMap;
   @ViewChild(MapInfoWindow, { static: false }) infoWindow!: MapInfoWindow;
   @ViewChild('scroller1') scrollbar!: ElementRef;
+  @ViewChild('inputField')
+  inputField!: ElementRef;
+  @Output() placeChanged = new EventEmitter<PlaceSearchResult>();
+  autocomplete!: google.maps.places.Autocomplete;
+  listener: any;
+  listStore?: any;
 
   myControl = new FormControl('');
   mapZoom = 15;
@@ -52,14 +58,13 @@ export class AddressComponent implements OnInit {
 
   geocoderWorking = false;
   geolocationWorking = false;
-
   address?: any;
   formattedAddress?: string | null = null;
   locationCoords?: google.maps.LatLng | null = null;
+  filteredOptions?: Observable<string[]>;
+  options: string[] = [];
 
-  reset() {
-    this.address = "";
-  }
+
   get isWorking(): boolean {
     return this.geolocationWorking || this.geocoderWorking;
   }
@@ -68,6 +73,21 @@ export class AddressComponent implements OnInit {
     this.infoWindow?.open(marker);
   }
 
+  getListStore() {
+    this.storeService.getStores().subscribe(
+      data => {
+        this.listStore = data
+        console.log(this.listStore);
+      }
+    )
+  }
+  getPhotoUrl(
+    place: google.maps.places.PlaceResult | undefined
+  ): string | undefined {
+    return place?.photos && place?.photos.length > 0
+      ? place?.photos[0].getUrl({ maxWidth: 500 })
+      : undefined;
+  }
   getCurrentLocation() {
     this.geolocationWorking = true;
     navigator.geolocation.getCurrentPosition(
@@ -100,7 +120,7 @@ export class AddressComponent implements OnInit {
                 animation: google.maps.Animation.DROP,
               };
             } else {
-              this.toast.error({ detail: "Thông báo lỗi", summary: " Sản phẩm chưa được cập nhật!", duration: 3000 })
+              this.toast.error({ detail: "Thông báo lỗi", summary: " Không tìm thấy vị trí!", duration: 3000 })
 
             }
           })
@@ -112,16 +132,16 @@ export class AddressComponent implements OnInit {
         this.geolocationWorking = false;
 
         if (error.PERMISSION_DENIED) {
-          this.toast.error({ detail: "Thông báo lỗi", summary: " Sản phẩm chưa được cập nhật!", duration: 3000 })
+          this.toast.error({ detail: "Thông báo lỗi", summary: " Không tìm thấy vị trí!", duration: 3000 })
 
         } else if (error.POSITION_UNAVAILABLE) {
-          this.toast.error({ detail: "Thông báo lỗi", summary: " Sản phẩm chưa được cập nhật!", duration: 3000 })
+          this.toast.error({ detail: "Thông báo lỗi", summary: " Không tìm thấy vị trí!", duration: 3000 })
 
         } else if (error.TIMEOUT) {
-          this.toast.error({ detail: "Thông báo lỗi", summary: " Sản phẩm chưa được cập nhật!", duration: 3000 })
+          this.toast.error({ detail: "Thông báo lỗi", summary: " Không tìm thấy vị trí!", duration: 3000 })
 
         } else {
-          this.toast.error({ detail: "Thông báo lỗi", summary: " Sản phẩm chưa được cập nhật!", duration: 3000 })
+          this.toast.error({ detail: "Thông báo lỗi", summary: " Không tìm thấy vị trí!", duration: 3000 })
 
         }
       },
@@ -171,7 +191,7 @@ export class AddressComponent implements OnInit {
       });
   }
 
-  findStores(addressDetail:any) {
+  findStores(addressDetail: any) {
     this.geocoderWorking = true;
     this.geocodingService.getLocation(addressDetail)
       .subscribe(
@@ -245,31 +265,15 @@ export class AddressComponent implements OnInit {
       });
   }
 
-  filteredOptions?: Observable<string[]>;
-  options: string[] = [];
 
-  ngOnInit() {
-    this.address = this.inputField;
-    this.getListStore();
 
-    const div = this.scrollbar.nativeElement as HTMLDivElement;
-    div.addEventListener('mouseover', e => {
-      console.log('Mouse Over');
-    });
-    div.addEventListener('mouseout', e => {
-      console.log('Mouse Out');
-    });
+
+
+  ngOnDestroy() {
+    if (this.autocomplete) {
+      google.maps.event.clearInstanceListeners(this.autocomplete);
+    }
   }
-
-
-  @ViewChild('inputField')
-  inputField!: ElementRef;
-
-
-  @Output() placeChanged = new EventEmitter<PlaceSearchResult>();
-  autocomplete!: google.maps.places.Autocomplete;
-  listener: any;
-
   ngAfterViewInit() {
     this.autocomplete = new google.maps.places.Autocomplete(
       this.inputField.nativeElement
@@ -289,32 +293,17 @@ export class AddressComponent implements OnInit {
         this.placeChanged.emit(result);
       });
     });
-
   }
+  ngOnInit() {
+    this.address = this.inputField;
+    this.getListStore();
 
-  listStore?:any;
-
-  getListStore(){
-    this.storeService.getStores().subscribe(
-      data => {
-        this.listStore = data
-        console.log(this.listStore);
-      }
-    )
-  }
-
-
-  getPhotoUrl(
-    place: google.maps.places.PlaceResult | undefined
-  ): string | undefined {
-    return place?.photos && place?.photos.length > 0
-      ? place?.photos[0].getUrl({ maxWidth: 500 })
-      : undefined;
-  }
-
-  ngOnDestroy() {
-    if (this.autocomplete) {
-      google.maps.event.clearInstanceListeners(this.autocomplete);
-    }
+    const div = this.scrollbar.nativeElement as HTMLDivElement;
+    div.addEventListener('mouseover', e => {
+      console.log('Mouse Over');
+    });
+    div.addEventListener('mouseout', e => {
+      console.log('Mouse Out');
+    });
   }
 }

@@ -12,25 +12,24 @@ import { MyErrorStateMatcher } from '../../register/register.component';
   styleUrls: ['./create-address.component.scss']
 })
 export class CreateAddressComponent implements OnInit {
-  constructor(private addressService: AddressService, private route: Router,
+  constructor(private addressService: AddressService,
+    private route: Router,
     private toast: NgToastService) { }
 
-  aId = 0;
   namef = new FormControl('', [Validators.required]);
-
   matcher = new MyErrorStateMatcher();
 
   isChecked = true;
   newAddress: Address = {
     name: ""
   }
+  aId = 0;
 
   createCategory() {
     this.addressService.createAddress(this.newAddress)
       .subscribe(
         (data) => {
           console.log(data);
-          // this.newCategory  = data
           this.toast.success({ detail: "Thông báo thành công", summary: " Đã tạo mới!", duration: 3000 })
           this.route.navigate(['home/address/map']);
         },
@@ -40,8 +39,6 @@ export class CreateAddressComponent implements OnInit {
         }
       )
   }
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 }
 

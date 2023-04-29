@@ -24,6 +24,8 @@ import { UpdateProductComponent } from './update-product/update-product.componen
 import { ImageDialogComponent } from './image-dialog/image-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 @NgModule({
   declarations: [
@@ -52,7 +54,8 @@ import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
     MatGridListModule,
     MatSelectModule,
     MatAutocompleteModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressBarModule
   ],
   providers: [
     {

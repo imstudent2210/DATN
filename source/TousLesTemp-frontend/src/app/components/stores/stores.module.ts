@@ -26,7 +26,7 @@ import { TagModule } from 'primeng/tag';
 import { NgxCurrencyModule } from "ngx-currency";
 import {MatChipsModule} from '@angular/material/chips';
 import {MatRadioModule} from '@angular/material/radio';
-
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,6 @@ import {MatRadioModule} from '@angular/material/radio';
     StoreDetailComponent,
     CreateStoreComponent,
     UpdateStoreComponent,
-
   ],
   imports: [
     CommonModule,
@@ -56,8 +55,8 @@ import {MatRadioModule} from '@angular/material/radio';
     MatIconModule,
     TagModule,
     NgxCurrencyModule,
-    MatChipsModule
-
+    MatChipsModule,
+    MatProgressBarModule
   ],
   exports:[],
   providers:[

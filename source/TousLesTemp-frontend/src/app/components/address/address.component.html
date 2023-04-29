@@ -17,19 +17,35 @@
           <!-- <button mat-raised-button class="button-submit my-2" style="float:left" (click)="getCurrentLocation()" [disabled]="isWorking"><mat-icon>place</mat-icon>Vị trí của tôi</button> -->
           <div class="scrollbar" #scrollbar>
             <mat-list>
-              <mat-list-item class="store" *ngFor="let store of listStore" (click)="findStores(store.addressDetail)">
-                <div matListItemTitle class="store-name">{{store.name}}</div>
-                <div class="store-address">Địa chỉ: {{store.addressDetail}}</div>
-                <div class="store-address">Điện thoại: {{store.phone}}</div>
+              <mat-list-item
+                class="store"
+                *ngFor="let store of listStore"
+                (click)="findStores(store.addressDetail)"
+              >
+                <div matListItemTitle class="store-name">{{ store.name }}</div>
+                <div class="store-address">
+                  Địa chỉ: {{ store.addressDetail }}
+                </div>
+                <div class="store-address">Điện thoại: {{ store.phone }}</div>
               </mat-list-item>
             </mat-list>
           </div>
         </div>
         <div class="col-12 col-md-8">
           <div class="google_map_container shadow-sm rounded mt-1">
-            <google-map width="100%" [zoom]="mapZoom" [center]="mapCenter" [options]="mapOptions">
-              <map-marker #marker="mapMarker" [position]="mapCenter" [options]="markerOptions"
-                (mapClick)="openInfoWindow(marker)" (mapDragend)="onMapDragEnd($event)">
+            <google-map
+              width="100%"
+              [zoom]="mapZoom"
+              [center]="mapCenter"
+              [options]="mapOptions"
+            >
+              <map-marker
+                #marker="mapMarker"
+                [position]="mapCenter"
+                [options]="markerOptions"
+                (mapClick)="openInfoWindow(marker)"
+                (mapDragend)="onMapDragEnd($event)"
+              >
               </map-marker>
               <map-info-window>{{ markerInfoContent }}</map-info-window>
             </google-map>

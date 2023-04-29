@@ -1,34 +1,78 @@
-<div class="backgound-image" style="background-image: url('../../../assets/touslestemp.jpg');">
+<div
+  class="backgound-image"
+  style="background-image: url('../../../assets/touslestemp.jpg')"
+>
   <div class="row">
     <div class="col-md-12">
       <mat-card>
         <div class="login-form">
-          <mat-card-title class="text-center my-2 linetext"><span>Đăng nhập</span></mat-card-title>
-          <img id="profile-img" src="../../../assets/admin-avatar.png" class="login-img-card" />
+          <mat-card-title class="text-center my-2 linetext"
+            ><span>Đăng nhập</span></mat-card-title
+          >
+          <img
+            id="profile-img"
+            src="../../../assets/admin-avatar.png"
+            class="login-img-card"
+          />
 
-          <form name="form" (ngSubmit)="f.form.valid && formSubmit()" #f="ngForm" novalidate>
+          <form
+            name="form"
+            (ngSubmit)="f.form.valid && formSubmit()"
+            #f="ngForm"
+            novalidate
+          >
             <mat-form-field class="full-width" appearance="outline">
               <mat-label>Tên đăng nhập</mat-label>
-              <input matInput type="text" name="username" [(ngModel)]="form.username" required #username="ngModel"
-                placeholder="User name">
-              <mat-error *ngIf="username.invalid">{{errror()}}</mat-error>
+              <input
+                matInput
+                type="text"
+                name="username"
+                [(ngModel)]="form.username"
+                required
+                #username="ngModel"
+                placeholder="User name"
+              />
+              <mat-error *ngIf="username.invalid">{{ errror() }}</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>Mật khẩu</mat-label>
-              <input matInput [type]="hide ? 'password' : 'text'" name="password" [(ngModel)]="form.password" required
-                minlength="6" #password="ngModel">
-              <mat-error *ngIf="password.invalid">{{errrorPassword()}}</mat-error>
-              <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              <input
+                matInput
+                [type]="hide ? 'password' : 'text'"
+                name="password"
+                [(ngModel)]="form.password"
+                required
+                minlength="6"
+                #password="ngModel"
+              />
+              <mat-error *ngIf="password.invalid">{{
+                errrorPassword()
+              }}</mat-error>
+              <button
+                type="button"
+                mat-icon-button
+                matSuffix
+                (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide"
+              >
+                <mat-icon>{{
+                  hide ? "visibility_off" : "visibility"
+                }}</mat-icon>
               </button>
             </mat-form-field>
             <div class="group-button">
-              <!-- <div class="linetext my-2"><span>Tous les temp</span></div> -->
-              <button type="button" class="mx-2" mat-raised-button
-                [routerLink]="'/register'"><mat-icon>assignment_ind</mat-icon>Đăng ký</button>
-              <button mat-raised-button class="button-submit mx-2"><mat-icon>login</mat-icon>Đăng nhập</button>
-
+              <button
+                type="button"
+                class="mx-2"
+                mat-raised-button
+                [routerLink]="'/register'"
+              >
+                <mat-icon>assignment_ind</mat-icon>Đăng ký
+              </button>
+              <button mat-raised-button class="button-submit mx-2">
+                <mat-icon>login</mat-icon>Đăng nhập
+              </button>
             </div>
           </form>
         </div>

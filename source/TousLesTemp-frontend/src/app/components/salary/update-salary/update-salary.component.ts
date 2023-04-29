@@ -13,8 +13,10 @@ import { MyErrorStateMatcher } from '../../register/register.component';
 })
 export class UpdateSalaryComponent implements OnInit {
 
-  constructor(private salaryService: SalaryService, private route: Router,
-    private activatedRoute: ActivatedRoute, private toast: NgToastService) { }
+  constructor(private salaryService: SalaryService,
+    private route: Router,
+    private activatedRoute: ActivatedRoute,
+    private toast: NgToastService) { }
 
   saId = 0;
   namef = new FormControl('', [Validators.required]);

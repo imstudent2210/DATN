@@ -51,7 +51,18 @@ export class CreateTimeKeepingComponent implements OnInit {
       )
   }
 
-  month = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
+  month = [{ id: 1, name: 'Tháng Một' },
+  { id: 2, name: 'Tháng Hai' },
+  { id: 3, name: 'Tháng Ba' },
+  { id: 4, name: 'Tháng Tư' },
+  { id: 5, name: 'Tháng Năm' },
+  { id: 6, name: 'Tháng Sáu' },
+  { id: 7, name: 'Tháng Bảy' },
+  { id: 8, name: 'Tháng Tám' },
+  { id: 9, name: 'Tháng Chín' },
+  { id: 10, name: 'Tháng Mười' },
+  { id: 11, name: 'Tháng Mười Một' },
+  { id: 12, name: 'Tháng Mười Hai' },]
   staff?: any;
   getStaff(): void {
     this.staffService.getStaff().subscribe(
@@ -60,7 +71,7 @@ export class CreateTimeKeepingComponent implements OnInit {
       }
     )
   }
-  // stores-id?:number;
+
   storesId?: any;
   salaryList?: any;
   getSalary(): void {

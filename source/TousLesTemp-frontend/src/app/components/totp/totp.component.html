@@ -1,23 +1,51 @@
-<div class="backgound-image" style="background-image: url('../../../assets/touslestemp.jpg');">
+<div
+  class="backgound-image"
+  style="background-image: url('../../../assets/touslestemp.jpg')"
+>
   <div class="row">
     <div class="col-md-12">
       <mat-card>
         <div class="otp-form">
-          <mat-card-title class="my-2 linetext"><span>đăng nhập</span></mat-card-title>
-          <img id="profile-img" src="../../../assets/register3.png" class="otp-img-card" />
-          <p class="content">Mật khẩu một lần được tạo bởi ứng dụng Authenticator để xác minh đăng nhập của bạn
+          <mat-card-title class="my-2 linetext"
+            ><span>đăng nhập</span></mat-card-title
+          >
+          <img
+            id="profile-img"
+            src="../../../assets/register3.png"
+            class="otp-img-card"
+          />
+          <p class="content">
+            Mật khẩu một lần được tạo bởi ứng dụng Authenticator để xác minh
+            đăng nhập của bạn
           </p>
-          <form class="mx-3" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+          <form
+            class="mx-3"
+            name="form"
+            (ngSubmit)="f.form.valid && onSubmit()"
+            #f="ngForm"
+            novalidate
+          >
             <mat-form-field class="full-width" appearance="outline">
               <mat-label>Nhập mã OTP</mat-label>
-              <input matInput type="number" name="code" [(ngModel)]="form.code" required maxlength="6" #code="ngModel">
-              <mat-error *ngIf="otp.invalid">{{errror()}}</mat-error>
+              <input
+                matInput
+                type="number"
+                name="code"
+                [(ngModel)]="form.code"
+                required
+                maxlength="6"
+                #code="ngModel"
+              />
+              <mat-error *ngIf="otp.invalid">{{ errror() }}</mat-error>
             </mat-form-field>
 
             <div class="group-button">
               <button mat-raised-button class="mx-2" [routerLink]="'/login'">
-                <mat-icon>keyboard_backspace</mat-icon>Trở về</button>
-              <button mat-raised-button class="button-submit mx-2"><mat-icon>done</mat-icon>Xác nhận</button>
+                <mat-icon>keyboard_backspace</mat-icon>Trở về
+              </button>
+              <button mat-raised-button class="button-submit mx-2">
+                <mat-icon>done</mat-icon>Xác nhận
+              </button>
             </div>
           </form>
         </div>

@@ -28,8 +28,6 @@ import { CreateStaffgroupComponent } from './create-staffgroup/create-staffgroup
 import { UpdateGroupComponent } from './update-group/update-group.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 
-
-
 @NgModule({
   declarations: [
     StaffComponent,

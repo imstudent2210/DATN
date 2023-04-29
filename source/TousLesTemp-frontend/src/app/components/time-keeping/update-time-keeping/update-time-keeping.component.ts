@@ -16,8 +16,11 @@ import { MyErrorStateMatcher } from '../../register/register.component';
 export class UpdateTimeKeepingComponent implements OnInit {
 
   constructor(private salaryService: SalaryService,
-    private activatedRoute: ActivatedRoute, private timeKeepingService: TimeKeepingService, private route: Router,
-    private toast: NgToastService, private staffService: StaffService) { }
+    private activatedRoute: ActivatedRoute,
+    private timeKeepingService: TimeKeepingService,
+    private route: Router,
+    private toast: NgToastService,
+    private staffService: StaffService) { }
 
   tId = 0;
   monthf = new FormControl('', [Validators.required]);
@@ -31,7 +34,7 @@ export class UpdateTimeKeepingComponent implements OnInit {
     month: 0,
     numOfShift: 0,
     salary: { id: 1 },
-    staff: { id: 1, staffGroup: {} , phone:'', image:'', email:'', store:{address:{}} }
+    staff: { id: 1, staffGroup: {}, phone: '', image: '', email: '', store: { address: {} } }
   }
   getCurrentTimeKeeping(id: number): void {
     this.timeKeepingService.getTimeKeepingById(id)
@@ -78,7 +81,6 @@ export class UpdateTimeKeepingComponent implements OnInit {
     this.getCurrentTimeKeeping(this.tId);
     this.getSalary();
     this.getStaff();
-
   }
 }
 

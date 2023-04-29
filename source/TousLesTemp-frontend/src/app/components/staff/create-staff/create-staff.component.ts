@@ -10,7 +10,6 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { Observable, finalize } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 
-
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -24,8 +23,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./create-staff.component.scss']
 })
 export class CreateStaffComponent implements OnInit {
-  progress?: number;
-  cdRef: any;
+
   constructor(private store: StoresService,
     private staffGroupService: StaffGroupService,
     private staffService: StaffService,
@@ -40,13 +38,13 @@ export class CreateStaffComponent implements OnInit {
 
   private firebasePath = '/uploads/staff';
 
+  progress?: number;
+  cdRef: any;
   fileUpload?: any[];
   imageUrl?: string;
   fireBaseUrl?: string;
   downloadURL?: Observable<string>;
 
-
-  // Model
   newStaff: Staff = {
     name: "",
     email: "",
@@ -62,7 +60,6 @@ export class CreateStaffComponent implements OnInit {
       data => {
         this.stores = data;
         console.log(this.stores);
-
       }
     )
   }
@@ -72,7 +69,6 @@ export class CreateStaffComponent implements OnInit {
       data => {
         this.staffGroups = data
         console.log(this.staffGroups);
-
       }
     )
   }
@@ -93,7 +89,6 @@ export class CreateStaffComponent implements OnInit {
         this.toast.error({ detail: "Thông báo lỗi", summary: " Nhân viên chưa được thêm!", duration: 3000 })
       }
     )
-
   }
   onFileSelected(event: any) {
     const file = event.target.files[0];
@@ -105,19 +100,15 @@ export class CreateStaffComponent implements OnInit {
       .pipe(
         finalize(() => {
           this.downloadURL = fileRef.getDownloadURL();
-          // console.log(this.newStaff.image);
           this.downloadURL.subscribe(url => {
             if (url) {
               this.fireBaseUrl = url;
               this.toast.success({ detail: "Thành công", summary: "Tải ảnh thành công!", duration: 3000 })
-
             }
-            // console.log(this.fireBaseUrl);
             this.newStaff.image = this.fireBaseUrl;
           });
         })
-      )
-      .subscribe((snapshot) => {
+      ) .subscribe((snapshot) => {
         const progress = (snapshot!.bytesTransferred / snapshot!.totalBytes) * 100;
         console.log(`Upload is ${progress}% done`);
         this.progress = Math.round(progress);

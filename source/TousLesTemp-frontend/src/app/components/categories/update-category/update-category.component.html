@@ -1,4 +1,4 @@
-<div class="container ">
+<div class="container">
   <mat-card>
     <mat-card-header>
       <p class="title-page">Cập nhật thông tin loại sản phẩm</p>
@@ -10,26 +10,41 @@
             <div class="col-md-6 mx-auto">
               <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Tên loại sản phẩm</mat-label>
-                <input type="text" matInput [formControl]="namef" [errorStateMatcher]="matcher"
-                  [(ngModel)]="currentCategory.name" name="name">
+                <input
+                  type="text"
+                  matInput
+                  [formControl]="namef"
+                  [errorStateMatcher]="matcher"
+                  [(ngModel)]="currentCategory.name"
+                  name="name"
+                />
                 <mat-error *ngIf="namef.hasError('required')">
                   Vui lòng nhập tên loại sản phẩm
                 </mat-error>
               </mat-form-field>
-              <mat-slide-toggle name="activated" [(ngModel)]="currentCategory.activated">
+              <mat-slide-toggle
+                name="activated"
+                [(ngModel)]="currentCategory.activated"
+              >
                 <span class="slide-toggle">Còn hàng ?</span>
               </mat-slide-toggle>
             </div>
-
           </div>
           <div class="row">
-            <div class="col-md-6">
-            </div>
+            <div class="col-md-6"></div>
             <div class="group-button">
-              <button mat-raised-button class="mt-2 mx-2" [routerLink]="'../../../categories/list'" type="button"><mat-icon>keyboard_backspace</mat-icon>Trở về</button>
-              <button mat-raised-button class="button-submit mt-2 mx-2"><mat-icon>save</mat-icon>Cập nhật</button>
-
-          </div>
+              <button
+                mat-raised-button
+                class="mt-2 mx-2"
+                [routerLink]="'../../../categories/list'"
+                type="button"
+              >
+                <mat-icon>keyboard_backspace</mat-icon>Trở về
+              </button>
+              <button mat-raised-button class="button-submit mt-2 mx-2">
+                <mat-icon>save</mat-icon>Cập nhật
+              </button>
+            </div>
           </div>
         </div>
       </div>

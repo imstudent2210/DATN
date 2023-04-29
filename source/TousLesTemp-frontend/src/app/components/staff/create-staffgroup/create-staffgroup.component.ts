@@ -31,7 +31,6 @@ export class CreateStaffgroupComponent implements OnInit {
       .subscribe(
         (data) => {
           console.log(data);
-          // this.newCategory  = data
           this.toast.success({ detail: "Thông báo thành công", summary: " Đã tạo mới!", duration: 3000 })
           this.route.navigate(['home/group/list']);
         },
@@ -41,7 +40,5 @@ export class CreateStaffgroupComponent implements OnInit {
         }
       )
   }
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 }

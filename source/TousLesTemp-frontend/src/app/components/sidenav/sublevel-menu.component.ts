@@ -59,8 +59,8 @@ import { fadeInOut, INavbarData } from './helper';
       state('visible', style({
         height: '*'
       })),
-      transition('visible <=> hidden', [style({overflow: 'hidden'}),
-        animate('{{transitionParams}}')]),
+      transition('visible <=> hidden', [style({ overflow: 'hidden' }),
+      animate('{{transitionParams}}')]),
       transition('void => *', animate(0))
     ])
   ]
@@ -78,16 +78,12 @@ export class SublevelMenuComponent implements OnInit {
   @Input() expanded: boolean | undefined;
   @Input() multiple: boolean = false;
 
-  constructor(public router: Router) {}
-
-  ngOnInit(): void {
-  }
-
+  constructor(public router: Router) { }
   handleClick(item: any): void {
     if (!this.multiple) {
       if (this.data.items && this.data.items.length > 0) {
-        for(let modelItem of this.data.items) {
-          if (item !==modelItem && modelItem.expanded) {
+        for (let modelItem of this.data.items) {
+          if (item !== modelItem && modelItem.expanded) {
             modelItem.expanded = false;
           }
         }
@@ -97,9 +93,7 @@ export class SublevelMenuComponent implements OnInit {
   }
 
   getActiveClass(item: INavbarData): string {
-    return item.expanded && this.router.url.includes(item.routeLink)
-      ? 'active-sublevel'
-      : '';
+    return item.expanded && this.router.url.includes(item.routeLink)? 'active-sublevel': '';
   }
-
+  ngOnInit(): void {}
 }

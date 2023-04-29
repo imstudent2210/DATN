@@ -2,7 +2,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgToastService } from 'ng-angular-popup';
 import { StaffService } from 'src/app/services/staff.service';
-import { StaffGroupService } from 'src/app/services/staffgroup.service';
 
 @Component({
   selector: 'app-delete-dialog',

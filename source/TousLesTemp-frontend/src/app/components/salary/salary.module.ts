@@ -21,8 +21,6 @@ import { SalaryComponent } from './salary.component';
 import { CreateSalaryComponent } from './create-salary/create-salary.component';
 import { UpdateSalaryComponent } from './update-salary/update-salary.component';
 
-
-
 @NgModule({
   declarations: [
     SalaryComponent,
@@ -47,8 +45,6 @@ import { UpdateSalaryComponent } from './update-salary/update-salary.component';
     MatGridListModule,
     MatSelectModule,
     MatSlideToggleModule,
-
-
   ], providers:[
     { provide: MatPaginatorIntl, useValue: CustomPaginator() }
   ],

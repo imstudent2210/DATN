@@ -1,5 +1,4 @@
 import { Address } from "./address.model";
-import { FileHandle } from "./file-handle.model";
 
 export interface Store{
   id?:number;

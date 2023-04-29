@@ -12,7 +12,8 @@ import { MyErrorStateMatcher } from '../../register/register.component';
   styleUrls: ['./create-salary.component.scss']
 })
 export class CreateSalaryComponent implements OnInit {
-  constructor(private salaryService: SalaryService , private route: Router,
+  constructor(private salaryService: SalaryService,
+    private route: Router,
     private toast: NgToastService) { }
 
   saId = 0;
@@ -23,7 +24,7 @@ export class CreateSalaryComponent implements OnInit {
   isChecked = true;
   newSalary: Salary = {
     name: "",
-    basicSalary:0
+    basicSalary: 0
   }
 
   createCategory() {
@@ -40,8 +41,6 @@ export class CreateSalaryComponent implements OnInit {
         }
       )
   }
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 }
 

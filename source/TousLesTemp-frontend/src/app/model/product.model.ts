@@ -1,5 +1,4 @@
 import { Category } from "./category.model";
-import { FileHandle } from "./file-handle.model";
 import { Size } from "./size.model";
 import { Store } from "./store.model";
 

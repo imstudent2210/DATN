@@ -3,75 +3,136 @@
     <mat-tab-group dynamicHeight>
       <mat-tab label="Danh sách bảng chấm công">
         <div class="container">
-          <div class="row ">
+          <div class="row">
             <div class="col-md-6">
               <div class="effect my-2">
-                <input class="effect-2" (keyup)="doFilter($event)" type="text" [(ngModel)]="name"
-                  placeholder="Tìm kiếm">
-                <i class="fa-solid fa-magnifying-glass icon-search" (click)="search()"></i>
+                <input
+                  class="effect-2"
+                  (keyup)="doFilter($event)"
+                  type="text"
+                  [(ngModel)]="name"
+                  placeholder="Tìm kiếm"
+                />
+                <i
+                  class="fa-solid fa-magnifying-glass icon-search"
+                  (click)="search()"
+                ></i>
                 <span class="focus-border"></span>
               </div>
             </div>
             <div class="col-md-6">
-              <button mat-raised-button class="button-submit mt-2"
-                [routerLink]="'../create'"><mat-icon>library_add</mat-icon>Thêm mới</button>
+              <button
+                mat-raised-button
+                class="button-submit mt-2"
+                [routerLink]="'../create'"
+              >
+                <mat-icon>library_add</mat-icon>Thêm mới
+              </button>
             </div>
           </div>
           <div class="row">
-            <div class="col-md-12 mat-header-sticky ">
-              <table mat-table matSort [dataSource]="list" class="mat-elevation-z8 table-tlt">
+            <div class="col-md-12 mat-header-sticky">
+              <table
+                mat-table
+                matSort
+                [dataSource]="list"
+                class="mat-elevation-z8 table-tlt"
+              >
                 <ng-container matColumnDef="id">
                   <th mat-header-cell *matHeaderCellDef disableClear>Mã</th>
-                  <td mat-cell *matCellDef="let element" class="col-name-tlt" [routerLink]="'../detail/' + element.id">
+                  <td
+                    mat-cell
+                    *matCellDef="let element"
+                    class="col-name-tlt"
+                    [routerLink]="'../detail/' + element.id"
+                  >
                     {{ element.id }}
                   </td>
                 </ng-container>
                 <ng-container matColumnDef="createdDate">
                   <th mat-header-cell *matHeaderCellDef>Ngày tạo</th>
-                  <td mat-cell *matCellDef="let element">{{ element.createdDate|date }}</td>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.createdDate | date }}
+                  </td>
                 </ng-container>
                 <ng-container matColumnDef="month">
                   <th mat-header-cell *matHeaderCellDef>Tháng</th>
-                  <td mat-cell *matCellDef="let element">{{ element.month }}</td>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.month }}
+                  </td>
                 </ng-container>
 
                 <ng-container matColumnDef="numOfShift">
                   <th mat-header-cell *matHeaderCellDef>Số giờ làm</th>
-                  <td mat-cell *matCellDef="let element">{{ element.numOfShift * 4}}</td>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.numOfShift * 4 }}
+                  </td>
                 </ng-container>
                 <ng-container matColumnDef="salaryname">
                   <th mat-header-cell *matHeaderCellDef>Vị trí</th>
-                  <td mat-cell *matCellDef="let element">{{ element.salary.name }}</td>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.salary.name }}
+                  </td>
                 </ng-container>
                 <ng-container matColumnDef="salaryprice">
                   <th mat-header-cell *matHeaderCellDef>Đơn giá/giờ</th>
-                  <td mat-cell *matCellDef="let element">{{ element.salary.basicSalary }}</td>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.salary.basicSalary }}
+                  </td>
                 </ng-container>
                 <ng-container matColumnDef="staff">
                   <th mat-header-cell *matHeaderCellDef>Nhân viên</th>
-                  <td mat-cell *matCellDef="let element" (click)="salaryDetail(element.staff.id)">{{ element.staff.name}}</td>
+                  <td
+                    mat-cell
+                    *matCellDef="let element"
+                    (click)="salaryDetail(element.staff.id)"
+                  >
+                    {{ element.staff.name }}
+                  </td>
                 </ng-container>
                 <ng-container matColumnDef="edit">
-                  <th mat-header-cell *matHeaderCellDef class="col-action-tlt"></th>
+                  <th
+                    mat-header-cell
+                    *matHeaderCellDef
+                    class="col-action-tlt"
+                  ></th>
                   <td mat-cell *matCellDef="let element">
-                    <button mat-mini-fab color="basic" (click)="editTimeKeeping(element.id)">
-                      <i class="fa fa-edit" style="color:var(--yellow)"></i>
+                    <button
+                      mat-mini-fab
+                      color="basic"
+                      (click)="editTimeKeeping(element.id)"
+                    >
+                      <i class="fa fa-edit" style="color: var(--yellow)"></i>
                     </button>
                   </td>
                 </ng-container>
                 <ng-container matColumnDef="delete">
-                  <th mat-header-cell *matHeaderCellDef class="col-action-tlt"></th>
+                  <th
+                    mat-header-cell
+                    *matHeaderCellDef
+                    class="col-action-tlt"
+                  ></th>
                   <td mat-cell *matCellDef="let element">
-                    <button mat-mini-fab color="basic" (click)="deleteTimeKeeping(element.id)">
-                      <i class="fa-solid fa-trash" style="color:red"></i>
+                    <button
+                      mat-mini-fab
+                      color="basic"
+                      (click)="deleteTimeKeeping(element.id)"
+                    >
+                      <i class="fa-solid fa-trash" style="color: red"></i>
                     </button>
                   </td>
                 </ng-container>
-                <tr mat-header-row *matHeaderRowDef="columns;sticky:true"></tr>
+                <tr
+                  mat-header-row
+                  *matHeaderRowDef="columns; sticky: true"
+                ></tr>
                 <tr mat-row *matRowDef="let row; columns: columns"></tr>
               </table>
-              <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
-                [showFirstLastButtons]="showFirstLastButtons">
+              <mat-paginator
+                class="mat-paginator-sticky"
+                [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+                [showFirstLastButtons]="showFirstLastButtons"
+              >
               </mat-paginator>
             </div>
           </div>
@@ -81,13 +142,21 @@
         <div class="container">
           <div class="row my-2">
             <div class="col-md-2">
-              <button mat-raised-button type="button" style="width: 100%;" class="button-submit ms-auto my-2"
-                (click)="getAllStaffSalaryPerMonth(month)"><mat-icon>bar_chart</mat-icon>Thống kê</button>
+              <button
+                mat-raised-button
+                type="button"
+                style="width: 100%"
+                class="button-submit ms-auto my-2"
+                (click)="getAllStaffSalaryPerMonth(month)"
+              >
+                <mat-icon>bar_chart</mat-icon>Thống kê
+              </button>
               <select class="custom-select" [(ngModel)]="month" name="month">
-                <option value="1" selected disabled hidden>Chọn tháng </option>
-                <option *ngFor="let option of months" [value]="option.id">{{ option.name }}</option>
+                <option value="1" selected disabled hidden>Chọn tháng</option>
+                <option *ngFor="let option of months" [value]="option.id">
+                  {{ option.name }}
+                </option>
               </select>
-
             </div>
             <div class="col-md-10 mx-auto">
               <canvas #myCanvas id="myCanvas"></canvas>

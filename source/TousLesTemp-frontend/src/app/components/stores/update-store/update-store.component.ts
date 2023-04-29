@@ -17,20 +17,23 @@ import { Observable, finalize } from 'rxjs';
 export class UpdateStoreComponent {
   constructor(private addressService: AddressService, private storeService: StoresService,
     private toast: NgToastService, private route: Router,
-    private activatedRoute: ActivatedRoute,  private storage: AngularFireStorage) { }
+    private activatedRoute: ActivatedRoute, private storage: AngularFireStorage) { }
   sId = 0;
   matcher = new MyErrorStateMatcher();
   namef = new FormControl('', [Validators.required]);
   phonef = new FormControl('', [Validators.required]);
   emailf = new FormControl('', [Validators.required]);
   addressDetailf = new FormControl('', [Validators.required]);
-
+  progress?: number;
+  cdRef: any;
   email = new FormControl('', [Validators.required, Validators.email]);
-  private firebasePath = '/uploads';
   fileUpload?: any[];
   imageUrl?: string;
-  fireBaseUrl?:string;
+  fireBaseUrl?: string;
   downloadURL?: Observable<string>;
+
+  private firebasePath = '/uploads';
+
   getErrorMessage() {
     if (this.email.hasError('required')) {
       return 'Vui lòng nhập email';
@@ -38,7 +41,6 @@ export class UpdateStoreComponent {
 
     return this.email.hasError('email') ? 'Email không hợp lệ' : '';
   }
-  //Model
   currentStore: Store = {
     name: "",
     email: "",
@@ -46,14 +48,12 @@ export class UpdateStoreComponent {
     address: { id: 1 },
     addressDetail: ""
   }
-  // get list address
   address?: any;
   getAddress(): void {
     this.addressService.getAddress().subscribe(
       data => {
         this.address = data
         console.log(this.address);
-
       }
     )
   }
@@ -65,8 +65,7 @@ export class UpdateStoreComponent {
         }
       )
   }
-
-  onFileSelected(event:any) {
+  onFileSelected(event: any) {
     const file = event.target.files[0];
     const filePath = `${this.firebasePath}/${file.name}`;
     const fileRef = this.storage.ref(filePath);
@@ -80,20 +79,19 @@ export class UpdateStoreComponent {
           this.downloadURL.subscribe(url => {
             if (url) {
               this.fireBaseUrl = url;
-              this.toast.success({detail:"Thành công", summary:"Tải ảnh thành công!", duration:3000})
+              this.toast.success({ detail: "Thành công", summary: "Tải ảnh thành công!", duration: 3000 })
             }
             console.log(this.fireBaseUrl);
             this.currentStore.image = this.fireBaseUrl;
           });
         })
-      )
-      .subscribe(url => {
-        if (url) {
-          console.log(url);
-        }
+      ).subscribe((snapshot) => {
+        const progress = (snapshot!.bytesTransferred / snapshot!.totalBytes) * 100;
+        console.log(`Upload is ${progress}% done`);
+        this.progress = Math.round(progress);
+        this.cdRef.detectChanges();
       });
   }
-
 
   updateStore() {
     this.storeService.updateStore(this.currentStore, this.sId).subscribe(
@@ -110,7 +108,6 @@ export class UpdateStoreComponent {
     )
   }
 
-  //=========================================
   ngOnInit(): void {
     this.sId = this.activatedRoute.snapshot.params['sid'];
     this.getCurrentStore(this.sId);

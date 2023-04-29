@@ -22,7 +22,6 @@ export class ProductsService {
     return this.http.get<Product>(`${environment.API_BASE_URL}/product/get/${id}`);
   }
 
-  // 1 usage
   createProduct(product:any):Observable<any>{
     return this.http.post<Product>(`${environment.API_BASE_URL}/product/create`, product);
   }
@@ -37,12 +36,11 @@ export class ProductsService {
     return this.http.get(`${environment.API_BASE_URL}/product/getByStoreId/${id}`);
   }
 
+  getStoresByName(name:string):Observable<any>{
+    return this.http.get(`${environment.API_BASE_URL}/store/search/${name}`);
+  }
 
-  // getStoresByName(name:string):Observable<any>{
-  //   return this.http.get(`${environment.apiUrl}/store/search/${name}`);
-  // }
-
-  // getStoresByAddress(name:string):Observable<any>{
-  //   return this.http.get(`${environment.apiUrl}/store/filter/${name}`);
-  // }
+  getStoresByAddress(name:string):Observable<any>{
+    return this.http.get(`${environment.API_BASE_URL}/store/filter/${name}`);
+  }
 }

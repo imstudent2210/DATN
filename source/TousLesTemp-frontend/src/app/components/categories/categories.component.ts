@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { Store } from 'src/app/model/store.model';
 import * as XLSX from 'xlsx';
@@ -13,18 +13,18 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
-  constructor(private service: CategoriesService, private route:Router){}
+  constructor(private service: CategoriesService, private route: Router) { }
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
   @Input() name?: any;
-
+  fileName = "Export.xlsx";
   empty?: any;
-  item?:any;
+  item?: any;
   categories?: any;
-  columns: string[] = ['id','name','activated','edit']
+  columns: string[] = ['id', 'name', 'activated', 'edit']
 
-  pageSizeOptions = [5,3, 10, 25];
+  pageSizeOptions = [5, 3, 10, 25];
   showPageSizeOptions = true;
   showFirstLastButtons = true;
   setPageSizeOptions(setPageSizeOptionsInput: string) {
@@ -32,7 +32,6 @@ export class CategoriesComponent implements OnInit {
       this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
     }
   }
-  // ================== Call Api BackEnd====================
   getCategories(): void {
     this.service.getCategories().subscribe(
       data => {
@@ -48,7 +47,6 @@ export class CategoriesComponent implements OnInit {
 
   getCurrentItem(item: any) {
     console.log(item);
-    console.log(item.id +"fffff"+ item.store.name);
   }
 
   doFilter(event: Event) {
@@ -57,18 +55,16 @@ export class CategoriesComponent implements OnInit {
     console.log(filterValue);
   }
 
-
-  editCategory(cId:any){
+  editCategory(cId: any) {
     this.route.navigate(["/home/categories/update", cId]);
   }
 
-  fileName ="Export.xlsx";
-  export():void{
+  export(): void {
     let element = document.getElementById('categoryExport');
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb,ws,'Sheet1');
-    XLSX.writeFile(wb,this.fileName);
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.writeFile(wb, this.fileName);
   }
 
   ngOnInit(): void {

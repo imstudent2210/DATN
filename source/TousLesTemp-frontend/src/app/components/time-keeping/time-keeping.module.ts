@@ -11,26 +11,21 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatListModule } from '@angular/material/list';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { AppComponent } from 'src/app/app.component';
 import { CustomPaginator } from 'src/app/model/paginator-config';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { NgxCurrencyModule } from 'ngx-currency';
 import { TagModule } from 'primeng/tag';
 import { TimeKeepingComponent } from './time-keeping.component';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import { MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { SalaryDetailComponent } from './salary-detail/salary-detail.component';
-import {MatTabsModule} from '@angular/material/tabs';
-
-
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -62,15 +57,10 @@ import {MatTabsModule} from '@angular/material/tabs';
     NgxCurrencyModule,
     MatChipsModule,
     MatTabsModule
-
-
-
   ],
   exports:[],
   providers:[
     { provide: MatPaginatorIntl, useValue: CustomPaginator() },
-    // {provide: MAT_DATE_FORMATS, useValue: _dateFormats},
-
   ],
 })
 export class TimeKeepingModule { }

@@ -1,10 +1,14 @@
 <div class="my-2 mx-2">
   <h6 class="me-auto"><strong>Xoá nhân viên</strong></h6>
-  <div mat-dialog-content>
-    Bạn có chắc muốn xoá nhân viên này?
+  <div mat-dialog-content>Bạn có chắc muốn xoá nhân viên này?</div>
+  <div mat-dialog-actions class="button">
+    <button mat-raised-button mat-dialog-close>Trở lại</button>
+    <button
+      mat-raised-button
+      class="button-submit mx-2"
+      (click)="deleteProduct()"
+    >
+      <mat-icon>delete</mat-icon>Xoá
+    </button>
   </div>
-    <div mat-dialog-actions class="button">
-      <button mat-raised-button mat-dialog-close>Trở lại</button>
-      <button mat-raised-button class="button-submit mx-2" (click)="deleteProduct()"><mat-icon>delete</mat-icon>Xoá</button>
-    </div>
 </div>

@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { Observable, finalize } from 'rxjs';
 import { AddressService } from 'src/app/services/address.service';
 import { StoresService } from 'src/app/services/stores.service';
 import { Store } from 'src/app/model/store.model';
-
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -22,9 +21,12 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./create-store.component.scss']
 })
 export class CreateStoreComponent implements OnInit {
-  constructor(private addressService: AddressService, private storeService:StoresService,
-   private toast: NgToastService, private route:Router, private storage: AngularFireStorage) { }
-  // Validators
+  constructor(private addressService: AddressService,
+    private storeService: StoresService,
+    private toast: NgToastService,
+    private route: Router,
+    private storage: AngularFireStorage) { }
+
   matcher = new MyErrorStateMatcher();
   namef = new FormControl('', [Validators.required]);
   phonef = new FormControl('', [Validators.required]);
@@ -37,26 +39,24 @@ export class CreateStoreComponent implements OnInit {
 
   fileUpload?: any[];
   imageUrl?: string;
-  fireBaseUrl?:string;
+  fireBaseUrl?: string;
   downloadURL?: Observable<string>;
-
+  progress?: number;
+  cdRef: any;
   getErrorMessage() {
     if (this.email.hasError('required')) {
       return 'Vui lòng nhập email';
     }
-
     return this.email.hasError('email') ? 'Email không hợp lệ' : '';
   }
-  //Model
   newStore: Store = {
     name: "",
     email: "",
     phone: "",
     address: { id: 1 },
-    addressDetail:"",
+    addressDetail: "",
     image: ""
   }
-  // get list address
   address?: any;
   getAddress(): void {
     this.addressService.getAddress().subscribe(
@@ -66,9 +66,6 @@ export class CreateStoreComponent implements OnInit {
       }
     )
   }
-
-
-  //================== Call Api=======================
   createStore() {
     this.storeService.createStore(this.newStore).subscribe(
       (data) => {
@@ -84,8 +81,7 @@ export class CreateStoreComponent implements OnInit {
     )
   }
 
-
-  onFileSelected(event:any) {
+  onFileSelected(event: any) {
     const file = event.target.files[0];
     const filePath = `${this.firebasePath}/${file.name}`;
     const fileRef = this.storage.ref(filePath);
@@ -99,22 +95,19 @@ export class CreateStoreComponent implements OnInit {
           this.downloadURL.subscribe(url => {
             if (url) {
               this.fireBaseUrl = url;
-              this.toast.success({detail:"Thành công", summary:"Tải ảnh thành công!", duration:3000})
+              this.toast.success({ detail: "Thành công", summary: "Tải ảnh thành công!", duration: 3000 })
             }
             console.log(this.fireBaseUrl);
             this.newStore.image = this.fireBaseUrl;
           });
         })
-      )
-      .subscribe(url => {
-        if (url) {
-          console.log(url);
-        }
+      ).subscribe((snapshot) => {
+        const progress = (snapshot!.bytesTransferred / snapshot!.totalBytes) * 100;
+        console.log(`Upload is ${progress}% done`);
+        this.progress = Math.round(progress);
+        this.cdRef.detectChanges();
       });
   }
-
-
-//=========================================
   ngOnInit(): void {
     this.getAddress();
   }

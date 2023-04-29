@@ -5,11 +5,9 @@ import { UpdateCategoryComponent } from './update-category/update-category.compo
 import { CreateCategoryComponent } from './create-category/create-category.component';
 
 const routes: Routes = [
-  {path:'list', component:CategoriesComponent},
-  {path:'create', component:CreateCategoryComponent},
-  {
-    path:'update/:cid',component:UpdateCategoryComponent,
-  },
+  { path: 'list', component: CategoriesComponent },
+  { path: 'create', component: CreateCategoryComponent },
+  { path: 'update/:cid', component: UpdateCategoryComponent },
 
 ];
 

@@ -1,13 +1,11 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { StoresService } from 'src/app/services/stores.service';
-import { CustomPaginator } from 'src/app/model/paginator-config';
 import { Store } from 'src/app/model/store.model';
 import { NgToastService } from 'ng-angular-popup';
-// import { MatPaginatorIntl } from '@angular/material';
 @Component({
   selector: 'app-stores',
   templateUrl: './stores.component.html',
@@ -19,6 +17,7 @@ export class StoresComponent implements OnInit {
   @ViewChild(MatPaginator) paginator?:MatPaginator;
   @ViewChild(MatSort) sort?:MatSort;
   @Input() name?:any;
+
 
   sId=0;
   listStore?:any;
@@ -33,7 +32,6 @@ export class StoresComponent implements OnInit {
       this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
     }
   }
-// ================== Call Api BackEnd====================
   getStores(): void {
     this.storeService.getStores().subscribe(
       data => {
@@ -68,9 +66,6 @@ export class StoresComponent implements OnInit {
     this.stores.filter = filterValue;
     console.log(filterValue);
   }
-  // getCurrentItem(item:any){
-  //   console.log(item);
-  // }
 
   search(){
     this.getStoresByAddress(this.name);

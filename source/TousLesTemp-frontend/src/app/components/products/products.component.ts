@@ -3,16 +3,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ProductsService } from 'src/app/services/products.service';
 import { Product } from 'src/app/model/product.model';
 import { Store } from 'src/app/model/store.model';
 import { ImageDialogComponent } from './image-dialog/image-dialog.component';
-// import { ImageProcessingService } from 'src/app/services/image-processing.service';
-import { Observable, map } from 'rxjs';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import * as XLSX from 'xlsx';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -23,14 +20,13 @@ export class ProductsComponent {
     private service: ProductsService,
     private route: Router,
     public imageDialog: MatDialog,
-    public deleteDialog: MatDialog,
-    private storage: AngularFireStorage) { }
+    public deleteDialog: MatDialog) { }
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
   @Input() name?: any;
 
-  productNumber?:number;
+  productNumber?: number;
   pId: any;
   listProduct?: any;
   item?: any;
@@ -45,7 +41,6 @@ export class ProductsComponent {
       this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
     }
   }
-
 
   doFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -67,7 +62,6 @@ export class ProductsComponent {
     this.route.navigate(["/home/products/update", pId]);
   }
 
-  // ================== Call Api BackEnd====================
   getProducts(): void {
     this.service.getProducts()
       .subscribe(
@@ -81,20 +75,19 @@ export class ProductsComponent {
       )
   }
 
-
   deleteProduct(pId: number) {
     const dialogRef = this.deleteDialog.open(DeleteDialogComponent, {
       data: {
-            productId: pId
-          }
+        productId: pId
+      }
     });
     dialogRef.afterClosed().subscribe(() => {
       this.getProducts();
     });
   }
 
-  fileName ="Export.xlsx";
-  export():void{
+  fileName = "Export.xlsx";
+  export(): void {
     let element = document.getElementById('productExport');
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
@@ -102,43 +95,41 @@ export class ProductsComponent {
     for (let i in ws) {
       console.log("ewewqe");
 
-      if (typeof(ws[i]) != "object") continue;
+      if (typeof (ws[i]) != "object") continue;
 
       let cell = XLSX.utils.decode_cell(i);
 
-      ws[i].style = { // styling for all cells
-          font: {
-              name: "arial"
+      ws[i].style = {
+        font: {
+          name: "arial"
+        },
+        alignment: {
+          vertical: "center",
+          horizontal: "center",
+          wrapText: '1',
+        },
+        border: {
+          right: {
+            style: "thin",
+            color: "000000"
           },
-          alignment: {
-              vertical: "center",
-              horizontal: "center",
-              wrapText: '1',
+          left: {
+            style: "thin",
+            color: "000000"
           },
-          border: {
-              right: {
-                  style: "thin",
-                  color: "000000"
-              },
-              left: {
-                  style: "thin",
-                  color: "000000"
-              },
-          }
+        }
       };
 
-
-
-      if (cell.r % 2) { // every other row
-          ws[i].style.fill = { // background color
-              patternType: "solid",
-              fgColor: { rgb: "b2b2b2" },
-              bgColor: { rgb: "b2b2b2" }
-          };
+      if (cell.r % 2) {
+        ws[i].style.fill = {
+          patternType: "solid",
+          fgColor: { rgb: "b2b2b2" },
+          bgColor: { rgb: "b2b2b2" }
+        };
       }
-      XLSX.utils.book_append_sheet(wb,ws,'Sheet1');
-      XLSX.writeFile(wb,this.fileName);
-  }
+      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+      XLSX.writeFile(wb, this.fileName);
+    }
   }
 
   ngOnInit(): void {

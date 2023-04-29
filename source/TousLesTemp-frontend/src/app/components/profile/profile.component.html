@@ -1,31 +1,51 @@
-<div class="container" *ngIf="currentUser; else loggedOut">
-	<div>
-		<h6 class="text-muted py-5">
-			<strong>{{ currentUser.displayName }}</strong> Profile
-		</h6>
-	</div>
-	<p>
-		<strong>Email:</strong> {{ currentUser.email }}
-	</p>
-	<strong>Roles:</strong>
-	<ul>
-		<li *ngFor="let role of currentUser.roles">{{ role }}</li>
-	</ul>
-</div>
-<ng-template #loggedOut> Please login. </ng-template>
-
-<div class="example-header">
-  <button mat-icon-button >
-    <mat-icon>keyboard_double_arrow_left</mat-icon>
-  </button>
-  <button mat-icon-button >
-    <mat-icon>keyboard_arrow_left</mat-icon>
-  </button>
-  <span class="example-header-label"></span>
-  <button mat-icon-button>
-    <mat-icon>keyboard_arrow_right</mat-icon>
-  </button>
-  <button mat-icon-button >
-    <mat-icon>keyboard_double_arrow_right</mat-icon>
-  </button>
-</div>
+<section class="vh-100" style="background-color: #f4f5f7">
+  <div class="container" *ngIf="currentUser; else loggedOut">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-lg-6 mb-4 mb-lg-0">
+          <div class="card mb-3" style="border-radius: 0.5rem">
+            <div class="row g-0">
+              <div
+                class="col-md-4 gradient-custom text-center"
+                style="
+                  border-top-left-radius: 0.5rem;
+                  border-bottom-left-radius: 0.5rem;
+                "
+              >
+                <img
+                  src="../../../assets/admin3.png"
+                  alt="Avatar"
+                  class="img-fluid my-5"
+                  style="width: 80px"
+                />
+                <h5>{{ currentUser.displayName }}</h5>
+              
+              </div>
+              <div class="col-md-8">
+                <div class="card-body p-4">
+                  <h6>Thông tin quản trị viên</h6>
+                  <hr class="mt-0 mb-4" />
+                  <div class="row pt-1">
+                    <div class="col-6 mb-3">
+                      <h6>Email</h6>
+                      <p class="text-muted">{{ currentUser.email }}</p>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <h6>Phân quyền</h6>
+                      <ul>
+                        <li *ngFor="let role of currentUser.roles">
+                          {{ role }}
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #loggedOut> Please login. </ng-template>
+</section>

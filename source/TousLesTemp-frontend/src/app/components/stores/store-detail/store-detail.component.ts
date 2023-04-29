@@ -81,6 +81,5 @@ export class StoreDetailComponent implements OnInit {
     this.getStoreById(this.sId);
     this.getProductByStoreId(this.sId);
   }
-
 }
 

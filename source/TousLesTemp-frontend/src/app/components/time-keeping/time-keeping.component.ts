@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
 import { NgToastService } from 'ng-angular-popup';
 import { Store } from 'src/app/model/store.model';
-import { StaffService } from 'src/app/services/staff.service';
 import { TimeKeepingService } from 'src/app/services/time-keeping.service';
 import { environment } from 'src/environment/environment.prod';
 
@@ -17,8 +16,10 @@ import { environment } from 'src/environment/environment.prod';
   styleUrls: ['./time-keeping.component.scss']
 })
 export class TimeKeepingComponent implements OnInit {
-  constructor(private timeKeepingService: TimeKeepingService, private route: Router,
-    private toast: NgToastService, private http: HttpClient, private staffService: StaffService) { }
+  constructor(private timeKeepingService: TimeKeepingService, 
+    private route: Router,
+    private toast: NgToastService, 
+    private http: HttpClient) { }
 
   @ViewChild('myCanvas') canvas!: ElementRef<HTMLCanvasElement>;
   chart!: Chart;
@@ -57,7 +58,6 @@ export class TimeKeepingComponent implements OnInit {
         .map((str) => +str);
     }
   }
-  // ================== Call Api BackEnd====================
   getTimeKeeping(): void {
     this.timeKeepingService.getTimeKeeping().subscribe((data) => {
       this.timekeeping = data

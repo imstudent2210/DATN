@@ -12,7 +12,8 @@ import { NgToastService } from 'ng-angular-popup';
   styleUrls: ['./create-category.component.scss']
 })
 export class CreateCategoryComponent implements OnInit {
-  constructor(private categoriesService: CategoriesService, private route: Router,
+  constructor(private categoriesService: CategoriesService,
+    private route: Router,
     private toast: NgToastService) { }
 
   cId = 0;
@@ -31,7 +32,6 @@ export class CreateCategoryComponent implements OnInit {
       .subscribe(
         (data) => {
           console.log(data);
-          // this.newCategory  = data
           this.toast.success({ detail: "Thông báo thành công", summary: " Đã tạo mới!", duration: 3000 })
           this.route.navigate(['home/categories/list']);
         },
@@ -41,7 +41,5 @@ export class CreateCategoryComponent implements OnInit {
         }
       )
   }
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 }

@@ -1,15 +1,11 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
-import { ProductsService } from 'src/app/services/products.service';
 import { StaffService } from 'src/app/services/staff.service';
-import { Staff } from 'src/app/model/staff.model';
 import { ImageDialogComponent } from '../products/image-dialog/image-dialog.component';
 import { MatTableDataSource } from '@angular/material/table';
-import { map } from 'rxjs';
 import { Product } from 'src/app/model/product.model';
 import { Store } from 'src/app/model/store.model';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
@@ -75,6 +71,16 @@ export class StaffComponent implements OnInit {
           this.staffNumber = data.length;
         }
       )
+  }
+  showImages(product: Product) {
+    console.log(product);
+    this.imageDialog.open(ImageDialogComponent, {
+      data: {
+        image: product.image
+      },
+      height: '310px',
+      width: '500px'
+    })
   }
   ngOnInit(): void {
     this.getStaff();

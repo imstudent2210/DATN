@@ -5,7 +5,6 @@
         <mat-card-header>
           <mat-card-title>{{currentStore?.name}}</mat-card-title>
           <mat-card-subtitle>{{currentStore?.email}}</mat-card-subtitle>
-
         </mat-card-header>
         <img class="image" src="{{currentStore?.image}}">
         <mat-card-actions>
@@ -14,7 +13,6 @@
       </mat-card>
     </div>
   </div>
-
   <div class="row">
     <div class="col-md-3" *ngFor="let product of listProductByStoreId">
       <mat-card class="my-2 px-2">
@@ -37,7 +35,6 @@
           <p>
             <strong>Đơn giá: </strong> {{ product.price | currency: " VND " | uppercase }}
           </p>
-
         </mat-card-content>
         <mat-card-actions class="group-button-detail">
           <button mat-raised-button class="button-submit me-auto" (click)="editProduct(product.id)"><mat-icon>edit</mat-icon>Cập nhập</button>

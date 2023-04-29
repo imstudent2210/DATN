@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { Observable, finalize } from 'rxjs';
@@ -18,11 +17,15 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
   styleUrls: ['./update-product.component.scss']
 })
 export class UpdateProductComponent {
-  constructor(private category: CategoriesService, private store: StoresService, private sizeService: SizeService,
-    private productService: ProductsService, private toast: NgToastService, private sanitizer: DomSanitizer,
-    private route: Router, private activatedRoute: ActivatedRoute, private storage: AngularFireStorage) { }
+  constructor(private category: CategoriesService,
+    private store: StoresService,
+    private sizeService: SizeService,
+    private productService: ProductsService,
+    private toast: NgToastService,
+    private route: Router,
+    private activatedRoute: ActivatedRoute,
+    private storage: AngularFireStorage) { }
 
-  // Validators
   matcher = new MyErrorStateMatcher();
   namef = new FormControl('', [Validators.required]);
   inventoryf = new FormControl('', [Validators.required]);
@@ -30,6 +33,8 @@ export class UpdateProductComponent {
   categoriesf = new FormControl('', Validators.required);
 
   pId = 0;
+  progress?: number;
+  cdRef: any;
 
   currentProduct: Product = {
     name: "",
@@ -47,7 +52,6 @@ export class UpdateProductComponent {
   fireBaseUrl?: string;
   downloadURL?: Observable<string>;
 
-  // =========== Call api===========
   categories: any;
   getCategories(): void {
     this.category.getCategories().subscribe(
@@ -82,26 +86,23 @@ export class UpdateProductComponent {
       .pipe(
         finalize(() => {
           this.downloadURL = fileRef.getDownloadURL();
-          // console.log(this.newStaff.image);
           this.downloadURL.subscribe(url => {
             if (url) {
               this.fireBaseUrl = url;
               this.toast.success({ detail: "Thành công", summary: "Tải ảnh thành công!", duration: 3000 })
 
             }
-            // console.log(this.fireBaseUrl);
             this.currentProduct.image = this.fireBaseUrl;
           });
         })
       )
-      .subscribe(url => {
-        if (url) {
-          console.log(url);
-        }
+      .subscribe((snapshot) => {
+        const progress = (snapshot!.bytesTransferred / snapshot!.totalBytes) * 100;
+        console.log(`Upload is ${progress}% done`);
+        this.progress = Math.round(progress);
+        this.cdRef.detectChanges();
       });
   }
-
-  // upate new product
   updateProduct() {
     if (this.currentProduct.name == '' || this.currentProduct.name == null || this.currentProduct.inventory == 0
       || this.currentProduct.inventory == null || this.currentProduct.price == 0 || this.currentProduct.price == null) {
@@ -122,7 +123,6 @@ export class UpdateProductComponent {
       )
   }
 
-  // currentProduct:any;
   getCurrentProduct(id: number): void {
     this.productService.getProductById(id)
       .subscribe(
@@ -132,7 +132,6 @@ export class UpdateProductComponent {
       )
   }
 
-  //=====================================
   ngOnInit(): void {
     this.getCategories();
     this.getStores();

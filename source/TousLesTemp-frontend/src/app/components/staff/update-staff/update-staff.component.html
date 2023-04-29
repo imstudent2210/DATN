@@ -1,17 +1,23 @@
-<div class="container ">
+<div class="container">
   <mat-card>
     <mat-card-header>
       <p class="title-page">Cập nhật thông tin nhân viên mới</p>
     </mat-card-header>
-    <form class="example-form my-3 mx-3"  (ngSubmit)="updateStaff()">
+    <form class="example-form my-3 mx-3" (ngSubmit)="updateStaff()">
       <div class="row">
         <div class="col-md-8">
           <div class="row">
             <div class="col-md-12">
               <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Tên nhân viên</mat-label>
-                <input type="text" matInput [formControl]="namef" [errorStateMatcher]="matcher"
-                  [(ngModel)]="currentStaff.name" name="name">
+                <input
+                  type="text"
+                  matInput
+                  [formControl]="namef"
+                  [errorStateMatcher]="matcher"
+                  [(ngModel)]="currentStaff.name"
+                  name="name"
+                />
                 <mat-error *ngIf="namef.hasError('required')">
                   Vui lòng nhập tên nhân viên
                 </mat-error>
@@ -22,8 +28,14 @@
             <div class="col-md-6">
               <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Email</mat-label>
-                <input type="email" matInput [(ngModel)]="currentStaff.email" name="email"
-                  [formControl]="emailf" [errorStateMatcher]="matcher">
+                <input
+                  type="email"
+                  matInput
+                  [(ngModel)]="currentStaff.email"
+                  name="email"
+                  [formControl]="emailf"
+                  [errorStateMatcher]="matcher"
+                />
                 <mat-error *ngIf="emailf.hasError('required')">
                   Vui lòng nhập email
                 </mat-error>
@@ -32,10 +44,18 @@
             <div class="col-md-6">
               <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Nhóm nhân viên</mat-label>
-                <mat-select required [(ngModel)]="currentStaff.staffGroup.id" name="staffGroup">
-                  <mat-option *ngFor="let item of staffGroups" [value]="item.id"> {{item.name}}</mat-option>
+                <mat-select
+                  required
+                  [(ngModel)]="currentStaff.staffGroup.id"
+                  name="staffGroup"
+                >
+                  <mat-option
+                    *ngFor="let item of staffGroups"
+                    [value]="item.id"
+                  >
+                    {{ item.name }}</mat-option
+                  >
                 </mat-select>
-
               </mat-form-field>
             </div>
           </div>
@@ -43,37 +63,73 @@
             <div class="col-md-6">
               <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Điện thoại</mat-label>
-                <input type="number"  matInput [(ngModel)]="currentStaff.phone" name="phone"
-                  [formControl]="phonef" [errorStateMatcher]="matcher">
+                <input
+                  type="number"
+                  matInput
+                  [(ngModel)]="currentStaff.phone"
+                  name="phone"
+                  [formControl]="phonef"
+                  [errorStateMatcher]="matcher"
+                />
                 <mat-error *ngIf="phonef.hasError('required')">
                   Vui lòng nhập điện thoại
                 </mat-error>
               </mat-form-field>
             </div>
           </div>
-          <mat-form-field appearance="outline" class="full-width" appearance="outline">
+          <mat-form-field
+            appearance="outline"
+            class="full-width"
+            appearance="outline"
+          >
             <mat-label>Cửa hàng</mat-label>
             <mat-select [(ngModel)]="currentStaff.store.id" name="store">
-              <mat-option *ngFor="let item of stores" [value]="item.id">{{item.name}}</mat-option>
+              <mat-option *ngFor="let item of stores" [value]="item.id">{{
+                item.name
+              }}</mat-option>
             </mat-select>
           </mat-form-field>
-
         </div>
         <div class="col-md-4 overflow-auto">
-          <input type="file"
-            style="color:var(--yellow); font-size: 15px;font-weight: 700;font-family: 'Roboto', sans-serif; margin-bottom: 10px;" multiple
-            value="select" (change)="onFileSelected($event)">
-          <img [src]="currentStaff.image" width="350px" height="280px" name="image">
-          <mat-progress-bar mode="determinate" style="width:350px"  [value]="progress"></mat-progress-bar>
-
+          <input
+            type="file"
+            style="
+              color: var(--yellow);
+              font-size: 15px;
+              font-weight: 700;
+              font-family: 'Roboto', sans-serif;
+              margin-bottom: 10px;
+            "
+            multiple
+            value="select"
+            (change)="onFileSelected($event)"
+          />
+          <img
+            [src]="currentStaff.image"
+            width="350px"
+            height="280px"
+            name="image"
+          />
+          <mat-progress-bar
+            mode="determinate"
+            style="width: 350px"
+            [value]="progress"
+          ></mat-progress-bar>
         </div>
       </div>
       <div class="group-button">
-        <button mat-raised-button class="mt-2 mx-2" [routerLink]="'../../../staff/list'"type="button"><mat-icon>keyboard_backspace</mat-icon>Trở về</button>
-        <button mat-raised-button class="button-submit mt-2 mx-2"><mat-icon>edit</mat-icon>Cập nhật</button>
+        <button
+          mat-raised-button
+          class="mt-2 mx-2"
+          [routerLink]="'../../../staff/list'"
+          type="button"
+        >
+          <mat-icon>keyboard_backspace</mat-icon>Trở về
+        </button>
+        <button mat-raised-button class="button-submit mt-2 mx-2">
+          <mat-icon>edit</mat-icon>Cập nhật
+        </button>
       </div>
     </form>
   </mat-card>
 </div>
-
-

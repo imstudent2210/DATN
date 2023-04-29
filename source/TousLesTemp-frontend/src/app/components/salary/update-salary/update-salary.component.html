@@ -1,25 +1,37 @@
-<div class="container ">
+<div class="container">
   <mat-card>
     <mat-card-header>
-      <p class="title-page">Cập nhật mức lương </p>
+      <p class="title-page">Cập nhật mức lương</p>
     </mat-card-header>
     <form class="example-form my-3 mx-3" (ngSubmit)="updateSalary()">
       <div class="row">
-        <div class="col-md-12 ">
+        <div class="col-md-12">
           <div class="row">
             <div class="col-md-6 mx-auto">
               <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Tên mức lương</mat-label>
-                <input type="text" matInput [formControl]="namef" [errorStateMatcher]="matcher"
-                  [(ngModel)]="currentSalary.name" name="name">
+                <input
+                  type="text"
+                  matInput
+                  [formControl]="namef"
+                  [errorStateMatcher]="matcher"
+                  [(ngModel)]="currentSalary.name"
+                  name="name"
+                />
                 <mat-error *ngIf="namef.hasError('required')">
                   Vui lòng nhập tên mức lương
                 </mat-error>
               </mat-form-field>
               <mat-form-field class="full-width" appearance="outline">
                 <mat-label>Đơn giá lương trên giờ</mat-label>
-                <input type="number" matInput [formControl]="salaryf" [errorStateMatcher]="matcher"
-                  [(ngModel)]="currentSalary.basicSalary" name="basicSalary">
+                <input
+                  type="number"
+                  matInput
+                  [formControl]="salaryf"
+                  [errorStateMatcher]="matcher"
+                  [(ngModel)]="currentSalary.basicSalary"
+                  name="basicSalary"
+                />
                 <mat-error *ngIf="namef.hasError('required')">
                   Vui lòng nhập mức lương cơ bản
                 </mat-error>
@@ -28,22 +40,25 @@
                 <span class="slide-toggle">Còn hàng ?</span>
               </mat-slide-toggle> -->
             </div>
-
           </div>
           <div class="row">
-            <div class="col-md-6">
-            </div>
+            <div class="col-md-6"></div>
             <div class="group-button">
-                <button mat-raised-button class="mt-2 mx-2" [routerLink]="'../../../salary/list'" type="button"><mat-icon>keyboard_backspace</mat-icon>Trở về</button>
-                <button mat-raised-button class="button-submit mt-2 mx-2"><mat-icon>save</mat-icon>Lưu</button>
-
+              <button
+                mat-raised-button
+                class="mt-2 mx-2"
+                [routerLink]="'../../../salary/list'"
+                type="button"
+              >
+                <mat-icon>keyboard_backspace</mat-icon>Trở về
+              </button>
+              <button mat-raised-button class="button-submit mt-2 mx-2">
+                <mat-icon>save</mat-icon>Lưu
+              </button>
             </div>
-
           </div>
         </div>
       </div>
     </form>
   </mat-card>
 </div>
-
-

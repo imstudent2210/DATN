@@ -47,8 +47,6 @@ import { CreateCategoryComponent } from './create-category/create-category.compo
     MatGridListModule,
     MatSelectModule,
     MatSlideToggleModule,
-
-
   ], providers:[
     { provide: MatPaginatorIntl, useValue: CustomPaginator() }
   ],

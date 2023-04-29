@@ -23,7 +23,6 @@
     <div class="col-md-8">
       <div class="row">
         <div class="col-md-12 mat-header-sticky ">
-          <!-- <h3>Thông tin ca làm việc</h3> -->
           <table mat-table matSort [dataSource]="list" class="mat-elevation-z8 table-tlt">
             <ng-container matColumnDef="id">
               <th mat-header-cell *matHeaderCellDef disableClear>Mã</th>
@@ -65,7 +64,6 @@
           <mat-paginator class="mat-paginator-sticky"[pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
             [showFirstLastButtons]="showFirstLastButtons">
           </mat-paginator>
-          <!-- <button type="button" (click)="getMonthSalary(23,1)"><mat-icon>keyboard_backspace</mat-icon>Trở về</button> -->
         </div>
       </div>
     </div>

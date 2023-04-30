@@ -1,46 +1,73 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <h1 class="text">{{ currentStore?.name }}</h1>
       <mat-card class="example-card">
         <mat-card-header>
-          <mat-card-title>{{currentStore?.name}}</mat-card-title>
-          <mat-card-subtitle>{{currentStore?.email}}</mat-card-subtitle>
+          <mat-card-title>{{ currentStore?.name }}</mat-card-title>
+          <mat-card-subtitle>{{ currentStore?.email }}</mat-card-subtitle>
         </mat-card-header>
-        <img class="image" src="{{currentStore?.image}}">
+        <img class="image" src="{{ currentStore?.image }}" />
         <mat-card-actions>
-          <button mat-raised-button class="mx-2" (click)="editStore(currentStore?.id)"><mat-icon>edit</mat-icon>Cập nhập</button>
+          <button
+            mat-raised-button
+            class="mx-2"
+            (click)="editStore(currentStore?.id)"
+          >
+            <mat-icon>edit</mat-icon>Cập nhập
+          </button>
         </mat-card-actions>
       </mat-card>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-3" *ngFor="let product of listProductByStoreId">
-      <mat-card class="my-2 px-2">
-        <mat-card-header>
-          <div mat-card-avatar><img class="a" src="../../../../assets/logo.jpg" alt=""></div>
-          <mat-card-title class="title">{{product.name}}</mat-card-title>
-          <mat-card-subtitle>{{product.category.name}}</mat-card-subtitle>
-        </mat-card-header>
-        <img class="image" mat-card-image src="{{product.image}}" alt="...">
-        <mat-card-content>
-          <p>
-            <mat-chip-listbox aria-label="Size">
-              <mat-chip-option selected>{{product.size.size}}
-              </mat-chip-option>
-            </mat-chip-listbox>
-          </p>
-          <p>
-            <strong>Số lượng: </strong> {{product.inventory}}
-          </p>
-          <p>
-            <strong>Đơn giá: </strong> {{ product.price | currency: " VND " | uppercase }}
-          </p>
-        </mat-card-content>
-        <mat-card-actions class="group-button-detail">
-          <button mat-raised-button class="button-submit me-auto" (click)="editProduct(product.id)"><mat-icon>edit</mat-icon>Cập nhập</button>
-          <button mat-raised-button class="ms-auto"><mat-icon>open_in_new</mat-icon>Chi tiết</button>
-        </mat-card-actions>
-      </mat-card>
+        </div>
+      </div>
+      <div class="row">
+        <h1 class="list-product-title">Tấc cả sản phẩm</h1>
+        <div class="col-md-3" *ngFor="let product of listProductByStoreId">
+          <mat-card class="my-2 px-2">
+            <mat-card-header>
+              <div mat-card-avatar>
+                <img class="a" src="../../../../assets/logo.jpg" alt="" />
+              </div>
+              <mat-card-title class="title">{{ product.name }}</mat-card-title>
+              <mat-card-subtitle>{{ product.category.name }}</mat-card-subtitle>
+            </mat-card-header>
+            <img
+              class="image"
+              mat-card-image
+              src="{{ product.image }}"
+              alt="..."
+            />
+            <mat-card-content>
+              <p>
+                <mat-chip-listbox aria-label="Size">
+                  <mat-chip-option selected
+                    >{{ product.size.size }}
+                  </mat-chip-option>
+                </mat-chip-listbox>
+              </p>
+              <p><strong>Số lượng: </strong> {{ product.inventory }}</p>
+              <p>
+                <strong>Đơn giá: </strong>
+                {{ product.price | currency : " VND " | uppercase }}
+              </p>
+            </mat-card-content>
+            <mat-card-actions class="group-button-detail">
+              <button
+                mat-raised-button
+                class="button-submit me-auto"
+                (click)="editProduct(product.id)"
+              >
+                <mat-icon>edit</mat-icon>Cập nhập
+              </button>
+              <button mat-raised-button class="ms-auto">
+                <mat-icon>open_in_new</mat-icon>Chi tiết
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
     </div>
   </div>
 </div>

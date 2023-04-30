@@ -10,6 +10,14 @@ import { Store } from 'src/app/model/store.model';
 import { ImageDialogComponent } from './image-dialog/image-dialog.component';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import * as XLSX from 'xlsx';
+import { FormGroup, FormControl } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { environment } from 'src/environment/environment.prod';
+import { CategoriesService } from 'src/app/services/categories.service';
+import { SizeService } from 'src/app/services/size.service';
+import { StoresService } from 'src/app/services/stores.service';
+import { NgToastService } from 'ng-angular-popup';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -18,14 +26,30 @@ import * as XLSX from 'xlsx';
 export class ProductsComponent {
   constructor(
     private service: ProductsService,
+    private category: CategoriesService,
+    private store: StoresService,
+    private sizeService: SizeService,
     private route: Router,
     public imageDialog: MatDialog,
-    public deleteDialog: MatDialog) { }
+    public deleteDialog: MatDialog,
+    private http: HttpClient,
+    private toast: NgToastService) { }
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
   @Input() name?: any;
 
+  filterForm = new FormGroup({
+    name: new FormControl(),
+    price: new FormControl(),
+    inventory: new FormControl(),
+    category: new FormControl(),
+    store: new FormControl(),
+    size: new FormControl()
+  });
+
+  filterResult: any[] = [];
+  filterResultLength?:any;
   productNumber?: number;
   pId: any;
   listProduct?: any;
@@ -86,6 +110,74 @@ export class ProductsComponent {
     });
   }
 
+  filter(): void {
+    let search = '';
+    const name = this.filterForm.get('name')?.value;
+    if (name) {
+      search += `name=="*${name}*";`;
+    }
+    const price = this.filterForm.get('price')?.value;
+    if (price) {
+      search += `price${price};`;
+    }
+    const inventory = this.filterForm.get('inventory')?.value;
+    if (inventory) {
+      search += `inventory${inventory};`;
+    }
+    const category = this.filterForm.get('category')?.value;
+    if (category) {
+      search += `category==${category};`;
+    }
+    const store = this.filterForm.get('store')?.value;
+    if (store) {
+      search += `store==${store};`;
+    }
+
+    if (search) {
+      search = search.slice(0, -1); // Remove trailing semicolon
+      const url = `${environment.API_BASE_URL}/rsql/product?search=${search}`;
+      this.http.get<any[]>(url)
+        .subscribe( data => {
+          console.log(url);
+          this.listProduct = data;
+          this.filterResultLength = this.listProduct.length;
+          if(this.listProduct.length==0){
+
+            this.toast.success({ detail: "Thông báo", summary: "Không có dữ liệu!", duration: 3000 })
+          }
+          this.products = new MatTableDataSource<Store>(this.listProduct);
+          this.products.sort = this.sort;
+          this.products.paginator = this.paginator;
+          this.productNumber = data.length;
+        });
+    }
+  }
+  categories?: any;
+  getCategories(): void {
+    this.category.getCategories().subscribe(
+      data => {
+        this.categories = data
+      }
+    )
+  }
+
+  stores?: any;
+  getStores(): void {
+    this.store.getStores().subscribe(
+      data => {
+        this.stores = data;
+      }
+    )
+  }
+  sizes?: any;
+  getSize(): void {
+    this.sizeService.getSize().subscribe(
+      data => {
+        this.sizes = data;
+      }
+    )
+  }
+
   fileName = "Export.xlsx";
   export(): void {
     let element = document.getElementById('productExport');
@@ -134,5 +226,9 @@ export class ProductsComponent {
 
   ngOnInit(): void {
     this.getProducts();
+    // this.filter();
+    this.getCategories();
+    this.getSize();
+    this.getStores()
   }
 }

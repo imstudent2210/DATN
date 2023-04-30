@@ -28,7 +28,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class CreateProductComponent implements OnInit {
   constructor(
-    private category: CategoriesService, private store: StoresService,
+    private category: CategoriesService,
+    private store: StoresService,
     private sizeService: SizeService,
     private productService: ProductsService,
     private toast: NgToastService,

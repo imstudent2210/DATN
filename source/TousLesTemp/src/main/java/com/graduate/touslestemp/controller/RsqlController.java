@@ -1,6 +1,12 @@
 package com.graduate.touslestemp.controller;
 
+import com.graduate.touslestemp.domain.dto.ProductDTO;
+import com.graduate.touslestemp.domain.dto.StoreDTO;
+import com.graduate.touslestemp.domain.entity.Product;
 import com.graduate.touslestemp.domain.entity.Store;
+import com.graduate.touslestemp.domain.mapper.ProductMapper;
+import com.graduate.touslestemp.domain.mapper.StoreMapper;
+import com.graduate.touslestemp.domain.repository.ProductRepository;
 import com.graduate.touslestemp.domain.repository.StoreRepository;
 import com.graduate.touslestemp.rsql.CustomRsqlVisitor;
 import cz.jirutka.rsql.parser.RSQLParser;
@@ -19,11 +25,25 @@ import java.util.List;
 public class RsqlController {
     @Autowired
     private StoreRepository storeRepository;
+    @Autowired
+    private ProductRepository productRepository;
+
+    @Autowired
+    private StoreMapper storeMapper;
+    @Autowired
+    private ProductMapper productMapper;
 
     @GetMapping("/store")
-    public List<Store> findAllByRsql(@RequestParam(value = "search") String search) {
+    public List<StoreDTO> findStoreByRsql(@RequestParam(value = "search") String search) {
         Node rootNode = new RSQLParser().parse(search);
         Specification<Store> spec = rootNode.accept(new CustomRsqlVisitor<>());
-        return storeRepository.findAll(spec);
+        return storeMapper.toStoreDTOs(storeRepository.findAll(spec));
+    }
+
+    @GetMapping("/product")
+    public List<ProductDTO> findProductByRsql(@RequestParam(value = "search") String search) {
+        Node rootNode = new RSQLParser().parse(search);
+        Specification<Product> spec = rootNode.accept(new CustomRsqlVisitor<>());
+        return productMapper.toProductDTOs(productRepository.findAll(spec));
     }
 }

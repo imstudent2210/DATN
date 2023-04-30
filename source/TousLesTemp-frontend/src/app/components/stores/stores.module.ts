@@ -9,7 +9,7 @@ import { MatTableModule } from '@angular/material/table';
 import { AppComponent } from 'src/app/app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomPaginator } from 'src/app/model/paginator-config';
-import { MatInput, MatInputModule } from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';

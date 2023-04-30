@@ -63,14 +63,15 @@ export class CreateTimeKeepingComponent implements OnInit {
   { id: 10, name: 'Tháng Mười' },
   { id: 11, name: 'Tháng Mười Một' },
   { id: 12, name: 'Tháng Mười Hai' },]
+
   staff?: any;
-  getStaff(): void {
-    this.staffService.getStaff().subscribe(
-      data => {
-        this.staff = data
-      }
-    )
-  }
+  // getStaff(): void {
+  //   this.staffService.getStaff().subscribe(
+  //     data => {
+  //       this.staff = data
+  //     }
+  //   )
+  // }
 
   storesId?: any;
   salaryList?: any;
@@ -99,7 +100,7 @@ export class CreateTimeKeepingComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getSalary();
-    this.getStaff();
+    // this.getStaff();
     this.getStores();
 
   }

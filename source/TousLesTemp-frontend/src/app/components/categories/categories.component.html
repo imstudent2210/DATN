@@ -8,7 +8,7 @@
   <div></div>
 
   <div class="row">
-    <div class="col-md-10 mx-auto">
+    <div class="col-md-8 mx-auto mat-header-sticky">
       <div class="effect my-2">
         <input
           class="effect-2"
@@ -28,9 +28,6 @@
         <mat-icon>library_add</mat-icon>Thêm mới
       </button>
 
-      <!-- <button class="btn-1 ms-auto my-2"  (click)="export()">
-        <i class="fa-solid fa-file-excel btn-1-icon"></i><span class="btn-1-text">Xuất Excel</span>
-      </button> -->
       <table
         mat-table
         matSort
@@ -70,10 +67,11 @@
           </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-header-row *matHeaderRowDef="columns;sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: columns"></tr>
       </table>
       <mat-paginator
+      class="mat-paginator-sticky"
         [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
         [showFirstLastButtons]="showFirstLastButtons"
       >

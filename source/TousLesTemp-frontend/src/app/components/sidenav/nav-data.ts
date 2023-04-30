@@ -66,11 +66,7 @@ export const navbarData: INavbarData[] = [
 
     ],
   },
-  {
-    routeLink: 'profile',
-    icon: 'fad fa-address-card',
-    label: 'Tài khoản',
-  },
+
   {
     routeLink: 'salary',
     icon: 'fa-solid fa-sack-dollar',
@@ -102,20 +98,25 @@ export const navbarData: INavbarData[] = [
 
     ],
   },
-  // {
-  //   routeLink: 'address',
-  //   icon: 'fad fa-map-marker-alt',
-  //   label: 'Địa chỉ',
-  //   items: [
-  //     {
-  //       routeLink: 'address/map',
-  //       label: 'Tấc cả chi nhánh',
-  //     },
-  //     {
-  //       routeLink: 'address/create',
-  //       label: 'Thêm chi nhánh mới',
-  //     },
-  //   ],
-  // },
+  {
+    routeLink: 'address',
+    icon: 'fad fa-map-marker-alt',
+    label: 'Địa chỉ',
+    items: [
+      {
+        routeLink: 'address/map',
+        label: 'Tấc cả chi nhánh',
+      },
+      {
+        routeLink: 'address/create',
+        label: 'Thêm chi nhánh mới',
+      },
+    ],
+  },
+  {
+    routeLink: 'profile',
+    icon: 'fad fa-address-card',
+    label: 'Tài khoản',
+  },
 ];
 

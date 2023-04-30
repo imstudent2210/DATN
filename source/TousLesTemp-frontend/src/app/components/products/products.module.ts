@@ -25,6 +25,7 @@ import { ImageDialogComponent } from './image-dialog/image-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+// import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({

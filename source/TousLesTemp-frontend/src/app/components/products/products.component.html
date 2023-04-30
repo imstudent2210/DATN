@@ -8,8 +8,8 @@
   </div>
 
   <div class="row">
-    <div class="col-md-6">
-      <div class="effect my-2">
+    <div class="col-md-4">
+      <div class="effect my-2 ms-auto">
         <input
           class="effect-2"
           (keyup)="doFilter($event)"
@@ -21,25 +21,28 @@
         <span class="focus-border"></span>
       </div>
     </div>
-    <div class="col-md-6 d-flex">
-      <!-- <button class="btn-1 my-2" style="margin-left: 320px;" (click)="export()">
-        <i class="fa-solid fa-file-excel btn-1-icon"></i><span class="btn-1-text">Xuất Excel</span>
-      </button> -->
-      <!-- <button class="btn-1 ms-auto my-2" [routerLink]="'../create'">
-        <i class="fa fa-plus btn-1-icon"></i><span class="btn-1-text">Thêm mới</span>
-      </button> -->
+    <div class="col-md-5 d-flex justify-content-end">
+      <button mat-raised-button (click)="getProducts()" class="mt-2">
+        <mat-icon>list</mat-icon> Tấc cả sản phẩm
+      </button>
+    </div>
+    <div class="col-md-3 mb-2">
       <button
         mat-raised-button
-        class="button-submit mt-2 ms-auto"
+        class="button-submit mt-2"
         [routerLink]="'../create'"
       >
         <mat-icon>library_add</mat-icon>Thêm mới
+      </button>
+
+      <button mat-raised-button class="mt-2" (click)="filter()">
+        <mat-icon>send</mat-icon> Tìm kiếm
       </button>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-12 mat-header-sticky">
+    <div class="col-md-9 mat-header-sticky">
       <table
         mat-table
         matSort
@@ -122,6 +125,52 @@
       >
       </mat-paginator>
       <mat-divider></mat-divider>
+    </div>
+    <div class="col-md-3">
+      <mat-card class="filter-box">
+        <form [formGroup]="filterForm">
+          <mat-form-field appearance="outline" class="filter-box-field">
+            <mat-label>Tên sản phẩm</mat-label>
+            <input type="text" matInput formControlName="name" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="filter-box-field">
+            <mat-label>Đơn giá</mat-label>
+            <mat-select formControlName="price">
+              <mat-option value="&lt;20000">Nhỏ hơn 20000</mat-option>
+              <mat-option value="&gt;20000">Lớn hơn 20000</mat-option>
+              <mat-option value="&gt;20000;price&lt;35000"
+                >Từ 20000 đến 35000</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="filter-box-field">
+            <mat-label>Số lượng</mat-label>
+            <mat-select formControlName="inventory">
+              <mat-option value="&lt;10">Nhỏ hơn 10</mat-option>
+              <mat-option value="&gt;50;inventory&lt;80"
+                >Từ 50 đến 80</mat-option
+              >
+              <mat-option value="&gt;80">Lớn hơn 80</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="filter-box-field">
+            <mat-label>Loại sản phẩm</mat-label>
+            <mat-select formControlName="category">
+              <mat-option *ngFor="let item of categories" [value]="item.id">
+                {{ item.name }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="filter-box-field">
+            <mat-label>Cửa hàng</mat-label>
+            <mat-select formControlName="store">
+              <mat-option *ngFor="let item of stores" [value]="item.id">
+                {{ item.name }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </form>
+      </mat-card>
     </div>
   </div>
 </div>

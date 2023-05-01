@@ -136,6 +136,7 @@
           <mat-form-field appearance="outline" class="filter-box-field">
             <mat-label>Đơn giá</mat-label>
             <mat-select formControlName="price">
+              <mat-option value="">-- Tấc cả --</mat-option>
               <mat-option value="&lt;20000">Nhỏ hơn 20000</mat-option>
               <mat-option value="&gt;20000">Lớn hơn 20000</mat-option>
               <mat-option value="&gt;20000;price&lt;35000"
@@ -146,6 +147,7 @@
           <mat-form-field appearance="outline" class="filter-box-field">
             <mat-label>Số lượng</mat-label>
             <mat-select formControlName="inventory">
+              <mat-option value="">-- Tấc cả --</mat-option>
               <mat-option value="&lt;10">Nhỏ hơn 10</mat-option>
               <mat-option value="&gt;50;inventory&lt;80"
                 >Từ 50 đến 80</mat-option
@@ -156,6 +158,7 @@
           <mat-form-field appearance="outline" class="filter-box-field">
             <mat-label>Loại sản phẩm</mat-label>
             <mat-select formControlName="category">
+              <mat-option value="">-- Tấc cả --</mat-option>
               <mat-option *ngFor="let item of categories" [value]="item.id">
                 {{ item.name }}</mat-option
               >
@@ -164,6 +167,7 @@
           <mat-form-field appearance="outline" class="filter-box-field">
             <mat-label>Cửa hàng</mat-label>
             <mat-select formControlName="store">
+              <mat-option value="">-- Tấc cả --</mat-option>
               <mat-option *ngFor="let item of stores" [value]="item.id">
                 {{ item.name }}</mat-option
               >

@@ -1,0 +1,20 @@
+# Sử dụng image có sẵn của Node.js làm cơ sở
+FROM node:latest
+
+# Đặt thư mục làm thư mục làm việc
+WORKDIR /app
+
+# Sao chép package.json và package-lock.json vào thư mục làm việc
+COPY package*.json ./
+
+# Cài đặt các gói phụ thuộc
+RUN npm install
+
+# Sao chép các tệp Angular vào thư mục làm việc
+COPY . .
+
+# Xây dựng ứng dụng
+RUN npm run build --prod
+
+# Chạy ứng dụng
+CMD [ "npm", "start" ]

@@ -104,13 +104,14 @@ export const navbarData: INavbarData[] = [
     label: 'Địa chỉ',
     items: [
       {
-        routeLink: 'address/map',
-        label: 'Tấc cả chi nhánh',
-      },
-      {
         routeLink: 'address/create',
         label: 'Thêm chi nhánh mới',
       },
+      {
+        routeLink: 'address/map',
+        label: 'Tấc cả chi nhánh',
+      },
+
     ],
   },
   {

@@ -446,3 +446,17 @@ input::-webkit-inner-spin-button {
 }
 
 
+input[type=file]::file-selector-button {
+  margin-right: 20px;
+  border: none;
+  background: #ff9900;
+  padding: 7px 20px;
+  border-radius: 5px;
+  color: #000;
+  cursor: pointer;
+  transition: background .2s ease-in-out;
+}
+
+input[type=file]::file-selector-button:hover {
+  background: #ff9900;
+}

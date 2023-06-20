@@ -6,6 +6,15 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+* @File:  AppProperties.java com.graduate.touslestemp.config
+*
+* @Author: TamNLT
+* @Since: 20/6/2023 11:08 PM
+* @Last update: 20/6/2023
+*
+* */
+
 @Component
 @ConfigurationProperties(prefix = "app")
 public class AppProperties {

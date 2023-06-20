@@ -13,7 +13,14 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
-
+/*
+* @File:  TimeKeepingMapper.java com.graduate.touslestemp.domain.mapper
+*
+* @Author: TamNLT
+* @Since: 20/6/2023 11:23 PM
+* @Last update: 20/6/2023
+*
+* */
 @Mapper(componentModel = "spring")
 public interface TimeKeepingMapper {
     TimeKeepingMapper INSTANCE = Mappers.getMapper(TimeKeepingMapper.class);

@@ -6,11 +6,15 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
-/**
- *
- * @author imstudent2210
- *
- */
+/*
+* @File:  ThymeleafTemplateConfig.java com.graduate.touslestemp.config
+*
+* @Author: TamNLT
+* @Since: 20/6/2023 11:08 PM
+* @Last update: 20/6/2023
+*
+* */
+
 @Configuration
 public class ThymeleafTemplateConfig {
 

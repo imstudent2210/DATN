@@ -19,6 +19,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+/*
+* @File:  RsqlController.java com.graduate.touslestemp.controller
+*
+* @Author: TamNLT
+* @Since: 20/6/2023 11:10 PM
+* @Last update: 20/6/2023
+*
+* */
 
 @RestController
 @RequestMapping("/rsql")

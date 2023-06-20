@@ -6,7 +6,14 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 import java.util.List;
-
+/*
+* @File:  Staff.java com.graduate.touslestemp.domain.entity
+*
+* @Author: TamNLT
+* @Since: 20/6/2023 11:22 PM
+* @Last update: 20/6/2023
+*
+* */
 @Getter
 @Setter
 @NoArgsConstructor

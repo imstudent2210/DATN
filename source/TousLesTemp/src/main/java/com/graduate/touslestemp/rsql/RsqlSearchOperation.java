@@ -5,7 +5,14 @@ import cz.jirutka.rsql.parser.ast.ComparisonOperator;
 import cz.jirutka.rsql.parser.ast.RSQLOperators;
 
 import java.util.Arrays;
-
+/*
+* @File:  RsqlSearchOperation.java com.graduate.touslestemp.rsql
+*
+* @Author: TamNLT
+* @Since: 20/6/2023 11:28 PM
+* @Last update: 20/6/2023
+*
+* */
 public enum RsqlSearchOperation {
     EQUAL(RSQLOperators.EQUAL),
     NOT_EQUAL(RSQLOperators.NOT_EQUAL),

@@ -8,6 +8,14 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.util.Properties;
 
+/*
+* @File:  MailConfig.java com.graduate.touslestemp.config
+*
+* @Author: TamNLT
+* @Since: 20/6/2023 11:08 PM
+* @Last update: 20/6/2023
+*
+* */
 @Configuration
 public class MailConfig {
     @Value("smtp.gmail.com")

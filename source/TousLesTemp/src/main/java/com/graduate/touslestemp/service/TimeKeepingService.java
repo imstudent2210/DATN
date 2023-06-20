@@ -8,7 +8,14 @@ import com.graduate.touslestemp.domain.entity.TimeKeeping;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
-
+/*
+* @File:  TimeKeepingService.java com.graduate.touslestemp.service
+*
+* @Author: TamNLT
+* @Since: 20/6/2023 11:30 PM
+* @Last update: 20/6/2023
+*
+* */
 public interface TimeKeepingService {
     PageResponseDTO<?> getAllTimeKeeping(Pageable request);
 

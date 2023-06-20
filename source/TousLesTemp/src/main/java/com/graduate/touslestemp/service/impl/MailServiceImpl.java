@@ -11,7 +11,14 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
-
+/*
+* @File:  MailServiceImpl.java com.graduate.touslestemp.service.impl
+*
+* @Author: TamNLT
+* @Since: 20/6/2023 11:29 PM
+* @Last update: 20/6/2023
+*
+* */
 @Service
 @Slf4j
 public class MailServiceImpl implements MailService {

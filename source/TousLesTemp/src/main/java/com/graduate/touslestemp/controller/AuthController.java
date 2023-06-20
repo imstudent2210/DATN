@@ -36,6 +36,14 @@ import org.springframework.web.bind.annotation.*;
 
 import static dev.samstevens.totp.code.HashingAlgorithm.SHA256;
 import static dev.samstevens.totp.util.Utils.getDataUriForImage;
+/*
+* @File:  AuthController.java com.graduate.touslestemp.controller
+*
+* @Author: TamNLT
+* @Since: 20/6/2023 11:09 PM
+* @Last update: 20/6/2023
+*
+* */
 
 @Slf4j
 @RestController

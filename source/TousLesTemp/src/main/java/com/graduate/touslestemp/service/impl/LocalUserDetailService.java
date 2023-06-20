@@ -11,9 +11,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * @author imstudent2210@gmail.com
- */
+/*
+* @File:  LocalUserDetailService.java com.graduate.touslestemp.service.impl
+*
+* @Author: TamNLT
+* @Since: 20/6/2023 11:29 PM
+* @Last update: 20/6/2023
+*
+* */
 @Service
 public class LocalUserDetailService implements UserDetailsService {
 

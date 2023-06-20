@@ -16,11 +16,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
 
-/**
- *
- * @author imstudent2210
- *
- */
+/*
+* @File:  SetupDataLoader.java com.graduate.touslestemp.config
+*
+* @Author: TamNLT
+* @Since: 20/6/2023 11:10 PM
+* @Last update: 20/6/2023
+*
+* */
 @Component
 public class SetupDataLoader implements ApplicationListener<ContextRefreshedEvent> {
 

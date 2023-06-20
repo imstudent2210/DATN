@@ -15,7 +15,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static cz.jirutka.rsql.parser.ast.RSQLOperators.*;
-
+/*
+* @File:  GenericRsqlSpecification.java com.graduate.touslestemp.rsql
+*
+* @Author: TamNLT
+* @Since: 20/6/2023 11:28 PM
+* @Last update: 20/6/2023
+*
+* */
 @Getter
 @Setter
 @NoArgsConstructor

@@ -8,7 +8,14 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
 import java.io.IOException;
-
+/*
+* @File:  RestAuthenticationEntryPoint.java com.graduate.touslestemp.security.jwt
+*
+* @Author: TamNLT
+* @Since: 20/6/2023 11:28 PM
+* @Last update: 20/6/2023
+*
+* */
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     private static final Logger logger = LoggerFactory.getLogger(RestAuthenticationEntryPoint.class);

@@ -20,6 +20,14 @@ import java.io.ByteArrayInputStream;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+/*
+* @File:  SizeController.java com.graduate.touslestemp.controller
+*
+* @Author: TamNLT
+* @Since: 20/6/2023 11:10 PM
+* @Last update: 20/6/2023
+*
+* */
 
 @RestController
 @CrossOrigin("*")

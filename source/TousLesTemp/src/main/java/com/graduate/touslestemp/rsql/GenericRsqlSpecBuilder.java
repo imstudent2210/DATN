@@ -9,7 +9,14 @@ import org.springframework.data.jpa.domain.Specification;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-
+/*
+* @File:  GenericRsqlSpecBuilder.java com.graduate.touslestemp.rsql
+*
+* @Author: TamNLT
+* @Since: 20/6/2023 11:26 PM
+* @Last update: 20/6/2023
+*
+* */
 public class GenericRsqlSpecBuilder<T> {
     public Specification<T> createSpecification(Node node) {
         if (node instanceof LogicalNode) {

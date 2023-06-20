@@ -10,7 +10,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-
+/*
+* @File:  ProductRepository.java com.graduate.touslestemp.domain.repository
+*
+* @Author: TamNLT
+* @Since: 20/6/2023 11:24 PM
+* @Last update: 20/6/2023
+*
+* */
 public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpecificationExecutor<Product> {
     Page<Product> findAll(Pageable pageable);
 

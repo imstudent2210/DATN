@@ -8,7 +8,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-
+/*
+* @File:  TokenProvider.java com.graduate.touslestemp.security.jwt
+*
+* @Author: TamNLT
+* @Since: 20/6/2023 11:29 PM
+* @Last update: 20/6/2023
+*
+* */
 @Service
 public class TokenProvider {
 

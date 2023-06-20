@@ -109,7 +109,7 @@ export const navbarData: INavbarData[] = [
       },
       {
         routeLink: 'address/map',
-        label: 'Tấc cả chi nhánh',
+        label: 'Địa chỉ cửa hàng',
       },
 
     ],

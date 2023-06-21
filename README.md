@@ -39,11 +39,9 @@ These instructions will help you get a copy of the project up and running on you
 
 ### Frontend Setup
 
-1. Navigate to the `TousLestemp-frontend` directory.
+1. Navigate to the `TousLesTemp-frontend` directory.
 2. Install the required package:
   - npm install
-3. Run the frontend server:
-  - ng serve
 
 ## Usage
 
@@ -55,8 +53,9 @@ These instructions will help you get a copy of the project up and running on you
 
 ### Running the Frontend
 
-1. Navigate to the `frontend` directory.
-2. [Instructions to run the frontend]
+1. Navigate to the `TousLesTemp-frontend` directory.
+2. Run the frontend server:
+  - ng serve
 
 ## Documentation
 

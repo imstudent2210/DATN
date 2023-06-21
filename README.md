@@ -63,7 +63,7 @@ These instructions will help you get a copy of the project up and running on you
 The API documentation is generated using Swagger 3.0. You can access the API documentation by following these steps:
 
 1. Start the backend server.
-2. Open your browser and navigate to: http://localhost:8080/TousLesTemp/swagger-ui/index.html
+2. Open your browser and navigate to: http://localhost:9090/TousLesTemp/swagger-ui/index.html
 
 ## Contributing
 

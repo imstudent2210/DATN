@@ -1,5 +1,6 @@
 package com.graduate.touslestemp.security.jwt;
 
+import com.graduate.touslestemp.constant.SecurityConstant;
 import com.graduate.touslestemp.domain.entity.Role;
 import com.graduate.touslestemp.service.impl.LocalUserDetailService;
 import jakarta.servlet.FilterChain;
@@ -78,8 +79,8 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
      * @return the extracted JWT token or null if it is not found
      */
     private String getJwtFromRequest(HttpServletRequest request) {
-        String bearerToken = request.getHeader("Authorization");
-        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
+        String bearerToken = request.getHeader(SecurityConstant.HEADER_STRING);
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(SecurityConstant.TOKEN_PREFIX)) {
             return bearerToken.substring(7, bearerToken.length());
         }
         return null;

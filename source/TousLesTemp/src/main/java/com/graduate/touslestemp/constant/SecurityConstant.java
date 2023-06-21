@@ -11,6 +11,11 @@ public class SecurityConstant {
     public static final long EXPIRATION_TIME = 864_000_000; // 10 days
     public static final String TOKEN_PREFIX = "Bearer ";
     public static final String HEADER_STRING = "Authorization";
+    public static final String AUTHENTICATED = "authenticated";
+    public static final long TEMP_TOKEN_VALIDITY_IN_MILLIS = 300000;
+    public static final String SEND_MAIL_SUBJECT = "XÁC NHẬN ĐĂNG KÝ TÀI KHOẢN THÀNH CÔNG";
+    public static final String TEMPLATE_FILE_NAME = "client";
+    public static final String BASE_PACKAGE = "com.graduate.touslestemp.controller";
     public static final String AUTH_REGISTER_URL = "/register/**";
     public static final String AUTH_LOGIN_URL = "/login";
     public static final String[] AUTH_WHITELIST = {

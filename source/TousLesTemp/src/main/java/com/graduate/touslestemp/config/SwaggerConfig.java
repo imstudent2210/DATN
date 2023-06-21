@@ -1,5 +1,6 @@
 package com.graduate.touslestemp.config;
 
+import com.graduate.touslestemp.constant.SecurityConstant;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.PathSelectors;
@@ -23,10 +24,9 @@ import java.util.List;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
-    public static final String AUTHORIZATION_HEADER = "Authorization";
 
     private ApiKey apiKey() {
-        return new ApiKey("JWT", AUTHORIZATION_HEADER, "header");
+        return new ApiKey("JWT", SecurityConstant.HEADER_STRING, "header");
     }
 
     private SecurityContext securityContext() {
@@ -44,7 +44,7 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.graduate.touslestemp.controller"))
+                .apis(RequestHandlerSelectors.basePackage(SecurityConstant.BASE_PACKAGE))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(apiInfo());

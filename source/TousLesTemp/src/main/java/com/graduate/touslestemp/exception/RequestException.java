@@ -1,12 +1,11 @@
 package com.graduate.touslestemp.exception;
-/*
-* @File:  RequestException.java com.graduate.touslestemp.exception
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:26 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: RequestException.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:24 AM
+ * @Update: 21/6/2023
+ */
 public class RequestException extends RuntimeException {
     public RequestException(String message) {
         super(message);

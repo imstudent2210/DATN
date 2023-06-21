@@ -4,14 +4,13 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.Date;
-/*
-* @File:  TimeKeepingDTO.java com.graduate.touslestemp.domain.dto
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:21 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: TimeKeepingDTO.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:18 AM
+ * @Update: 21/6/2023
+ */
 @Getter
 @Setter
 public class TimeKeepingDTO {

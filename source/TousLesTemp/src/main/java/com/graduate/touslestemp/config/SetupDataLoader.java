@@ -16,14 +16,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
 
-/*
-* @File:  SetupDataLoader.java com.graduate.touslestemp.config
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:10 PM
-* @Last update: 20/6/2023
-*
-* */
+/**
+ * @File: SetupDataLoader.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:10 AM
+ * @Update: 21/6/2023
+ */
 @Component
 public class SetupDataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -38,6 +36,12 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * Overrides the onApplicationEvent method to perform additional setup logic when the application context is refreshed.
+     * This method is responsible for creating initial roles, creating a user if not found, and setting up the application's initial state.
+     *
+     * @param event The ContextRefreshedEvent representing the application context refresh event.
+     */
     @Override
     @Transactional
     public void onApplicationEvent(final ContextRefreshedEvent event) {
@@ -50,6 +54,15 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         createUserIfNotFound("admin@gmail.com", Set.of(userRole, adminRole));
         alreadySetup = true;
     }
+
+    /**
+     * Creates a new user if the user with the specified email is not found in the user repository.
+     * If the user is created, it is assigned the provided roles.
+     *
+     * @param email The email of the user.
+     * @param roles The set of roles to assign to the user.
+     * @return The created user if it was not found in the repository, otherwise returns the existing user.
+     */
 
     @Transactional
     User createUserIfNotFound(final String email, Set<Role> roles) {
@@ -70,6 +83,12 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         return user;
     }
 
+    /**
+     * Creates a new role if the role with the specified name is not found in the role repository.
+     *
+     * @param name The name of the role.
+     * @return The created role if it was not found in the repository, otherwise returns the existing role.
+     */
     @Transactional
     Role createRoleIfNotFound(final String name) {
         Role role = roleRepository.findByName(name);
@@ -79,9 +98,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         return role;
     }
 
-//    @Transactional
-//    Salary createSalaryIfNotFound(final String name) throws Exception {
-//      Salary salary = salaryRepository.findSalaryByName(name);
-//        return salaryService.save(salary);
-//    }
+  /*  @Transactional
+    Salary createSalaryIfNotFound(final String name) throws Exception {
+      Salary salary = salaryRepository.findSalaryByName(name);
+        return salaryService.save(salary);
+    }*/
 }

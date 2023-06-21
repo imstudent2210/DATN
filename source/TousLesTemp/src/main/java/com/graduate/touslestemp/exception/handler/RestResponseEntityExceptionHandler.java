@@ -13,14 +13,13 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.stream.Collectors;
-/*
-* @File:  RestResponseEntityExceptionHandler.java com.graduate.touslestemp.exception.handler
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:26 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: RestResponseEntityExceptionHandler.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:23 AM
+ * @Update: 21/6/2023
+ */
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 

@@ -8,14 +8,12 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.util.Set;
 
-/*
-* @File:  Role.java com.graduate.touslestemp.domain.entity
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:22 PM
-* @Last update: 20/6/2023
-*
-* */
+/**
+ * @File: Role.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:19 AM
+ * @Update: 21/6/2023
+ */
 @Entity
 @Getter
 @Setter

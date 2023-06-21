@@ -26,14 +26,12 @@ import org.springframework.util.StringUtils;
 
 import java.util.*;
 
-/*
-* @File:  UserServiceImpl.java com.graduate.touslestemp.service.impl
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:30 PM
-* @Last update: 20/6/2023
-*
-* */
+/**
+ * @File: UserServiceImpl.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:28 AM
+ * @Update: 21/6/2023
+ */
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -47,7 +45,13 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
 
     private SecretGenerator secretGenerator = new DefaultSecretGenerator();
-
+    /**
+     * Registers a new admin user based on the provided sign-up request.
+     *
+     * @param signUpRequest the sign-up request containing the details of the new admin user
+     * @return the newly registered admin user
+     * @throws UserAlreadyExistAuthenticationException if the user with the given ID or email already exists
+     */
     @Override
     @Transactional(value = "transactionManager")
     public User registerNewAdmin(final SignUpRequest signUpRequest) throws UserAlreadyExistAuthenticationException {
@@ -88,7 +92,16 @@ public class UserServiceImpl implements UserService {
     public User findUserByEmail(final String email) {
         return userRepository.findByEmail(email);
     }
-
+    /**
+     * Processes user registration based on the provided registration ID, attributes, ID token, and user info.
+     *
+     * @param registrationId the registration ID representing the OAuth2 provider
+     * @param attributes     the attributes received from the OAuth2 provider
+     * @param idToken        the ID token received from the OAuth2 provider
+     * @param userInfo       the user info received from the OAuth2 provider
+     * @return the registered local user
+     * @throws OAuth2AuthenticationProcessingException if required information (name or email) is not found from the OAuth2 provider, or if there is an authentication processing error
+     */
     @Override
     @Transactional
     public LocalUser processUserRegistration(String registrationId, Map<String, Object> attributes, OidcIdToken idToken, OidcUserInfo userInfo) {
@@ -112,12 +125,24 @@ public class UserServiceImpl implements UserService {
 
         return LocalUser.create(user, attributes, idToken, userInfo);
     }
-
+    /**
+     * Updates the existing user with the provided OAuth2 user info.
+     *
+     * @param existingUser    the existing user to be updated
+     * @param oAuth2UserInfo the OAuth2 user info
+     * @return the updated user
+     */
     private User updateExistingUser(User existingUser, OAuth2UserInfo oAuth2UserInfo) {
         existingUser.setDisplayName(oAuth2UserInfo.getName());
         return userRepository.save(existingUser);
     }
-
+    /**
+     * Converts the OAuth2 user info to a SignUpRequest object.
+     *
+     * @param registrationId  the registration ID representing the OAuth2 provider
+     * @param oAuth2UserInfo the OAuth2 user info
+     * @return the SignUpRequest object
+     */
     private SignUpRequest toUserRegistrationObject(String registrationId, OAuth2UserInfo oAuth2UserInfo) {
         return SignUpRequest.getBuilder().addProviderUserID(oAuth2UserInfo.getId()).addDisplayName(oAuth2UserInfo.getName()).addEmail(oAuth2UserInfo.getEmail())
                 .addSocialProvider(GeneralUtils.toSocialProvider(registrationId)).addPassword("changeit").build();

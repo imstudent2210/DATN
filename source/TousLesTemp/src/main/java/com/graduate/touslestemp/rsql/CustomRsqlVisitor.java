@@ -5,14 +5,13 @@ import cz.jirutka.rsql.parser.ast.ComparisonNode;
 import cz.jirutka.rsql.parser.ast.OrNode;
 import cz.jirutka.rsql.parser.ast.RSQLVisitor;
 import org.springframework.data.jpa.domain.Specification;
-/*
-* @File:  CustomRsqlVisitor.java com.graduate.touslestemp.rsql
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:28 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: CustomRsqlVisitor.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:24 AM
+ * @Update: 21/6/2023
+ */
 public class CustomRsqlVisitor<T> implements RSQLVisitor<Specification<T>,Void> {
     private GenericRsqlSpecBuilder<T> builder;
 

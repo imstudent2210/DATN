@@ -1,12 +1,11 @@
 package com.graduate.touslestemp.domain.dto;
-/*
-* @File:  SocialProvider.java com.graduate.touslestemp.domain.dto
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:21 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: SocialProvider.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:17 AM
+ * @Update: 21/6/2023
+ */
 public enum SocialProvider {
 
 	FACEBOOK("facebook"), GITHUB("github"), LOCAL("local");

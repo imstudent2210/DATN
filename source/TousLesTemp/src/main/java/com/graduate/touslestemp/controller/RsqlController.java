@@ -19,14 +19,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-/*
-* @File:  RsqlController.java com.graduate.touslestemp.controller
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:10 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: RsqlController.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:11 AM
+ * @Update: 21/6/2023
+ */
 
 @RestController
 @RequestMapping("/rsql")
@@ -41,6 +40,12 @@ public class RsqlController {
     @Autowired
     private ProductMapper productMapper;
 
+    /**
+     * Retrieves StoreDTOs based on RSQL search query.
+     *
+     * @param search The RSQL search query.
+     * @return A list of matched StoreDTOs.
+     */
     @GetMapping("/store")
     public List<StoreDTO> findStoreByRsql(@RequestParam(value = "search") String search) {
         Node rootNode = new RSQLParser().parse(search);
@@ -48,6 +53,12 @@ public class RsqlController {
         return storeMapper.toStoreDTOs(storeRepository.findAll(spec));
     }
 
+    /**
+     * Retrieves ProductDTOs based on RSQL search query.
+     *
+     * @param search The RSQL search query.
+     * @return A list of matched ProductDTOs.
+     */
     @GetMapping("/product")
     public List<ProductDTO> findProductByRsql(@RequestParam(value = "search") String search) {
         Node rootNode = new RSQLParser().parse(search);

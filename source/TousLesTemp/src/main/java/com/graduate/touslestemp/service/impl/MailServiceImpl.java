@@ -11,14 +11,13 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
-/*
-* @File:  MailServiceImpl.java com.graduate.touslestemp.service.impl
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:29 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: MailServiceImpl.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:26 AM
+ * @Update: 21/6/2023
+ */
 @Service
 @Slf4j
 public class MailServiceImpl implements MailService {
@@ -28,6 +27,13 @@ public class MailServiceImpl implements MailService {
     @Autowired
     private SpringTemplateEngine templateEngine;
 
+    /**
+     * Sends an HTML email using the provided data and template.
+     *
+     * @param dataMail     the data for the email (e.g., recipient, subject, properties)
+     * @param templateName the name of the HTML template to use for the email content
+     * @throws MessagingException if an error occurs while sending the email
+     */
     @Override
     public void sendHtmlMail(DataMailDTO dataMail, String templateName) throws MessagingException {
         MimeMessage message = mailSender.createMimeMessage();

@@ -8,14 +8,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-/*
-* @File:  TokenProvider.java com.graduate.touslestemp.security.jwt
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:29 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: TokenProvider.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:24 AM
+ * @Update: 21/6/2023
+ */
 @Service
 public class TokenProvider {
 
@@ -31,6 +30,13 @@ public class TokenProvider {
         this.appProperties = appProperties;
     }
 
+    /**
+     * Creates a JWT token for the given user principal with the specified authentication status.
+     *
+     * @param userPrincipal the user principal
+     * @param authenticated the authentication status
+     * @return the created JWT token
+     */
     public String createToken(LocalUser userPrincipal, boolean authenticated) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + (authenticated ? appProperties.getAuth().getTokenExpirationMsec() : TEMP_TOKEN_VALIDITY_IN_MILLIS));
@@ -45,17 +51,34 @@ public class TokenProvider {
                 .compact();
     }
 
+    /**
+     * Retrieves the user ID from the provided JWT token.
+     *
+     * @param token the JWT token
+     * @return the user ID extracted from the token
+     */
     public Long getUserIdFromToken(String token) {
         Claims claims = Jwts.parser().setSigningKey(appProperties.getAuth().getTokenSecret()).parseClaimsJws(token).getBody();
         return Long.parseLong(claims.getSubject());
     }
 
-
+    /**
+     * Checks if the provided JWT token represents an authenticated user.
+     *
+     * @param token the JWT token
+     * @return true if the token represents an authenticated user, false otherwise
+     */
     public Boolean isAuthenticated(String token) {
         Claims claims = Jwts.parser().setSigningKey(appProperties.getAuth().getTokenSecret()).parseClaimsJws(token).getBody();
         return claims.get(AUTHENTICATED, Boolean.class);
     }
 
+    /**
+     * Validates the provided JWT token.
+     *
+     * @param authToken the JWT token to validate
+     * @return true if the token is valid, false otherwise
+     */
     public boolean validateToken(String authToken) {
         try {
             Jwts.parser().setSigningKey(appProperties.getAuth().getTokenSecret()).parseClaimsJws(authToken);

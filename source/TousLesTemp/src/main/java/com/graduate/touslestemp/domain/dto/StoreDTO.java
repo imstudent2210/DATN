@@ -4,14 +4,13 @@ import com.graduate.touslestemp.domain.entity.Address;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
-/*
-* @File:  StoreDTO.java com.graduate.touslestemp.domain.dto
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:21 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: StoreDTO.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:18 AM
+ * @Update: 21/6/2023
+ */
 @Getter
 @Setter
 public class StoreDTO {

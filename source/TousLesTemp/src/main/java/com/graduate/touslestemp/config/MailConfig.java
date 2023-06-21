@@ -8,14 +8,12 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.util.Properties;
 
-/*
-* @File:  MailConfig.java com.graduate.touslestemp.config
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:08 PM
-* @Last update: 20/6/2023
-*
-* */
+/**
+ * @File: MailConfig.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:10 AM
+ * @Update: 21/6/2023
+ */
 @Configuration
 public class MailConfig {
     @Value("smtp.gmail.com")
@@ -33,6 +31,12 @@ public class MailConfig {
     @Value("false")
     private String isSSL;
 
+    /**
+     * Configures and returns a JavaMailSender bean.
+     * The JavaMailSender bean is responsible for sending emails.
+     *
+     * @return JavaMailSender instance configured with the specified properties.
+     */
     @Bean
     public JavaMailSender getJavaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();

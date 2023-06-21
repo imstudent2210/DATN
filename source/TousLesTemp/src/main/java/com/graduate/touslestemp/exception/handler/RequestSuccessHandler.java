@@ -8,14 +8,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-/*
-* @File:  RequestSuccessHandler.java com.graduate.touslestemp.exception.handler
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:25 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: RequestSuccessHandler.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:23 AM
+ * @Update: 21/6/2023
+ */
 @ControllerAdvice
 public class RequestSuccessHandler {
     @ExceptionHandler(value = {RequestSuccess.class} )

@@ -4,14 +4,13 @@ import com.graduate.touslestemp.validator.PasswordMatches;
 import lombok.Data;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-/*
-* @File:  SignUpRequest.java com.graduate.touslestemp.domain.dto
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:16 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: SignUpRequest.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:12 AM
+ * @Update: 21/6/2023
+ */
 @Data
 @PasswordMatches
 public class SignUpRequest {

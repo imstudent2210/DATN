@@ -6,14 +6,13 @@ import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
-/*
-* @File:  Exception.java com.graduate.touslestemp.exception.handler
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:25 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: Exception.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:23 AM
+ * @Update: 21/6/2023
+ */
 public class Exception {
 
     private String message;

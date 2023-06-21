@@ -3,14 +3,13 @@ package com.graduate.touslestemp.domain.dto;
 import lombok.Data;
 
 import jakarta.validation.constraints.NotBlank;
-/*
-* @File:  LoginRequest.java com.graduate.touslestemp.domain.dto
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:17 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: LoginRequest.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:13 AM
+ * @Update: 21/6/2023
+ */
 @Data
 public class LoginRequest {
 	@NotBlank

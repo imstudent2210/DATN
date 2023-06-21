@@ -6,14 +6,13 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.Set;
-/*
-* @File:  Product.java com.graduate.touslestemp.domain.entity
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:22 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: Product.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:19 AM
+ * @Update: 21/6/2023
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

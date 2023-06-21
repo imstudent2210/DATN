@@ -36,14 +36,13 @@ import org.springframework.web.bind.annotation.*;
 
 import static dev.samstevens.totp.code.HashingAlgorithm.SHA256;
 import static dev.samstevens.totp.util.Utils.getDataUriForImage;
-/*
-* @File:  AuthController.java com.graduate.touslestemp.controller
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:09 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: AuthController.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:11 AM
+ * @Update: 21/6/2023
+ */
 
 @Slf4j
 @RestController
@@ -73,18 +72,34 @@ public class AuthController {
 
     private final CodeVerifier verifier = new DefaultCodeVerifier(codeGenerator, timeProvider);
 
+    /**
+     * Authenticates a user based on the provided login credentials.
+     *
+     * @param loginRequest The login request object containing the user's email and password.
+     * @return A ResponseEntity containing the authentication response.
+     */
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+        // Perform authentication using the provided email and password
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
-
+        // Set the authenticated user in the SecurityContextHolder
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        // Retrieve the LocalUser object from the authentication result
         LocalUser localUser = (LocalUser) authentication.getPrincipal();
+        // Check if the user is authenticated using two-factor authentication (2FA)
         boolean authenticated = !localUser.getUser().isUsing2FA();
+        // Generate a JWT token for the authenticated user
         String jwt = tokenProvider.createToken(localUser, authenticated);
-
+        // Return the JWT authentication response in the ResponseEntity
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt, authenticated, authenticated ? GeneralUtils.buildUserInfo(localUser) : null));
     }
 
+    /**
+     * Registers a new user.
+     *
+     * @param signUpRequest The sign-up request object containing the user's registration details.
+     * @return A ResponseEntity containing the registration response.
+     */
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
         try {
@@ -108,6 +123,14 @@ public class AuthController {
         return ResponseEntity.ok().body(new ApiResponse(true, "User registered successfully"));
     }
 
+    /**
+     * Verifies the provided code for a user with the PRE_VERIFICATION_USER role.
+     *
+     * @param code The verification code to be validated.
+     * @param user The currently authenticated user.
+     * @return A ResponseEntity containing the verification response.
+     */
+
     @PostMapping("/verify")
     @PreAuthorize("hasRole('PRE_VERIFICATION_USER')")
     public ResponseEntity<?> verifyCode(@NotEmpty @RequestBody String code, @CurrentUser LocalUser user) {
@@ -118,6 +141,12 @@ public class AuthController {
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt, true, GeneralUtils.buildUserInfo(user)));
     }
 
+    /**
+     * Sends an email.
+     *
+     * @param sdi The client SDI object containing the email details.
+     * @return A ResponseEntity indicating whether the email was sent successfully.
+     */
     @PostMapping(value = "/sendmail")
     public ResponseEntity<Boolean> sendmail(@RequestBody ClientSdi sdi) {
         return ResponseEntity.ok(clientService.create(sdi));

@@ -10,14 +10,13 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Collection;
 import java.util.Map;
-/*
-* @File:  LocalUser.java com.graduate.touslestemp.domain.dto
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:13 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: LocalUser.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:13 AM
+ * @Update: 21/6/2023
+ */
 public class LocalUser extends User implements OAuth2User, OidcUser {
 	private static final long serialVersionUID = -2845160792248762779L;
 	private final OidcIdToken idToken;
@@ -25,11 +24,37 @@ public class LocalUser extends User implements OAuth2User, OidcUser {
 	private Map<String, Object> attributes;
 	private com.graduate.touslestemp.domain.entity.User user;
 
+	/**
+	 * Constructs a new LocalUser object with the provided parameters.
+	 *
+	 * @param userID                the user ID
+	 * @param password              the password
+	 * @param enabled               whether the user is enabled
+	 * @param accountNonExpired     whether the user account is non-expired
+	 * @param credentialsNonExpired whether the user credentials are non-expired
+	 * @param accountNonLocked      whether the user account is non-locked
+	 * @param authorities           the authorities/roles assigned to the user
+	 * @param user                  the associated User entity
+	 */
 	public LocalUser(final String userID, final String password, final boolean enabled, final boolean accountNonExpired, final boolean credentialsNonExpired,
 			final boolean accountNonLocked, final Collection<? extends GrantedAuthority> authorities, final com.graduate.touslestemp.domain.entity.User	 user) {
 		this(userID, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities, user, null, null);
 	}
 
+	/**
+	 * Constructs a new LocalUser object with the provided parameters.
+	 *
+	 * @param userID                the user ID
+	 * @param password              the password
+	 * @param enabled               whether the user is enabled
+	 * @param accountNonExpired     whether the user account is non-expired
+	 * @param credentialsNonExpired whether the user credentials are non-expired
+	 * @param accountNonLocked      whether the user account is non-locked
+	 * @param authorities           the authorities/roles assigned to the user
+	 * @param user                  the associated User entity
+	 * @param idToken               the OIDC ID token
+	 * @param userInfo              the OIDC user info
+	 */
 	public LocalUser(final String userID, final String password, final boolean enabled, final boolean accountNonExpired, final boolean credentialsNonExpired,
 			final boolean accountNonLocked, final Collection<? extends GrantedAuthority> authorities, final com.graduate.touslestemp.domain.entity.User user, OidcIdToken idToken,
 			OidcUserInfo userInfo) {

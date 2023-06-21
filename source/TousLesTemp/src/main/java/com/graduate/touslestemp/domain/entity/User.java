@@ -9,14 +9,13 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
-/*
-* @File:  User.java com.graduate.touslestemp.domain.entity
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:23 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: User.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:20 AM
+ * @Update: 21/6/2023
+ */
 @Entity
 @NoArgsConstructor
 @Getter

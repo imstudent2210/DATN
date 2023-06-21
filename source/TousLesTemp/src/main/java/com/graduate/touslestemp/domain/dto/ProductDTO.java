@@ -5,14 +5,13 @@ import com.graduate.touslestemp.domain.entity.Size;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
-/*
-* @File:  ProductDTO.java com.graduate.touslestemp.domain.dto
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:17 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: ProductDTO.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:13 AM
+ * @Update: 21/6/2023
+ */
 @Getter
 @Setter
 public class ProductDTO {

@@ -4,14 +4,13 @@ import com.graduate.touslestemp.domain.entity.StaffGroup;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
-/*
-* @File:  StaffDTO.java com.graduate.touslestemp.domain.dto
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:21 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: StaffDTO.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:17 AM
+ * @Update: 21/6/2023
+ */
 @Getter
 @Setter
 public class StaffDTO {

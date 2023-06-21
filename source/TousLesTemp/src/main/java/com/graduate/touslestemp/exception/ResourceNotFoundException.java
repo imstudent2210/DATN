@@ -3,14 +3,13 @@ package com.graduate.touslestemp.exception;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
-/*
-* @File:  ResourceNotFoundException.java com.graduate.touslestemp.exception
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:28 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: ResourceNotFoundException.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:24 AM
+ * @Update: 21/6/2023
+ */
 @Getter
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class ResourceNotFoundException extends RuntimeException {

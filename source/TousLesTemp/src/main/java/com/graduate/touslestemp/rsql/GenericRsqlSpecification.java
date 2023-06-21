@@ -15,14 +15,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static cz.jirutka.rsql.parser.ast.RSQLOperators.*;
-/*
-* @File:  GenericRsqlSpecification.java com.graduate.touslestemp.rsql
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:28 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: GenericRsqlSpecification.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:25 AM
+ * @Update: 21/6/2023
+ */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -33,6 +32,14 @@ public class GenericRsqlSpecification<T> implements Specification<T> {
     private ComparisonOperator operator;
     private List<String> arguments;
 
+    /**
+     * Generates a {@link Predicate} based on the provided parameters.
+     *
+     * @param root    the root entity in the query
+     * @param query   the criteria query
+     * @param builder the criteria builder
+     * @return the generated {@link Predicate}
+     */
     @Override
     public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
         List<Object> args = castArguments(root);
@@ -78,6 +85,12 @@ public class GenericRsqlSpecification<T> implements Specification<T> {
         return null;
     }
 
+    /**
+     * Casts the arguments to the appropriate data types based on the Java type of the property being accessed.
+     *
+     * @param root the root entity
+     * @return the list of arguments with casted data types
+     */
     private List<Object> castArguments(final Root<T> root) {
 
         Class<? extends Object> type = root.get(property).getJavaType();

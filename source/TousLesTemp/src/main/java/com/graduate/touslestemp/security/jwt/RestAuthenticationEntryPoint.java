@@ -8,18 +8,26 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
 import java.io.IOException;
-/*
-* @File:  RestAuthenticationEntryPoint.java com.graduate.touslestemp.security.jwt
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:28 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: RestAuthenticationEntryPoint.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:25 AM
+ * @Update: 21/6/2023
+ */
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     private static final Logger logger = LoggerFactory.getLogger(RestAuthenticationEntryPoint.class);
 
+    /**
+     * Invoked when an unauthenticated user tries to access a secured resource.
+     * It handles the unauthorized error by logging the error message and sending an HTTP_UNAUTHORIZED (401) response to the client.
+     *
+     * @param httpServletRequest  the HTTP servlet request
+     * @param httpServletResponse the HTTP servlet response
+     * @param e                   the AuthenticationException representing the unauthorized error
+     * @throws IOException if an I/O error occurs during the response handling
+     */
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException {
         logger.error("Unauthorized error. Message - {}", e.getMessage());

@@ -5,14 +5,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.graduate.touslestemp.exception.ForeignKeyConstraintException;
 import org.springframework.http.ResponseEntity;
-/*
-* @File:  ExceptionHandlerAdvice.java com.graduate.touslestemp.exception.handler
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:25 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: ExceptionHandlerAdvice.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:23 AM
+ * @Update: 21/6/2023
+ */
 @RestControllerAdvice
 public class ExceptionHandlerAdvice {
     @ExceptionHandler(ForeignKeyConstraintException.class)

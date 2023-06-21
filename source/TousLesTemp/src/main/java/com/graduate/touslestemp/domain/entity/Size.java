@@ -3,14 +3,13 @@ package com.graduate.touslestemp.domain.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
-/*
-* @File:  Size.java com.graduate.touslestemp.domain.entity
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:22 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: Size.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:19 AM
+ * @Update: 21/6/2023
+ */
 @Getter
 @Setter
 @NoArgsConstructor

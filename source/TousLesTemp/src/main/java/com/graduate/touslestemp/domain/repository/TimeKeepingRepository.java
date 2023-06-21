@@ -8,14 +8,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-/*
-* @File:  TimeKeepingRepository.java com.graduate.touslestemp.domain.repository
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:25 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: TimeKeepingRepository.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:23 AM
+ * @Update: 21/6/2023
+ */
 public interface TimeKeepingRepository extends JpaRepository<TimeKeeping, Long> {
 
     // Total Salary

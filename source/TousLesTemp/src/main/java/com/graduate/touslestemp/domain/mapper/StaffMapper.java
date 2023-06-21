@@ -11,14 +11,13 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
-/*
-* @File:  StaffMapper.java com.graduate.touslestemp.domain.mapper
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:23 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: StaffMapper.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:20 AM
+ * @Update: 21/6/2023
+ */
 @Mapper(componentModel = "spring")
 public interface StaffMapper {
     StaffMapper INSTANCE = Mappers.getMapper(StaffMapper.class);

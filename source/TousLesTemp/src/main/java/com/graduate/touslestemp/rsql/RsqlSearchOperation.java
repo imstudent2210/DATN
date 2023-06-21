@@ -5,14 +5,13 @@ import cz.jirutka.rsql.parser.ast.ComparisonOperator;
 import cz.jirutka.rsql.parser.ast.RSQLOperators;
 
 import java.util.Arrays;
-/*
-* @File:  RsqlSearchOperation.java com.graduate.touslestemp.rsql
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:28 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: RsqlSearchOperation.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:25 AM
+ * @Update: 21/6/2023
+ */
 public enum RsqlSearchOperation {
     EQUAL(RSQLOperators.EQUAL),
     NOT_EQUAL(RSQLOperators.NOT_EQUAL),
@@ -33,19 +32,16 @@ public enum RsqlSearchOperation {
         this.operator = operator;
     }
 
-
+    /**
+     * Retrieves the RsqlSearchOperation enum value based on the provided ComparisonOperator.
+     *
+     * @param operator the ComparisonOperator to match
+     * @return the corresponding RsqlSearchOperation value
+     * @throws RequestException if no matching RsqlSearchOperation is found
+     */
     public static RsqlSearchOperation getSimpleOperator(final ComparisonOperator operator) {
         return Arrays.stream(values())
                 .filter(operation -> operation.getOperator() == operator)
                 .findAny().orElseThrow(() -> new RequestException("No data!"));
     }
-    //    public static RsqlSearchOperation getSimpleOperator(ComparisonOperator operator) {
-//        for (RsqlSearchOperation operation : values()) {
-//            if (operation.getOperator() == operator) {
-//                return operation;
-//            }
-//        }
-//        return null;
-//    }
-
 }

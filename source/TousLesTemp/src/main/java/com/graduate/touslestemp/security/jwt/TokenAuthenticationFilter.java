@@ -21,14 +21,13 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
-/*
-* @File:  TokenAuthenticationFilter.java com.graduate.touslestemp.security.jwt
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:28 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: TokenAuthenticationFilter.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:25 AM
+ * @Update: 21/6/2023
+ */
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
@@ -36,22 +35,34 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private LocalUserDetailService customUserDetailsService;
     private static final Logger logger = LoggerFactory.getLogger(TokenAuthenticationFilter.class);
-
+    /**
+     * Filters the incoming request and processes the authentication based on the JWT token.
+     * If a valid JWT token is present, it sets the user authentication in the security context.
+     *
+     * @param request      the HTTP servlet request
+     * @param response     the HTTP servlet response
+     * @param filterChain  the filter chain to proceed with the request processing
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException      if an I/O error occurs during the request processing
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
             String jwt = getJwtFromRequest(request);
 
+            // Check and validate the JWT if it has a value and is valid
             if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
                 Long userId = tokenProvider.getUserIdFromToken(jwt);
-
+                // Load user details from customUserDetailsService
                 UserDetails userDetails = customUserDetailsService.loadUserById(userId);
+                // Get authorities based on token authentication status
                 Collection<? extends GrantedAuthority> authorities = tokenProvider.isAuthenticated(jwt)
                         ? userDetails.getAuthorities()
                         : List.of(new SimpleGrantedAuthority(Role.ROLE_PRE_VERIFICATION_USER));
+                // Create an authentication token with user details, null credentials, and authorities
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
+                // Set the authentication in the security context
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception ex) {
@@ -60,7 +71,12 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(request, response);
     }
-
+    /**
+     * Extracts the JWT token from the Authorization header of the HttpServletRequest.
+     *
+     * @param request the HTTP servlet request
+     * @return the extracted JWT token or null if it is not found
+     */
     private String getJwtFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {

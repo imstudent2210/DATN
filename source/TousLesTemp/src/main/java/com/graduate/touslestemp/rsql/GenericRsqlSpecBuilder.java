@@ -9,15 +9,20 @@ import org.springframework.data.jpa.domain.Specification;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-/*
-* @File:  GenericRsqlSpecBuilder.java com.graduate.touslestemp.rsql
-*
-* @Author: TamNLT
-* @Since: 20/6/2023 11:26 PM
-* @Last update: 20/6/2023
-*
-* */
+
+/**
+ * @File: GenericRsqlSpecBuilder.java
+ * @Author: TamNLT
+ * @Since: 21/6/2023 9:25 AM
+ * @Update: 21/6/2023
+ */
 public class GenericRsqlSpecBuilder<T> {
+    /**
+     * Creates a Specification based on the given Node.
+     *
+     * @param node the Node to create the Specification from
+     * @return the created Specification
+     */
     public Specification<T> createSpecification(Node node) {
         if (node instanceof LogicalNode) {
             return createSpecification((LogicalNode) node);
@@ -28,6 +33,12 @@ public class GenericRsqlSpecBuilder<T> {
         return null;
     }
 
+    /**
+     * Creates a Specification based on the given LogicalNode.
+     *
+     * @param logicalNode the LogicalNode to create the Specification from
+     * @return the created Specification
+     */
     public Specification<T> createSpecification(LogicalNode logicalNode) {
         List<Specification> specs = logicalNode.getChildren()
                 .stream()
@@ -49,6 +60,12 @@ public class GenericRsqlSpecBuilder<T> {
         return result;
     }
 
+    /**
+     * Creates a Specification based on the given ComparisonNode.
+     *
+     * @param comparisonNode the ComparisonNode to create the Specification from
+     * @return the created Specification
+     */
     public Specification<T> createSpecification(ComparisonNode comparisonNode) {
         Specification<T> result = Specification.where(
                 new GenericRsqlSpecification<T>(

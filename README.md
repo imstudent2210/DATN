@@ -1,47 +1,80 @@
-# DATN
-# Tên dự án
+# Tous Les Temp Store Management
 
-[![Build Status](https://travis-ci.org/username/repo.svg?branch=master)](https://travis-ci.org/username/repo)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+This project is a store management system for Tous Les Temp, built with Spring Boot 3.0 for the backend and Angular 15 for the frontend. It integrates various technologies and features for enhanced functionality.
 
-Mô tả ngắn gọn về dự án.
+## Features
 
-## Bắt đầu
+- User authentication and authorization using Spring Security
+- Two-factor authentication (2FA) with OTP verification
+- Integration with Thymeleaf for sending emails
+- API documentation management with Swagger 3.0
+- Angular Material for UI components
+- Chart.js for data visualization
+- Integration with Google Maps API for displaying maps
 
-Hướng dẫn này sẽ giúp bạn có được một bản sao của dự án và chạy nó trên máy tính của bạn để phát triển và thử nghiệm.
+## Prerequisites
 
-### Yêu cầu tiên quyết
+Before running the project, make sure you have the following prerequisites installed:
 
-Để cài đặt và chạy dự án, bạn cần có các công cụ sau:
+- Java JDK 17
+- Node.js
+- Angular CLI
 
-- Tool A
-- Tool B
-- ...
+## Getting Started
 
-### Cài đặt
+These instructions will help you get a copy of the project up and running on your local machine for development and testing purposes.
 
-Hướng dẫn chi tiết về cách cài đặt môi trường và các bước cần thiết để có thể chạy dự án của bạn.
+### Backend Setup
 
-1. Bước 1
-2. Bước 2
-3. ...
+1. Clone the repository 
+  - git clone https://github.com/imstudent2210/DATN.git
+2. Navigate to the `TousLesTemp` directory.
+  - cd TousLesTemp
+3. Install the required dependencies using Maven:
+  - mvn install
+4. Configure the application properties:
+  - Open the src/main/resources/application.yaml file.
+  - Modify the database configuration, such as the URL, username, and password, to match your setup.
+  - Customize other configuration properties as needed.
 
-### Sử dụng
+### Frontend Setup
 
-Hướng dẫn về cách sử dụng và cấu hình dự án của bạn. Đưa ra các ví dụ và giải thích cụ thể.
+1. Navigate to the `TousLestemp-frontend` directory.
+2. Install the required package:
+  - npm install
+3. Run the frontend server:
+  - ng serve
 
-## Đóng góp
+## Usage
 
-Chúng tôi rất hoan nghênh sự đóng góp vào dự án. Bạn có thể đóng góp bằng cách:
+### Running the Backend
 
-1. Tạo vấn đề (issue) với ý tưởng của bạn
-2. Fork dự án và gửi yêu cầu kéo (pull request) để đóng góp mã nguồn của bạn
+1. Navigate to the `TousLesTemp` directory.
+2. Run the backend server: 
+  - mvn spring-boot:run
 
-## Giấy phép
+### Running the Frontend
 
-Dự án này được phân phối dưới giấy phép MIT. Xem tệp [LICENSE](LICENSE) để biết thêm thông tin chi tiết.
+1. Navigate to the `frontend` directory.
+2. [Instructions to run the frontend]
 
-## Liên hệ
+## Documentation
 
-Nếu bạn có bất kỳ câu hỏi hoặc đề xuất nào, hãy liên hệ với chúng tôi qua email [your-email@example.com] hoặc qua [hệ thống liên hệ khác].
+The API documentation is generated using Swagger 3.0. You can access the API documentation by following these steps:
 
+1. Start the backend server.
+2. Open your browser and navigate to: http://localhost:8080/TousLesTemp/swagger-ui/index.html
+
+## Contributing
+
+We welcome contributions to improve this project. To contribute, please follow these steps:
+
+1. Fork the project repository.
+2. Create a new branch.
+3. Make your changes and commit them.
+4. Push the changes to your forked repository.
+5. Submit a pull request.
+
+## Contact
+
+If you have any questions or suggestions, feel free to reach out to us at imstudent2210@gmail.com
